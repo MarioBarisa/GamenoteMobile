@@ -89,7 +89,7 @@ export function AnimatedIcon() {
 
       <Animated.View entering={keyframe.duration(DURATION)} style={styles.background} />
       <Animated.View style={styles.imageContainer} entering={logoKeyframe.duration(DURATION)}>
-        <Image style={styles.image} source={require('@/assets/images/expo-logo.png')} />
+        <Image style={styles.image} source={require('@/assets/images/gamenote.png')} />
       </Animated.View>
     </View>
   );
@@ -105,6 +105,7 @@ const styles = StyleSheet.create({
     height: 201,
     position: 'absolute',
   },
+
   iconContainer: {
     justifyContent: 'center',
     alignItems: 'center',
@@ -114,16 +115,16 @@ const styles = StyleSheet.create({
   },
   image: {
     position: 'absolute',
-    width: 76,
-    height: 71,
+    width: 300,
+    height: 100,
   },
-  background: {
-    borderRadius: 40,
+  /*background: {
+    borderRadius: 15,
     experimental_backgroundImage: `linear-gradient(180deg, #3C9FFE, #0274DF)`,
-    width: 128,
-    height: 128,
+    width: 220,
+    height: 120,
     position: 'absolute',
-  },
+  },*/
   backgroundSolidColor: {
     ...StyleSheet.absoluteFillObject,
     backgroundColor: '#208AEF',
