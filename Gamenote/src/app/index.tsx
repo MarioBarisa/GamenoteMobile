@@ -27,7 +27,7 @@ function getDevMenuHint() {
     </ThemedText>
   );
 }
-
+// POČETNA STRANICA GAMENOTE
 export default function HomeScreen() {
   return (
     <ThemedView style={styles.container}>

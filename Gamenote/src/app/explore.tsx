@@ -32,7 +32,7 @@ export default function TabTwoScreen() {
       paddingBottom: Spacing.four,
     },
   });
-
+//MOJE IGRE STRANICA GAMENOTE
   return (
     <ScrollView
       style={[styles.scrollView, { backgroundColor: theme.background }]}
