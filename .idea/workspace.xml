@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="7b37eb79-ceff-44a4-81aa-7e12f61dfc1f" name="Changes" comment="minimalni bug fixevi">
+      <change beforePath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/(tabs)/groups/_layout.tsx" beforePathEscaped="$PROJECT_DIR$/Gamenote/app/(tabs)/groups/_layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/(tabs)/groups/_layout.tsx" afterPathEscaped="$PROJECT_DIR$/Gamenote/app/(tabs)/groups/_layout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/(tabs)/groups/index.tsx" beforePathEscaped="$PROJECT_DIR$/Gamenote/app/(tabs)/groups/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/(tabs)/groups/index.tsx" afterPathEscaped="$PROJECT_DIR$/Gamenote/app/(tabs)/groups/index.tsx" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CopilotPersistence">
+    <persistenceIdMap>
+      <entry key="_/Users/mariobarisa/Desktop//Osobno/GamenoteMobile" value="3BnhLSTOxjFVNfgTjSLmchQK7qB" />
+      <entry key="_/Users/mariobarisa/Desktop//Osobno/GamenoteMobile" value="3CBIhKU2vO6VugCVNOCjC2milEX" />
+    </persistenceIdMap>
+  </component>
+  <component name="CopilotUserSelectedChatMode">
+    <option name="chatModeId" value="Agent" />
+  </component>
+  <component name="CopilotUserSelectedModel">
+    <selectedModels>
+      <entry key="chat-panel" value="Gemini 3.1 Pro" />
+      <entry key="agent-panel" value="Gemini 3.1 Pro" />
+    </selectedModels>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;MarioBarisa&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/MarioBarisa/GamenoteMobile.git&quot;,
+    &quot;accountId&quot;: &quot;c496fd33-dc99-4f52-a2cd-b11e539fb580&quot;
+  }
+}</component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="ProjectErrors" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 6,
+  &quot;fromUser&quot;: false
+}</component>
+  <component name="ProjectId" id="3BnhLSTOxjFVNfgTjSLmchQK7qB" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "codeWithMe.voiceChat.enabledByDefault": "false",
+    "git-widget-placeholder": "main",
+    "javascript.preferred.runtime.type.id": "node",
+    "last_opened_file_path": "/Users/mariobarisa/Desktop/💻/Osobno/GamenoteMobile/Gamenote/app/(tabs)/groups",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "preferences.lookFeel",
+    "ts.external.directory.path": "/Users/mariobarisa/Desktop/💻/Osobno/GamenoteMobile/Gamenote/node_modules/typescript/lib",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/Gamenote/app/(tabs)/groups" />
+      <recent name="$PROJECT_DIR$/Gamenote/app/(tabs)" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/Gamenote/assets/images/tabIcons" />
+      <recent name="$PROJECT_DIR$/Gamenote/assets/images/Staro" />
+      <recent name="$PROJECT_DIR$/Gamenote/assets/tabIcons" />
+      <recent name="$PROJECT_DIR$/Gamenote/assets/images" />
+    </key>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-js-predefined-d6986cc7102b-3bd3a6803838-JavaScript-WS-261.22158.274" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="7b37eb79-ceff-44a4-81aa-7e12f61dfc1f" name="Changes" comment="" />
+      <created>1775130685907</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1775130685907</updated>
+      <workItem from="1775130686906" duration="1689000" />
+      <workItem from="1775407157152" duration="8413000" />
+      <workItem from="1775477885148" duration="2757000" />
+      <workItem from="1775852651341" duration="7624000" />
+    </task>
+    <task id="LOCAL−00001" summary="izmjena directorija README">
+      <option name="closed" value="true" />
+      <created>1775131138616</created>
+      <option name="number" value="LOCAL−00001" />
+      <option name="presentableId" value="LOCAL−00001" />
+      <updated>1775131138616</updated>
+    </task>
+    <task id="LOCAL−00002" summary="izmjena homescreena">
+      <option name="closed" value="true" />
+      <created>1775132335678</created>
+      <option name="number" value="LOCAL−00002" />
+      <option name="presentableId" value="LOCAL−00002" />
+      <updated>1775132335678</updated>
+    </task>
+    <task id="LOCAL−00003" summary="dodani osnovni tabovi ali treba popraviti ikone u njima i sf icon fix">
+      <option name="closed" value="true" />
+      <created>1775410943040</created>
+      <option name="number" value="LOCAL−00003" />
+      <option name="presentableId" value="LOCAL−00003" />
+      <updated>1775410943040</updated>
+    </task>
+    <task id="LOCAL−00004" summary="update packages-a">
+      <option name="closed" value="true" />
+      <created>1775474669890</created>
+      <option name="number" value="LOCAL−00004" />
+      <option name="presentableId" value="LOCAL−00004" />
+      <updated>1775474669890</updated>
+    </task>
+    <task id="LOCAL−00005" summary="Prelazak na EXPO44 -&gt; poptuno novi projekt.">
+      <option name="closed" value="true" />
+      <created>1775855434517</created>
+      <option name="number" value="LOCAL−00005" />
+      <option name="presentableId" value="LOCAL−00005" />
+      <updated>1775855434517</updated>
+    </task>
+    <task id="LOCAL−00006" summary="minimalni bug fixevi">
+      <option name="closed" value="true" />
+      <created>1775907703200</created>
+      <option name="number" value="LOCAL−00006" />
+      <option name="presentableId" value="LOCAL−00006" />
+      <updated>1775907703200</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="izmjena directorija README" />
+    <MESSAGE value="izmjena homescreena" />
+    <MESSAGE value="dodani osnovni tabovi ali treba popraviti ikone u njima i sf icon fix" />
+    <MESSAGE value="update packages-a" />
+    <MESSAGE value="Prelazak na EXPO44 -&gt; poptuno novi projekt." />
+    <MESSAGE value="minimalni bug fixevi" />
+    <option name="LAST_COMMIT_MESSAGE" value="minimalni bug fixevi" />
+  </component>
+  <component name="github-copilot-workspace">
+    <instructionFileLocations>
+      <option value=".github/instructions" />
+    </instructionFileLocations>
+    <promptFileLocations>
+      <option value=".github/prompts" />
+    </promptFileLocations>
+  </component>
+</project>

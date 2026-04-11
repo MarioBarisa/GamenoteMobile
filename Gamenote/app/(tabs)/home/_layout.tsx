@@ -1,15 +1,15 @@
 import { Stack } from "expo-router";
 import {useNavigationTheme} from "@/constants/navigationTheme";
 
-// noinspection JSUnusedGlobalSymbols
-export default function GroupsLayout() {
+export default function HomeLayout() {
     const navTheme = useNavigationTheme();
   return (
     <Stack screenOptions={navTheme}>
       <Stack.Screen
         name="index"
         options={{
-          title: "Grupe",
+         // headerLargeTitle: true,
+          title: "Početna",
         }}
       />
     </Stack>
