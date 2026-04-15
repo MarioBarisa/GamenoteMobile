@@ -17,12 +17,12 @@ export default function FavoritesScreen() {
   return (
 
       <ScrollView style={{backgroundColor: t.background}}>
-        <Text style={[styles.textMain, {color: t.text}]}>{loggedIn ? "Hello, " + username + "!" : "You are not logged in."}</Text>
+        <Text style={[styles.textMain, {color: t.text}]}>{loggedIn ? "Pozdrav, " + username + "!" : "Niste prijavljeni."}</Text>
         {loggedIn && (
             <View>
-               <Text style={[styles.textBody, {color: t.text}]}>Number of favorites: {favorites.length}</Text>
+               <Text style={[styles.textBody, {color: t.text}]}>Broj omiljenih igara: {favorites.length}</Text>
                <Button
-                   title={"Logout"}
+                   title={"Odjavi se."}
                    color={t.destructive}
                    onPress={()=>{
                      setLoggedIn(false);
@@ -33,17 +33,17 @@ export default function FavoritesScreen() {
 
         {!loggedIn && (
             <View>
-              <Text style={[styles.textBodyCenterHiglighted, {color: t.accent}]}>Please make an account or log in.</Text>
+              <Text style={[styles.textBodyCenterHiglighted, {color: t.accent}]}>Napravite profil ili se prijavite.</Text>
               <View style={{padding: 15, gap: 8, marginTop: 10}}>
                 <TextInput
-                    placeholder="Pokedex Username"
+                    placeholder="Gamenote Username"
                     placeholderTextColor={t.secondaryText}
                     clearButtonMode="unless-editing"
                     style={[styles.systemInput, {color: t.text}]}
                     onChangeText={setUsername}
                 />
                 <TextInput
-                    placeholder="Pokedex Password"
+                    placeholder="Gamenote Password"
                     placeholderTextColor={t.secondaryText}
                     clearButtonMode="unless-editing"
                     style={[styles.systemInput, {color: t.text}]}
@@ -52,11 +52,11 @@ export default function FavoritesScreen() {
 
                 <Button
                     accessibilityLabel="Login button"
-                    title={"Login"}
+                    title={"Prijavi se."}
                     color={t.accent}
                     onPress={() => {
                       if(password === ""){
-                        Alert.alert("Missing password", "Please enter a valid password.")
+                        Alert.alert("Fali lozinka.", "Unesite ispravnu lozinku.")
                       }else{
                         setLoggedIn(true);
                       }

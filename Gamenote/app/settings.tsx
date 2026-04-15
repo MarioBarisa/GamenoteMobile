@@ -27,14 +27,14 @@ export default function SettingsScreen() {
                 ]}
             >
                 <Text style={[styles.sectionTitle, {color: t.secondaryText}]}>
-                    Appearance
+                    Izgled
                 </Text>
 
                 <View style={styles.row}>
                     <View>
                         <Text style={[styles.title, {color: t.text}]}>Dark Mode</Text>
                         <Text style={[styles.subtitle, {color: t.secondaryText}]}>
-                            Override system setting
+                            Koristi Dark Mode.
                         </Text>
                     </View>
                     <Switch
@@ -51,9 +51,9 @@ export default function SettingsScreen() {
 
                 <View style={styles.row}>
                     <View>
-                        <Text style={[styles.title, {color: t.text}]}>Use System</Text>
+                        <Text style={[styles.title, {color: t.text}]}>Korist iOS default</Text>
                         <Text style={[styles.subtitle, {color: t.secondaryText}]}>
-                            Match iOS appearance
+                            Gamenote koristi iOS default.
                         </Text>
                     </View>
                     <Switch
@@ -83,11 +83,14 @@ export default function SettingsScreen() {
                 ]}
             >
                 <Text style={[styles.sectionTitle, {color: t.secondaryText}]}>
-                    Basics
+                    Ostalo
                 </Text>
 
                 <View style={styles.row}>
-                    <Text style={[styles.title, {color: t.text}]}>Haptics</Text>
+                    <View>
+                    <Text style={[styles.title, {color: t.text}]}>Vibracije</Text>
+                    <Text style={[styles.subtitle, { color: t.secondaryText}]}>Omoguci haptick feedback</Text>
+                    </View>
                     <Switch
                         value={true}
                         onValueChange={() => {
@@ -100,7 +103,10 @@ export default function SettingsScreen() {
                 </View>
 
                 <View style={styles.row}>
-                    <Text style={[styles.title, {color: t.text}]}>Sounds</Text>
+                    <View>
+                    <Text style={[styles.title, {color: t.text}]}>Zvukovi</Text>
+                        <Text style={[styles.subtitle, {color: t.secondaryText}]}>Omoguci zvukove.</Text>
+                    </View>
                     <Switch
                         value={true}
                         onValueChange={() => {

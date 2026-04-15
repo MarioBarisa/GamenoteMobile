@@ -4,9 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7b37eb79-ceff-44a4-81aa-7e12f61dfc1f" name="Changes" comment="minimalni bug fixevi">
-      <change beforePath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/(tabs)/groups/_layout.tsx" beforePathEscaped="$PROJECT_DIR$/Gamenote/app/(tabs)/groups/_layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/(tabs)/groups/_layout.tsx" afterPathEscaped="$PROJECT_DIR$/Gamenote/app/(tabs)/groups/_layout.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/(tabs)/groups/index.tsx" beforePathEscaped="$PROJECT_DIR$/Gamenote/app/(tabs)/groups/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/(tabs)/groups/index.tsx" afterPathEscaped="$PROJECT_DIR$/Gamenote/app/(tabs)/groups/index.tsx" afterDir="false" />
+    <list default="true" id="7b37eb79-ceff-44a4-81aa-7e12f61dfc1f" name="Changes" comment="Dodani osnovni tabovi, podešavanje tema i ekran za favorite. Minimalni polish ruta">
+      <change beforePath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/.idea/vcs.xml" beforePathEscaped="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/.idea/vcs.xml" afterPathEscaped="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/.idea/workspace.xml" beforePathEscaped="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/.idea/workspace.xml" afterPathEscaped="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/(tabs)/profile/index.tsx" beforePathEscaped="$PROJECT_DIR$/Gamenote/app/(tabs)/profile/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/(tabs)/profile/index.tsx" afterPathEscaped="$PROJECT_DIR$/Gamenote/app/(tabs)/profile/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/settings.tsx" beforePathEscaped="$PROJECT_DIR$/Gamenote/app/settings.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/settings.tsx" afterPathEscaped="$PROJECT_DIR$/Gamenote/app/settings.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -15,8 +17,8 @@
   </component>
   <component name="CopilotPersistence">
     <persistenceIdMap>
-      <entry key="_/Users/mariobarisa/Desktop//Osobno/GamenoteMobile" value="3BnhLSTOxjFVNfgTjSLmchQK7qB" />
       <entry key="_/Users/mariobarisa/Desktop//Osobno/GamenoteMobile" value="3CBIhKU2vO6VugCVNOCjC2milEX" />
+      <entry key="_/Users/mariobarisa/Desktop//Osobno/GamenoteMobile" value="3BnhLSTOxjFVNfgTjSLmchQK7qB" />
     </persistenceIdMap>
   </component>
   <component name="CopilotUserSelectedChatMode">
@@ -66,13 +68,13 @@
     "codeWithMe.voiceChat.enabledByDefault": "false",
     "git-widget-placeholder": "main",
     "javascript.preferred.runtime.type.id": "node",
-    "last_opened_file_path": "/Users/mariobarisa/Desktop/💻/Osobno/GamenoteMobile/Gamenote/app/(tabs)/groups",
+    "last_opened_file_path": "/Users/mariobarisa/Desktop/💻/Osobno/GamenoteMobile",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "preferences.lookFeel",
+    "settings.editor.selected.configurable": "project.propVCSSupport.DirectoryMappings",
     "ts.external.directory.path": "/Users/mariobarisa/Desktop/💻/Osobno/GamenoteMobile/Gamenote/node_modules/typescript/lib",
     "vue.rearranger.settings.migration": "true"
   }
@@ -107,7 +109,8 @@
       <workItem from="1775130686906" duration="1689000" />
       <workItem from="1775407157152" duration="8413000" />
       <workItem from="1775477885148" duration="2757000" />
-      <workItem from="1775852651341" duration="7624000" />
+      <workItem from="1775852651341" duration="17044000" />
+      <workItem from="1776252419788" duration="726000" />
     </task>
     <task id="LOCAL−00001" summary="izmjena directorija README">
       <option name="closed" value="true" />
@@ -151,7 +154,14 @@
       <option name="presentableId" value="LOCAL−00006" />
       <updated>1775907703200</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL−00007" summary="Dodani osnovni tabovi, podešavanje tema i ekran za favorite. Minimalni polish ruta">
+      <option name="closed" value="true" />
+      <created>1775911035983</created>
+      <option name="number" value="LOCAL−00007" />
+      <option name="presentableId" value="LOCAL−00007" />
+      <updated>1775911035983</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -164,7 +174,8 @@
     <MESSAGE value="update packages-a" />
     <MESSAGE value="Prelazak na EXPO44 -&gt; poptuno novi projekt." />
     <MESSAGE value="minimalni bug fixevi" />
-    <option name="LAST_COMMIT_MESSAGE" value="minimalni bug fixevi" />
+    <MESSAGE value="Dodani osnovni tabovi, podešavanje tema i ekran za favorite. Minimalni polish ruta" />
+    <option name="LAST_COMMIT_MESSAGE" value="Dodani osnovni tabovi, podešavanje tema i ekran za favorite. Minimalni polish ruta" />
   </component>
   <component name="github-copilot-workspace">
     <instructionFileLocations>
