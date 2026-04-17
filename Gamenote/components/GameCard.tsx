@@ -22,10 +22,10 @@ export interface Game {
 }
 
 const STATUS_CONFIG = {
-    playing: {label: "Trenutno igraš", bg: '#0A84FF', text: '#FFFFFF'},
-    paused: {label: "Pauzirano,", bg: '#FF9F0A', text: '#FFFFFF'},
-    completed: {label: "Završeno", bg: '#30D158', text: '#FFFFFF'},
-    dropped: {label: "Napustio", bg: '#FF453A', text: '#FFFFFF'},
+    playing: {label: "Playing", bg: '#0A84FF', text: '#FFFFFF'},
+    paused: {label: "Paused,", bg: '#FF9F0A', text: '#FFFFFF'},
+    completed: {label: "Completed", bg: '#30D158', text: '#FFFFFF'},
+    dropped: {label: "Dropped", bg: '#FF453A', text: '#FFFFFF'},
     backlog: {label: "Backlog", bg: '#b364da', text: '#FFFFFF'},
 }
 

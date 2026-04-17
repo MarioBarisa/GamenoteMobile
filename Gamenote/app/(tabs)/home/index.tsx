@@ -21,7 +21,7 @@ const PLACEHOLDER_GAMES: Game[] = [
   {
     title: 'Persona 5 Royal',
     platform: 'PlayStation 5',
-    status: 'completed',
+    status: 'dropped',
     rating: 1,
     play_time: 102,
     progress_value: 0,
