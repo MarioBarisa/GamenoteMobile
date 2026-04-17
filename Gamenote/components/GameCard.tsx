@@ -1,6 +1,7 @@
 import {View, Text, StyleSheet, Dimensions, Image} from 'react-native'
 import { colors } from '@/constants/theme'
 import { useTheme } from '@/context/theme'
+import {Ionicons} from "@expo/vector-icons";
 
 export interface Game {
   title: string
@@ -20,6 +21,15 @@ export interface Game {
   progress_mode?: string
 }
 
+const STATUS_CONFIG = {
+    playing: {label: "Trenutno igraš", bg: '#0A84FF', text: '#FFFFFF'},
+    paused: {label: "Pauzirano,", bg: '#FF9F0A', text: '#FFFFFF'},
+    completed: {label: "Završeno", bg: '#30D158', text: '#FFFFFF'},
+    dropped: {label: "Napustio", bg: '#FF453A', text: '#FFFFFF'},
+    backlog: {label: "Backlog", bg: '#b364da', text: '#FFFFFF'},
+}
+
+
 const CARD_WIDTH = Dimensions.get('window').width-32;
 const IMAGE_HEIGHT =Math.round(CARD_WIDTH*9/16); //za 16:9 cover
 
@@ -33,10 +43,17 @@ export default function GameCard({ game }: Props) {
 
   const imageUri = game.image_url || game.background_image || null;
 
+  const achievementPercent = (() => {
+  if (!game.progress_value || !game.progress_total) return 0
+  const v = Math.min(game.progress_value, game.progress_total)
+  return Math.round((v / game.progress_total) * 100)
+})()
+
   return (
+
     <View style={[styles.card, { backgroundColor: t.card }]}>
 
-      {/* cover slika igre*/}
+      {/* cover slika igre */}
       <View style={styles.imageContainer}>
         {imageUri ? (
           <Image
@@ -55,6 +72,51 @@ export default function GameCard({ game }: Props) {
         <Text style={[styles.title, { color: t.text }]} numberOfLines={1}>
           {game.title}
         </Text>
+
+            {/* stanje igre i ocjena */}
+            <View style={styles.infoRow}>
+                {game.status && STATUS_CONFIG[game.status] ? (
+                    <View style={[
+                        styles.badge,
+                        {backgroundColor: STATUS_CONFIG[game.status].bg, marginRight: 8}
+                    ]}>
+                        <Text style={[styles.badgeText, {color: STATUS_CONFIG[game.status].text}]}>
+                            {STATUS_CONFIG[game.status].label}
+                        </Text>
+                    </View>
+                ) : null}
+
+                {typeof game.rating === 'number' ? (
+                    <View style={styles.ratingRow}>
+                        {[1,2,3,4,5].map(star => (
+                            <Ionicons
+                                key={star}
+                                name={star <= game.rating! ? 'star' : 'star-outline'}
+                            size={14}
+                            color={star<=game.rating! ? '#FF9F0A' : t.secondaryText}
+                            style={{marginRight: 2}}/>
+                        ))}
+                    </View>
+                ) : null}
+            </View>
+
+            {/*Progress bar*/}
+            {typeof game.progress_value === 'number' && typeof game.progress_total === 'number' && game.progress_total > 0 ? (
+                <View style={styles.progressSection}>
+                    <View style={[styles.progressTrack, {backgroundColor: theme === 'dark' ? '#2C2C2E' : '#E5E5EA' }]}>
+                        <View style={[styles.progressFill, {width: `${achievementPercent}%` as any }]} />
+                    </View>
+                    <View style={styles.progressLabels}>
+                        <Text style={[styles.progressLabel, {color: t.text}]}>
+                            {Math.min(game.progress_value, game.progress_total)}/{game.progress_total}
+                        </Text>
+                        <Text style={[styles.progressPercent, {color: t.secondaryText}]}>
+                            {achievementPercent}%
+                        </Text>
+
+                    </View>
+                </View>
+            ) : null}
       </View>
     </View>
   )
@@ -88,5 +150,58 @@ const styles = StyleSheet.create({
         fontSize: 17,
         fontWeight: '600',
         padding: 12,
+        paddingBottom: 8,
+    },
+    infoRow: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      paddingHorizontal: 12,
+      marginBottom: 8,
+    },
+    badge: {
+      paddingHorizontal: 8,
+      paddingVertical: 3,
+      borderRadius: 20,
+    },
+    badgeText: {
+      fontSize: 12,
+      fontWeight: '600',
+      letterSpacing: 0.1,
+    },
+    ratingRow: {
+      flexDirection: 'row',
+      alignItems: 'center',
+    },
+    ratingText: {
+      fontSize: 12,
+      marginLeft: 4,
+    },
+    progressSection: {
+        marginTop: 8 },
+    progressTrack: {
+      height: 4,
+      borderRadius: 2,
+      overflow: 'hidden',
+      marginBottom: 4,
+      marginLeft: 8,
+      marginRight: 8,
+    },
+    progressFill: {
+      height: '100%',
+      backgroundColor: '#0A84FF',
+      borderRadius: 2,
+    },
+    progressLabels: {
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+    },
+    progressLabel: {
+        fontSize: 11,
+        fontWeight: '600',
+        marginLeft: 8,
+    },
+    progressPercent: {
+        fontSize: 11,
+        marginRight: 8,
     },
 })

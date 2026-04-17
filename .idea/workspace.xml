@@ -4,9 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7b37eb79-ceff-44a4-81aa-7e12f61dfc1f" name="Changes" comment="Prijevod određenih screnova na HR.">
-      <change afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/components/GameCard.tsx" afterPathEscaped="$PROJECT_DIR$/Gamenote/components/GameCard.tsx" afterDir="false" />
+    <list default="true" id="7b37eb79-ceff-44a4-81aa-7e12f61dfc1f" name="Changes" comment="Implementacija Gamecarda. Dodana osnovna komponenta + cover image.">
       <change beforePath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/.idea/workspace.xml" beforePathEscaped="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/.idea/workspace.xml" afterPathEscaped="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/(tabs)/home/index.tsx" beforePathEscaped="$PROJECT_DIR$/Gamenote/app/(tabs)/home/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/(tabs)/home/index.tsx" afterPathEscaped="$PROJECT_DIR$/Gamenote/app/(tabs)/home/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/components/GameCard.tsx" beforePathEscaped="$PROJECT_DIR$/Gamenote/components/GameCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/components/GameCard.tsx" afterPathEscaped="$PROJECT_DIR$/Gamenote/components/GameCard.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -109,7 +110,7 @@
       <workItem from="1775477885148" duration="2757000" />
       <workItem from="1775852651341" duration="17044000" />
       <workItem from="1776252419788" duration="815000" />
-      <workItem from="1776332032609" duration="1938000" />
+      <workItem from="1776332032609" duration="16414000" />
     </task>
     <task id="LOCAL−00001" summary="izmjena directorija README">
       <option name="closed" value="true" />
@@ -167,7 +168,14 @@
       <option name="presentableId" value="LOCAL−00008" />
       <updated>1776253182475</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL−00009" summary="Implementacija Gamecarda. Dodana osnovna komponenta + cover image.">
+      <option name="closed" value="true" />
+      <created>1776334153284</created>
+      <option name="number" value="LOCAL−00009" />
+      <option name="presentableId" value="LOCAL−00009" />
+      <updated>1776334153284</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -182,7 +190,8 @@
     <MESSAGE value="minimalni bug fixevi" />
     <MESSAGE value="Dodani osnovni tabovi, podešavanje tema i ekran za favorite. Minimalni polish ruta" />
     <MESSAGE value="Prijevod određenih screnova na HR." />
-    <option name="LAST_COMMIT_MESSAGE" value="Prijevod određenih screnova na HR." />
+    <MESSAGE value="Implementacija Gamecarda. Dodana osnovna komponenta + cover image." />
+    <option name="LAST_COMMIT_MESSAGE" value="Implementacija Gamecarda. Dodana osnovna komponenta + cover image." />
   </component>
   <component name="github-copilot-workspace">
     <instructionFileLocations>
