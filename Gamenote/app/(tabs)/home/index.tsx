@@ -8,14 +8,25 @@ import GameCard, { Game } from '@/components/GameCard'
 
 
 const PLACEHOLDER_GAMES: Game[] = [
+      {
+    title: 'Splatoon 2',
+    platform: 'Nintendo Switch',
+    genre: 'Shooter',
+    status: 'playing',
+    rating: 5,
+    play_time: 10000,
+    progress_value: 98,
+    progress_total: 100,
+    image_url: 'https://media.rawg.io/media/games/24b/24b68f500fd138c3146d8856f0dd55b4.jpg'
+  },
   {
     title: 'The Legend of Zelda: Tears of the Kingdom',
-    platform: 'Nintendo Switch',
+    platform: 'Nintendo Switch 2',
     genre: 'Adventure',
     status: 'playing',
     rating: 5,
     play_time: 10,
-    progress_value: 87,
+    progress_value: 106,
     progress_total: 152,
     image_url: 'https://imgs.search.brave.com/2cSE4AyYrHjAAvueNp8XOOWOgsBWRCW-ZjnCKNcHXAI/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9zdGF0/aWMwLnBvbHlnb25p/bWFnZXMuY29tL3dv/cmRwcmVzcy93cC1j/b250ZW50L3VwbG9h/ZHMvY2hvcnVzL3Vw/bG9hZHMvY2hvcnVz/X2Fzc2V0L2ZpbGUv/MjQ1ODI5MDQvemVs/ZGFfbWFzdGVyX3N3/b3JkX3RvdGsuanBn/P3E9NDkmZml0PWNy/b3Amdz02NDImaD0z/OTMmZHByPTI'
   },

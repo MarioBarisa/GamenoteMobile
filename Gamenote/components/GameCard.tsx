@@ -23,7 +23,7 @@ export interface Game {
 
 const STATUS_CONFIG = {
     playing: {label: "Playing", bg: '#0A84FF', text: '#FFFFFF'},
-    paused: {label: "Paused,", bg: '#FF9F0A', text: '#FFFFFF'},
+    paused: {label: "Paused", bg: '#FF9F0A', text: '#FFFFFF'},
     completed: {label: "Completed", bg: '#30D158', text: '#FFFFFF'},
     dropped: {label: "Dropped", bg: '#FF453A', text: '#FFFFFF'},
     backlog: {label: "Backlog", bg: '#b364da', text: '#FFFFFF'},
@@ -32,13 +32,15 @@ const STATUS_CONFIG = {
 const STATUS_PLATFORM: Record<string, { label: string; text: string }> = {
     PlayStation: {label: "PlayStation", text: '#2760f4'},
     'PlayStation 5': {label: "PlayStation 5", text: '#2760f4'},
+    'PlayStation 4': {label: "PlayStation 4", text: '#2760f4'},
 
-    Xbox: {label: "Xbox,", text: '#27f427'},
-    'Xbox Series X/S': {label: "Xbox Series X/S,", text: '#27f427'},
+    Xbox: {label: "Xbox", text: '#27f427'},
+    'Xbox Series X/S': {label: "Xbox Series X/S", text: '#27f427'},
     'Xbox One': {label: "Xbox One", text: '#27f427'},
 
     Nintendo: {label: "Nintendo",text: '#eb0e30'},
     'Nintendo Switch': {label: "Nintendo Switch", text: '#eb0e30'},
+    'Nintendo Switch 2': {label: "Nintendo Switch 2", text: '#eb0e30'},
 
     PC: {label: "PC", text: '#0df9e1'},
     iOS: {label: "iOS", text: '#FFFFFF'},
@@ -48,7 +50,7 @@ const STATUS_PLATFORM: Record<string, { label: string; text: string }> = {
 
 
 const CARD_WIDTH = Dimensions.get('window').width-32;
-const IMAGE_HEIGHT =Math.round(CARD_WIDTH*9/16); //za 16:9 cover
+const IMAGE_HEIGHT = Math.round(CARD_WIDTH * 8 / 16); //za 16:9 cover
 
 interface Props {
   game: Game
@@ -66,9 +68,28 @@ export default function GameCard({ game }: Props) {
   return Math.round((v / game.progress_total) * 100)
 })()
 
+    //BOJE PROGRESS BARA PREMA POSTOTKU PROLAZNOSTI
+  const progressColor = (() => {
+    const clamped = Math.max(0, Math.min(achievementPercent, 100))
+    if (clamped >= 100) return '#0d36f9'
+    if (clamped >= 98) return '#f90d74'
+    if (clamped >= 95) return '#12f90d'
+    if (clamped >= 90) return '#22C55E'
+    if (clamped >= 70) return '#84CC16'
+    if (clamped >= 45) return '#FACC15'
+    if (clamped >= 20) return '#F97316'
+    return '#EF4444'
+  })()
+
   return (
 
-    <View style={[styles.card, { backgroundColor: t.card }]}>
+    <View style={[
+      styles.card,
+      {
+        backgroundColor: t.card,
+        borderColor: theme === 'dark' ? '#2C2C2E' : '#E5E5EA',
+      },
+    ]}>
 
       {/* cover slika igre */}
       <View style={styles.imageContainer}>
@@ -124,10 +145,15 @@ export default function GameCard({ game }: Props) {
                 {game.platform && STATUS_PLATFORM[game.platform] ? (
                     <View style={[
                         styles.badge,
-                        {marginRight: 8}
+                        {
+                          marginRight: 8,
+                          backgroundColor: theme === 'dark' ? '#2C2C2E' : '#F2F2F7',
+                        }
                     ]}>
                         <Text style={[styles.badgePlaytime, {color: STATUS_PLATFORM[game.platform].text}]}>
-                            {game.play_time}h via {STATUS_PLATFORM[game.platform].label}
+                            {typeof game.play_time === 'number'
+                              ? `${game.play_time}h via ${STATUS_PLATFORM[game.platform].label}`
+                              : `via ${STATUS_PLATFORM[game.platform].label}`}
                         </Text>
                     </View>
                 ) : null}
@@ -137,7 +163,7 @@ export default function GameCard({ game }: Props) {
             {typeof game.progress_value === 'number' && typeof game.progress_total === 'number' && game.progress_total > 0 ? (
                 <View style={styles.progressSection}>
                     <View style={[styles.progressTrack, {backgroundColor: theme === 'dark' ? '#2C2C2E' : '#E5E5EA' }]}>
-                        <View style={[styles.progressFill, {width: `${achievementPercent}%` as any }]} />
+                        <View style={[styles.progressFill, { width: `${achievementPercent}%` as any, backgroundColor: progressColor }]} />
                     </View>
                     <View style={styles.progressLabels}>
                         <Text style={[styles.progressLabel, {color: t.text}]}>
@@ -157,9 +183,15 @@ export default function GameCard({ game }: Props) {
 
 const styles = StyleSheet.create({
     card: {
-        borderRadius: 14,
+        borderRadius: 10,
         overflow: 'hidden',
         marginBottom: 12,
+        borderWidth: StyleSheet.hairlineWidth,
+        shadowColor: '#000',
+        shadowOpacity: 0.08,
+        shadowRadius: 8,
+        shadowOffset: { width: 0, height: 3 },
+        elevation: 2,
     },
     imageContainer: {
         position: 'relative',
@@ -177,32 +209,34 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     cardBody: {
-        padding: 12,
+        padding: 8,
     },
     title: {
-        fontSize: 17,
-        fontWeight: '600',
-        padding: 12,
-        paddingBottom: 8,
+        fontSize: 16,
+        fontWeight: '700',
+        paddingHorizontal: 10,
+        paddingTop: 6,
+        paddingBottom: 4,
     },
     infoRow: {
       flexDirection: 'row',
       alignItems: 'center',
-      paddingHorizontal: 12,
-      marginBottom: 8,
+      paddingHorizontal: 10,
+      padding: 4,
+      marginBottom: 5,
     },
     badge: {
-      paddingHorizontal: 8,
-      paddingVertical: 3,
-      borderRadius: 20,
+      paddingHorizontal: 7,
+      paddingVertical: 2,
+      borderRadius: 16,
     },
     badgeText: {
-      fontSize: 12,
-      fontWeight: '600',
+      fontSize: 11,
+      fontWeight: '700',
       letterSpacing: 0.1,
     },
      badgePlaytime: {
-      fontSize: 12,
+      fontSize: 11,
       fontWeight: '700',
       letterSpacing: 0.1,
     },
@@ -215,18 +249,17 @@ const styles = StyleSheet.create({
       marginLeft: 4,
     },
     progressSection: {
-        marginTop: 8 },
+        marginTop: 4 },
     progressTrack: {
       height: 4,
-      borderRadius: 2,
+      borderRadius: 3,
       overflow: 'hidden',
       marginBottom: 4,
-      marginLeft: 8,
-      marginRight: 8,
+      marginLeft: 10,
+      marginRight: 10,
     },
     progressFill: {
       height: '100%',
-      backgroundColor: '#0A84FF',
       borderRadius: 2,
     },
     progressLabels: {
@@ -234,12 +267,12 @@ const styles = StyleSheet.create({
       justifyContent: 'space-between',
     },
     progressLabel: {
-        fontSize: 11,
+        fontSize: 10,
         fontWeight: '600',
-        marginLeft: 8,
+        marginLeft: 10,
     },
     progressPercent: {
-        fontSize: 11,
-        marginRight: 8,
+        fontSize: 10,
+        marginRight: 10,
     },
 })
