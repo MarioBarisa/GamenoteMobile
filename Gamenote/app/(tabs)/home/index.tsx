@@ -24,7 +24,7 @@ const PLACEHOLDER_GAMES: Game[] = [
     platform: 'Nintendo Switch 2',
     genre: 'Adventure',
     status: 'playing',
-    rating: 5,
+    rating: 4,
     play_time: 10,
     progress_value: 106,
     progress_total: 152,

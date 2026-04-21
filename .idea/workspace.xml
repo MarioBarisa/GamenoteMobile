@@ -4,8 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7b37eb79-ceff-44a4-81aa-7e12f61dfc1f" name="Changes" comment="minimalne izmjene naziva stanja igranja igre">
+    <list default="true" id="7b37eb79-ceff-44a4-81aa-7e12f61dfc1f" name="Changes" comment="Progress bar sada ima drugaciji color uzimajuci u obzir %-ak prolaznosti u igri, manje izmjene velicine fontova i game slike">
       <change beforePath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/.idea/workspace.xml" beforePathEscaped="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/.idea/workspace.xml" afterPathEscaped="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/README.md" beforePathEscaped="$PROJECT_DIR$/Gamenote/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/README.md" afterPathEscaped="$PROJECT_DIR$/Gamenote/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/(tabs)/home/index.tsx" beforePathEscaped="$PROJECT_DIR$/Gamenote/app/(tabs)/home/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/(tabs)/home/index.tsx" afterPathEscaped="$PROJECT_DIR$/Gamenote/app/(tabs)/home/index.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/components/GameCard.tsx" beforePathEscaped="$PROJECT_DIR$/Gamenote/components/GameCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/components/GameCard.tsx" afterPathEscaped="$PROJECT_DIR$/Gamenote/components/GameCard.tsx" afterDir="false" />
     </list>
@@ -26,8 +27,8 @@
   </component>
   <component name="CopilotUserSelectedModel">
     <selectedModels>
-      <entry key="chat-panel" value="GPT-5.3-Codex" />
-      <entry key="agent-panel" value="GPT-5.3-Codex" />
+      <entry key="chat-panel" value="Auto" />
+      <entry key="agent-panel" value="Auto" />
     </selectedModels>
   </component>
   <component name="Git.Settings">
@@ -190,11 +191,29 @@
       <option name="presentableId" value="LOCAL−00011" />
       <updated>1776441806907</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL−00012" summary="Progress bar sada ima drugaciji color uzimajuci u obzir %-ak prolaznosti u igri, manje izmjene velicine fontova i game slike">
+      <option name="closed" value="true" />
+      <created>1776773902133</created>
+      <option name="number" value="LOCAL−00012" />
+      <option name="presentableId" value="LOCAL−00012" />
+      <updated>1776773902133</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="izmjena directorija README" />
@@ -208,7 +227,8 @@
     <MESSAGE value="Implementacija Gamecarda. Dodana osnovna komponenta + cover image." />
     <MESSAGE value="Implementiran osnovni Gamecard ( osnovna veličina ) u home tab sa placeholder info." />
     <MESSAGE value="minimalne izmjene naziva stanja igranja igre" />
-    <option name="LAST_COMMIT_MESSAGE" value="minimalne izmjene naziva stanja igranja igre" />
+    <MESSAGE value="Progress bar sada ima drugaciji color uzimajuci u obzir %-ak prolaznosti u igri, manje izmjene velicine fontova i game slike" />
+    <option name="LAST_COMMIT_MESSAGE" value="Progress bar sada ima drugaciji color uzimajuci u obzir %-ak prolaznosti u igri, manje izmjene velicine fontova i game slike" />
   </component>
   <component name="github-copilot-workspace">
     <instructionFileLocations>

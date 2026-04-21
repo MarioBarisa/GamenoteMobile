@@ -107,7 +107,7 @@ export default function GameCard({ game }: Props) {
 
       {/* body igre */}
       <View style={styles.cardBody}>
-        <Text style={[styles.title, { color: t.text }]} numberOfLines={1}>
+        <Text style={[styles.title, { color: t.text }]} numberOfLines={2}>
           {game.title}
         </Text>
 
