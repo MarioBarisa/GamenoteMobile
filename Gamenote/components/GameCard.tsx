@@ -29,6 +29,23 @@ const STATUS_CONFIG = {
     backlog: {label: "Backlog", bg: '#b364da', text: '#FFFFFF'},
 }
 
+const STATUS_PLATFORM: Record<string, { label: string; text: string }> = {
+    PlayStation: {label: "PlayStation", text: '#2760f4'},
+    'PlayStation 5': {label: "PlayStation 5", text: '#2760f4'},
+
+    Xbox: {label: "Xbox,", text: '#27f427'},
+    'Xbox Series X/S': {label: "Xbox Series X/S,", text: '#27f427'},
+    'Xbox One': {label: "Xbox One", text: '#27f427'},
+
+    Nintendo: {label: "Nintendo",text: '#eb0e30'},
+    'Nintendo Switch': {label: "Nintendo Switch", text: '#eb0e30'},
+
+    PC: {label: "PC", text: '#0df9e1'},
+    iOS: {label: "iOS", text: '#FFFFFF'},
+    Android: {label: "Android", text: '#FFFFFF'},
+    Other: {label: "Other", text: '#a3a3a3'},
+}
+
 
 const CARD_WIDTH = Dimensions.get('window').width-32;
 const IMAGE_HEIGHT =Math.round(CARD_WIDTH*9/16); //za 16:9 cover
@@ -86,6 +103,7 @@ export default function GameCard({ game }: Props) {
                     </View>
                 ) : null}
 
+
                 {typeof game.rating === 'number' ? (
                     <View style={styles.ratingRow}>
                         {[1,2,3,4,5].map(star => (
@@ -99,6 +117,21 @@ export default function GameCard({ game }: Props) {
                     </View>
                 ) : null}
             </View>
+
+
+          {/*Platforma i vrijeme igranja*/}
+          <View style={styles.infoRow}>
+                {game.platform && STATUS_PLATFORM[game.platform] ? (
+                    <View style={[
+                        styles.badge,
+                        {marginRight: 8}
+                    ]}>
+                        <Text style={[styles.badgePlaytime, {color: STATUS_PLATFORM[game.platform].text}]}>
+                            {game.play_time}h via {STATUS_PLATFORM[game.platform].label}
+                        </Text>
+                    </View>
+                ) : null}
+          </View>
 
             {/*Progress bar*/}
             {typeof game.progress_value === 'number' && typeof game.progress_total === 'number' && game.progress_total > 0 ? (
@@ -166,6 +199,11 @@ const styles = StyleSheet.create({
     badgeText: {
       fontSize: 12,
       fontWeight: '600',
+      letterSpacing: 0.1,
+    },
+     badgePlaytime: {
+      fontSize: 12,
+      fontWeight: '700',
       letterSpacing: 0.1,
     },
     ratingRow: {
