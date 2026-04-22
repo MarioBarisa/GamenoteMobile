@@ -9,7 +9,7 @@ export default function SearchLayout() {
       <Stack.Screen
         name="index"
         options={{
-          title: "Pretraži Pokemone",
+          title: "Pretraži Gamenote",
         }}
       />
     </Stack>
