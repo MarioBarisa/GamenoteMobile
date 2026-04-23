@@ -15,11 +15,26 @@ export default function SearchIndex() {
   const PLACEHOLDER_IGRE = PLACEHOLDER_GAMES;
 
   const filteredGames = useMemo(() => {
-    if (!search) return PLACEHOLDER_IGRE;
-    return PLACEHOLDER_IGRE.filter((game) =>
-      game.title.toLowerCase().includes(search.toLowerCase()),
-    );
-  }, [search]);
+    let results = [...PLACEHOLDER_IGRE];
+
+    if (search) {
+      results = results.filter((game) =>
+        game.title.toLowerCase().includes(search.toLowerCase()),
+      );
+    }
+    results.sort((a, b) => {
+      if (sort) {
+        // default (sort = false): sort po playtime-u (silazno)
+        return (b.rating || 0) - (a.rating || 0);
+      } else {
+          // sort  uključen (sort = true): sort po ocjeni (silazno)
+        return (b.play_time || 0) - (a.play_time || 0);
+      }
+    });
+
+    return results;
+  }, [search, sort]); // <- Obavezno dodati 'sort' u ovisnosti (dependency array)
+
 
   const { theme } = useTheme();
   const t = colors[theme];
@@ -32,7 +47,7 @@ export default function SearchIndex() {
           headerRight: () => (
             <TouchableOpacity
               onPress={() => setSort(prev => !prev)}
-              onLongPress={() => Alert.alert("Sortiranje", "Sortiraj rezultate pretrage. Igre koje najviše igraš su prve.")}
+              onLongPress={() => Alert.alert("Sortiranje", "Sortiraj rezultate pretrage. Ako je sortiranje uključeno igre koje najviše igraš su prve.")}
               style={{ justifyContent: 'center', alignItems: 'center'}}>
              <SymbolView
                  key={sort ? "line.horizontal.3.decrease.circle" : "line.horizontal.3.decrease.circle.fill"}

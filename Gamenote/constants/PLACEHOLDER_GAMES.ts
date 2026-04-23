@@ -18,7 +18,7 @@ export const PLACEHOLDER_GAMES: Game[] = [
     genre: 'Adventure',
     status: 'playing',
     rating: 4,
-    play_time: 10,
+    play_time: 120,
     progress_value: 106,
     progress_total: 152,
     image_url: 'https://imgs.search.brave.com/2cSE4AyYrHjAAvueNp8XOOWOgsBWRCW-ZjnCKNcHXAI/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9zdGF0/aWMwLnBvbHlnb25p/bWFnZXMuY29tL3dv/cmRwcmVzcy93cC1j/b250ZW50L3VwbG9h/ZHMvY2hvcnVzL3Vw/bG9hZHMvY2hvcnVz/X2Fzc2V0L2ZpbGUv/MjQ1ODI5MDQvemVs/ZGFfbWFzdGVyX3N3/b3JkX3RvdGsuanBn/P3E9NDkmZml0PWNy/b3Amdz02NDImaD0z/OTMmZHByPTI'
@@ -40,7 +40,7 @@ export const PLACEHOLDER_GAMES: Game[] = [
     genre: 'RPG',
     status: 'completed',
     rating: 5,
-    play_time: 113,
+    play_time: 114,
     progress_value: 100,
     progress_total: 100,
     image_url: 'https://media.rawg.io/media/games/91d/91ddeef8d5ebee7f21faa89efa0f2201.jpg'
@@ -59,7 +59,7 @@ export const PLACEHOLDER_GAMES: Game[] = [
     title: 'Hollow Knight',
     platform: 'Nintendo Switch',
     status: 'backlog',
-    rating: 4,
+    rating: 3,
     play_time: 102,
     image_url: 'https://imgs.search.brave.com/rGo8wNTrFG5myKCED8JEG-u_5X9FJ-L5JW9Pf_t5ENQ/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93YWxs/cGFwZXJjYXZlLmNv/bS93cC93cDcwOTc0/MDguanBn'
   },
