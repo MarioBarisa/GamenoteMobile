@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7b37eb79-ceff-44a4-81aa-7e12f61dfc1f" name="Changes" comment="search bar sada radi nad videoigrama">
-      <change beforePath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/.idea/copilotDiffState.xml" beforePathEscaped="$PROJECT_DIR$/.idea/copilotDiffState.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/.idea/copilotDiffState.xml" afterPathEscaped="$PROJECT_DIR$/.idea/copilotDiffState.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/.idea/workspace.xml" beforePathEscaped="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/.idea/workspace.xml" afterPathEscaped="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="7b37eb79-ceff-44a4-81aa-7e12f61dfc1f" name="Changes" comment="Implementirani osnovni sort mehanizam">
       <change beforePath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/(tabs)/search/index.tsx" beforePathEscaped="$PROJECT_DIR$/Gamenote/app/(tabs)/search/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/(tabs)/search/index.tsx" afterPathEscaped="$PROJECT_DIR$/Gamenote/app/(tabs)/search/index.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -225,7 +223,21 @@
       <option name="presentableId" value="LOCAL−00015" />
       <updated>1776859428817</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL−00016" summary="Dodani gumb za toggle između korisnikovog Gamenote-a i globalne Gamenote baze prilikom pretrage te gumb za sortiranje. Potrebna implementacija">
+      <option name="closed" value="true" />
+      <created>1776945205825</created>
+      <option name="number" value="LOCAL−00016" />
+      <option name="presentableId" value="LOCAL−00016" />
+      <updated>1776945205825</updated>
+    </task>
+    <task id="LOCAL−00017" summary="Implementirani osnovni sort mehanizam">
+      <option name="closed" value="true" />
+      <created>1776946170114</created>
+      <option name="number" value="LOCAL−00017" />
+      <option name="presentableId" value="LOCAL−00017" />
+      <updated>1776946170114</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -258,7 +270,9 @@
     <MESSAGE value="Minimalne izmjene + update README.md" />
     <MESSAGE value="update README.md" />
     <MESSAGE value="search bar sada radi nad videoigrama" />
-    <option name="LAST_COMMIT_MESSAGE" value="search bar sada radi nad videoigrama" />
+    <MESSAGE value="Dodani gumb za toggle između korisnikovog Gamenote-a i globalne Gamenote baze prilikom pretrage te gumb za sortiranje. Potrebna implementacija" />
+    <MESSAGE value="Implementirani osnovni sort mehanizam" />
+    <option name="LAST_COMMIT_MESSAGE" value="Implementirani osnovni sort mehanizam" />
   </component>
   <component name="github-copilot-workspace">
     <instructionFileLocations>

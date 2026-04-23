@@ -83,7 +83,7 @@ export default function SearchIndex() {
       contentInsetAdjustmentBehavior="automatic"
     >
       {filteredGames.map((game, i) => (
-        <GameCard key={i} game={game} />
+        <GameCard key={game.title} game={game} />
       ))}
     </ScrollView>
     </>
