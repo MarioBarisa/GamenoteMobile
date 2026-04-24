@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useFavorites } from "@/context/favorites";
 import { useTheme } from "@/context/theme";
 import { colors } from "@/constants/theme";
+import {SymbolView} from "expo-symbols";
 
 
 export default function FavoritesScreen() {
@@ -33,6 +34,10 @@ export default function FavoritesScreen() {
 
         {!loggedIn && (
             <View>
+              <SymbolView
+                name={"person.crop.circle.badge.plus"}
+                 style={{ width: 110, height: 110, alignSelf:"center", margin: 5 }}
+              />
               <Text style={[styles.textBodyCenterHiglighted, {color: t.accent}]}>Napravite profil ili se prijavite.</Text>
               <View style={{padding: 15, gap: 8, marginTop: 10}}>
                 <TextInput

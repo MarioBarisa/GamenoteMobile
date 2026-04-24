@@ -1,6 +1,7 @@
 import { Stack, useRouter } from "expo-router";
 import { Pressable, Text } from "react-native";
 import {useNavigationTheme} from "@/constants/navigationTheme";
+import {SymbolView} from "expo-symbols";
 
 export default function FavoritesLayout() {
     const navTheme = useNavigationTheme();
@@ -14,7 +15,11 @@ export default function FavoritesLayout() {
           title: "Profile",
           headerRight: () => (
             <Pressable onPress={() => router.push("/settings")} hitSlop={10}>
-              <Text style={{ color: "#0A84FF", fontWeight: "600" }}>Postavke</Text>
+             <SymbolView
+                name={"gear"}
+                resizeMode="scaleAspectFit"
+                 style={{ width: 36, height: 30 }}
+              />
             </Pressable>
           ),
         }}

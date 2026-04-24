@@ -4,7 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7b37eb79-ceff-44a4-81aa-7e12f61dfc1f" name="Changes" comment="Manji bug fix kod mapiranja filtiriranih igara" />
+    <list default="true" id="7b37eb79-ceff-44a4-81aa-7e12f61dfc1f" name="Changes" comment="Manji bug fix kod mapiranja filtiriranih igara">
+      <change beforePath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/.idea/workspace.xml" beforePathEscaped="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/.idea/workspace.xml" afterPathEscaped="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/(tabs)/profile/_layout.tsx" beforePathEscaped="$PROJECT_DIR$/Gamenote/app/(tabs)/profile/_layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/(tabs)/profile/_layout.tsx" afterPathEscaped="$PROJECT_DIR$/Gamenote/app/(tabs)/profile/_layout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/(tabs)/profile/index.tsx" beforePathEscaped="$PROJECT_DIR$/Gamenote/app/(tabs)/profile/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/(tabs)/profile/index.tsx" afterPathEscaped="$PROJECT_DIR$/Gamenote/app/(tabs)/profile/index.tsx" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
