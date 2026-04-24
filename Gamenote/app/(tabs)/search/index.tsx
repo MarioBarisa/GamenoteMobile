@@ -35,6 +35,13 @@ export default function SearchIndex() {
     return results;
   }, [search, sort]); // <- Obavezno dodati 'sort' u ovisnosti (dependency array)
 
+    function searchBarText(vrsta: boolean){
+        if(vrsta){
+            return "Pretraži svoji Gamenote"
+        } else{
+            return "Pretraži Gamenote DB"
+        }
+    }
 
   const { theme } = useTheme();
   const t = colors[theme];
@@ -50,8 +57,8 @@ export default function SearchIndex() {
               onLongPress={() => Alert.alert("Sortiranje", "Sortiraj rezultate pretrage. Ako je sortiranje uključeno igre koje najviše igraš su prve.")}
               style={{ justifyContent: 'center', alignItems: 'center'}}>
              <SymbolView
-                 key={sort ? "line.horizontal.3.decrease.circle" : "line.horizontal.3.decrease.circle.fill"}
-                 name={sort ? "line.horizontal.3.decrease.circle" : "line.horizontal.3.decrease.circle.fill"}
+                 key={sort ? "line.horizontal.3.decrease.circle.fill" : "line.horizontal.3.decrease.circle"}
+                 name={sort ? "line.horizontal.3.decrease.circle.fill" : "line.horizontal.3.decrease.circle"}
                 resizeMode="scaleAspectFit"
                 style={{ width: 36, height: 30 }}
               />
@@ -72,7 +79,7 @@ export default function SearchIndex() {
             </TouchableOpacity>
           ),
           headerSearchBarOptions: {
-            placeholder: "Pretraži Gamenote",
+            placeholder: searchBarText(userGamenotesOnly),
             onChangeText: (event) => setSearch(event.nativeEvent.text),
           },
         }}

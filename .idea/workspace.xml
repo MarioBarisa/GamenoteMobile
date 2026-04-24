@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7b37eb79-ceff-44a4-81aa-7e12f61dfc1f" name="Changes" comment="Implementirani osnovni sort mehanizam">
-      <change beforePath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/(tabs)/search/index.tsx" beforePathEscaped="$PROJECT_DIR$/Gamenote/app/(tabs)/search/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/(tabs)/search/index.tsx" afterPathEscaped="$PROJECT_DIR$/Gamenote/app/(tabs)/search/index.tsx" afterDir="false" />
-    </list>
+    <list default="true" id="7b37eb79-ceff-44a4-81aa-7e12f61dfc1f" name="Changes" comment="Manji bug fix kod mapiranja filtiriranih igara" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -237,7 +235,14 @@
       <option name="presentableId" value="LOCAL−00017" />
       <updated>1776946170114</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL−00018" summary="Manji bug fix kod mapiranja filtiriranih igara">
+      <option name="closed" value="true" />
+      <created>1776946346253</created>
+      <option name="number" value="LOCAL−00018" />
+      <option name="presentableId" value="LOCAL−00018" />
+      <updated>1776946346253</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -272,7 +277,8 @@
     <MESSAGE value="search bar sada radi nad videoigrama" />
     <MESSAGE value="Dodani gumb za toggle između korisnikovog Gamenote-a i globalne Gamenote baze prilikom pretrage te gumb za sortiranje. Potrebna implementacija" />
     <MESSAGE value="Implementirani osnovni sort mehanizam" />
-    <option name="LAST_COMMIT_MESSAGE" value="Implementirani osnovni sort mehanizam" />
+    <MESSAGE value="Manji bug fix kod mapiranja filtiriranih igara" />
+    <option name="LAST_COMMIT_MESSAGE" value="Manji bug fix kod mapiranja filtiriranih igara" />
   </component>
   <component name="github-copilot-workspace">
     <instructionFileLocations>
