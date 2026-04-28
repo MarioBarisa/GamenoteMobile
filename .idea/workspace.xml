@@ -4,16 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7b37eb79-ceff-44a4-81aa-7e12f61dfc1f" name="Changes" comment="Dodana ikona od gumba za postavke i poboljšanje izgleda Profil page-a.">
+    <list default="true" id="7b37eb79-ceff-44a4-81aa-7e12f61dfc1f" name="Changes" comment="Poboljšana prilagodba ScrollView-a i ažuriranje stila zaglavlja/titles na iOS26 native">
+      <change beforePath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/.idea/copilotDiffState.xml" beforePathEscaped="$PROJECT_DIR$/.idea/copilotDiffState.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/.idea/copilotDiffState.xml" afterPathEscaped="$PROJECT_DIR$/.idea/copilotDiffState.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/.idea/workspace.xml" beforePathEscaped="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/.idea/workspace.xml" afterPathEscaped="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app.json" beforePathEscaped="$PROJECT_DIR$/Gamenote/app.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app.json" afterPathEscaped="$PROJECT_DIR$/Gamenote/app.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/(tabs)/home/_layout.tsx" beforePathEscaped="$PROJECT_DIR$/Gamenote/app/(tabs)/home/_layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/(tabs)/home/_layout.tsx" afterPathEscaped="$PROJECT_DIR$/Gamenote/app/(tabs)/home/_layout.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/_layout.tsx" beforePathEscaped="$PROJECT_DIR$/Gamenote/app/_layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/_layout.tsx" afterPathEscaped="$PROJECT_DIR$/Gamenote/app/_layout.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/details.tsx" beforePathEscaped="$PROJECT_DIR$/Gamenote/app/details.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/details.tsx" afterPathEscaped="$PROJECT_DIR$/Gamenote/app/details.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/components/GameCard.tsx" beforePathEscaped="$PROJECT_DIR$/Gamenote/components/GameCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/components/GameCard.tsx" afterPathEscaped="$PROJECT_DIR$/Gamenote/components/GameCard.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/package-lock.json" beforePathEscaped="$PROJECT_DIR$/Gamenote/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/package-lock.json" afterPathEscaped="$PROJECT_DIR$/Gamenote/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/package.json" beforePathEscaped="$PROJECT_DIR$/Gamenote/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/package.json" afterPathEscaped="$PROJECT_DIR$/Gamenote/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/README.md" beforePathEscaped="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/README.md" afterPathEscaped="$PROJECT_DIR$/README.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -27,13 +22,13 @@
     </persistenceIdMap>
   </component>
   <component name="CopilotUserSelectedChatMode">
-    <option name="chatModeId" value="Ask" />
+    <option name="chatModeId" value="Agent" />
     <option name="inlineChatModeId" value="Ask" />
   </component>
   <component name="CopilotUserSelectedModel">
     <selectedModels>
-      <entry key="chat-panel" value="Gemini 3.1 Pro" />
-      <entry key="agent-panel" value="Gemini 3.1 Pro" />
+      <entry key="chat-panel" value="GPT-5.2-Codex" />
+      <entry key="agent-panel" value="GPT-5.2-Codex" />
     </selectedModels>
   </component>
   <component name="FileTemplateManagerImpl">
@@ -125,7 +120,7 @@
       <workItem from="1775852651341" duration="17044000" />
       <workItem from="1776252419788" duration="815000" />
       <workItem from="1776332032609" duration="28920000" />
-      <workItem from="1777377864731" duration="2497000" />
+      <workItem from="1777377864731" duration="4465000" />
     </task>
     <task id="LOCAL−00001" summary="izmjena directorija README">
       <option name="closed" value="true" />
@@ -260,7 +255,21 @@
       <option name="presentableId" value="LOCAL−00019" />
       <updated>1777025319946</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL−00020" summary="Dodana presseble komponenta na na GameCard.tsx">
+      <option name="closed" value="true" />
+      <created>1777382275828</created>
+      <option name="number" value="LOCAL−00020" />
+      <option name="presentableId" value="LOCAL−00020" />
+      <updated>1777382275828</updated>
+    </task>
+    <task id="LOCAL−00021" summary="Poboljšana prilagodba ScrollView-a i ažuriranje stila zaglavlja/titles na iOS26 native">
+      <option name="closed" value="true" />
+      <created>1777382892586</created>
+      <option name="number" value="LOCAL−00021" />
+      <option name="presentableId" value="LOCAL−00021" />
+      <updated>1777382892586</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -297,7 +306,9 @@
     <MESSAGE value="Implementirani osnovni sort mehanizam" />
     <MESSAGE value="Manji bug fix kod mapiranja filtiriranih igara" />
     <MESSAGE value="Dodana ikona od gumba za postavke i poboljšanje izgleda Profil page-a." />
-    <option name="LAST_COMMIT_MESSAGE" value="Dodana ikona od gumba za postavke i poboljšanje izgleda Profil page-a." />
+    <MESSAGE value="Dodana presseble komponenta na na GameCard.tsx" />
+    <MESSAGE value="Poboljšana prilagodba ScrollView-a i ažuriranje stila zaglavlja/titles na iOS26 native" />
+    <option name="LAST_COMMIT_MESSAGE" value="Poboljšana prilagodba ScrollView-a i ažuriranje stila zaglavlja/titles na iOS26 native" />
   </component>
   <component name="github-copilot-workspace">
     <instructionFileLocations>

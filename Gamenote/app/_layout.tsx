@@ -17,7 +17,7 @@ function RootNavigator() {
                 <Stack.Screen name="details"
                               options={{
                                //   headerLargeTitle: true,
-                                  title: "Detalji",
+                               //  title: "Detalji", -> naziv dodan unutar details.tsx kako bi svaki naslov bio = naziv igre
                                   headerBackButtonDisplayMode: "minimal",
 
                               }}/>
