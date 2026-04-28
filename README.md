@@ -5,3 +5,5 @@ It provides a clean interface for keeping notes, favorites, and other game-relat
 Built using React Native + Expo SDK54. 
 
 This project is developed as a final thesis project for the Faculty of Informatics in Pula for the academic year 2025/2026.
+
+To fix any package version mismatch use `npx expo install --fix` in root of the project.

@@ -1,7 +1,9 @@
-import {View, Text, StyleSheet, Dimensions, Image} from 'react-native'
+import {View, Text, StyleSheet, Dimensions, Image, Pressable} from 'react-native'
 import { colors } from '@/constants/theme'
 import { useTheme } from '@/context/theme'
 import {Ionicons} from "@expo/vector-icons";
+import {useRouter} from "expo-router";
+import {json} from "node:stream/consumers";
 
 export interface Game {
   title: string
@@ -19,6 +21,8 @@ export interface Game {
   progress_total?: number
   progress_source?: string
   progress_mode?: string
+  previous_game?: string
+  next_game?: string
 }
 
 const STATUS_CONFIG = {
@@ -59,6 +63,14 @@ interface Props {
 export default function GameCard({ game }: Props) {
   const { theme } = useTheme()
   const t = colors[theme]
+    const router = useRouter();
+
+  const handlePress = () => {
+      router.push({
+          pathname: '/details',
+          params: {game: JSON.stringify(game)}, // šalje se cijeli game object
+      })
+  }
 
   const imageUri = game.image_url || game.background_image || null;
 
@@ -83,6 +95,7 @@ export default function GameCard({ game }: Props) {
 
   return (
 
+      <Pressable onPress={handlePress} style={({pressed})=>[{opacity: pressed ? 0.8 : 1}]}>
     <View style={[
       styles.card,
       {
@@ -178,6 +191,7 @@ export default function GameCard({ game }: Props) {
             ) : null}
       </View>
     </View>
+</Pressable>
   )
 }
 
