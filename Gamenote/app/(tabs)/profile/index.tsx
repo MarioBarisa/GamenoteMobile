@@ -17,7 +17,10 @@ export default function FavoritesScreen() {
 
   return (
 
-      <ScrollView style={{backgroundColor: t.background}}>
+      <ScrollView
+        style={{backgroundColor: t.background}}
+        contentInsetAdjustmentBehavior="automatic"
+      >
         <Text style={[styles.textMain, {color: t.text}]}>{loggedIn ? "Pozdrav, " + username + "!" : "Niste prijavljeni."}</Text>
         {loggedIn && (
             <View>

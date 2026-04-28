@@ -8,7 +8,10 @@ export default function GroupsIndex() {
   const t = colors[theme];
 
   return (
-    <ScrollView style={{ backgroundColor: t.background }}>
+    <ScrollView
+      style={{ backgroundColor: t.background }}
+      contentInsetAdjustmentBehavior="automatic"
+    >
       <Text style={{ color: t.text, padding: 20, textAlign: "center", fontSize: 18 }}>
         Tvoje grupe
       </Text>
