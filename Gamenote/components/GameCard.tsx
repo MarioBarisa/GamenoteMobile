@@ -12,8 +12,8 @@ export interface Game {
   status?: 'playing' | 'paused' | 'completed' | 'dropped' | 'backlog'
   rating?: number
   notes?: string
-  image_url?: string
-  background_image?: string
+  image_url?: string[]
+  background_image?: string[]
   play_time?: number
   start_date?: string
   end_date?: string
@@ -23,6 +23,7 @@ export interface Game {
   progress_mode?: string
   previous_game?: string
   next_game?: string
+
 }
 
 const STATUS_CONFIG = {
@@ -108,7 +109,7 @@ export default function GameCard({ game }: Props) {
       <View style={styles.imageContainer}>
         {imageUri ? (
           <Image
-          source={{ uri: imageUri }}
+          source={{ uri: imageUri[0] }}
           style={[styles.image, { resizeMode: 'cover' }]}
         />
         ) : (
