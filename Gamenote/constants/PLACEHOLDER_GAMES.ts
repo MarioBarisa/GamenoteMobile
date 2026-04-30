@@ -10,6 +10,8 @@ export const PLACEHOLDER_GAMES: Game[] = [
     play_time: 10000,
     progress_value: 98,
     progress_total: 100,
+    start_date: "2025-11-11",
+    end_date: "2025-11-12",
     image_url: [
   "https://media.rawg.io/media/games/24b/24b68f500fd138c3146d8856f0dd55b4.jpg",
   "https://media.rawg.io/media/screenshots/3ea/3eadccae65f82027a0e0ddc1f4ea5d52.jpg",
