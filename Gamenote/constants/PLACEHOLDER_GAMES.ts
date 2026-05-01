@@ -7,16 +7,17 @@ export const PLACEHOLDER_GAMES: Game[] = [
     genre: 'Shooter',
     status: 'playing',
     rating: 5,
+    notes: '"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."',
     play_time: 10000,
     progress_value: 98,
     progress_total: 100,
     start_date: "2025-11-11",
     end_date: "2025-11-12",
     image_url: [
-  "https://media.rawg.io/media/games/24b/24b68f500fd138c3146d8856f0dd55b4.jpg",
-  "https://media.rawg.io/media/screenshots/3ea/3eadccae65f82027a0e0ddc1f4ea5d52.jpg",
-  "https://media.rawg.io/media/screenshots/ea6/ea669a514a8fdd905b5d67384561014b.jpg",
-  "https://media.rawg.io/media/screenshots/441/44158afb4810a7141760dc3b03d143ba.jpg"]
+      "https://media.rawg.io/media/games/24b/24b68f500fd138c3146d8856f0dd55b4.jpg",
+      "https://media.rawg.io/media/screenshots/3ea/3eadccae65f82027a0e0ddc1f4ea5d52.jpg",
+      "https://media.rawg.io/media/screenshots/ea6/ea669a514a8fdd905b5d67384561014b.jpg",
+      "https://media.rawg.io/media/screenshots/441/44158afb4810a7141760dc3b03d143ba.jpg"]
 },
   {
     title: 'The Legend of Zelda: Tears of the Kingdom',

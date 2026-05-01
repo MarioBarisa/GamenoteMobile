@@ -1,17 +1,20 @@
 import {useLocalSearchParams, Stack} from "expo-router";
 import {useEffect, useState} from "react";
 import {Image, ScrollView, StyleSheet, Text, View, Pressable, Dimensions, Modal} from "react-native";
+import {useSafeAreaInsets} from "react-native-safe-area-context";
 import {Game} from "@/components/GameCard";
 import {useTheme} from "@/context/theme";
 import {colors} from "@/constants/theme";
 import {SymbolView} from "expo-symbols";
 import {inspect} from "node:util";
+import {Ionicons} from "@expo/vector-icons";
 
 const SCREEN_WIDTH = Dimensions.get("window").width;
 
 export default function Index() {
     const {theme} = useTheme();
     const t = colors[theme];
+    const insets = useSafeAreaInsets();
     const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
 
 
@@ -54,8 +57,25 @@ export default function Index() {
         return <Text style={{color: t.text, padding: 16}}>Igra nije pronađena</Text>
     }
 
-    // @ts-ignore
-    // @ts-ignore
+    //boja dostignuća
+    const progressColor = (() => {
+        let achievementPercent;
+        if (game?.progress_value == undefined) {
+            achievementPercent = 0;
+        } else {
+            achievementPercent = game.progress_value;
+        }
+        const clamped = Math.max(0, Math.min(achievementPercent, 100))
+        if (clamped >= 100) return '#0d36f9'
+        if (clamped >= 98) return '#f90d74'
+        if (clamped >= 95) return '#12f90d'
+        if (clamped >= 90) return '#22C55E'
+        if (clamped >= 70) return '#84CC16'
+        if (clamped >= 45) return '#FACC15'
+        if (clamped >= 20) return '#F97316'
+        return '#EF4444'
+    })()
+
     // @ts-ignore
     // @ts-ignore
     return (
@@ -92,7 +112,7 @@ export default function Index() {
                                         key={uri}
                                         source={{uri}}
                                         style={styles.coverImage}
-                                        resizeMode="cover"/> </Pressable>
+                                        resizeMode="cover"/></Pressable>
                             ))}
                         </ScrollView>
 
@@ -141,36 +161,72 @@ export default function Index() {
                             ) : null}
                         </View>
                     </View>
+                    <View style={{paddingHorizontal: 12, paddingVertical: 8, gap: 16}}>
 
-                    {/* start i end datumi */}
-                    <View style={{
-                        padding: 8,
-                        flexDirection: 'row',
-                        alignItems: 'center',
-                        flexWrap: 'wrap',
-                        justifyContent: 'space-evenly'
-                    }}>
-                        {game.start_date ? (
-                            <Text style={{color: t.text, fontWeight: '700', paddingLeft: 8}}>
-                                {new Date(game.start_date).toLocaleDateString('hr-HR')}
-                            </Text>
-                        ) : null}
-                        <SymbolView name={"arrow.right"}
-                                    style={{width: 20, height: 20, alignSelf: "center", margin: 5}}/>
-                        {game.end_date ? (
-                            <Text style={{color: t.text, fontWeight: '700'}}>
-                                {new Date(game.end_date).toLocaleDateString('hr-HR')}
-                            </Text>
-                        ) : null}
+                        {/* Progress i Ocjena */}
+                        <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
+                            {/* Progress */}
+                            {typeof game.progress_value === 'number' && typeof game.progress_total === 'number' ? (
+                                <Text style={{fontSize: 18, fontWeight: '800', color: progressColor}}>
+                                    Postignuća: {game.progress_value}/{game.progress_total}
+                                </Text>
+                            ) : <View/> /* Placeholder da space-between radi čak i ako nema progressa */}
 
+                            {/* Ocjena */}
+                            {typeof game.rating === 'number' && (
+                                <View style={{flexDirection: 'row', gap: 4}}>
+                                    {[1, 2, 3, 4, 5].map(star => (
+                                        <SymbolView
+                                            key={star}
+                                            name={star <= game.rating! ? 'star.fill' : 'star'}
+                                            style={{width: 24, height: 24}}
+                                            tintColor={star <= game.rating! ? '#FF9F0A' : t.secondaryText}
+                                        />
+                                    ))}
+                                </View>
+                            )}
+                        </View>
 
-                        {/* Progress */}
-                        {typeof game.progress_value === 'number' && typeof game.progress_total === 'number' && (
-                            <Text style={{padding: 4, fontWeight: 800, color: t.text}}>
-                                Postignuća: {game.progress_value}/{game.progress_total}
-                            </Text>
+                        {/* start i end datumi */}
+                        {(game.start_date || game.end_date) && (
+                            <View style={{
+                                flexDirection: 'row',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                gap: 8,
+                                backgroundColor: theme === 'dark' ? '#2C2C2E' : '#F2F2F7',
+                                paddingVertical: 8,
+                                paddingHorizontal: 16,
+                                borderRadius: 8,
+                                alignSelf: 'center'
+                            }}>
+                                {game.start_date ? (
+                                    <Text style={{color: '#51d834', fontWeight: '700', fontSize: 14}}>
+                                        Start: {new Date(game.start_date).toLocaleDateString('hr-HR')}
+                                    </Text>
+                                ) : <Text style={{color: t.secondaryText, fontSize: 14}}>?</Text>}
+
+                                <SymbolView
+                                    name="arrow.right"
+                                    style={{width: 16, height: 16}}
+                                    tintColor={t.secondaryText}
+                                />
+
+                                {game.end_date ? (
+                                    <Text style={{color: '#607de8', fontWeight: '700', fontSize: 14}}>
+                                        End: {new Date(game.end_date).toLocaleDateString('hr-HR')}
+                                    </Text>
+                                ) : <Text style={{color: t.secondaryText, fontSize: 14}}>Sada</Text>}
+                            </View>
                         )}
+                        {/* bilješke korisnika */}
+                        <Text style={{color: t.text, fontSize: 20, fontWeight: '600'}}>Tvoje bilješke:</Text>
+                        {game.notes && (
+                            <Text style={{ fontStyle: 'italic',fontSize: 14, color: t.text}}>{game.notes}</Text>
+                        )}
+
                     </View>
+
 
                 </View>
 
@@ -179,31 +235,42 @@ export default function Index() {
                 visible={selectedIndex !== null}
                 transparent
                 animationType="fade"
-                onRequestClose={() => setSelectedIndex(null)}
-            >
+                onRequestClose={() => setSelectedIndex(null)}>
                 <View style={styles.modalOverlay}>
-                    <Pressable style={styles.modalCloseArea} onPress={() => setSelectedIndex(null)}>
-                        <SymbolView name={"xmark.circle"} style={{width: 42, height: 40, alignSelf: "flex-start", margin: 1}}/>
-                    </Pressable>
-
+                    <View style={{paddingTop: insets.top}}>
+                        <Pressable style={styles.modalCloseArea} onPress={() => setSelectedIndex(null)}>
+                            <SymbolView
+                                name="xmark.circle.fill"
+                                style={{width: 40, height: 40}}
+                                tintColor="rgba(255,255,255,0.85)"
+                            />
+                        </Pressable>
+                    </View>
                     <ScrollView
                         horizontal
                         pagingEnabled
                         showsHorizontalScrollIndicator={false}
                         contentOffset={{
-                            x: (selectedIndex ?? 0) * SCREEN_WIDTH, //da lijepo zauzme prostor
+                            x: (selectedIndex ?? 0) * SCREEN_WIDTH,
                             y: 0,
                         }}
-                    >
-                        {/* @ts-ignore */}
+                    >{/*@ts-ignore*/}
                         {game.image_url.map((uri) => (
-                          <View key={uri} style={styles.fullscreenSlide}>
-                            <Image
-                              source={{ uri }}
-                              style={styles.fullscreenImage}
-                              resizeMode="contain"
-                            />
-                          </View>
+                            <ScrollView
+                                key={uri}
+                                style={styles.fullscreenSlide}
+                                minimumZoomScale={1}
+                                maximumZoomScale={5}
+                                showsHorizontalScrollIndicator={false}
+                                showsVerticalScrollIndicator={false}
+                                centerContent={true}
+                            >
+                                <Image
+                                    source={{uri}}
+                                    style={{width: SCREEN_WIDTH, height: SCREEN_WIDTH * 0.75}}
+                                    resizeMode="contain"
+                                />
+                            </ScrollView>
                         ))}
                     </ScrollView>
                 </View>
@@ -256,16 +323,11 @@ const styles = StyleSheet.create({
     boldFont: {
         fontWeight: '700'
     },
-    fullscreenImage: {
-        width: "100%",
-        height: "100%",
-    },
     modalOverlay: {
         flex: 1,
         backgroundColor: "rgba(0,0,0,0.95)",
     },
     modalCloseArea: {
-        paddingTop: 60,
         paddingHorizontal: 16,
         paddingBottom: 12,
         zIndex: 1,
@@ -278,7 +340,5 @@ const styles = StyleSheet.create({
     fullscreenSlide: {
         width: SCREEN_WIDTH,
         height: "100%",
-        justifyContent: "center",
-        alignItems: "center",
     },
 })

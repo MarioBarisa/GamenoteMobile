@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7b37eb79-ceff-44a4-81aa-7e12f61dfc1f" name="Changes" comment="image_url je sada array sa slikama, prvi link u array-u je cove a ostalo su generic slike igara -&gt; prepravljena GameCard.tsx da radi na osnovu navedenog. U details.tsx prikazuje se više slike igare osim covera ( kako bi se kasnije ušteilo na prostoru. TODO: Mogucnost klika na sliku kako bi se bolje mogla vidjeti.">
+    <list default="true" id="7b37eb79-ceff-44a4-81aa-7e12f61dfc1f" name="Changes" comment="Daljni razvoj details.tsx zaslona + dodana mogucnost klika na sliku za veci prikaz.">
       <change beforePath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/.idea/workspace.xml" beforePathEscaped="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/.idea/workspace.xml" afterPathEscaped="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/details.tsx" beforePathEscaped="$PROJECT_DIR$/Gamenote/app/details.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/details.tsx" afterPathEscaped="$PROJECT_DIR$/Gamenote/app/details.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/constants/PLACEHOLDER_GAMES.ts" beforePathEscaped="$PROJECT_DIR$/Gamenote/constants/PLACEHOLDER_GAMES.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/constants/PLACEHOLDER_GAMES.ts" afterPathEscaped="$PROJECT_DIR$/Gamenote/constants/PLACEHOLDER_GAMES.ts" afterDir="false" />
@@ -16,8 +16,8 @@
   </component>
   <component name="CopilotPersistence">
     <persistenceIdMap>
-      <entry key="_/Users/mariobarisa/Desktop//Osobno/GamenoteMobile" value="3D1uOwh147Go214RoVBZSPXxVTy" />
       <entry key="_/Users/mariobarisa/Desktop//Osobno/GamenoteMobile" value="3BnhLSTOxjFVNfgTjSLmchQK7qB" />
+      <entry key="_/Users/mariobarisa/Desktop//Osobno/GamenoteMobile" value="3D7QRxuir63ayyBRrZzlbTRszvx" />
     </persistenceIdMap>
   </component>
   <component name="CopilotUserSelectedChatMode">
@@ -26,8 +26,8 @@
   </component>
   <component name="CopilotUserSelectedModel">
     <selectedModels>
-      <entry key="chat-panel" value="Gemini 3.1 Pro" />
-      <entry key="agent-panel" value="Gemini 3.1 Pro" />
+      <entry key="chat-panel" value="Auto" />
+      <entry key="agent-panel" value="Auto" />
     </selectedModels>
   </component>
   <component name="FileTemplateManagerImpl">
@@ -121,7 +121,8 @@
       <workItem from="1776332032609" duration="28920000" />
       <workItem from="1777377864731" duration="4865000" />
       <workItem from="1777461869997" duration="2812000" />
-      <workItem from="1777552599504" duration="5043000" />
+      <workItem from="1777552599504" duration="5103000" />
+      <workItem from="1777630625531" duration="5137000" />
     </task>
     <task id="LOCAL−00001" summary="izmjena directorija README">
       <option name="closed" value="true" />
@@ -284,7 +285,14 @@
       <option name="presentableId" value="LOCAL−00023" />
       <updated>1777464688469</updated>
     </task>
-    <option name="localTasksCounter" value="24" />
+    <task id="LOCAL−00024" summary="Daljni razvoj details.tsx zaslona + dodana mogucnost klika na sliku za veci prikaz.">
+      <option name="closed" value="true" />
+      <created>1777557709526</created>
+      <option name="number" value="LOCAL−00024" />
+      <option name="presentableId" value="LOCAL−00024" />
+      <updated>1777557709526</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -325,7 +333,8 @@
     <MESSAGE value="Poboljšana prilagodba ScrollView-a i ažuriranje stila zaglavlja/titles na iOS26 native" />
     <MESSAGE value="Naslov igre u details.tsx se mijenja ovisno o, također details.tsx prikazuje osnove informacije o igri" />
     <MESSAGE value="image_url je sada array sa slikama, prvi link u array-u je cove a ostalo su generic slike igara -&gt; prepravljena GameCard.tsx da radi na osnovu navedenog. U details.tsx prikazuje se više slike igare osim covera ( kako bi se kasnije ušteilo na prostoru. TODO: Mogucnost klika na sliku kako bi se bolje mogla vidjeti." />
-    <option name="LAST_COMMIT_MESSAGE" value="image_url je sada array sa slikama, prvi link u array-u je cove a ostalo su generic slike igara -&gt; prepravljena GameCard.tsx da radi na osnovu navedenog. U details.tsx prikazuje se više slike igare osim covera ( kako bi se kasnije ušteilo na prostoru. TODO: Mogucnost klika na sliku kako bi se bolje mogla vidjeti." />
+    <MESSAGE value="Daljni razvoj details.tsx zaslona + dodana mogucnost klika na sliku za veci prikaz." />
+    <option name="LAST_COMMIT_MESSAGE" value="Daljni razvoj details.tsx zaslona + dodana mogucnost klika na sliku za veci prikaz." />
   </component>
   <component name="github-copilot-workspace">
     <instructionFileLocations>
