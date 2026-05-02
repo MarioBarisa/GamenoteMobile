@@ -5,13 +5,27 @@ import {Ionicons} from "@expo/vector-icons";
 import {useRouter} from "expo-router";
 import {json} from "node:stream/consumers";
 
+export interface SeriesGame {
+    id: number;
+    name: string;
+    released: string | null;
+    background_image: string;
+}
+
 export interface Game {
   title: string
   platform?: string
   genre?: string
   status?: 'playing' | 'paused' | 'completed' | 'dropped' | 'backlog'
   rating?: number
+  metacriticScore: number
+  ageRating: number
+  realaseDate: string
+  webPage: string
+  about: string
+  series?: SeriesGame[];
   notes?: string
+  publisher?: string
   image_url?: string[]
   background_image?: string[]
   play_time?: number
