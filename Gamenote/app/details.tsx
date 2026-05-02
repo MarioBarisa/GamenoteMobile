@@ -192,24 +192,18 @@ export default function Index() {
                                 </Text>
                             )}
 
-                            {/* Ocjena (koristi obavezno ternary s null, ne &&) */}
-                            {game.metacriticScore ? (
-                                <View style={{flexDirection: 'row', alignItems: 'center', gap: 8}}>
-                                    <Text style={{color: t.secondaryText, fontSize: 14}}>Metacritic</Text>
-                                    <View style={{
-                                        backgroundColor: metacriticColor,
-                                        width: 36,
-                                        height: 36,
-                                        borderRadius: 4,
-                                        justifyContent: 'center',
-                                        alignItems: 'center'
-                                    }}>
-                                        <Text style={{color: '#FFFFFF', fontSize: 16, fontWeight: 'bold'}}>
-                                            {game.metacriticScore}
-                                        </Text>
-                                    </View>
+                            {typeof game.rating === 'number' && (
+                                <View style={{flexDirection: 'row', gap: 4}}>
+                                    {[1, 2, 3, 4, 5].map(star => (
+                                        <SymbolView
+                                            key={star}
+                                            name={star <= game.rating! ? 'star.fill' : 'star'}
+                                            style={{width: 24, height: 24}}
+                                            tintColor={star <= game.rating! ? '#FF9F0A' : t.secondaryText}
+                                        />
+                                    ))}
                                 </View>
-                            ) : null}
+                            )}
 
                         </View>
 
