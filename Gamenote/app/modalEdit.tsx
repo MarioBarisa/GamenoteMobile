@@ -49,6 +49,7 @@ export default function ModalEdit() {
         end_date: original.end_date,
         progress_value: original.progress_value,
         progress_total: original.progress_total,
+        platform: original.platform,
     });
 
     const patch = (key: keyof Game, value: any) => setForm(prev => ({...form, [key]: value}));
@@ -60,6 +61,13 @@ export default function ModalEdit() {
         dropped: {label: 'Dropped', bg: '#FF453A'},
         backlog: {label: 'Backlog', bg: '#b364da'},
     } as const;
+
+    const PLATFORMS = [
+        'PlayStation 5', 'PlayStation 4',
+        'Xbox Series X/S', 'Xbox One',
+        'Nintendo Switch', 'Nintendo Switch 2',
+        'PC', 'iOS', 'Android', 'Other'
+    ] as const;
 
     return (
 
@@ -110,7 +118,7 @@ export default function ModalEdit() {
                     />
                 </View>
                 <View style={{flexDirection: "row", alignItems: "center", gap: 8}}>
-                    <Text style={[styles.label, {color: t.text}]}>Postignuća</Text>
+                    <Text style={[styles.label, {color: t.text}]}>Postignuća: </Text>
                     <TextInput style={[styles.numInput, {
                         color: t.text,
                         backgroundColor: theme === 'dark' ? '#2C2C2E' : '#E5E5EA'
@@ -133,16 +141,43 @@ export default function ModalEdit() {
                                placeholderTextColor={t.secondaryText}
                                maxLength={4}/>
                 </View>
-                <Text style={[styles.label, {color: t.text}]}>Playtime</Text>
-                <TextInput style={[styles.input, {
-                    color: t.text,
-                    backgroundColor: theme === 'dark' ? '#2C2C2E' : '#E5E5EA'
-                }]} //PLAYTIME IGRE
-                           value={form.play_time?.toString() ?? ''}
-                           onChangeText={v => patch('play_time', v === '' ? undefined : parseInt(v))}
-                           keyboardType="number-pad"
-                           placeholder="Npr. 120"
-                           placeholderTextColor={t.secondaryText}/>
+                <View style={{flexDirection: "row", alignItems: "center", gap: 8}}>
+                    <Text style={[styles.label, {color: t.text}]}>Playtime: </Text>
+                    <TextInput style={[styles.input, {
+                        color: t.text,
+                        backgroundColor: theme === 'dark' ? '#2C2C2E' : '#E5E5EA'
+                    }]} //PLAYTIME IGRE
+                               value={form.play_time?.toString() ?? ''}
+                               onChangeText={v => patch('play_time', v === '' ? undefined : parseInt(v))}
+                               keyboardType="number-pad"
+                               placeholder="Npr. 120"
+                               placeholderTextColor={t.secondaryText}/>
+                </View>
+                <View style={[{backgroundColor: theme === 'dark' ? '#2C2C2E' : '#E5E5EA'}]}/>
+                <View style={{flexDirection: "row", alignItems: "center", gap: 8}}>
+                    <Text style={[styles.label, {color: t.text}]}>Platforma </Text>
+                    <Pressable
+                        onPress={() => Alert.alert(
+                            'Odaberi platformu',  // ODABIR PLATFORME NA KOJOJ JE IGRA IGRANA
+
+                            undefined,
+                            [
+                                ...PLATFORMS.map(p => ({
+                                    text: p,
+                                    onPress: () => patch('platform', p),
+                                })),
+                                {text: 'Odustani', style: 'cancel'},
+                            ]
+                        )}
+                        style={{flexDirection: 'row', alignItems: 'center', gap: 6}}
+                    >
+                        <Text style={{color: t.accent, fontSize: 15, fontWeight: '500'}}>
+                            {form.platform ?? 'Odaberi platformu'}
+                        </Text>
+                        <SymbolView name="chevron.up.chevron.down" style={{width: 14, height: 14}}
+                                    tintColor={t.accent}/>
+                    </Pressable>
+                </View>
                 <Text style={[styles.label, {color: t.text}]}>Tvoje bilješke:</Text>
                 <TextInput style={[styles.notesInput, {
                     color: t.text,

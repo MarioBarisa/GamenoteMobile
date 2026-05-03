@@ -4,14 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7b37eb79-ceff-44a4-81aa-7e12f61dfc1f" name="Changes" comment="Dodan modalEdit.tsx">
-      <change beforePath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/.idea/workspace.xml" beforePathEscaped="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/.idea/workspace.xml" afterPathEscaped="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app.json" beforePathEscaped="$PROJECT_DIR$/Gamenote/app.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app.json" afterPathEscaped="$PROJECT_DIR$/Gamenote/app.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/_layout.tsx" beforePathEscaped="$PROJECT_DIR$/Gamenote/app/_layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/_layout.tsx" afterPathEscaped="$PROJECT_DIR$/Gamenote/app/_layout.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/details.tsx" beforePathEscaped="$PROJECT_DIR$/Gamenote/app/details.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/details.tsx" afterPathEscaped="$PROJECT_DIR$/Gamenote/app/details.tsx" afterDir="false" />
+    <list default="true" id="7b37eb79-ceff-44a4-81aa-7e12f61dfc1f" name="Changes" comment="U potpunosti implementiran modalEdit.tsx">
       <change beforePath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/modalEdit.tsx" beforePathEscaped="$PROJECT_DIR$/Gamenote/app/modalEdit.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/modalEdit.tsx" afterPathEscaped="$PROJECT_DIR$/Gamenote/app/modalEdit.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/package-lock.json" beforePathEscaped="$PROJECT_DIR$/Gamenote/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/package-lock.json" afterPathEscaped="$PROJECT_DIR$/Gamenote/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/package.json" beforePathEscaped="$PROJECT_DIR$/Gamenote/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/package.json" afterPathEscaped="$PROJECT_DIR$/Gamenote/package.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -327,7 +321,14 @@
       <option name="presentableId" value="LOCAL−00028" />
       <updated>1777808796794</updated>
     </task>
-    <option name="localTasksCounter" value="29" />
+    <task id="LOCAL−00029" summary="U potpunosti implementiran modalEdit.tsx">
+      <option name="closed" value="true" />
+      <created>1777815192594</created>
+      <option name="number" value="LOCAL−00029" />
+      <option name="presentableId" value="LOCAL−00029" />
+      <updated>1777815192595</updated>
+    </task>
+    <option name="localTasksCounter" value="30" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -345,7 +346,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="update packages-a" />
     <MESSAGE value="Prelazak na EXPO44 -&gt; poptuno novi projekt." />
     <MESSAGE value="minimalni bug fixevi" />
     <MESSAGE value="Dodani osnovni tabovi, podešavanje tema i ekran za favorite. Minimalni polish ruta" />
@@ -370,7 +370,8 @@
     <MESSAGE value="Unaprijeđen geneic game info ( detalji ); dodane sve bitne ionformacije + serijali igara + ispravljen achivment text da ispiše kad korisnik nije još dodao niti jedan achv" />
     <MESSAGE value="popravak details.tsx ( krivi render zvjezdica )" />
     <MESSAGE value="Dodan modalEdit.tsx" />
-    <option name="LAST_COMMIT_MESSAGE" value="Dodan modalEdit.tsx" />
+    <MESSAGE value="U potpunosti implementiran modalEdit.tsx" />
+    <option name="LAST_COMMIT_MESSAGE" value="U potpunosti implementiran modalEdit.tsx" />
   </component>
   <component name="github-copilot-workspace">
     <instructionFileLocations>
