@@ -98,7 +98,13 @@ export default function Index() {
                 options={{
                     title: game.title, headerBackTitle: 'Natrag',
                     headerRight: () => (
-                        <Link href="/modalEdit" asChild>
+                        <Link
+                            href={{
+                                pathname: '/modalEdit',
+                                params: {game: gameParam}
+                            }}
+                            asChild
+                        >
                             <Pressable hitSlop={10}>
                                 <SymbolView
                                     name="square.and.pencil"

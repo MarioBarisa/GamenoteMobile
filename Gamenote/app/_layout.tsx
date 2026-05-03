@@ -24,7 +24,7 @@ function RootNavigator() {
                         <Stack.Screen
                             name="modalEdit"
                             options={{
-                              presentation: 'modal', title: "Uredi Informacije"
+                              presentation: 'modal', title: "Uredi Informacije",
                             }}
                           />
                 <Stack.Screen name="settings"
