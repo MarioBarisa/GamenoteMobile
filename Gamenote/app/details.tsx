@@ -1,4 +1,4 @@
-import {useLocalSearchParams, Stack} from "expo-router";
+import {useLocalSearchParams, Stack, Link} from "expo-router";
 import {useEffect, useState} from "react";
 import {Image, ScrollView, StyleSheet, Text, View, Pressable, Dimensions, Modal} from "react-native";
 import {useSafeAreaInsets} from "react-native-safe-area-context";
@@ -95,17 +95,21 @@ export default function Index() {
     return (
         <>
             <Stack.Screen
-                options={{title: game.title, headerBackTitle: 'Natrag',
+                options={{
+                    title: game.title, headerBackTitle: 'Natrag',
                     headerRight: () => (
-                        <Pressable /*onPress={() =>  router.push("/settings")} */ hitSlop={10}>
-                         <SymbolView
-                            name={"square.and.pencil"}
-                            resizeMode="scaleAspectFit"
-                            style={{width: 32, height: 32, justifyContent: 'center'}}
-                            tintColor={t.text}
-                          />
-                        </Pressable>
-                                  ),}}
+                        <Link href="/modalEdit" asChild>
+                            <Pressable hitSlop={10}>
+                                <SymbolView
+                                    name="square.and.pencil"
+                                    resizeMode="scaleAspectFit"
+                                    style={{width: 32, height: 32, justifyContent: 'center'}}
+                                    tintColor={t.text}
+                                />
+                            </Pressable>
+                        </Link>
+                    ),
+                }}
             />
             <ScrollView contentContainerStyle={{gap: 10, padding: 8}}
                         style={{backgroundColor: t.background}}

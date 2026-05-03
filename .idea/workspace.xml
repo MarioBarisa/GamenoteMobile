@@ -5,7 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7b37eb79-ceff-44a4-81aa-7e12f61dfc1f" name="Changes" comment="popravak details.tsx ( krivi render zvjezdica )">
+      <change afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/modalEdit.tsx" afterPathEscaped="$PROJECT_DIR$/Gamenote/app/modalEdit.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/.idea/workspace.xml" beforePathEscaped="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/.idea/workspace.xml" afterPathEscaped="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/_layout.tsx" beforePathEscaped="$PROJECT_DIR$/Gamenote/app/_layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/_layout.tsx" afterPathEscaped="$PROJECT_DIR$/Gamenote/app/_layout.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/details.tsx" beforePathEscaped="$PROJECT_DIR$/Gamenote/app/details.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/details.tsx" afterPathEscaped="$PROJECT_DIR$/Gamenote/app/details.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -93,11 +95,11 @@
       <recent name="$PROJECT_DIR$/Gamenote/app/(tabs)" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/Gamenote/app/(tabs)/modalEdit" />
       <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/Gamenote/assets/images/tabIcons" />
       <recent name="$PROJECT_DIR$/Gamenote/assets/images/Staro" />
       <recent name="$PROJECT_DIR$/Gamenote/assets/tabIcons" />
-      <recent name="$PROJECT_DIR$/Gamenote/assets/images" />
     </key>
   </component>
   <component name="SharedIndexes">

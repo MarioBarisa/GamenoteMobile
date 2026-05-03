@@ -21,6 +21,12 @@ function RootNavigator() {
                                   headerBackButtonDisplayMode: "minimal",
 
                               }}/>
+                        <Stack.Screen
+                            name="modalEdit"
+                            options={{
+                              presentation: 'modal', title: "Uredi Informacije"
+                            }}
+                          />
                 <Stack.Screen name="settings"
                               options={{
                                   headerShown: true,
