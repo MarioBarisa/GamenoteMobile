@@ -4,10 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7b37eb79-ceff-44a4-81aa-7e12f61dfc1f" name="Changes" comment="dodan user opis igre ( bilješke ), dodana mogucnost zoomina na slike ( pinch to zoom ), UI poboljšanja">
+    <list default="true" id="7b37eb79-ceff-44a4-81aa-7e12f61dfc1f" name="Changes" comment="popravak details.tsx ( krivi render zvjezdica )">
+      <change beforePath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/.idea/workspace.xml" beforePathEscaped="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/.idea/workspace.xml" afterPathEscaped="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/details.tsx" beforePathEscaped="$PROJECT_DIR$/Gamenote/app/details.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/details.tsx" afterPathEscaped="$PROJECT_DIR$/Gamenote/app/details.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/components/GameCard.tsx" beforePathEscaped="$PROJECT_DIR$/Gamenote/components/GameCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/components/GameCard.tsx" afterPathEscaped="$PROJECT_DIR$/Gamenote/components/GameCard.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/constants/PLACEHOLDER_GAMES.ts" beforePathEscaped="$PROJECT_DIR$/Gamenote/constants/PLACEHOLDER_GAMES.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/constants/PLACEHOLDER_GAMES.ts" afterPathEscaped="$PROJECT_DIR$/Gamenote/constants/PLACEHOLDER_GAMES.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -16,12 +15,12 @@
   </component>
   <component name="CopilotPersistence">
     <persistenceIdMap>
-      <entry key="_/Users/mariobarisa/Desktop//Osobno/GamenoteMobile" value="3BnhLSTOxjFVNfgTjSLmchQK7qB" />
       <entry key="_/Users/mariobarisa/Desktop//Osobno/GamenoteMobile" value="3D7QRxuir63ayyBRrZzlbTRszvx" />
+      <entry key="_/Users/mariobarisa/Desktop//Osobno/GamenoteMobile" value="3BnhLSTOxjFVNfgTjSLmchQK7qB" />
     </persistenceIdMap>
   </component>
   <component name="CopilotUserSelectedChatMode">
-    <option name="chatModeId" value="Ask" />
+    <option name="chatModeId" value="Agent" />
     <option name="inlineChatModeId" value="Ask" />
   </component>
   <component name="CopilotUserSelectedModel">
@@ -64,30 +63,30 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
-    "codeWithMe.voiceChat.enabledByDefault": "false",
-    "git-widget-placeholder": "main",
-    "javascript.preferred.runtime.type.id": "node",
-    "last_opened_file_path": "/Users/mariobarisa/Desktop/💻/Osobno/GamenoteMobile",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.standard": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.standard": "",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "settings.javascript.prettier",
-    "ts.external.directory.path": "/Users/mariobarisa/Desktop/💻/Osobno/GamenoteMobile/Gamenote/node_modules/typescript/lib",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
+    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;javascript.preferred.runtime.type.id&quot;: &quot;node&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/mariobarisa/Desktop/💻/Osobno/GamenoteMobile&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.standard&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.standard&quot;: &quot;&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;settings.javascript.prettier&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;/Users/mariobarisa/Desktop/💻/Osobno/GamenoteMobile/Gamenote/node_modules/typescript/lib&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/Gamenote/app/(tabs)/groups" />
@@ -124,7 +123,8 @@
       <workItem from="1777377864731" duration="4865000" />
       <workItem from="1777461869997" duration="2812000" />
       <workItem from="1777552599504" duration="5103000" />
-      <workItem from="1777630625531" duration="14902000" />
+      <workItem from="1777630625531" duration="15223000" />
+      <workItem from="1777805317128" duration="2071000" />
     </task>
     <task id="LOCAL−00001" summary="izmjena directorija README">
       <option name="closed" value="true" />
@@ -301,7 +301,21 @@
       <option name="presentableId" value="LOCAL−00025" />
       <updated>1777635891175</updated>
     </task>
-    <option name="localTasksCounter" value="26" />
+    <task id="LOCAL−00026" summary="Unaprijeđen geneic game info ( detalji ); dodane sve bitne ionformacije + serijali igara + ispravljen achivment text da ispiše kad korisnik nije još dodao niti jedan achv">
+      <option name="closed" value="true" />
+      <created>1777727781625</created>
+      <option name="number" value="LOCAL−00026" />
+      <option name="presentableId" value="LOCAL−00026" />
+      <updated>1777727781625</updated>
+    </task>
+    <task id="LOCAL−00027" summary="popravak details.tsx ( krivi render zvjezdica )">
+      <option name="closed" value="true" />
+      <created>1777727998852</created>
+      <option name="number" value="LOCAL−00027" />
+      <option name="presentableId" value="LOCAL−00027" />
+      <updated>1777727998853</updated>
+    </task>
+    <option name="localTasksCounter" value="28" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -319,8 +333,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="izmjena directorija README" />
-    <MESSAGE value="izmjena homescreena" />
     <MESSAGE value="dodani osnovni tabovi ali treba popraviti ikone u njima i sf icon fix" />
     <MESSAGE value="update packages-a" />
     <MESSAGE value="Prelazak na EXPO44 -&gt; poptuno novi projekt." />
@@ -344,7 +356,9 @@
     <MESSAGE value="image_url je sada array sa slikama, prvi link u array-u je cove a ostalo su generic slike igara -&gt; prepravljena GameCard.tsx da radi na osnovu navedenog. U details.tsx prikazuje se više slike igare osim covera ( kako bi se kasnije ušteilo na prostoru. TODO: Mogucnost klika na sliku kako bi se bolje mogla vidjeti." />
     <MESSAGE value="Daljni razvoj details.tsx zaslona + dodana mogucnost klika na sliku za veci prikaz." />
     <MESSAGE value="dodan user opis igre ( bilješke ), dodana mogucnost zoomina na slike ( pinch to zoom ), UI poboljšanja" />
-    <option name="LAST_COMMIT_MESSAGE" value="dodan user opis igre ( bilješke ), dodana mogucnost zoomina na slike ( pinch to zoom ), UI poboljšanja" />
+    <MESSAGE value="Unaprijeđen geneic game info ( detalji ); dodane sve bitne ionformacije + serijali igara + ispravljen achivment text da ispiše kad korisnik nije još dodao niti jedan achv" />
+    <MESSAGE value="popravak details.tsx ( krivi render zvjezdica )" />
+    <option name="LAST_COMMIT_MESSAGE" value="popravak details.tsx ( krivi render zvjezdica )" />
   </component>
   <component name="github-copilot-workspace">
     <instructionFileLocations>

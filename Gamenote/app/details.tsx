@@ -95,7 +95,17 @@ export default function Index() {
     return (
         <>
             <Stack.Screen
-                options={{title: game.title, headerBackTitle: 'Natrag'}}
+                options={{title: game.title, headerBackTitle: 'Natrag',
+                    headerRight: () => (
+                        <Pressable /*onPress={() =>  router.push("/settings")} */ hitSlop={10}>
+                         <SymbolView
+                            name={"square.and.pencil"}
+                            resizeMode="scaleAspectFit"
+                            style={{width: 32, height: 32, justifyContent: 'center'}}
+                            tintColor={t.text}
+                          />
+                        </Pressable>
+                                  ),}}
             />
             <ScrollView contentContainerStyle={{gap: 10, padding: 8}}
                         style={{backgroundColor: t.background}}
