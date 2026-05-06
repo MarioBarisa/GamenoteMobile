@@ -1,5 +1,5 @@
 import {
-    Alert,
+    Alert, Platform,
     Pressable,
     ScrollView,
     StyleSheet,
@@ -15,6 +15,7 @@ import {useState} from "react";
 import {SymbolView} from "expo-symbols";
 import DateTimePicker, {DateTimePickerEvent} from "@react-native-community/datetimepicker";
 import {STATUS_CONFIG, STATUS_PLATFORM} from "@/common/StatusCommons";
+import * as Haptics from 'expo-haptics';
 import {PROGRESS_MODES} from "@/common/ProgressSources";
 
 
@@ -207,8 +208,15 @@ export default function ModalEdit() {
                            placeholder="Dodaj bilješke..."
                            placeholderTextColor={t.secondaryText}
                            textAlignVertical="top"/>
-                <Pressable onPress={handleSave}
-                           style={[styles.saveButton, {backgroundColor: t.accent}]}>
+                <Pressable
+                    onPress={() => {
+                        handleSave();
+                        if (Platform.OS === 'ios') {
+                            Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium); //medium vibracija kada se igra uspješno spremi
+                        }
+                    }}
+                    style={[styles.saveButton, {backgroundColor: t.accent}]}
+                >
                     <Text style={{color: '#fff', fontWeight: '700', fontSize: 16}}>Spremi</Text>
                 </Pressable>
             </View>
