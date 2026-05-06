@@ -1,6 +1,7 @@
 export const colors = {
   light: {
-    background: "#F2F2F7",
+    background: "#ffffff",
+    backgroundModal: "#F2F2F7",
     card: "#FFFFFF",
     text: "#000000",
     secondaryText: "rgba(60,60,67,0.6)",
@@ -9,6 +10,7 @@ export const colors = {
   },
   dark: {
     background: "#000000",
+    backgroundModal: "rgba(28,28,30,0.85)",
     card: "rgba(28,28,30,0.85)",
     text: "#FFFFFF",
     secondaryText: "rgba(235,235,245,0.6)",

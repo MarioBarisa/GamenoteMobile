@@ -4,17 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7b37eb79-ceff-44a4-81aa-7e12f61dfc1f" name="Changes" comment="Dodan picker za platformu">
-      <change afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/common/Game.tsx" afterPathEscaped="$PROJECT_DIR$/Gamenote/common/Game.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/common/GameSeries.tsx" afterPathEscaped="$PROJECT_DIR$/Gamenote/common/GameSeries.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/common/StatusCommons.tsx" afterPathEscaped="$PROJECT_DIR$/Gamenote/common/StatusCommons.tsx" afterDir="false" />
+    <list default="true" id="7b37eb79-ceff-44a4-81aa-7e12f61dfc1f" name="Changes" comment="Veliki code clean-up, refactor game related importa kako bi svi imali single-point-of-refrence">
+      <change afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/common/ProgressSources.tsx" afterPathEscaped="$PROJECT_DIR$/Gamenote/common/ProgressSources.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/.idea/copilotDiffState.xml" beforePathEscaped="$PROJECT_DIR$/.idea/copilotDiffState.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/.idea/copilotDiffState.xml" afterPathEscaped="$PROJECT_DIR$/.idea/copilotDiffState.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/.idea/workspace.xml" beforePathEscaped="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/.idea/workspace.xml" afterPathEscaped="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/(tabs)/home/index.tsx" beforePathEscaped="$PROJECT_DIR$/Gamenote/app/(tabs)/home/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/(tabs)/home/index.tsx" afterPathEscaped="$PROJECT_DIR$/Gamenote/app/(tabs)/home/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/(tabs)/search/index.tsx" beforePathEscaped="$PROJECT_DIR$/Gamenote/app/(tabs)/search/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/(tabs)/search/index.tsx" afterPathEscaped="$PROJECT_DIR$/Gamenote/app/(tabs)/search/index.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/details.tsx" beforePathEscaped="$PROJECT_DIR$/Gamenote/app/details.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/details.tsx" afterPathEscaped="$PROJECT_DIR$/Gamenote/app/details.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/modalEdit.tsx" beforePathEscaped="$PROJECT_DIR$/Gamenote/app/modalEdit.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/modalEdit.tsx" afterPathEscaped="$PROJECT_DIR$/Gamenote/app/modalEdit.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/components/GameCard.tsx" beforePathEscaped="$PROJECT_DIR$/Gamenote/components/GameCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/components/GameCard.tsx" afterPathEscaped="$PROJECT_DIR$/Gamenote/components/GameCard.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/common/Game.tsx" beforePathEscaped="$PROJECT_DIR$/Gamenote/common/Game.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/common/Game.tsx" afterPathEscaped="$PROJECT_DIR$/Gamenote/common/Game.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/constants/PLACEHOLDER_GAMES.ts" beforePathEscaped="$PROJECT_DIR$/Gamenote/constants/PLACEHOLDER_GAMES.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/constants/PLACEHOLDER_GAMES.ts" afterPathEscaped="$PROJECT_DIR$/Gamenote/constants/PLACEHOLDER_GAMES.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/constants/theme.ts" beforePathEscaped="$PROJECT_DIR$/Gamenote/constants/theme.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/constants/theme.ts" afterPathEscaped="$PROJECT_DIR$/Gamenote/constants/theme.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,8 +31,8 @@
   </component>
   <component name="CopilotUserSelectedModel">
     <selectedModels>
-      <entry key="chat-panel" value="Auto" />
-      <entry key="agent-panel" value="Auto" />
+      <entry key="agent-panel" value="Gemini 3.1 Pro" />
+      <entry key="chat-panel" value="Gemini 3.1 Pro" />
     </selectedModels>
   </component>
   <component name="FileTemplateManagerImpl">
@@ -60,7 +58,7 @@
   }
 }</component>
   <component name="ProblemsViewState">
-    <option name="selectedTabId" value="CurrentFile" />
+    <option name="selectedTabId" value="ProjectErrors" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 6,
@@ -135,7 +133,7 @@
       <workItem from="1777630625531" duration="15223000" />
       <workItem from="1777805317128" duration="2071000" />
       <workItem from="1778010307439" duration="186000" />
-      <workItem from="1778061800224" duration="1917000" />
+      <workItem from="1778061800224" duration="11659000" />
     </task>
     <task id="LOCAL−00001" summary="izmjena directorija README">
       <option name="closed" value="true" />
@@ -347,7 +345,14 @@
       <option name="presentableId" value="LOCAL−00030" />
       <updated>1777815979487</updated>
     </task>
-    <option name="localTasksCounter" value="31" />
+    <task id="LOCAL−00031" summary="Veliki code clean-up, refactor game related importa kako bi svi imali single-point-of-refrence">
+      <option name="closed" value="true" />
+      <created>1778064067503</created>
+      <option name="number" value="LOCAL−00031" />
+      <option name="presentableId" value="LOCAL−00031" />
+      <updated>1778064067503</updated>
+    </task>
+    <option name="localTasksCounter" value="32" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -365,7 +370,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="minimalni bug fixevi" />
     <MESSAGE value="Dodani osnovni tabovi, podešavanje tema i ekran za favorite. Minimalni polish ruta" />
     <MESSAGE value="Prijevod određenih screnova na HR." />
     <MESSAGE value="Implementacija Gamecarda. Dodana osnovna komponenta + cover image." />
@@ -390,7 +394,8 @@
     <MESSAGE value="Dodan modalEdit.tsx" />
     <MESSAGE value="U potpunosti implementiran modalEdit.tsx" />
     <MESSAGE value="Dodan picker za platformu" />
-    <option name="LAST_COMMIT_MESSAGE" value="Dodan picker za platformu" />
+    <MESSAGE value="Veliki code clean-up, refactor game related importa kako bi svi imali single-point-of-refrence" />
+    <option name="LAST_COMMIT_MESSAGE" value="Veliki code clean-up, refactor game related importa kako bi svi imali single-point-of-refrence" />
   </component>
   <component name="github-copilot-workspace">
     <instructionFileLocations>

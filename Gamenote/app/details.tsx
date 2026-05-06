@@ -1,5 +1,5 @@
 import {useLocalSearchParams, Stack, Link} from "expo-router";
-import { useState} from "react";
+import {useState} from "react";
 import {Image, ScrollView, StyleSheet, Text, View, Pressable, Dimensions, Modal} from "react-native";
 import {useSafeAreaInsets} from "react-native-safe-area-context";
 import {Game} from "@/common/Game";
@@ -7,6 +7,7 @@ import {useTheme} from "@/context/theme";
 import {colors} from "@/constants/theme";
 import {SymbolView} from "expo-symbols";
 import {STATUS_CONFIG, STATUS_PLATFORM} from "@/common/StatusCommons";
+import {isProgressModeKey, PROGRESS_MODE_MAP, progressLabel} from "@/common/ProgressSources";
 
 
 const SCREEN_WIDTH = Dimensions.get("window").width;
@@ -32,11 +33,13 @@ export default function Index() {
 
     //boja dostignuća
     const progressColor = (() => {
-        let achievementPercent;
-        if (game?.progress_value === undefined) {
-            achievementPercent = 0;
-        } else {
-            achievementPercent = game.progress_value;
+        let achievementPercent = 0;
+        if (game?.progress_value !== undefined) {
+            if (game.progress_total && game.progress_total > 0) {
+                achievementPercent = (game.progress_value / game.progress_total) * 100;
+            } else {
+                achievementPercent = game.progress_value;
+            }
         }
         const clamped = Math.max(0, Math.min(achievementPercent, 100))
         if (clamped >= 100) return '#0d36f9'
@@ -48,6 +51,12 @@ export default function Index() {
         if (clamped >= 20) return '#F97316'
         return '#EF4444'
     })()
+
+    const mode = game.progress_mode && isProgressModeKey(game.progress_mode)
+        ? PROGRESS_MODE_MAP[game.progress_mode]
+        : null;
+
+    const label = progressLabel(game.progress_mode, game.progress_value, game.progress_total);
 
     const metacriticColor = (() => {
         let meta;
@@ -69,7 +78,9 @@ export default function Index() {
         <>
             <Stack.Screen
                 options={{
-                    title: game.title, headerBackTitle: 'Natrag',
+                    title: game.title,
+                    //animation: 'none',
+                    headerBackTitle: 'Natrag',
                     headerRight: () => (
                         <Link
                             href={{
@@ -170,20 +181,24 @@ export default function Index() {
                     </View>
                     <View style={{paddingHorizontal: 12, paddingVertical: 8, gap: 16}}>
 
-                        {/* Progress i Ocjena */}
+
                         {/* Progress i Ocjena */}
                         <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
-
                             {/* Progress */}
-                            {typeof game.progress_value === 'number' && typeof game.progress_total === 'number' && game.progress_value > 0 ? (
-                                <Text style={{fontSize: 18, fontWeight: '800', color: progressColor}}>
-                                    Postignuća: {game.progress_value}/{game.progress_total}
-                                </Text>
+                            {label ? (
+                                <View style={{gap: 2}}>
+                                    <Text style={{
+                                        fontSize: 12,
+                                        color: t.secondaryText,
+                                        fontWeight: '700',
+                                    }}>{mode?.label ?? 'Progress'}</Text>
+                                    <Text style={{fontSize: 18, fontWeight: '800', color: progressColor}}>
+                                        {label}
+                                    </Text>
+                                </View>
                             ) : (
-                                <Text style={{fontSize: 16, fontWeight: '600', color: t.secondaryText}}>
-                                    Još nema postignuća
-                                </Text>
-                            )}
+                                <Text style={{fontSize: 16, fontWeight: '600', color: t.secondaryText}}>Još nema
+                                    progressa</Text>)}
 
                             {typeof game.rating === 'number' && (
                                 <View style={{flexDirection: 'row', gap: 4}}>

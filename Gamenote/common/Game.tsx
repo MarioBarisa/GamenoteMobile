@@ -1,4 +1,5 @@
 import {SeriesGame} from "@/common/GameSeries";
+import {ProgressModeKey} from "@/common/ProgressSources";
 
 export interface Game {
   title: string
@@ -21,9 +22,6 @@ export interface Game {
   end_date?: string
   progress_value?: number
   progress_total?: number
-  progress_source?: string
-  progress_mode?: string
-  previous_game?: string
-  next_game?: string
+  progress_mode?: ProgressModeKey
 
 }

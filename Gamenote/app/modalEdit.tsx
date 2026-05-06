@@ -15,6 +15,7 @@ import {useState} from "react";
 import {SymbolView} from "expo-symbols";
 import DateTimePicker, {DateTimePickerEvent} from "@react-native-community/datetimepicker";
 import {STATUS_CONFIG, STATUS_PLATFORM} from "@/common/StatusCommons";
+import {PROGRESS_MODES} from "@/common/ProgressSources";
 
 
 export default function ModalEdit() {
@@ -24,6 +25,10 @@ export default function ModalEdit() {
     const t = colors[theme];
 
     const handleSave = () => {
+        if (form.progress_value !== undefined && form.progress_total !== undefined && form.progress_value > form.progress_total) {
+            Alert.alert('Greška', 'Broj osvojenih postignuća ne može biti veći od ukupnog broja.');
+            return;
+        }
         const updated: Game = {...original, ...form};
         //TU DOLAZI SUPABASE IMPLEMENTACIJA KASINIJE!!!!!!!!
         Alert.alert('Spremljeno', `${original.title} ažuriran.`, [
@@ -51,6 +56,7 @@ export default function ModalEdit() {
         progress_value: original.progress_value,
         progress_total: original.progress_total,
         platform: original.platform,
+        progress_mode: original.progress_mode,
     });
 
     const patch = (key: keyof Game, value: any) => setForm(prev => ({...form, [key]: value}));
@@ -66,7 +72,7 @@ export default function ModalEdit() {
     return (
 
         <ScrollView contentContainerStyle={{gap: 10, padding: 8}}
-                    style={{backgroundColor: t.background}}
+                    style={{backgroundColor: t.backgroundModal}}
                     contentInsetAdjustmentBehavior="automatic"
                     automaticallyAdjustContentInsets={true}
                     keyboardShouldPersistTaps="handled"
@@ -112,6 +118,23 @@ export default function ModalEdit() {
                     />
                 </View>
                 <View style={{flexDirection: "row", alignItems: "center", gap: 8}}>
+                    <Text style={[styles.label, {color: t.text}]}>Vrsta Progresa: </Text>
+                    <Pressable
+                        onPress={()=>
+                    Alert.alert('Odaberi vrstu progressa', undefined, [
+                        ...PROGRESS_MODES.map( m=> ({
+                            text: m.label,
+                            onPress: () => patch('progress_mode', m.key),
+                        })),
+                        {text: 'Odustani', style: "cancel"},
+                    ])} style={{ flexDirection: "row", alignItems: "center", gap: 6}}>
+                        <Text style={{color: t.text, fontSize: 16, fontWeight: '500'}}>
+                            {form.progress_mode ? PROGRESS_MODES.find(m=> m.key ===form.progress_mode)?.label : 'Odaberi'}
+                        </Text>
+                         <SymbolView name="chevron.up.chevron.down" style={{ width: 14, height: 14 }} tintColor={t.accent} />
+                    </Pressable>
+                </View>
+                <View style={{flexDirection: "row", alignItems: "center", gap: 8}}>
                     <Text style={[styles.label, {color: t.text}]}>Postignuća: </Text>
                     <TextInput style={[styles.numInput, {
                         color: t.text,
@@ -149,7 +172,7 @@ export default function ModalEdit() {
                 </View>
                 <View style={[{backgroundColor: theme === 'dark' ? '#2C2C2E' : '#E5E5EA'}]}/>
                 <View style={{flexDirection: "row", alignItems: "center", gap: 8}}>
-                    <Text style={[styles.label, {color: t.text}]}>Platforma </Text>
+                    <Text style={[styles.label, {color: t.text}]}>Platforma: </Text>
                     <Pressable
                         onPress={() => Alert.alert(
                             'Odaberi platformu',  // ODABIR PLATFORME NA KOJOJ JE IGRA IGRANA
@@ -165,7 +188,7 @@ export default function ModalEdit() {
                         )}
                         style={{flexDirection: 'row', alignItems: 'center', gap: 6}}
                     >
-                        <Text style={{color: t.accent, fontSize: 15, fontWeight: '500'}}>
+                        <Text style={{color: t.text, fontSize: 15, fontWeight: '500'}}>
                             {form.platform ?? 'Odaberi platformu'}
                         </Text>
                         <SymbolView name="chevron.up.chevron.down" style={{width: 14, height: 14}}
