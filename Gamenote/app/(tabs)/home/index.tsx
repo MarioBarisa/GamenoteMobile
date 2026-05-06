@@ -1,16 +1,13 @@
-import { useEffect, useState } from "react";
-import { Image, ScrollView, StyleSheet, Text, View } from "react-native";
-import { Link } from "expo-router";
+import { ScrollView, StyleSheet } from "react-native";
 import { useTheme } from "@/context/theme";
 import { colors } from "@/constants/theme";
-import GameCard, { Game } from '@/components/GameCard'
+import GameCard from '@/components/GameCard';
 import {PLACEHOLDER_GAMES} from "@/constants/PLACEHOLDER_GAMES";
 
 // noinspection JSUnusedGlobalSymbols
 export default function HomeIndex() {
   const { theme } = useTheme()
   const t = colors[theme]
-  const PLACEHOLDER_IGRE = PLACEHOLDER_GAMES;
 
   return (
     <ScrollView
@@ -18,7 +15,7 @@ export default function HomeIndex() {
       contentContainerStyle={{ padding: 16, gap: 0 }}
       contentInsetAdjustmentBehavior="automatic"
     >
-      {PLACEHOLDER_IGRE.map((game, i) => (
+      { PLACEHOLDER_GAMES.map((game, i) => (
         <GameCard key={i} game={game} />
       ))}
     </ScrollView>

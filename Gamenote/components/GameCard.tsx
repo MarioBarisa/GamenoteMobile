@@ -3,70 +3,8 @@ import { colors } from '@/constants/theme'
 import { useTheme } from '@/context/theme'
 import {Ionicons} from "@expo/vector-icons";
 import {useRouter} from "expo-router";
-import {json} from "node:stream/consumers";
-
-export interface SeriesGame {
-    id: number;
-    name: string;
-    released: string | null;
-    background_image: string;
-}
-
-export interface Game {
-  title: string
-  platform?: string
-  genre?: string
-  status?: 'playing' | 'paused' | 'completed' | 'dropped' | 'backlog'
-  rating?: number
-  metacriticScore: number
-  ageRating: number
-  realaseDate: string
-  webPage: string
-  about: string
-  series?: SeriesGame[];
-  notes?: string
-  publisher?: string
-  image_url?: string[]
-  background_image?: string[]
-  play_time?: number
-  start_date?: string
-  end_date?: string
-  progress_value?: number
-  progress_total?: number
-  progress_source?: string
-  progress_mode?: string
-  previous_game?: string
-  next_game?: string
-
-}
-
-const STATUS_CONFIG = {
-    playing: {label: "Playing", bg: '#0A84FF', text: '#FFFFFF'},
-    paused: {label: "Paused", bg: '#FF9F0A', text: '#FFFFFF'},
-    completed: {label: "Completed", bg: '#30D158', text: '#FFFFFF'},
-    dropped: {label: "Dropped", bg: '#FF453A', text: '#FFFFFF'},
-    backlog: {label: "Backlog", bg: '#b364da', text: '#FFFFFF'},
-}
-
-const STATUS_PLATFORM: Record<string, { label: string; text: string }> = {
-    PlayStation: {label: "PlayStation", text: '#2760f4'},
-    'PlayStation 5': {label: "PlayStation 5", text: '#2760f4'},
-    'PlayStation 4': {label: "PlayStation 4", text: '#2760f4'},
-
-    Xbox: {label: "Xbox", text: '#27f427'},
-    'Xbox Series X/S': {label: "Xbox Series X/S", text: '#27f427'},
-    'Xbox One': {label: "Xbox One", text: '#27f427'},
-
-    Nintendo: {label: "Nintendo",text: '#eb0e30'},
-    'Nintendo Switch': {label: "Nintendo Switch", text: '#eb0e30'},
-    'Nintendo Switch 2': {label: "Nintendo Switch 2", text: '#eb0e30'},
-
-    PC: {label: "PC", text: '#0df9e1'},
-    iOS: {label: "iOS", text: '#FFFFFF'},
-    Android: {label: "Android", text: '#FFFFFF'},
-    Other: {label: "Other", text: '#a3a3a3'},
-}
-
+import {Game} from "@/common/Game"
+import {STATUS_CONFIG, STATUS_PLATFORM} from "@/common/StatusCommons";
 
 const CARD_WIDTH = Dimensions.get('window').width-32;
 const IMAGE_HEIGHT = Math.round(CARD_WIDTH * 8 / 16); //za 16:9 cover

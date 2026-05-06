@@ -10,10 +10,11 @@ import {
 import {useLocalSearchParams, useRouter} from "expo-router";
 import {useTheme} from "@/context/theme";
 import {colors} from "@/constants/theme";
-import {Game} from "@/components/GameCard";
+import {Game} from "@/common/Game";
 import {useState} from "react";
 import {SymbolView} from "expo-symbols";
 import DateTimePicker, {DateTimePickerEvent} from "@react-native-community/datetimepicker";
+import {STATUS_CONFIG, STATUS_PLATFORM} from "@/common/StatusCommons";
 
 
 export default function ModalEdit() {
@@ -54,13 +55,6 @@ export default function ModalEdit() {
 
     const patch = (key: keyof Game, value: any) => setForm(prev => ({...form, [key]: value}));
 
-    const STATUS_CONFIG = {
-        playing: {label: 'Playing', bg: '#0A84FF'},
-        paused: {label: 'Paused', bg: '#FF9F0A'},
-        completed: {label: 'Completed', bg: '#30D158'},
-        dropped: {label: 'Dropped', bg: '#FF453A'},
-        backlog: {label: 'Backlog', bg: '#b364da'},
-    } as const;
 
     const PLATFORMS = [
         'PlayStation 5', 'PlayStation 4',

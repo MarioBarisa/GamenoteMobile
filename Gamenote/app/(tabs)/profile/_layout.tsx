@@ -1,5 +1,5 @@
 import { Stack, useRouter } from "expo-router";
-import { Pressable, Text } from "react-native";
+import { Pressable } from "react-native";
 import {useNavigationTheme} from "@/constants/navigationTheme";
 import {SymbolView} from "expo-symbols";
 

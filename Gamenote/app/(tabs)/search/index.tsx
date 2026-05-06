@@ -3,7 +3,8 @@ import {ScrollView, Text, TouchableOpacity, Alert} from "react-native";
 import { Stack } from "expo-router";
 import { useTheme } from "@/context/theme";
 import { colors } from "@/constants/theme";
-import GameCard, {Game} from "@/components/GameCard";
+import GameCard from "@/components/GameCard";
+import {Game} from "@/common/Game";
 import {PLACEHOLDER_GAMES} from "@/constants/PLACEHOLDER_GAMES";
 import { SymbolView } from "expo-symbols";
 

@@ -1,4 +1,4 @@
-import {Game} from "@/components/GameCard";
+import {Game} from "@/common/Game";
 
 export const PLACEHOLDER_GAMES: Game[] = [
   {
