@@ -1,15 +1,16 @@
 import {SeriesGame} from "@/common/GameSeries";
 import {ProgressModeKey} from "@/common/ProgressSources";
+import {GameStatus} from  "@/common/StatusCommons"
 
 export interface Game {
   title: string
   platform?: string
   genre?: string
-  status?: 'playing' | 'paused' | 'completed' | 'dropped' | 'backlog'
+  status?: GameStatus //'playing' | 'paused' | 'completed' | 'dropped' | 'backlog'
   rating?: number
   metacriticScore: number
   ageRating: number
-  realaseDate: string
+  releaseDate: string
   webPage: string
   about: string
   series?: SeriesGame[];

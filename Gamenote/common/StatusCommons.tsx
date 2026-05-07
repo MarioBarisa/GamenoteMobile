@@ -24,3 +24,13 @@ export const STATUS_PLATFORM: Record<string, { label: string; text: string }> = 
     Android: {label: "Android", text: '#FFFFFF'},
     Other: {label: "Other", text: '#a3a3a3'},
 }
+
+export type GameStatus = typeof GAME_STATUSES[number]
+
+export const GAME_STATUSES = [
+  'playing',
+  'paused',
+  'completed',
+  'dropped',
+  'backlog',
+] as const

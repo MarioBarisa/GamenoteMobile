@@ -302,14 +302,14 @@ export default function Index() {
                                 </View>
                             ) : null}
 
-                            {game.realaseDate ? (
+                            {game.releaseDate ? (
                                 <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
                                     <Text style={{color: t.secondaryText, fontSize: 14}}>Godina izlaska</Text>
                                     <Text style={{
                                         color: t.text,
                                         fontSize: 14,
                                         fontWeight: '600'
-                                    }}>{game.realaseDate}</Text>
+                                    }}>{game.releaseDate}</Text>
                                 </View>
                             ) : null}
 

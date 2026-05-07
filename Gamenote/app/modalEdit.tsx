@@ -14,7 +14,7 @@ import {Game} from "@/common/Game";
 import {useState} from "react";
 import {SymbolView} from "expo-symbols";
 import DateTimePicker, {DateTimePickerEvent} from "@react-native-community/datetimepicker";
-import {STATUS_CONFIG, STATUS_PLATFORM} from "@/common/StatusCommons";
+import {STATUS_CONFIG, GAME_STATUSES} from "@/common/StatusCommons";
 import * as Haptics from 'expo-haptics';
 import {PROGRESS_MODES} from "@/common/ProgressSources";
 
@@ -60,7 +60,7 @@ export default function ModalEdit() {
         progress_mode: original.progress_mode,
     });
 
-    const patch = (key: keyof Game, value: any) => setForm(prev => ({...form, [key]: value}));
+    const patch = (key: keyof Game, value: any) => setForm(prev => ({...prev, [key]: value}));
 
 
     const PLATFORMS = [
@@ -119,20 +119,45 @@ export default function ModalEdit() {
                     />
                 </View>
                 <View style={{flexDirection: "row", alignItems: "center", gap: 8}}>
+                    <Text style={[styles.label, {color: t.text}]}>Platforma: </Text>
+                    <Pressable
+                        onPress={() => Alert.alert(
+                            'Odaberi platformu',  // ODABIR PLATFORME NA KOJOJ JE IGRA IGRANA
+
+                            undefined,
+                            [
+                                ...PLATFORMS.map(p => ({
+                                    text: p,
+                                    onPress: () => patch('platform', p),
+                                })),
+                                {text: 'Odustani', style: 'cancel'},
+                            ]
+                        )}
+                        style={{flexDirection: 'row', alignItems: 'center', gap: 6}}
+                    >
+                        <Text style={{color: t.text, fontSize: 15, fontWeight: '500'}}>
+                            {form.platform ?? 'Odaberi platformu'}
+                        </Text>
+                        <SymbolView name="chevron.up.chevron.down" style={{width: 14, height: 14}}
+                                    tintColor={t.accent}/>
+                    </Pressable>
+                </View>
+                <View style={{flexDirection: "row", alignItems: "center", gap: 8}}>
                     <Text style={[styles.label, {color: t.text}]}>Vrsta Progresa: </Text>
                     <Pressable
-                        onPress={()=>
-                    Alert.alert('Odaberi vrstu progressa', undefined, [
-                        ...PROGRESS_MODES.map( m=> ({
-                            text: m.label,
-                            onPress: () => patch('progress_mode', m.key),
-                        })),
-                        {text: 'Odustani', style: "cancel"},
-                    ])} style={{ flexDirection: "row", alignItems: "center", gap: 6}}>
+                        onPress={() =>
+                            Alert.alert('Odaberi vrstu progressa', undefined, [
+                                ...PROGRESS_MODES.map(m => ({
+                                    text: m.label,
+                                    onPress: () => patch('progress_mode', m.key),
+                                })),
+                                {text: 'Odustani', style: "cancel"},
+                            ])} style={{flexDirection: "row", alignItems: "center", gap: 6}}>
                         <Text style={{color: t.text, fontSize: 16, fontWeight: '500'}}>
-                            {form.progress_mode ? PROGRESS_MODES.find(m=> m.key ===form.progress_mode)?.label : 'Odaberi'}
+                            {form.progress_mode ? PROGRESS_MODES.find(m => m.key === form.progress_mode)?.label : 'Odaberi'}
                         </Text>
-                         <SymbolView name="chevron.up.chevron.down" style={{ width: 14, height: 14 }} tintColor={t.accent} />
+                        <SymbolView name="chevron.up.chevron.down" style={{width: 14, height: 14}}
+                                    tintColor={t.accent}/>
                     </Pressable>
                 </View>
                 <View style={{flexDirection: "row", alignItems: "center", gap: 8}}>
@@ -173,16 +198,16 @@ export default function ModalEdit() {
                 </View>
                 <View style={[{backgroundColor: theme === 'dark' ? '#2C2C2E' : '#E5E5EA'}]}/>
                 <View style={{flexDirection: "row", alignItems: "center", gap: 8}}>
-                    <Text style={[styles.label, {color: t.text}]}>Platforma: </Text>
+                    <Text style={[styles.label, {color: t.text}]}>Status igranja: </Text>
                     <Pressable
                         onPress={() => Alert.alert(
-                            'Odaberi platformu',  // ODABIR PLATFORME NA KOJOJ JE IGRA IGRANA
+                            'Odaberi status igranja',
 
                             undefined,
                             [
-                                ...PLATFORMS.map(p => ({
-                                    text: p,
-                                    onPress: () => patch('platform', p),
+                                ...GAME_STATUSES.map(status => ({
+                                    text: STATUS_CONFIG[status].label,
+                                    onPress: () => patch('status', status),
                                 })),
                                 {text: 'Odustani', style: 'cancel'},
                             ]
@@ -190,7 +215,7 @@ export default function ModalEdit() {
                         style={{flexDirection: 'row', alignItems: 'center', gap: 6}}
                     >
                         <Text style={{color: t.text, fontSize: 15, fontWeight: '500'}}>
-                            {form.platform ?? 'Odaberi platformu'}
+                            {form.status ? STATUS_CONFIG[form.status].label : 'Odaberi status igranja'}
                         </Text>
                         <SymbolView name="chevron.up.chevron.down" style={{width: 14, height: 14}}
                                     tintColor={t.accent}/>

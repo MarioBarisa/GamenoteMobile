@@ -1,11 +1,10 @@
 import { useMemo, useState } from "react";
-import {ScrollView, Text, TouchableOpacity, Alert} from "react-native";
+import {ScrollView, TouchableOpacity, Alert} from "react-native";
 import { Stack } from "expo-router";
 import { useTheme } from "@/context/theme";
 import { colors } from "@/constants/theme";
 import GameCard from "@/components/GameCard";
 import * as Haptics from 'expo-haptics';
-import {Game} from "@/common/Game";
 import {PLACEHOLDER_GAMES} from "@/constants/PLACEHOLDER_GAMES";
 import { SymbolView } from "expo-symbols";
 

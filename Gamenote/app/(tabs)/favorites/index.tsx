@@ -1,6 +1,5 @@
-import { Text, ScrollView, Image, StyleSheet, View } from "react-native";
+import {  ScrollView,  StyleSheet,  } from "react-native";
 import { useFavorites } from "@/context/favorites";
-import { Link } from "expo-router";
 import { useTheme } from "@/context/theme";
 import { colors } from "@/constants/theme";
 import {PLACEHOLDER_GAMES} from "@/constants/PLACEHOLDER_GAMES";
@@ -29,10 +28,3 @@ export default function FavoritesScreen() {
 }
 
 
-const styles = StyleSheet.create({
-  name: {
-    fontSize: 20,
-    fontWeight: "bold",
-    textAlign: "center"
-  }
-});
