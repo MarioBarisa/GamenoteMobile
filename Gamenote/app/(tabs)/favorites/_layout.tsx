@@ -9,8 +9,7 @@ export default function FavoritesLayout() {
       <Stack.Screen
         name="index"
         options={{
-
-          title: "Tvoje omiljne igre:",
+          title: "Tvoj Gamenote",
         }}
       />
     </Stack>

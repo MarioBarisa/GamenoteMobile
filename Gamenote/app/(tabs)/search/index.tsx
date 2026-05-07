@@ -4,6 +4,7 @@ import { Stack } from "expo-router";
 import { useTheme } from "@/context/theme";
 import { colors } from "@/constants/theme";
 import GameCard from "@/components/GameCard";
+import * as Haptics from 'expo-haptics';
 import {Game} from "@/common/Game";
 import {PLACEHOLDER_GAMES} from "@/constants/PLACEHOLDER_GAMES";
 import { SymbolView } from "expo-symbols";
@@ -54,8 +55,12 @@ export default function SearchIndex() {
           title: "Pretraži Gamenote",
           headerRight: () => (
             <TouchableOpacity
-              onPress={() => setSort(prev => !prev)}
-              onLongPress={() => Alert.alert("Sortiranje", "Sortiraj rezultate pretrage. Ako je sortiranje uključeno igre koje najviše igraš su prve.")}
+              onPress={async () => { await Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light) //za samo korištenje neke header funkcije light vibracija, za dugo držanje jača vibracija ( alert = bolji kickback )
+                  setSort(prev => !prev)
+              }}
+              onLongPress={async () => { await Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium)
+                  Alert.alert("Sortiranje", "Sortiraj rezultate pretrage. Ako je sortiranje uključeno igre koje najviše igraš su prve.")
+              }}
               style={{ justifyContent: 'center', alignItems: 'center'}}>
              <SymbolView
                  key={sort ? "line.horizontal.3.decrease.circle.fill" : "line.horizontal.3.decrease.circle"}
@@ -67,8 +72,12 @@ export default function SearchIndex() {
           ),
           headerLeft: () => (
             <TouchableOpacity
-              onPress={() => setUserGamenotesOnly(prev => !prev)}
-              onLongPress={() => Alert.alert("Tvoji Gamenote", "Ovaj gumb uključuje filtiranje prikaza samo na tvoje dodane igre. Inače tražiš cijeli Gamenote database.")}
+              onPress={async () => { await Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light)
+                  setUserGamenotesOnly(prev => !prev)
+              }}
+              onLongPress={async () => { await Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium)
+                  Alert.alert("Tvoji Gamenote", "Ovaj gumb uključuje filtiranje prikaza samo na tvoje dodane igre. Inače tražiš cijeli Gamenote database.")
+              }}
               style={{ justifyContent: 'center', alignItems: 'center'}}>
 
               <SymbolView

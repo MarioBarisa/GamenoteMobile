@@ -9,7 +9,7 @@ export default function HomeLayout() {
         name="index"
         options={{
          // headerLargeTitle: true,
-          title: "Početna",
+          title: "Trenutno igraš",
         }}
       />
     </Stack>

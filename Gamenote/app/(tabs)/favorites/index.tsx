@@ -3,6 +3,8 @@ import { useFavorites } from "@/context/favorites";
 import { Link } from "expo-router";
 import { useTheme } from "@/context/theme";
 import { colors } from "@/constants/theme";
+import {PLACEHOLDER_GAMES} from "@/constants/PLACEHOLDER_GAMES";
+import GameCard from "@/components/GameCard";
 
 
 export default function FavoritesScreen() {
@@ -15,29 +17,13 @@ export default function FavoritesScreen() {
 
   return (
     <ScrollView
-      contentContainerStyle={{
-        gap: 10,
-        padding: 8,
-      }}
+      style={{ backgroundColor: t.background }}
+      contentContainerStyle={{ padding: 16, gap: 0 }}
       contentInsetAdjustmentBehavior="automatic"
-      automaticallyAdjustContentInsets={true}
-      style={{backgroundColor: t.background}}
     >
-      {favorites.length === 0 ? (
-        <Text style={{color: t.text}}>You dont have any favorites yet.</Text>
-      ) : (
-          favorites.map((pokemon) => (
-            <Link
-              key={pokemon.name}
-              href={{pathname: "/details", params: {name: pokemon.name}}}
-            >
-              <View style={{ alignItems: "center" , width: "100%", backgroundColor: t.card, borderRadius: 20, padding:20}}>
-              <Image source={{ uri: pokemon.imageFront }} style={{ width: 100, height: 100 }}></Image>
-              <Text style={[styles.name, {color: t.text}]}>#{ pokemon.id} - {pokemon.name}</Text>
-              </View>
-            </Link>
-          ))
-      )}
+      { PLACEHOLDER_GAMES.map((game, i) => (
+        <GameCard key={i} game={game} />
+      ))}
     </ScrollView>
   );
 }

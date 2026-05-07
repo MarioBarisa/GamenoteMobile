@@ -15,7 +15,7 @@ export default function HomeIndex() {
       contentContainerStyle={{ padding: 16, gap: 0 }}
       contentInsetAdjustmentBehavior="automatic"
     >
-      { PLACEHOLDER_GAMES.map((game, i) => (
+      { PLACEHOLDER_GAMES.filter(g => g.status === 'playing').map((game, i) => (
         <GameCard key={i} game={game} />
       ))}
     </ScrollView>
