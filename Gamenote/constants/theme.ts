@@ -2,7 +2,7 @@ export const colors = {
   light: {
     background: "#ffffff",
     backgroundModal: "#F2F2F7",
-    card: "#FFFFFF",
+    card: "#F2F2F7",
     text: "#000000",
     secondaryText: "rgba(60,60,67,0.6)",
     accent: "#007AFF",

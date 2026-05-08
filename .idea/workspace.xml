@@ -4,15 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7b37eb79-ceff-44a4-81aa-7e12f61dfc1f" name="Changes" comment="početna stranica sada učitava igre koje imaju status playing, moje igre stranica učitava sve igre, dodan haptick feedback na header gumbe unutar search section-a">
+    <list default="true" id="7b37eb79-ceff-44a4-81aa-7e12f61dfc1f" name="Changes" comment="Ispravljen naziv 'realaseDate' u 'releaseDate' u više datoteka i refaktoriran status igre na korištenje tipa GameStatus, dodan status edit u modalEdit.tsx,">
       <change beforePath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/.idea/workspace.xml" beforePathEscaped="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/.idea/workspace.xml" afterPathEscaped="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/(tabs)/favorites/index.tsx" beforePathEscaped="$PROJECT_DIR$/Gamenote/app/(tabs)/favorites/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/(tabs)/favorites/index.tsx" afterPathEscaped="$PROJECT_DIR$/Gamenote/app/(tabs)/favorites/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/(tabs)/search/index.tsx" beforePathEscaped="$PROJECT_DIR$/Gamenote/app/(tabs)/search/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/(tabs)/search/index.tsx" afterPathEscaped="$PROJECT_DIR$/Gamenote/app/(tabs)/search/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/details.tsx" beforePathEscaped="$PROJECT_DIR$/Gamenote/app/details.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/details.tsx" afterPathEscaped="$PROJECT_DIR$/Gamenote/app/details.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/modalEdit.tsx" beforePathEscaped="$PROJECT_DIR$/Gamenote/app/modalEdit.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/modalEdit.tsx" afterPathEscaped="$PROJECT_DIR$/Gamenote/app/modalEdit.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/common/Game.tsx" beforePathEscaped="$PROJECT_DIR$/Gamenote/common/Game.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/common/Game.tsx" afterPathEscaped="$PROJECT_DIR$/Gamenote/common/Game.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/common/StatusCommons.tsx" beforePathEscaped="$PROJECT_DIR$/Gamenote/common/StatusCommons.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/common/StatusCommons.tsx" afterPathEscaped="$PROJECT_DIR$/Gamenote/common/StatusCommons.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/constants/PLACEHOLDER_GAMES.ts" beforePathEscaped="$PROJECT_DIR$/Gamenote/constants/PLACEHOLDER_GAMES.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/constants/PLACEHOLDER_GAMES.ts" afterPathEscaped="$PROJECT_DIR$/Gamenote/constants/PLACEHOLDER_GAMES.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/(tabs)/home/index.tsx" beforePathEscaped="$PROJECT_DIR$/Gamenote/app/(tabs)/home/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/(tabs)/home/index.tsx" afterPathEscaped="$PROJECT_DIR$/Gamenote/app/(tabs)/home/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/constants/theme.ts" beforePathEscaped="$PROJECT_DIR$/Gamenote/constants/theme.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/constants/theme.ts" afterPathEscaped="$PROJECT_DIR$/Gamenote/constants/theme.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -21,8 +16,8 @@
   </component>
   <component name="CopilotPersistence">
     <persistenceIdMap>
-      <entry key="_/Users/mariobarisa/Desktop//Osobno/GamenoteMobile" value="3BnhLSTOxjFVNfgTjSLmchQK7qB" />
       <entry key="_/Users/mariobarisa/Desktop//Osobno/GamenoteMobile" value="3DOTYMhNN7EXYCsE1vE2lFTvppa" />
+      <entry key="_/Users/mariobarisa/Desktop//Osobno/GamenoteMobile" value="3BnhLSTOxjFVNfgTjSLmchQK7qB" />
     </persistenceIdMap>
   </component>
   <component name="CopilotUserSelectedChatMode">
@@ -31,8 +26,8 @@
   </component>
   <component name="CopilotUserSelectedModel">
     <selectedModels>
-      <entry key="agent-panel" value="Gemini 3.1 Pro" />
-      <entry key="chat-panel" value="Gemini 3.1 Pro" />
+      <entry key="agent-panel" value="Auto" />
+      <entry key="chat-panel" value="Auto" />
     </selectedModels>
   </component>
   <component name="FileTemplateManagerImpl">
@@ -134,7 +129,8 @@
       <workItem from="1777805317128" duration="2071000" />
       <workItem from="1778010307439" duration="186000" />
       <workItem from="1778061800224" duration="13072000" />
-      <workItem from="1778152158387" duration="2415000" />
+      <workItem from="1778152158387" duration="2549000" />
+      <workItem from="1778228172326" duration="2426000" />
     </task>
     <task id="LOCAL−00001" summary="izmjena directorija README">
       <option name="closed" value="true" />
@@ -374,7 +370,14 @@
       <option name="presentableId" value="LOCAL−00034" />
       <updated>1778153096727</updated>
     </task>
-    <option name="localTasksCounter" value="35" />
+    <task id="LOCAL−00035" summary="Ispravljen naziv 'realaseDate' u 'releaseDate' u više datoteka i refaktoriran status igre na korištenje tipa GameStatus, dodan status edit u modalEdit.tsx,">
+      <option name="closed" value="true" />
+      <created>1778154629512</created>
+      <option name="number" value="LOCAL−00035" />
+      <option name="presentableId" value="LOCAL−00035" />
+      <updated>1778154629512</updated>
+    </task>
+    <option name="localTasksCounter" value="36" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -392,7 +395,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Implementiran osnovni Gamecard ( osnovna veličina ) u home tab sa placeholder info." />
     <MESSAGE value="minimalne izmjene naziva stanja igranja igre" />
     <MESSAGE value="Progress bar sada ima drugaciji color uzimajuci u obzir %-ak prolaznosti u igri, manje izmjene velicine fontova i game slike" />
     <MESSAGE value="Minimalne izmjene + update README.md" />
@@ -417,7 +419,8 @@
     <MESSAGE value="Micanje nepotrebnih importova po cijelom projektu, dodavanje custom kategorija achvn ( % ) za sve podržane platforme -&gt; edit details.tsx i editModal.tsx" />
     <MESSAGE value="Dodana lagana vibracija kada se spremi igra putem modalEdit.tsx" />
     <MESSAGE value="početna stranica sada učitava igre koje imaju status playing, moje igre stranica učitava sve igre, dodan haptick feedback na header gumbe unutar search section-a" />
-    <option name="LAST_COMMIT_MESSAGE" value="početna stranica sada učitava igre koje imaju status playing, moje igre stranica učitava sve igre, dodan haptick feedback na header gumbe unutar search section-a" />
+    <MESSAGE value="Ispravljen naziv 'realaseDate' u 'releaseDate' u više datoteka i refaktoriran status igre na korištenje tipa GameStatus, dodan status edit u modalEdit.tsx," />
+    <option name="LAST_COMMIT_MESSAGE" value="Ispravljen naziv 'realaseDate' u 'releaseDate' u više datoteka i refaktoriran status igre na korištenje tipa GameStatus, dodan status edit u modalEdit.tsx," />
   </component>
   <component name="github-copilot-workspace">
     <instructionFileLocations>
