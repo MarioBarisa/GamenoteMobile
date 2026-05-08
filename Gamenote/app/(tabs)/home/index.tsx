@@ -32,11 +32,11 @@ export default function HomeIndex() {
       >
         <View style={{flexDirection: "row", gap: 12, marginBottom:12, padding: 16, justifyContent: "center", backgroundColor: t.backgroundModal, borderRadius: 12,}}>
           <View>
-            <Text style={[styles.name, {color: t.text}]}>Ukupno igara:</Text>
+            <Text style={[styles.name, {color: t.text}]}>Ukupno igara</Text>
             <Text style={{textAlign: "center", color: "#F43098", fontSize: 16, fontWeight: "bold"}}>{gameNumber}</Text>
           </View>
           <View>
-            <Text style={[styles.name, {color: t.text}]}>Vrijeme igranja:</Text>
+            <Text style={[styles.name, {color: t.text}]}>Vrijeme igranja</Text>
             <Text style={{textAlign: "center", color: "#00D3BC", fontSize: 16, fontWeight: "bold"}}>{playtime}</Text>
           </View>
           <View>
