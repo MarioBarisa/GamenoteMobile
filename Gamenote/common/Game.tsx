@@ -4,6 +4,7 @@ import {GameStatus} from  "@/common/StatusCommons"
 
 export interface Game {
   title: string
+  game_id: string
   platform?: string
   genre?: string
   status?: GameStatus //'playing' | 'paused' | 'completed' | 'dropped' | 'backlog'

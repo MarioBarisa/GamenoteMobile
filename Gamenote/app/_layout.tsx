@@ -1,5 +1,6 @@
 import {Stack} from "expo-router";
 import {FavoritesProvider} from "../context/favorites";
+import {GroupsProvider} from "@/context/GroupsContext";
 import {ThemeProvider} from "@/context/theme";
 import {useNavigationTheme} from "@/constants/navigationTheme";
 
@@ -8,32 +9,34 @@ function RootNavigator() {
 
     return (
         <FavoritesProvider>
-            <Stack screenOptions={navTheme}>
-                <Stack.Screen name="(tabs)"
-                              options={{
-                                  headerShown: false,
-                                  title: "Početna",
-                              }}/>
-                <Stack.Screen name="details"
-                              options={{
-                               //   headerLargeTitle: true,
-                               //  title: "Detalji", -> naziv dodan unutar details.tsx kako bi svaki naslov bio = naziv igre
-                                  headerBackButtonDisplayMode: "minimal",
+            <GroupsProvider>
+                <Stack screenOptions={navTheme}>
+                    <Stack.Screen name="(tabs)"
+                                  options={{
+                                      headerShown: false,
+                                      title: "Početna",
+                                  }}/>
+                    <Stack.Screen name="details"
+                                  options={{
+                                      //   headerLargeTitle: true,
+                                      //  title: "Detalji", -> naziv dodan unutar details.tsx kako bi svaki naslov bio = naziv igre
+                                      headerBackButtonDisplayMode: "minimal",
 
-                              }}/>
-                        <Stack.Screen
-                            name="modalEdit"
-                            options={{
-                              presentation: 'modal', title: "Uredi Informacije",
-                            }}
-                          />
-                <Stack.Screen name="settings"
-                              options={{
-                                  headerShown: true,
-                                  title: "Postavke",
-                                  headerBackButtonDisplayMode: "minimal",
-                              }}/>
-            </Stack>
+                                  }}/>
+                    <Stack.Screen
+                        name="modalEdit"
+                        options={{
+                            presentation: 'modal', title: "Uredi Informacije",
+                        }}
+                    />
+                    <Stack.Screen name="settings"
+                                  options={{
+                                      headerShown: true,
+                                      title: "Postavke",
+                                      headerBackButtonDisplayMode: "minimal",
+                                  }}/>
+                </Stack>
+            </GroupsProvider>
         </FavoritesProvider>
     );
 }

@@ -4,10 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7b37eb79-ceff-44a4-81aa-7e12f61dfc1f" name="Changes" comment="Ispravljen naziv 'realaseDate' u 'releaseDate' u više datoteka i refaktoriran status igre na korištenje tipa GameStatus, dodan status edit u modalEdit.tsx,">
+    <list default="true" id="7b37eb79-ceff-44a4-81aa-7e12f61dfc1f" name="Changes" comment="Dodan osnovni stats bar na početnu stranicu.">
+      <change afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/common/groups.tsx" afterPathEscaped="$PROJECT_DIR$/Gamenote/common/groups.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/constants/PLACEHOLDER_GROUPS.TSX.ts" afterPathEscaped="$PROJECT_DIR$/Gamenote/constants/PLACEHOLDER_GROUPS.TSX.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/context/GroupsContext.tsx" afterPathEscaped="$PROJECT_DIR$/Gamenote/context/GroupsContext.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/.idea/workspace.xml" beforePathEscaped="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/.idea/workspace.xml" afterPathEscaped="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/(tabs)/home/index.tsx" beforePathEscaped="$PROJECT_DIR$/Gamenote/app/(tabs)/home/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/(tabs)/home/index.tsx" afterPathEscaped="$PROJECT_DIR$/Gamenote/app/(tabs)/home/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/constants/theme.ts" beforePathEscaped="$PROJECT_DIR$/Gamenote/constants/theme.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/constants/theme.ts" afterPathEscaped="$PROJECT_DIR$/Gamenote/constants/theme.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/(tabs)/groups/index.tsx" beforePathEscaped="$PROJECT_DIR$/Gamenote/app/(tabs)/groups/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/(tabs)/groups/index.tsx" afterPathEscaped="$PROJECT_DIR$/Gamenote/app/(tabs)/groups/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/_layout.tsx" beforePathEscaped="$PROJECT_DIR$/Gamenote/app/_layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/_layout.tsx" afterPathEscaped="$PROJECT_DIR$/Gamenote/app/_layout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/common/Game.tsx" beforePathEscaped="$PROJECT_DIR$/Gamenote/common/Game.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/common/Game.tsx" afterPathEscaped="$PROJECT_DIR$/Gamenote/common/Game.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/constants/PLACEHOLDER_GAMES.ts" beforePathEscaped="$PROJECT_DIR$/Gamenote/constants/PLACEHOLDER_GAMES.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/constants/PLACEHOLDER_GAMES.ts" afterPathEscaped="$PROJECT_DIR$/Gamenote/constants/PLACEHOLDER_GAMES.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -16,8 +21,8 @@
   </component>
   <component name="CopilotPersistence">
     <persistenceIdMap>
-      <entry key="_/Users/mariobarisa/Desktop//Osobno/GamenoteMobile" value="3DOTYMhNN7EXYCsE1vE2lFTvppa" />
       <entry key="_/Users/mariobarisa/Desktop//Osobno/GamenoteMobile" value="3BnhLSTOxjFVNfgTjSLmchQK7qB" />
+      <entry key="_/Users/mariobarisa/Desktop//Osobno/GamenoteMobile" value="3DU64i0gTWv7ku1RxGViGfCvXKi" />
     </persistenceIdMap>
   </component>
   <component name="CopilotUserSelectedChatMode">
@@ -34,6 +39,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="TypeScript File" />
+        <option value="TypeScript JSX File" />
       </list>
     </option>
   </component>
@@ -130,7 +136,8 @@
       <workItem from="1778010307439" duration="186000" />
       <workItem from="1778061800224" duration="13072000" />
       <workItem from="1778152158387" duration="2549000" />
-      <workItem from="1778228172326" duration="2426000" />
+      <workItem from="1778228172326" duration="2598000" />
+      <workItem from="1778324112870" duration="8499000" />
     </task>
     <task id="LOCAL−00001" summary="izmjena directorija README">
       <option name="closed" value="true" />
@@ -377,7 +384,21 @@
       <option name="presentableId" value="LOCAL−00035" />
       <updated>1778154629512</updated>
     </task>
-    <option name="localTasksCounter" value="36" />
+    <task id="LOCAL−00036" summary="Dodan osnovni stats bar na početnu stranicu.">
+      <option name="closed" value="true" />
+      <created>1778230628544</created>
+      <option name="number" value="LOCAL−00036" />
+      <option name="presentableId" value="LOCAL−00036" />
+      <updated>1778230628544</updated>
+    </task>
+    <task id="LOCAL−00037" summary="Dodan osnovni stats bar na početnu stranicu.">
+      <option name="closed" value="true" />
+      <created>1778230761816</created>
+      <option name="number" value="LOCAL−00037" />
+      <option name="presentableId" value="LOCAL−00037" />
+      <updated>1778230761816</updated>
+    </task>
+    <option name="localTasksCounter" value="38" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -395,7 +416,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="minimalne izmjene naziva stanja igranja igre" />
     <MESSAGE value="Progress bar sada ima drugaciji color uzimajuci u obzir %-ak prolaznosti u igri, manje izmjene velicine fontova i game slike" />
     <MESSAGE value="Minimalne izmjene + update README.md" />
     <MESSAGE value="update README.md" />
@@ -420,7 +440,8 @@
     <MESSAGE value="Dodana lagana vibracija kada se spremi igra putem modalEdit.tsx" />
     <MESSAGE value="početna stranica sada učitava igre koje imaju status playing, moje igre stranica učitava sve igre, dodan haptick feedback na header gumbe unutar search section-a" />
     <MESSAGE value="Ispravljen naziv 'realaseDate' u 'releaseDate' u više datoteka i refaktoriran status igre na korištenje tipa GameStatus, dodan status edit u modalEdit.tsx," />
-    <option name="LAST_COMMIT_MESSAGE" value="Ispravljen naziv 'realaseDate' u 'releaseDate' u više datoteka i refaktoriran status igre na korištenje tipa GameStatus, dodan status edit u modalEdit.tsx," />
+    <MESSAGE value="Dodan osnovni stats bar na početnu stranicu." />
+    <option name="LAST_COMMIT_MESSAGE" value="Dodan osnovni stats bar na početnu stranicu." />
   </component>
   <component name="github-copilot-workspace">
     <instructionFileLocations>

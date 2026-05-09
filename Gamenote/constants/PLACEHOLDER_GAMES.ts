@@ -4,6 +4,7 @@ import {ProgressModeKey} from "@/common/ProgressSources";
 export const PLACEHOLDER_GAMES: Game[] = [
     {
         title: 'Splatoon 2',
+        game_id: "0",
         platform: 'Nintendo Switch',
         genre: 'Shooter',
         status: 'playing',
@@ -40,6 +41,7 @@ export const PLACEHOLDER_GAMES: Game[] = [
     },
     {
         title: 'The Legend of Zelda: Tears of the Kingdom',
+        game_id: "1",
         platform: 'Nintendo Switch 2',
         genre: 'Adventure',
         status: 'playing',
@@ -59,6 +61,7 @@ export const PLACEHOLDER_GAMES: Game[] = [
     },
     {
         title: 'Horizon Forbidden West',
+        game_id: "2",
         platform: 'PlayStation 5',
         genre: 'RPG',
         status: 'paused',
@@ -77,6 +80,7 @@ export const PLACEHOLDER_GAMES: Game[] = [
     },
     {
         title: 'Kena: Bridge of Spirits',
+        game_id: "3",
         platform: 'PlayStation 5',
         genre: 'RPG',
         status: 'completed',
@@ -95,6 +99,7 @@ export const PLACEHOLDER_GAMES: Game[] = [
     },
     {
         title: 'Persona 5 Royal',
+        game_id: "4",
         platform: 'PlayStation 5',
         status: 'dropped',
         rating: 1,
@@ -113,6 +118,7 @@ export const PLACEHOLDER_GAMES: Game[] = [
     },
     {
         title: 'Hollow Knight',
+        game_id: "6",
         platform: 'Nintendo Switch',
         status: 'backlog',
         rating: 3,
