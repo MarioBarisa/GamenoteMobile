@@ -5,6 +5,7 @@ export type Group = {
   type: string | null;
   rating: number | null;
   created_at: string | null;
+  user_notes?: string | null;
 };
 
 export type GameGroup = {

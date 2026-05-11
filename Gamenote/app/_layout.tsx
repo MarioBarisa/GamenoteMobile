@@ -1,5 +1,5 @@
 import {Stack} from "expo-router";
-import {FavoritesProvider} from "../context/favorites";
+import {FavoritesProvider} from "@/context/favorites";
 import {GroupsProvider} from "@/context/GroupsContext";
 import {ThemeProvider} from "@/context/theme";
 import {useNavigationTheme} from "@/constants/navigationTheme";

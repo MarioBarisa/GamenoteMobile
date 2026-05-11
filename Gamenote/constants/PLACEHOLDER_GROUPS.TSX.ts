@@ -7,7 +7,8 @@ export const MOCK_GROUPS: Group[]=[
     name: "RPG igre",
     type: "Genre",
     rating: 4,
-    created_at: "2025-11-11"
+    created_at: "2025-11-11",
+    user_notes: "Jako poggers nintendo igre igre."
   },
   {
     id: "g2",
