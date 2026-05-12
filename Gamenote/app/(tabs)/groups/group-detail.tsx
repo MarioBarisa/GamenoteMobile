@@ -40,7 +40,7 @@ export default function GroupDetail(){
                 <View style={styles.ratingRow}>
                     {group.type && (
                         <Text style={{
-                            color: t.secondaryText,
+                            color: t.text,
                             fontSize: 18,
                             marginTop: 14,
                             fontWeight: "700"
@@ -48,7 +48,7 @@ export default function GroupDetail(){
                     )}
                     {group.created_at && (
                         <Text style={{
-                            color: t.secondaryText,
+                            color: t.text,
                             fontSize: 14,
                             marginTop: 14,
                             fontWeight: "700"

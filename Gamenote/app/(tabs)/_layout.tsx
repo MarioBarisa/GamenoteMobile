@@ -26,7 +26,7 @@ export default function TabsLayout() {
 
             <NativeTabs.Trigger name="groups">
                 <Label>Grupe</Label>
-                <Icon sf="rectangle.stack" drawable="ic_menu_agenda"/>
+                <Icon sf="rectangle.stack.fill" drawable="ic_menu_agenda"/>
             </NativeTabs.Trigger>
 
             <NativeTabs.Trigger name="profile">
