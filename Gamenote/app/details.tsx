@@ -84,7 +84,7 @@ export default function Index() {
                     headerRight: () => (
                         <Link
                             href={{
-                                pathname: '/modalEdit',
+                                pathname: "/(modals)/modalEdit",
                                 params: {game: gameParam}
                             }}
                             asChild

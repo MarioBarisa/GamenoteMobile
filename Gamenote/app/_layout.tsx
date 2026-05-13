@@ -23,10 +23,17 @@ function RootNavigator() {
                                       headerBackButtonDisplayMode: "minimal",
 
                                   }}/>
-                     <Stack.Screen
-                        name="modalEditGroups"
+                    <Stack.Screen
+                        name="(modals)/modalEditGroups"
                         options={{
                             presentation: 'modal', title: "Uredi Info grupe",
+                        }}
+                    />
+                    <Stack.Screen
+                        name="(modals)/modalEdit"
+                        options={{
+                            presentation: 'modal',
+                            title: "Uredi igru",
                         }}
                     />
                     <Stack.Screen name="settings"

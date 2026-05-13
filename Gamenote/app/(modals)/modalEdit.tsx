@@ -30,6 +30,7 @@ export default function ModalEdit() {
             Alert.alert('Greška', 'Broj osvojenih postignuća ne može biti veći od ukupnog broja.');
             return;
         }
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
         const updated: Game = {...original, ...form};
         //TU DOLAZI SUPABASE IMPLEMENTACIJA KASINIJE!!!!!!!!
         Alert.alert('Spremljeno', `${original.title} ažuriran.`, [
@@ -320,7 +321,7 @@ const styles = StyleSheet.create({
         fontWeight: '700',
     },
     divider: {
-        height: StyleSheet.hairlineWidth,
+        //height: StyleSheet.hairlineWidth,
         marginHorizontal: 16,
         marginTop: 20,
     },

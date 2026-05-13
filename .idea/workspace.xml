@@ -5,10 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7b37eb79-ceff-44a4-81aa-7e12f61dfc1f" name="Changes" comment="minimalne nadopune prošlog commita">
-      <change afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/modalEditGroups.tsx" afterPathEscaped="$PROJECT_DIR$/Gamenote/app/modalEditGroups.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/.idea/workspace.xml" beforePathEscaped="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/.idea/workspace.xml" afterPathEscaped="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/(tabs)/groups/group-detail.tsx" beforePathEscaped="$PROJECT_DIR$/Gamenote/app/(tabs)/groups/group-detail.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/(tabs)/groups/group-detail.tsx" afterPathEscaped="$PROJECT_DIR$/Gamenote/app/(tabs)/groups/group-detail.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/_layout.tsx" beforePathEscaped="$PROJECT_DIR$/Gamenote/app/_layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/_layout.tsx" afterPathEscaped="$PROJECT_DIR$/Gamenote/app/_layout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/details.tsx" beforePathEscaped="$PROJECT_DIR$/Gamenote/app/details.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/details.tsx" afterPathEscaped="$PROJECT_DIR$/Gamenote/app/details.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/modalEdit.tsx" beforePathEscaped="$PROJECT_DIR$/Gamenote/app/modalEdit.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/(modals)/modalEdit.tsx" afterPathEscaped="$PROJECT_DIR$/Gamenote/app/(modals)/modalEdit.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/modalEditGroups.tsx" beforePathEscaped="$PROJECT_DIR$/Gamenote/app/modalEditGroups.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/(modals)/modalEditGroups.tsx" afterPathEscaped="$PROJECT_DIR$/Gamenote/app/(modals)/modalEditGroups.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -97,11 +98,11 @@
       <recent name="$PROJECT_DIR$/Gamenote/app/(tabs)" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/Gamenote/app/(modals)" />
       <recent name="$PROJECT_DIR$/Gamenote/app" />
       <recent name="$PROJECT_DIR$/Gamenote/app/Other" />
       <recent name="$PROJECT_DIR$/Gamenote/app/(tabs)/modalEdit" />
       <recent name="$PROJECT_DIR$" />
-      <recent name="$PROJECT_DIR$/Gamenote/assets/images/tabIcons" />
     </key>
   </component>
   <component name="SharedIndexes">

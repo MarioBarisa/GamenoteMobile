@@ -37,7 +37,7 @@ export default function GroupDetail(){
                      headerRight: () => (
                         <Link
                             href={{
-                                pathname: '/modalEditGroups',
+                                pathname: "/(modals)/modalEditGroups",
                                 params: {group: JSON.stringify(group)}, // cijeli group objekt kao prop
                             }}
                             asChild

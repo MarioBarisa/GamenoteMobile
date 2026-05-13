@@ -21,17 +21,12 @@ export default function ModalEditGroups() {
     let group: Group | null = null;
     try {
         group = groupParam ? (JSON.parse(groupParam) as Group) : null;
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (e) {
         group = null;
     }
 
-    const original: Group = (() => {
-        try {
-            return group ? JSON.parse(groupParam as string) : {}
-        } catch {
-            return {}
-        }
-    })();
+    const original: Group = group ?? ({} as Group);
 
     const [form, setForm] = useState<Partial<Group>>({
         name: original.name,
