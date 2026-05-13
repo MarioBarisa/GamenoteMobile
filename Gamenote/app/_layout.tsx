@@ -23,10 +23,10 @@ function RootNavigator() {
                                       headerBackButtonDisplayMode: "minimal",
 
                                   }}/>
-                    <Stack.Screen
-                        name="modalEdit"
+                     <Stack.Screen
+                        name="modalEditGroups"
                         options={{
-                            presentation: 'modal', title: "Uredi Informacije",
+                            presentation: 'modal', title: "Uredi Info grupe",
                         }}
                     />
                     <Stack.Screen name="settings"

@@ -1,8 +1,8 @@
-import {useLocalSearchParams, Stack} from "expo-router";
+import {useLocalSearchParams, Stack, Link} from "expo-router";
 import {useTheme} from "@/context/theme";
 import {colors} from "@/constants/theme"
 import {useGroups} from "@/context/GroupsContext";
-import {Image, ScrollView, Text, View, StyleSheet,} from "react-native";
+import {Image, ScrollView, Text, View, StyleSheet, Pressable,} from "react-native";
 import {PLACEHOLDER_GAMES} from "@/constants/PLACEHOLDER_GAMES";
 import {SymbolView} from "expo-symbols";
 import {Ionicons} from "@expo/vector-icons";
@@ -34,6 +34,24 @@ export default function GroupDetail(){
                 options={{
                     title: group.name,
                     headerBackTitle: 'Natrag',
+                     headerRight: () => (
+                        <Link
+                            href={{
+                                pathname: '/modalEditGroups',
+                                params: {group: JSON.stringify(group)}, // cijeli group objekt kao prop
+                            }}
+                            asChild
+                        >
+                            <Pressable hitSlop={10}>
+                                <SymbolView
+                                    name="square.and.pencil"
+                                    resizeMode="scaleAspectFit"
+                                    style={{width: 32, height: 32, justifyContent: 'center'}}
+                                    tintColor={t.text}
+                                />
+                            </Pressable>
+                        </Link>
+                    ),
                 }}
             />
             <ScrollView style={{backgroundColor: t.background}} contentContainerStyle={{paddingBottom: 16}}>
