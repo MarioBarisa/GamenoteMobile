@@ -35,7 +35,9 @@ export function GroupsProvider({children}: { children: ReactNode }) {
     };
 
     const addGameToGroup = (gameId: string, groupId: string) => {
-        const exists = gameGroups.some((g) => g.id === gameId);
+        const exists = gameGroups.some(
+            (g) => g.game_id === gameId && g.group_id === groupId
+        );
         if (exists) return;
         setGameGroups((prev) => [
             ...prev,
@@ -46,13 +48,14 @@ export function GroupsProvider({children}: { children: ReactNode }) {
                 group_id: groupId,
                 created_at: new Date().toISOString(),
             }
-        ])
+        ]);
     };
 
     const removeGameFromGroup = (gameId: string, groupId: string) => {
         setGameGroups((prev) =>
-            prev.filter((g) => !(g.id === gameId && g.id === groupId)));
-    }
+            prev.filter((g) => !(g.game_id === gameId && g.group_id === groupId))
+        );
+    };
 
     const getGroupsForGame = (gameId: string): Group[] => {
         const groupIds = gameGroups
@@ -77,6 +80,7 @@ export function GroupsProvider({children}: { children: ReactNode }) {
 
 
 }
+
 //GRUPE MOPGU IMATI TYPE KOJI JE SAMO collection, trilogy ili frnachise!!!
 
 export function useGroups() {

@@ -10,12 +10,15 @@ export default function TabsLayout() {
         <NativeTabs>
             <NativeTabs.Trigger name="home">
                 <Label>Početna</Label>
-                <Icon sf="house.fill" drawable="ic_menu_view"/>
+              <Icon
+                    sf={{ default: "house", selected: "house.fill" }}
+                    drawable="ic_menu_view"
+                />
             </NativeTabs.Trigger>
 
             <NativeTabs.Trigger name="favorites">
                 <Label>Moje igre</Label>
-                <Icon sf="bookmark.fill" drawable="ic_menu_agenda"/>
+                <Icon sf={{ default: "bookmark", selected: "bookmark.fill" }} drawable="ic_menu_agenda"/>
             </NativeTabs.Trigger>
 
             <NativeTabs.Trigger name="search" role="search">
@@ -26,12 +29,12 @@ export default function TabsLayout() {
 
             <NativeTabs.Trigger name="groups">
                 <Label>Grupe</Label>
-                <Icon sf="rectangle.stack.fill" drawable="ic_menu_agenda"/>
+                <Icon sf={{default: "rectangle.stack", selected: "rectangle.stack.fill"}} drawable="ic_menu_agenda"/>
             </NativeTabs.Trigger>
 
             <NativeTabs.Trigger name="profile">
                 <Label>Profil</Label>
-                <Icon sf="person.fill" drawable="ic_menu_agenda"/>
+                <Icon sf={{default: "person", selected: "person.fill"}} drawable="ic_menu_agenda"/>
             </NativeTabs.Trigger>
 
         </NativeTabs>

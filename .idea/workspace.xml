@@ -4,22 +4,48 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7b37eb79-ceff-44a4-81aa-7e12f61dfc1f" name="Changes" comment="minimalne nadopune prošlog commita">
-      <change beforePath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/(tabs)/groups/group-detail.tsx" beforePathEscaped="$PROJECT_DIR$/Gamenote/app/(tabs)/groups/group-detail.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/(tabs)/groups/group-detail.tsx" afterPathEscaped="$PROJECT_DIR$/Gamenote/app/(tabs)/groups/group-detail.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/_layout.tsx" beforePathEscaped="$PROJECT_DIR$/Gamenote/app/_layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/_layout.tsx" afterPathEscaped="$PROJECT_DIR$/Gamenote/app/_layout.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/details.tsx" beforePathEscaped="$PROJECT_DIR$/Gamenote/app/details.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/details.tsx" afterPathEscaped="$PROJECT_DIR$/Gamenote/app/details.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/modalEdit.tsx" beforePathEscaped="$PROJECT_DIR$/Gamenote/app/modalEdit.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/(modals)/modalEdit.tsx" afterPathEscaped="$PROJECT_DIR$/Gamenote/app/(modals)/modalEdit.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/modalEditGroups.tsx" beforePathEscaped="$PROJECT_DIR$/Gamenote/app/modalEditGroups.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/(modals)/modalEditGroups.tsx" afterPathEscaped="$PROJECT_DIR$/Gamenote/app/(modals)/modalEditGroups.tsx" afterDir="false" />
+    <list default="true" id="7b37eb79-ceff-44a4-81aa-7e12f61dfc1f" name="Changes" comment="bolja organizacija projekta ( dodana modals mapa )">
+      <change beforePath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/.idea/workspace.xml" beforePathEscaped="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/.idea/workspace.xml" afterPathEscaped="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/(modals)/modalEditGroups.tsx" beforePathEscaped="$PROJECT_DIR$/Gamenote/app/(modals)/modalEditGroups.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/(modals)/modalEditGroups.tsx" afterPathEscaped="$PROJECT_DIR$/Gamenote/app/(modals)/modalEditGroups.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/(tabs)/_layout.tsx" beforePathEscaped="$PROJECT_DIR$/Gamenote/app/(tabs)/_layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/(tabs)/_layout.tsx" afterPathEscaped="$PROJECT_DIR$/Gamenote/app/(tabs)/_layout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/context/GroupsContext.tsx" beforePathEscaped="$PROJECT_DIR$/Gamenote/context/GroupsContext.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/context/GroupsContext.tsx" afterPathEscaped="$PROJECT_DIR$/Gamenote/context/GroupsContext.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="CopilotChats">
+    <option name="panelChat">
+      <chat>
+        <option name="activeSessionId" value="3fbf9305-f95f-42a4-8780-9b53c7e679ca" />
+        <option name="sessions">
+          <session>
+            <option name="chatType" value="PANEL" />
+            <option name="id" value="8c18420b-46c3-47f6-8ab6-57d712ecaf76" />
+            <option name="modeId" value="Ask" />
+            <option name="modelType" value="builtin_family" />
+            <option name="modelValue" value="auto" />
+            <option name="status" value="Completed" />
+            <option name="targetType" value="LOCAL" />
+          </session>
+          <session>
+            <option name="chatType" value="PANEL" />
+            <option name="id" value="3fbf9305-f95f-42a4-8780-9b53c7e679ca" />
+            <option name="modeId" value="Ask" />
+            <option name="modelType" value="builtin_family" />
+            <option name="modelValue" value="auto" />
+            <option name="targetType" value="LOCAL" />
+          </session>
+        </option>
+        <option name="type" value="PANEL" />
+      </chat>
+    </option>
+  </component>
   <component name="CopilotPersistence">
     <persistenceIdMap>
-      <entry key="_/Users/mariobarisa/Desktop//Osobno/GamenoteMobile" value="3DU64i0gTWv7ku1RxGViGfCvXKi" />
       <entry key="_/Users/mariobarisa/Desktop//Osobno/GamenoteMobile" value="3BnhLSTOxjFVNfgTjSLmchQK7qB" />
+      <entry key="_/Users/mariobarisa/Desktop//Osobno/GamenoteMobile" value="3Dl3Pl1BKfCat6GX4kt9pvYUj8z" />
     </persistenceIdMap>
   </component>
   <component name="CopilotUserSelectedChatMode">
@@ -63,6 +89,20 @@
   &quot;fromUser&quot;: false
 }</component>
   <component name="ProjectId" id="3BnhLSTOxjFVNfgTjSLmchQK7qB" />
+  <component name="ProjectSessionTemplates">
+    <option name="panelTemplate">
+      <template>
+        <option name="modeId" value="Ask" />
+        <option name="model">
+          <model>
+            <option name="modelType" value="builtin_family" />
+            <option name="modelValue" value="auto" />
+          </model>
+        </option>
+        <option name="targetType" value="LOCAL" />
+      </template>
+    </option>
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -136,6 +176,7 @@
       <workItem from="1778228172326" duration="2598000" />
       <workItem from="1778324112870" duration="12852000" />
       <workItem from="1778522820896" duration="11644000" />
+      <workItem from="1778842808495" duration="2072000" />
     </task>
     <task id="LOCAL−00001" summary="izmjena directorija README">
       <option name="closed" value="true" />
@@ -417,7 +458,14 @@
       <option name="presentableId" value="LOCAL−00040" />
       <updated>1778576542957</updated>
     </task>
-    <option name="localTasksCounter" value="41" />
+    <task id="LOCAL−00041" summary="bolja organizacija projekta ( dodana modals mapa )">
+      <option name="closed" value="true" />
+      <created>1778681800321</created>
+      <option name="number" value="LOCAL−00041" />
+      <option name="presentableId" value="LOCAL−00041" />
+      <updated>1778681800321</updated>
+    </task>
+    <option name="localTasksCounter" value="42" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -435,7 +483,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="search bar sada radi nad videoigrama" />
     <MESSAGE value="Dodani gumb za toggle između korisnikovog Gamenote-a i globalne Gamenote baze prilikom pretrage te gumb za sortiranje. Potrebna implementacija" />
     <MESSAGE value="Implementirani osnovni sort mehanizam" />
     <MESSAGE value="Manji bug fix kod mapiranja filtiriranih igara" />
@@ -460,7 +507,8 @@
     <MESSAGE value="Dodana podrška za grupe igara kroz GroupsContext, uključujući dodavanje i uklanjanje grupa te povezivanje igara s grupama." />
     <MESSAGE value="Dodan screen sa više detalja o grupama, unutar grupa dodano opcionalno polje sa komentarima korisnika, minimalne izmjene ikona unutar tab bar-a i prikaza starsa" />
     <MESSAGE value="minimalne nadopune prošlog commita" />
-    <option name="LAST_COMMIT_MESSAGE" value="minimalne nadopune prošlog commita" />
+    <MESSAGE value="bolja organizacija projekta ( dodana modals mapa )" />
+    <option name="LAST_COMMIT_MESSAGE" value="bolja organizacija projekta ( dodana modals mapa )" />
   </component>
   <component name="github-copilot-workspace">
     <instructionFileLocations>

@@ -7,6 +7,8 @@ import {SymbolView} from "expo-symbols";
 //import DateTimePicker, {DateTimePickerEvent} from "@react-native-community/datetimepicker";
 import * as Haptics from "expo-haptics";
 import {useState} from "react";
+import {useGroups} from "@/context/GroupsContext";
+import {PLACEHOLDER_GAMES} from "@/constants/PLACEHOLDER_GAMES";
 //import {GAME_STATUSES, STATUS_CONFIG} from "@/common/StatusCommons";
 
 
@@ -17,6 +19,7 @@ export default function ModalEditGroups() {
 
     const params = useLocalSearchParams<{ group?: string }>();
     const groupParam = params.group;
+
 
     let group: Group | null = null;
     try {
@@ -35,13 +38,22 @@ export default function ModalEditGroups() {
         created_at: original.created_at,
         user_notes: original.user_notes,
     });
+
+    const {addGameToGroup, removeGameFromGroup, getGamesInGroup} = useGroups();
+    const gamesInGroup: string[] = group ? getGamesInGroup(group.id) : [];
+
+    const [showAll, setShowAll] = useState(false);
+    const visibleGames = showAll ? PLACEHOLDER_GAMES : PLACEHOLDER_GAMES.slice(0, 5);
+
     const handleSave = () => {
         if (Platform.OS === 'ios') Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
         const updated = {...original, ...form}; // tu doalzi supabase
         Alert.alert('Spremljena', `"${updated.name}" grupa.`, [
             {text: 'OK', onPress: () => router.back()}
         ]);
-}
+
+
+    }
 
     const typeGroups = ["Collection", "Trilogy", "Franchise"];
 
@@ -113,7 +125,56 @@ export default function ModalEditGroups() {
                             ))}
                         </View>
                     </View>
-                    <Text style={{color: t.text}}>Dodaj / makni igru section. TBI</Text>
+                    <View style={{flexDirection: "column", gap: 8, paddingVertical: 8}}>
+                        <Text style={[styles.label, {color: t.text}]}>Igre u grupi:</Text>
+                        {visibleGames.map((game) => {
+                            const isInGroup = gamesInGroup.includes(game.game_id);
+                            return (
+                                <Pressable
+                                    key={game.game_id}
+                                    onPress={() => {
+                                        if (isInGroup) {
+                                            removeGameFromGroup(game.game_id, group.id);
+                                        } else {
+                                            addGameToGroup(game.game_id, group.id);
+                                        }
+                                        if (Platform.OS === 'ios') {
+                                            Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+                                        }
+                                    }}
+                                    style={{
+                                        flexDirection: 'row',
+                                        alignItems: 'center',
+                                        justifyContent: 'space-between',
+                                        paddingVertical: 10,
+                                        paddingHorizontal: 12,
+                                        borderRadius: 10,
+                                        backgroundColor: isInGroup
+                                            ? (theme === 'dark' ? '#1C3A2F' : '#D1FAE5')
+                                            : (theme === 'dark' ? '#2C2C2E' : '#E5E5EA'),
+                                        marginBottom: 4,
+                                    }}
+                                >
+                                    <Text
+                                        style={[{fontSize: 14, fontWeight: "bold", color: t.text}]}>{game.title}</Text>
+                                    {isInGroup && <SymbolView name="checkmark" style={{width: 20, height: 20}}
+                                                              tintColor={t.accent}/>}
+                                </Pressable>
+                            );
+                        })}
+                        {PLACEHOLDER_GAMES.length > 5 && (
+                            <Pressable
+                                onPress={() => setShowAll(prev => !prev)}
+                                style={{paddingVertical: 10, alignItems: 'center'}}
+                            >
+                                <Text style={{color: t.accent, fontSize: 14, fontWeight: '600'}}>
+                                    {showAll ? 'Prikaži manje' : `Prikaži još ${PLACEHOLDER_GAMES.length - 5} igara`}
+                                </Text>
+                            </Pressable>
+                        )}
+
+
+                    </View>
                     <View style={{flexDirection: 'column', gap: 8, paddingVertical: 8}}>
                         <Text style={[styles.label, {color: t.text}]}>Tvoje bilješke:</Text>
                         <TextInput style={[styles.notesInput, {
