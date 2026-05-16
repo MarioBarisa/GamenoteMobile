@@ -199,7 +199,7 @@ export default function ModalEditGroups() {
                         }}
                         style={[styles.saveButton, {backgroundColor: t.accent}]}
                     >
-                        <Text style={{color: '#fff', fontWeight: '700', fontSize: 16}}>Spremi</Text>
+                        <Text style={{color: '#fff', fontWeight: '700', fontSize: 16}}>Spremi izmjene</Text>
                     </Pressable>
                 </View>
             </ScrollView>

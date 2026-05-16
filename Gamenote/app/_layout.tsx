@@ -29,6 +29,12 @@ function RootNavigator() {
                             presentation: 'modal', title: "Uredi Info grupe",
                         }}
                     />
+                     <Stack.Screen
+                        name="(modals)/addGroupModal"
+                        options={{
+                            presentation: 'modal', title: "Dodaj novu grupu",
+                        }}
+                    />
                     <Stack.Screen
                         name="(modals)/modalEdit"
                         options={{

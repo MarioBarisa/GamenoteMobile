@@ -2,10 +2,14 @@ import { Stack, useRouter } from "expo-router";
 import { Pressable } from "react-native";
 import {useNavigationTheme} from "@/constants/navigationTheme";
 import {SymbolView} from "expo-symbols";
+import {useTheme} from "@/context/theme";
+import {colors} from "@/constants/theme";
 
 export default function FavoritesLayout() {
     const navTheme = useNavigationTheme();
     const router = useRouter();
+    const {theme} = useTheme();
+    const t = colors[theme]
   return (
     <Stack screenOptions={navTheme}>
       <Stack.Screen
@@ -19,6 +23,8 @@ export default function FavoritesLayout() {
                 name={"gear"}
                 resizeMode="scaleAspectFit"
                  style={{ width: 36, height: 30 }}
+                tintColor={t.text}
+
               />
             </Pressable>
           ),
