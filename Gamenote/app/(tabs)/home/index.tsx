@@ -7,6 +7,7 @@ import {useMemo} from "react";
 import * as Haptics from "expo-haptics";
 import {SymbolView} from "expo-symbols";
 import {STATUS_CONFIG} from "@/common/StatusCommons";
+import {router} from "expo-router";
 
 // noinspection JSUnusedGlobalSymbols
 export default function HomeIndex() {
@@ -38,6 +39,13 @@ export default function HomeIndex() {
             return moguce[Math.floor(Math.random() * moguce.length)];
         }
     }, [PLACEHOLDER_GAMES]);
+
+      const handlePress = () => {
+      router.push({
+          pathname: '/(modals)/modalEdit',
+          params: {game: JSON.stringify(jumpBackGame)}, // šalje se cijeli game object
+      })
+  }
 
     // @ts-ignore
     // @ts-ignore
@@ -165,8 +173,9 @@ export default function HomeIndex() {
                         }
                     }}
                     style={[styles.saveButton, {backgroundColor: "#605DFF"}]}
-                >
+                ><Pressable onPress={handlePress}>
                     <View style={{flexDirection: "row", alignItems: "center", gap: 6}}>
+
                         <Text style={{color: "#fff", fontWeight: "700", fontSize: 16}}>
                             Igraj danas!
                         </Text>
@@ -175,7 +184,7 @@ export default function HomeIndex() {
                             style={{width: 24, height: 24}}
                             tintColor={"#fff"}
                         />
-                    </View>
+                    </View></Pressable>
                 </Pressable>
             </View>
         </ScrollView>

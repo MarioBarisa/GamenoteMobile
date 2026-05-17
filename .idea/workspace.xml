@@ -4,14 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7b37eb79-ceff-44a4-81aa-7e12f61dfc1f" name="Changes" comment="U tab baru fill sf ikone se renderiraju samo kada korinsik je na tom tab-u, dodan selection igara za dodavanje / micanje istih unutar modalEditGroups.tsx">
-      <change afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/(modals)/addGroupModal.tsx" afterPathEscaped="$PROJECT_DIR$/Gamenote/app/(modals)/addGroupModal.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/.idea/workspace.xml" beforePathEscaped="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/.idea/workspace.xml" afterPathEscaped="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/(modals)/modalEditGroups.tsx" beforePathEscaped="$PROJECT_DIR$/Gamenote/app/(modals)/modalEditGroups.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/(modals)/modalEditGroups.tsx" afterPathEscaped="$PROJECT_DIR$/Gamenote/app/(modals)/modalEditGroups.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/(tabs)/groups/_layout.tsx" beforePathEscaped="$PROJECT_DIR$/Gamenote/app/(tabs)/groups/_layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/(tabs)/groups/_layout.tsx" afterPathEscaped="$PROJECT_DIR$/Gamenote/app/(tabs)/groups/_layout.tsx" afterDir="false" />
+    <list default="true" id="7b37eb79-ceff-44a4-81aa-7e12f61dfc1f" name="Changes" comment="dodan modal addGroupModal.tsx putem kojeg se mogu dodati nove grupe, manje ispravke UI-a. Dodana &quot;Jump back in!&quot; section na home koja prikazuje igre koje su ili pazuirane ili u backlogu, TBI: gumb igraj danas otvara modal igre.">
       <change beforePath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/(tabs)/home/index.tsx" beforePathEscaped="$PROJECT_DIR$/Gamenote/app/(tabs)/home/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/(tabs)/home/index.tsx" afterPathEscaped="$PROJECT_DIR$/Gamenote/app/(tabs)/home/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/(tabs)/profile/_layout.tsx" beforePathEscaped="$PROJECT_DIR$/Gamenote/app/(tabs)/profile/_layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/(tabs)/profile/_layout.tsx" afterPathEscaped="$PROJECT_DIR$/Gamenote/app/(tabs)/profile/_layout.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/_layout.tsx" beforePathEscaped="$PROJECT_DIR$/Gamenote/app/_layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/_layout.tsx" afterPathEscaped="$PROJECT_DIR$/Gamenote/app/_layout.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -188,7 +182,7 @@
       <workItem from="1778228172326" duration="2598000" />
       <workItem from="1778324112870" duration="12852000" />
       <workItem from="1778522820896" duration="11644000" />
-      <workItem from="1778842808495" duration="17581000" />
+      <workItem from="1778842808495" duration="19399000" />
     </task>
     <task id="LOCAL−00001" summary="izmjena directorija README">
       <option name="closed" value="true" />
@@ -484,7 +478,14 @@
       <option name="presentableId" value="LOCAL−00042" />
       <updated>1778845124255</updated>
     </task>
-    <option name="localTasksCounter" value="43" />
+    <task id="LOCAL−00043" summary="dodan modal addGroupModal.tsx putem kojeg se mogu dodati nove grupe, manje ispravke UI-a. Dodana &quot;Jump back in!&quot; section na home koja prikazuje igre koje su ili pazuirane ili u backlogu, TBI: gumb igraj danas otvara modal igre.">
+      <option name="closed" value="true" />
+      <created>1778944280012</created>
+      <option name="number" value="LOCAL−00043" />
+      <option name="presentableId" value="LOCAL−00043" />
+      <updated>1778944280012</updated>
+    </task>
+    <option name="localTasksCounter" value="44" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -502,7 +503,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Implementirani osnovni sort mehanizam" />
     <MESSAGE value="Manji bug fix kod mapiranja filtiriranih igara" />
     <MESSAGE value="Dodana ikona od gumba za postavke i poboljšanje izgleda Profil page-a." />
     <MESSAGE value="Dodana presseble komponenta na na GameCard.tsx" />
@@ -527,7 +527,8 @@
     <MESSAGE value="minimalne nadopune prošlog commita" />
     <MESSAGE value="bolja organizacija projekta ( dodana modals mapa )" />
     <MESSAGE value="U tab baru fill sf ikone se renderiraju samo kada korinsik je na tom tab-u, dodan selection igara za dodavanje / micanje istih unutar modalEditGroups.tsx" />
-    <option name="LAST_COMMIT_MESSAGE" value="U tab baru fill sf ikone se renderiraju samo kada korinsik je na tom tab-u, dodan selection igara za dodavanje / micanje istih unutar modalEditGroups.tsx" />
+    <MESSAGE value="dodan modal addGroupModal.tsx putem kojeg se mogu dodati nove grupe, manje ispravke UI-a. Dodana &quot;Jump back in!&quot; section na home koja prikazuje igre koje su ili pazuirane ili u backlogu, TBI: gumb igraj danas otvara modal igre." />
+    <option name="LAST_COMMIT_MESSAGE" value="dodan modal addGroupModal.tsx putem kojeg se mogu dodati nove grupe, manje ispravke UI-a. Dodana &quot;Jump back in!&quot; section na home koja prikazuje igre koje su ili pazuirane ili u backlogu, TBI: gumb igraj danas otvara modal igre." />
   </component>
   <component name="github-copilot-workspace">
     <instructionFileLocations>
