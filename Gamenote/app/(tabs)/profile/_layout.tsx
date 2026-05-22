@@ -1,30 +1,29 @@
-import { Stack, useRouter } from "expo-router";
-import { Pressable } from "react-native";
+import {Stack, useRouter} from "expo-router";
+import {Pressable} from "react-native";
 import {useNavigationTheme} from "@/constants/navigationTheme";
 import {SymbolView} from "expo-symbols";
 import {useTheme} from "@/context/theme";
 import {colors} from "@/constants/theme";
 
 export default function FavoritesLayout() {
-    const navTheme = useNavigationTheme();
-    const router = useRouter();
-    const {theme} = useTheme();
-    const t = colors[theme]
+  const navTheme = useNavigationTheme();
+  const router = useRouter();
+  const {theme} = useTheme();
+  const t = colors[theme];
+
   return (
     <Stack screenOptions={navTheme}>
       <Stack.Screen
         name="index"
         options={{
-         // headerLargeTitle: true,
-          title: "Profile",
+          title: "Profil",
           headerRight: () => (
             <Pressable onPress={() => router.push("/settings")} hitSlop={10}>
-             <SymbolView
+              <SymbolView
                 name={"gear"}
                 resizeMode="scaleAspectFit"
-                 style={{ width: 36, height: 30 }}
+                style={{width: 36, height: 30}}
                 tintColor={t.text}
-
               />
             </Pressable>
           ),
