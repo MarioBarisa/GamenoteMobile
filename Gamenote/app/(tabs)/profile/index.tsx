@@ -143,7 +143,8 @@ export default function FavoritesScreen() {
 
                         }}
                     />
-                  <Text style={{color: t.text, fontWeight: "bold", fontSize: 22, alignSelf: "center"}}>Tvoja Gamenote statistika:</Text>
+                  <Text style={{color: t.secondaryText, fontWeight: "bold", fontSize: 12, alignSelf: "center"}}>{username}@email.com</Text>
+                  <Text style={{color: t.text, fontWeight: "bold", fontSize: 22, alignSelf: "center"}}>Tvoja Gamenote statistika</Text>
                     <View style={styles.row}>
                         <StatCard
                             label="Ukupno igara"
@@ -155,15 +156,15 @@ export default function FavoritesScreen() {
                         <StatCard
                             label="Sati igranja"
                             value={`${userInfo.totalPlaytime}h`}
-                            valueColor="#00D3BC"
+                            valueColor="#6476ff"
                             symbolName="clock.fill"
-                            symbolColor="#00D3BC"
+                            symbolColor="#6476ff"
                         />
                         <StatCard
                             label="Završene"
                             value={String(userInfo.finishedGames)}
                             valueColor="#00D391"
-                            symbolName="checkmark.seal.fill"
+                            symbolName="checkmark.circle.fill"
                             symbolColor="#00D391"
                         />
                     </View>
@@ -179,9 +180,9 @@ export default function FavoritesScreen() {
                         <StatCard
                             label="AVG playtime"
                             value={`${userInfo.avgPlaytime}h`}
-                            valueColor="#8116f3"
+                            valueColor="#fb2b61"
                             symbolName="chart.bar.fill"
-                            symbolColor="#8116f3"
+                            symbolColor="#fb2b61"
                         />
                         <StatCard
                             label="U danima"
@@ -213,7 +214,7 @@ export default function FavoritesScreen() {
 
                     <View style={[styles.funFactCard, {backgroundColor: t.backgroundModal}]}>
                         <SymbolView
-                            name={"lightbulb.fill" as any}
+                            name={"info.circle.fill" as any}
                             style={styles.funFactIcon}
                             tintColor="#00aaf3"
                         />
@@ -222,6 +223,10 @@ export default function FavoritesScreen() {
                             <Text style={[styles.funFactBody, {color: "#00aaf3"}]}>{userInfo.funFact}</Text>
                         </View>
                     </View>
+                   <Text style={{color: t.text, fontWeight: "bold", fontSize: 22, alignSelf: "center"}}>Gamenote postignuća</Text>
+                  <View>
+
+                  </View>
 
                     <Button
                         title={"Odjavi se."}

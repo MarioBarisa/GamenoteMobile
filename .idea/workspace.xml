@@ -4,9 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7b37eb79-ceff-44a4-81aa-7e12f61dfc1f" name="Changes" comment="Gumb&quot; Igraj danas!&quot; sada otvara editmodal.tsx">
+    <list default="true" id="7b37eb79-ceff-44a4-81aa-7e12f61dfc1f" name="Changes" comment="U potpunosti preuređen details screen -&gt; dodana detaljna statistika.">
       <change beforePath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/.idea/workspace.xml" beforePathEscaped="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/.idea/workspace.xml" afterPathEscaped="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/(tabs)/profile/_layout.tsx" beforePathEscaped="$PROJECT_DIR$/Gamenote/app/(tabs)/profile/_layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/(tabs)/profile/_layout.tsx" afterPathEscaped="$PROJECT_DIR$/Gamenote/app/(tabs)/profile/_layout.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/(tabs)/profile/index.tsx" beforePathEscaped="$PROJECT_DIR$/Gamenote/app/(tabs)/profile/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/(tabs)/profile/index.tsx" afterPathEscaped="$PROJECT_DIR$/Gamenote/app/(tabs)/profile/index.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -184,7 +183,7 @@
       <workItem from="1778228172326" duration="2598000" />
       <workItem from="1778324112870" duration="12852000" />
       <workItem from="1778522820896" duration="11644000" />
-      <workItem from="1778842808495" duration="30801000" />
+      <workItem from="1778842808495" duration="35908000" />
     </task>
     <task id="LOCAL−00001" summary="izmjena directorija README">
       <option name="closed" value="true" />
@@ -494,7 +493,14 @@
       <option name="presentableId" value="LOCAL−00044" />
       <updated>1779022437763</updated>
     </task>
-    <option name="localTasksCounter" value="45" />
+    <task id="LOCAL−00045" summary="U potpunosti preuređen details screen -&gt; dodana detaljna statistika.">
+      <option name="closed" value="true" />
+      <created>1779466061308</created>
+      <option name="number" value="LOCAL−00045" />
+      <option name="presentableId" value="LOCAL−00045" />
+      <updated>1779466061308</updated>
+    </task>
+    <option name="localTasksCounter" value="46" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -512,7 +518,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Dodana ikona od gumba za postavke i poboljšanje izgleda Profil page-a." />
     <MESSAGE value="Dodana presseble komponenta na na GameCard.tsx" />
     <MESSAGE value="Poboljšana prilagodba ScrollView-a i ažuriranje stila zaglavlja/titles na iOS26 native" />
     <MESSAGE value="Naslov igre u details.tsx se mijenja ovisno o, također details.tsx prikazuje osnove informacije o igri" />
@@ -537,7 +542,8 @@
     <MESSAGE value="U tab baru fill sf ikone se renderiraju samo kada korinsik je na tom tab-u, dodan selection igara za dodavanje / micanje istih unutar modalEditGroups.tsx" />
     <MESSAGE value="dodan modal addGroupModal.tsx putem kojeg se mogu dodati nove grupe, manje ispravke UI-a. Dodana &quot;Jump back in!&quot; section na home koja prikazuje igre koje su ili pazuirane ili u backlogu, TBI: gumb igraj danas otvara modal igre." />
     <MESSAGE value="Gumb&quot; Igraj danas!&quot; sada otvara editmodal.tsx" />
-    <option name="LAST_COMMIT_MESSAGE" value="Gumb&quot; Igraj danas!&quot; sada otvara editmodal.tsx" />
+    <MESSAGE value="U potpunosti preuređen details screen -&gt; dodana detaljna statistika." />
+    <option name="LAST_COMMIT_MESSAGE" value="U potpunosti preuređen details screen -&gt; dodana detaljna statistika." />
   </component>
   <component name="github-copilot-workspace">
     <instructionFileLocations>
