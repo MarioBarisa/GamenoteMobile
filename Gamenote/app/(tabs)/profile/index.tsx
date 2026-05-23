@@ -1,6 +1,5 @@
-import {Text, ScrollView, StyleSheet, TextInput, View, Button, Alert, Image} from "react-native";
+import {Text, ScrollView, StyleSheet, TextInput, View, Button, Alert, Image, Pressable, Linking} from "react-native";
 import {useLayoutEffect, useState} from "react";
-import {useFavorites} from "@/context/favorites";
 import {useTheme} from "@/context/theme";
 import {colors} from "@/constants/theme";
 import {SymbolView} from "expo-symbols";
@@ -34,6 +33,7 @@ export default function FavoritesScreen() {
 
         const highRatedGenreCount = new Map<string, number>();
         let switchGames = 0;
+        let bestGames = 0;
 
         for (const game of PLACEHOLDER_GAMES) {
             const playTime = game.play_time ?? 0;
@@ -52,6 +52,9 @@ export default function FavoritesScreen() {
             // Omiljeni zanr = zanr koji se najcesce pojavljuje u igrama s rating >= 4
             if ((game.rating ?? 0) >= 4 && game.genre) {
                 highRatedGenreCount.set(game.genre, (highRatedGenreCount.get(game.genre) ?? 0) + 1);
+            }
+            if ((game.rating ?? 0) >= 5) {
+                bestGames++;
             }
 
             // Fora fact: koliko igara je na Nintendo platformi ( zamjeniti vjv )
@@ -87,6 +90,7 @@ export default function FavoritesScreen() {
             favoriteGenre,
             avgPlaytime,
             funFact,
+            bestGames,
         };
     }
 
@@ -138,13 +142,19 @@ export default function FavoritesScreen() {
                             borderRadius: 360,
                             margin: 5,
                             alignSelf: "center",
-                            borderColor: t.text,
-                            borderWidth: 4
+                            //borderColor: t.secondaryText,
+                            //borderWidth: 4
 
                         }}
                     />
-                  <Text style={{color: t.secondaryText, fontWeight: "bold", fontSize: 12, alignSelf: "center"}}>{username}@email.com</Text>
-                  <Text style={{color: t.text, fontWeight: "bold", fontSize: 22, alignSelf: "center"}}>Tvoja Gamenote statistika</Text>
+                    <Text style={{
+                        color: t.secondaryText,
+                        fontWeight: "bold",
+                        fontSize: 12,
+                        alignSelf: "center"
+                    }}>{username}@email.com</Text>
+                    <Text style={{color: t.text, fontWeight: "bold", fontSize: 22, alignSelf: "center"}}>Tvoja Gamenote
+                        statistika</Text>
                     <View style={styles.row}>
                         <StatCard
                             label="Ukupno igara"
@@ -212,8 +222,8 @@ export default function FavoritesScreen() {
                         />
                     </View>
 
-                    <View style={[styles.funFactCard, {backgroundColor: t.backgroundModal}]}>
-                        <SymbolView
+                    {/*<View style={[styles.funFactCard, {backgroundColor: t.backgroundModal}]}> MOŽDA DODAT ILI NE DODATI VIDITI!!
+                       <SymbolView
                             name={"info.circle.fill" as any}
                             style={styles.funFactIcon}
                             tintColor="#00aaf3"
@@ -222,20 +232,202 @@ export default function FavoritesScreen() {
                             <Text style={[styles.funFactTitle, {color: t.secondaryText}]}>Fun fact</Text>
                             <Text style={[styles.funFactBody, {color: "#00aaf3"}]}>{userInfo.funFact}</Text>
                         </View>
+                    </View>*/}
+                    <Text style={{color: t.text, fontWeight: "bold", fontSize: 22, alignSelf: "center", margin: 12}}>Gamenote
+                        postignuća</Text>
+                    <View style={{
+                        backgroundColor: t.backgroundModal,
+                        borderRadius: 32,
+                        flexDirection: "row",
+                        flexWrap: "wrap",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        padding: 4
+                    }}>
+
+                        <View style={{alignItems: "center", gap: 6, padding: 8, width: "30%"}}>
+                            <SymbolView
+                                name="flag.fill"
+                                style={{width: 24, height: 24}}
+                                tintColor={userInfo.totalGames >= 1 ? "#4cd964" : t.secondaryText}
+                            />
+                            <Text style={{
+                                color: userInfo.totalGames >= 1 ? "#4cd964" : t.secondaryText,
+                                fontWeight: "bold",
+                                fontSize: 11,
+                                textAlign: "center"
+                            }}>Beginner</Text>
+                            <Text style={{color: t.secondaryText, fontSize: 10, textAlign: "center"}}>Dodaj prvu
+                                igru</Text>
+                        </View>
+
+                        {/* Kolekcionar - 50+ igara */}
+                        <View style={{alignItems: "center", gap: 6, padding: 8, width: "30%"}}>
+                            <SymbolView
+                                name="bookmark.fill"
+                                style={{width: 24, height: 24}}
+                                tintColor={userInfo.totalGames >= 50 ? "#5ac8fa" : t.secondaryText}
+                            />
+                            <Text style={{
+                                color: userInfo.totalGames >= 50 ? "#5ac8fa" : t.secondaryText,
+                                fontWeight: "bold",
+                                fontSize: 11,
+                                textAlign: "center"
+                            }}>Kolekcionar</Text>
+                            <Text style={{color: t.secondaryText, fontSize: 10, textAlign: "center"}}>50+ igara</Text>
+                        </View>
+
+                        {/* 25+ završenih igara */}
+                        <View style={{alignItems: "center", gap: 6, padding: 8, width: "30%"}}>
+                            <SymbolView
+                                name="checkmark.seal.fill"
+                                style={{width: 24, height: 24}}
+                                tintColor={userInfo.finishedGames >= 25 ? "#00D391" : t.secondaryText}
+                            />
+                            <Text style={{
+                                color: userInfo.finishedGames >= 25 ? "#00D391" : t.secondaryText,
+                                fontWeight: "bold",
+                                fontSize: 11,
+                                textAlign: "center"
+                            }}>Completion master</Text>
+                            <Text style={{color: t.secondaryText, fontSize: 10, textAlign: "center"}}>Završi 25
+                                igara</Text>
+                        </View>
+
+                        {/* 100+ sati */}
+                        <View style={{alignItems: "center", gap: 6, padding: 8, width: "30%"}}>
+                            <SymbolView
+                                name="bolt.fill"
+                                style={{width: 24, height: 24}}
+                                tintColor={userInfo.totalPlaytime >= 100 ? "#ff9500" : t.secondaryText}
+                            />
+                            <Text style={{
+                                color: userInfo.totalPlaytime >= 100 ? "#ff9500" : t.secondaryText,
+                                fontWeight: "bold",
+                                fontSize: 11,
+                                textAlign: "center"
+                            }}>Brzinski</Text>
+                            <Text style={{color: t.secondaryText, fontSize: 10, textAlign: "center"}}>100+ sati</Text>
+                        </View>
+
+                        {/* Hardcore - 1000+ sati */}
+                        <View style={{alignItems: "center", gap: 6, padding: 8, width: "30%"}}>
+                            <SymbolView
+                                name="flame.fill"
+                                style={{width: 24, height: 24}}
+                                tintColor={userInfo.totalPlaytime >= 1000 ? "#ff3b30" : t.secondaryText}
+                            />
+                            <Text style={{
+                                color: userInfo.totalPlaytime >= 1000 ? "#ff3b30" : t.secondaryText,
+                                fontWeight: "bold",
+                                fontSize: 11,
+                                textAlign: "center"
+                            }}>Hardcore</Text>
+                            <Text style={{color: t.secondaryText, fontSize: 10, textAlign: "center"}}>1000+ sati</Text>
+                        </View>
+
+                        {/* Legend - 3000+ sati */}
+                        <View style={{alignItems: "center", gap: 6, padding: 8, width: "30%"}}>
+                            <SymbolView
+                                name="crown.fill"
+                                style={{width: 24, height: 24}}
+                                tintColor={userInfo.totalPlaytime >= 3000 ? "#bf5af2" : t.secondaryText}
+                            />
+                            <Text style={{
+                                color: userInfo.totalPlaytime >= 3000 ? "#bf5af2" : t.secondaryText,
+                                fontWeight: "bold",
+                                fontSize: 11,
+                                textAlign: "center"
+                            }}>Legend</Text>
+                            <Text style={{color: t.secondaryText, fontSize: 10, textAlign: "center"}}>3000+ sati</Text>
+                        </View>
+                        {/* EXTRA FORA -> gamenote platinum i GOTY enjoyer*/}
+                        <View style={{alignItems: "center", gap: 6, padding: 8, width: "30%"}}>
+                            <SymbolView
+                                name="trophy.fill"
+                                style={{width: 24, height: 24}}
+                                tintColor={userInfo.totalPlaytime >= 1000 && userInfo.totalPlaytime >= 3000 && userInfo.totalPlaytime >= 100 && userInfo.finishedGames >= 25 && userInfo.totalGames >= 50 && userInfo.bestGames >= 10 ? "#C0C0C0" : t.secondaryText}
+                            />
+                            <Text style={{
+                                color: userInfo.totalPlaytime >= 1000 && userInfo.totalPlaytime >= 3000 && userInfo.totalPlaytime >= 100 && userInfo.finishedGames >= 25 && userInfo.totalGames >= 50 && userInfo.bestGames >= 10 ? "#C0C0C0" : t.secondaryText,
+                                fontWeight: "bold",
+                                fontSize: 11,
+                                textAlign: "center"
+                            }}>Gamenote Platinum</Text>
+                            <Text style={{color: t.secondaryText, fontSize: 10, textAlign: "center"}}>100% Gamenote
+                                Completion</Text>
+                        </View>
+
+                        {/* GOTY enjoyer */}
+                        <View style={{alignItems: "center", gap: 6, padding: 8, width: "30%"}}>
+                            <SymbolView
+                                name="medal.fill"
+                                style={{width: 24, height: 24}}
+                                tintColor={userInfo.bestGames >= 10 ? "#FFD700" : t.secondaryText}
+                            />
+                            <Text style={{
+                                color: userInfo.bestGames >= 10 ? "#FFD700" : t.secondaryText,
+                                fontWeight: "bold",
+                                fontSize: 11,
+                                textAlign: "center"
+                            }}>GOTY enjoyer</Text>
+                            <Text style={{color: t.secondaryText, fontSize: 10, textAlign: "center"}}>Odigrano 10+ igara
+                                s MAX ocjenom</Text>
+                        </View>
+
                     </View>
-                   <Text style={{color: t.text, fontWeight: "bold", fontSize: 22, alignSelf: "center"}}>Gamenote postignuća</Text>
-                  <View>
+                    <View style={{flexDirection: "row", gap: 12, justifyContent: "center"}}>
 
-                  </View>
+                        {/* ACCOUNT MNG */}
+                        <Pressable
+                            style={({pressed}) => [{
+                                backgroundColor: t.backgroundModal,
+                                margin: 4, padding: 12,
+                                borderRadius: 32,
+                                flexDirection: "row",
+                                alignItems: "center",
+                                gap: 6,
+                                opacity: pressed ? 0.6 : 1,
+                            }]}
+                            onPress={() => Linking.openURL("https://gamenote.barisa.me/profile")}
+                        >
+                            <SymbolView
+                                name={"person.crop.circle" as any}
+                                style={{width: 18, height: 18}}
+                                tintColor={t.accent}
+                            />
+                            <Text style={{color: t.accent, fontWeight: "600", fontSize: 15}}>
+                                Upravljaj računom
+                            </Text>
+                        </Pressable>
 
-                    <Button
-                        title={"Odjavi se."}
-                        color={t.destructive}
-                        onPress={() => {
-                            setLoggedIn(false);
-                            Alert.alert("Logged out", "You are logged out.");
-                        }}
-                    />
+                        {/* ODJAVA */}
+                        <Pressable
+                            style={({pressed}) => [{
+                                backgroundColor: t.backgroundModal,
+                                margin: 4, padding: 12,
+                                borderRadius: 22,
+                                flexDirection: "row",
+                                alignItems: "center",
+                                gap: 6,
+                                opacity: pressed ? 0.6 : 1,
+                            }]}
+                            onPress={() => {
+                                setLoggedIn(false);
+                                Alert.alert("Logged out", "You are logged out.");
+                            }}
+                        >
+                            <SymbolView
+                                name={"rectangle.portrait.and.arrow.right" as any}
+                                style={{width: 18, height: 18}}
+                                tintColor={t.destructive}
+                            />
+                            <Text style={{color: t.destructive, fontWeight: "600", fontSize: 15}}>
+                                Odjavi se.
+                            </Text>
+                        </Pressable>
+
+                    </View>
                 </View>
             )}
 
