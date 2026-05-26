@@ -37,21 +37,26 @@ export default function AddGroupModal() {
             return;
         }
 
-        const newGroup = addGroup({
+        const groupId = Date.now().toString();
+        const createdAt = new Date().toISOString();
+
+        addGroup({
+            id: groupId,
+            created_at: createdAt,
             user_id: 'user1',
             name: form.name.trim(),
             type: form.type ?? null,
             rating: form.rating ?? null,
             user_notes: form.user_notes ?? null,
-        });
+        } as any);
 
-        selectedGameIds.forEach((gameId) => addGameToGroup(gameId, newGroup.id));
+        selectedGameIds.forEach((gameId) => addGameToGroup(gameId, groupId));
 
         if (Platform.OS === 'ios') {
             Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
         }
 
-        Alert.alert('', `Grupa "${newGroup.name}" je dodana.`, [ //'' je empty  kako bi alert bio u jednom redu.
+        Alert.alert('', `Grupa "${form.name?.trim()}" je dodana.`, [ //'' je empty  kako bi alert bio u jednom redu.
             {text: 'OK', onPress: () => router.back()}
         ]);
     };

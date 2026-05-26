@@ -6,7 +6,7 @@ import {MOCK_GAME_GROUPS, MOCK_GROUPS} from "@/constants/PLACEHOLDER_GROUPS.TSX"
 type GroupsContextType = {
     groups: Group[];
     gameGroups: GameGroup[];
-    addGroup: (group: Omit<Group, "id" | "created_at">) => void;
+    addGroup: (group: Omit<Group, "id" | "created_at"> & Partial<Pick<Group, "id" | "created_at">>) => Group;
     removeGroup: (groupId: string) => void;
     addGameToGroup: (gameId: string, groupId: string) => void;
     removeGameFromGroup: (gameId: string, groupId: string) => void;
@@ -20,13 +20,14 @@ export function GroupsProvider({children}: { children: ReactNode }) {
     const [groups, setGroups] = useState<Group[]>(MOCK_GROUPS);
     const [gameGroups, setGameGroups] = useState<GameGroup[]>(MOCK_GAME_GROUPS);
 
-    const addGroup = (data: Omit<Group, "id" | "created_at">) => {
+    const addGroup = (data: Omit<Group, "id" | "created_at"> & Partial<Pick<Group, "id" | "created_at">>) => {
         const newGroup: Group = {
             ...data,
-            id: Date.now().toString(),
-            created_at: new Date().toISOString(),
+            id: (data as any).id ?? Date.now().toString(),
+            created_at: (data as any).created_at ?? new Date().toISOString(),
         };
         setGroups((prev) => [...prev, newGroup]);
+        return newGroup;
     };
 
     const removeGroup = (groupId: string) => {

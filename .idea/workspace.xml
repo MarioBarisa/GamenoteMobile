@@ -4,11 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7b37eb79-ceff-44a4-81aa-7e12f61dfc1f" name="Changes" comment="100% implemntiran profile zaslon">
-      <change afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/(modals)/registerModal.tsx" afterPathEscaped="$PROJECT_DIR$/Gamenote/app/(modals)/registerModal.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/.idea/workspace.xml" beforePathEscaped="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/.idea/workspace.xml" afterPathEscaped="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/(tabs)/profile/index.tsx" beforePathEscaped="$PROJECT_DIR$/Gamenote/app/(tabs)/profile/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/(tabs)/profile/index.tsx" afterPathEscaped="$PROJECT_DIR$/Gamenote/app/(tabs)/profile/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/_layout.tsx" beforePathEscaped="$PROJECT_DIR$/Gamenote/app/_layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/_layout.tsx" afterPathEscaped="$PROJECT_DIR$/Gamenote/app/_layout.tsx" afterDir="false" />
+    <list default="true" id="7b37eb79-ceff-44a4-81aa-7e12f61dfc1f" name="Changes" comment="dodan gum za izradu profila, dodan registerModal.tsx za izradu prfila ( aktivira se klikom na &quot;Izadi račun&quot; ).">
+      <change beforePath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/.idea/copilotDiffState.xml" beforePathEscaped="$PROJECT_DIR$/.idea/copilotDiffState.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/.idea/copilotDiffState.xml" afterPathEscaped="$PROJECT_DIR$/.idea/copilotDiffState.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/(modals)/addGroupModal.tsx" beforePathEscaped="$PROJECT_DIR$/Gamenote/app/(modals)/addGroupModal.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/(modals)/addGroupModal.tsx" afterPathEscaped="$PROJECT_DIR$/Gamenote/app/(modals)/addGroupModal.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/context/GroupsContext.tsx" beforePathEscaped="$PROJECT_DIR$/Gamenote/context/GroupsContext.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/context/GroupsContext.tsx" afterPathEscaped="$PROJECT_DIR$/Gamenote/context/GroupsContext.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -194,7 +193,7 @@
       <workItem from="1778228172326" duration="2598000" />
       <workItem from="1778324112870" duration="12852000" />
       <workItem from="1778522820896" duration="11644000" />
-      <workItem from="1778842808495" duration="46710000" />
+      <workItem from="1778842808495" duration="47054000" />
     </task>
     <task id="LOCAL−00001" summary="izmjena directorija README">
       <option name="closed" value="true" />
@@ -525,7 +524,14 @@
       <option name="presentableId" value="LOCAL−00047" />
       <updated>1779545692498</updated>
     </task>
-    <option name="localTasksCounter" value="48" />
+    <task id="LOCAL−00048" summary="dodan gum za izradu profila, dodan registerModal.tsx za izradu prfila ( aktivira se klikom na &quot;Izadi račun&quot; ).">
+      <option name="closed" value="true" />
+      <created>1779798685233</created>
+      <option name="number" value="LOCAL−00048" />
+      <option name="presentableId" value="LOCAL−00048" />
+      <updated>1779798685233</updated>
+    </task>
+    <option name="localTasksCounter" value="49" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -543,7 +549,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Naslov igre u details.tsx se mijenja ovisno o, također details.tsx prikazuje osnove informacije o igri" />
     <MESSAGE value="image_url je sada array sa slikama, prvi link u array-u je cove a ostalo su generic slike igara -&gt; prepravljena GameCard.tsx da radi na osnovu navedenog. U details.tsx prikazuje se više slike igare osim covera ( kako bi se kasnije ušteilo na prostoru. TODO: Mogucnost klika na sliku kako bi se bolje mogla vidjeti." />
     <MESSAGE value="Daljni razvoj details.tsx zaslona + dodana mogucnost klika na sliku za veci prikaz." />
     <MESSAGE value="dodan user opis igre ( bilješke ), dodana mogucnost zoomina na slike ( pinch to zoom ), UI poboljšanja" />
@@ -568,7 +573,8 @@
     <MESSAGE value="U potpunosti preuređen details screen -&gt; dodana detaljna statistika." />
     <MESSAGE value="Minimalne izmjene profile zaslona" />
     <MESSAGE value="100% implemntiran profile zaslon" />
-    <option name="LAST_COMMIT_MESSAGE" value="100% implemntiran profile zaslon" />
+    <MESSAGE value="dodan gum za izradu profila, dodan registerModal.tsx za izradu prfila ( aktivira se klikom na &quot;Izadi račun&quot; )." />
+    <option name="LAST_COMMIT_MESSAGE" value="dodan gum za izradu profila, dodan registerModal.tsx za izradu prfila ( aktivira se klikom na &quot;Izadi račun&quot; )." />
   </component>
   <component name="github-copilot-workspace">
     <instructionFileLocations>
