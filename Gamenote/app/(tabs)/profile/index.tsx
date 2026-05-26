@@ -1,10 +1,10 @@
-import {Text, ScrollView, StyleSheet, TextInput, View, Button, Alert, Image, Pressable, Linking} from "react-native";
+import {Text, ScrollView, StyleSheet, TextInput, View, Alert, Image, Pressable, Linking} from "react-native";
 import {useLayoutEffect, useState} from "react";
 import {useTheme} from "@/context/theme";
 import {colors} from "@/constants/theme";
 import {SymbolView} from "expo-symbols";
 import {PLACEHOLDER_GAMES} from "@/constants/PLACEHOLDER_GAMES";
-import {useNavigation} from "expo-router";
+import {useNavigation, useRouter} from "expo-router";
 
 
 // noinspection JSUnusedGlobalSymbols
@@ -15,6 +15,7 @@ export default function FavoritesScreen() {
     const {theme} = useTheme();
     const t = colors[theme];
     const navigation = useNavigation();
+    const router = useRouter();
 
     useLayoutEffect(() => { // CUSTOM POZDRAV TITLE ZA USERNAME
         navigation.setOptions({
@@ -434,7 +435,7 @@ export default function FavoritesScreen() {
             {!loggedIn && (
                 <View>
                     <SymbolView
-                        name={"person.crop.circle.badge.plus"}
+                        name={"person.crop.circle"}
                         style={{width: 110, height: 110, alignSelf: "center", margin: 5}}
                     />
                     <Text style={[styles.textBodyCenterHiglighted, {color: t.accent}]}>
@@ -456,25 +457,70 @@ export default function FavoritesScreen() {
                             style={[styles.systemInput, {color: t.text}]}
                             onChangeText={setPassword}
                         />
-
-                        <Button
-                            accessibilityLabel="Login button"
-                            title={"Prijavi se."}
-                            color={t.accent}
-                            onPress={() => {
-                                if (password === "") {
-                                    Alert.alert("Fali lozinka.", "Unesite ispravnu lozinku.");
-                                } else {
-                                    setLoggedIn(true);
-                                }
-                            }}
-                        />
+                        <View style={{
+                            flexDirection: "row",
+                            alignItems: "center",
+                            margin: 12,
+                            gap: 4
+                        }}>
+                            <Pressable
+                                style={({pressed}) => [{
+                                    backgroundColor: t.backgroundModal,
+                                    margin: 4, padding: 12,
+                                    borderRadius: 32,
+                                    flexDirection: "row",
+                                    alignItems: "center",
+                                    gap: 6,
+                                    opacity: pressed ? 0.6 : 1
+                                }]}
+                                accessibilityLabel={"Login Button"}
+                                onPress={() => {
+                                    if (password === "") {
+                                        Alert.alert("Fali lozinka.", "Unesite ispravnu lozinku.");
+                                    } else {
+                                        setLoggedIn(true);
+                                    }
+                                }}
+                            >
+                                <SymbolView
+                                    name={"arrow.right" as any}
+                                    style={{width: 22, height: 22}}
+                                    tintColor={t.accent}
+                                />
+                                <Text style={{color: t.accent, fontWeight: "600", fontSize: 20}}>
+                                    Prijavi se
+                                </Text>
+                            </Pressable>
+                            <Pressable
+                                style={({pressed}) => [{
+                                    backgroundColor: t.backgroundModal,
+                                    margin: 4, padding: 12,
+                                    borderRadius: 32,
+                                    flexDirection: "row",
+                                    alignItems: "center",
+                                    gap: 6,
+                                    opacity: pressed ? 0.6 : 1
+                                }]}
+                                accessibilityLabel={"Register Button"}
+                                onPress={() => router.push('/(modals)/registerModal')}
+                            >
+                                <SymbolView
+                                    name={"person.crop.circle.badge.plus"}
+                                    style={{width: 28, height: 28}}
+                                    tintColor={t.accent}
+                                />
+                                <Text style={{color: t.accent, fontWeight: "600", fontSize: 20}}>
+                                    Izradi račun
+                                </Text>
+                            </Pressable>
+                        </View>
                     </View>
                 </View>
             )}
         </ScrollView>
     );
 }
+
 
 const CARD_GAP = 8;
 
