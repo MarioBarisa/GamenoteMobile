@@ -1,5 +1,4 @@
-import {  ScrollView,  StyleSheet,  } from "react-native";
-import { useFavorites } from "@/context/favorites";
+import {  ScrollView  } from "react-native";
 import { useTheme } from "@/context/theme";
 import { colors } from "@/constants/theme";
 import {PLACEHOLDER_GAMES} from "@/constants/PLACEHOLDER_GAMES";
@@ -7,8 +6,6 @@ import GameCard from "@/components/GameCard";
 
 
 export default function FavoritesScreen() {
-
-  const { favorites } = useFavorites();
 
   const { theme } = useTheme();
   const t = colors[theme];

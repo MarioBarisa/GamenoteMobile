@@ -1,14 +1,14 @@
 import {Stack} from "expo-router";
-import {FavoritesProvider} from "@/context/favorites";
 import {GroupsProvider} from "@/context/GroupsContext";
 import {ThemeProvider} from "@/context/theme";
+import {AuthProvider} from "@/context/auth";
 import {useNavigationTheme} from "@/constants/navigationTheme";
 
 function RootNavigator() {
     const navTheme = useNavigationTheme();
 
     return (
-        <FavoritesProvider>
+        <AuthProvider>
             <GroupsProvider>
                 <Stack screenOptions={navTheme}>
                     <Stack.Screen name="(tabs)"
@@ -57,7 +57,7 @@ function RootNavigator() {
                                   }}/>
                 </Stack>
             </GroupsProvider>
-        </FavoritesProvider>
+        </AuthProvider>
     );
 }
 

@@ -4,8 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7b37eb79-ceff-44a4-81aa-7e12f61dfc1f" name="Changes" comment="Popravka funkcija za dodavanje grupa.">
+    <list default="true" id="7b37eb79-ceff-44a4-81aa-7e12f61dfc1f" name="Changes" comment="Dodan redirect na Profile tab ako korisnik nije prijavljen">
       <change beforePath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/.idea/workspace.xml" beforePathEscaped="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/.idea/workspace.xml" afterPathEscaped="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/(tabs)/index.tsx" beforePathEscaped="$PROJECT_DIR$/Gamenote/app/(tabs)/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/(tabs)/index.tsx" afterPathEscaped="$PROJECT_DIR$/Gamenote/app/(tabs)/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/(tabs)/profile/index.tsx" beforePathEscaped="$PROJECT_DIR$/Gamenote/app/(tabs)/profile/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/(tabs)/profile/index.tsx" afterPathEscaped="$PROJECT_DIR$/Gamenote/app/(tabs)/profile/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/_layout.tsx" beforePathEscaped="$PROJECT_DIR$/Gamenote/app/_layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/_layout.tsx" afterPathEscaped="$PROJECT_DIR$/Gamenote/app/_layout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/context/favorites.tsx" beforePathEscaped="$PROJECT_DIR$/Gamenote/context/favorites.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/context/favorites.tsx" afterPathEscaped="$PROJECT_DIR$/Gamenote/context/favorites.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -15,7 +19,7 @@
   <component name="CopilotChats">
     <option name="panelChat">
       <chat>
-        <option name="activeSessionId" value="b4256303-5286-4cb0-86c1-711de224c929" />
+        <option name="activeSessionId" value="6644fff3-7256-4687-bf1d-ad239933e91f" />
         <option name="sessions">
           <session>
             <option name="chatType" value="PANEL" />
@@ -61,6 +65,22 @@
             <option name="status" value="Completed" />
             <option name="targetType" value="LOCAL" />
           </session>
+          <session>
+            <option name="chatType" value="PANEL" />
+            <option name="id" value="f99d3227-b61a-4d4f-9175-5c997f627fa2" />
+            <option name="modeId" value="Ask" />
+            <option name="modelType" value="builtin_family" />
+            <option name="modelValue" value="auto" />
+            <option name="targetType" value="LOCAL" />
+          </session>
+          <session>
+            <option name="chatType" value="PANEL" />
+            <option name="id" value="6644fff3-7256-4687-bf1d-ad239933e91f" />
+            <option name="modeId" value="Ask" />
+            <option name="modelType" value="builtin_family" />
+            <option name="modelValue" value="auto" />
+            <option name="targetType" value="LOCAL" />
+          </session>
         </option>
         <option name="type" value="PANEL" />
       </chat>
@@ -69,7 +89,7 @@
   <component name="CopilotPersistence">
     <persistenceIdMap>
       <entry key="_/Users/mariobarisa/Desktop//Osobno/GamenoteMobile" value="3BnhLSTOxjFVNfgTjSLmchQK7qB" />
-      <entry key="_/Users/mariobarisa/Desktop//Osobno/GamenoteMobile" value="3Dl3Pl1BKfCat6GX4kt9pvYUj8z" />
+      <entry key="_/Users/mariobarisa/Desktop//Osobno/GamenoteMobile" value="3EOcjkTquuKugmuBdefVsunXhNU" />
     </persistenceIdMap>
   </component>
   <component name="CopilotUserSelectedChatMode">
@@ -201,6 +221,8 @@
       <workItem from="1778324112870" duration="12852000" />
       <workItem from="1778522820896" duration="11644000" />
       <workItem from="1778842808495" duration="47054000" />
+      <workItem from="1780051486975" duration="850000" />
+      <workItem from="1780053195879" duration="1352000" />
     </task>
     <task id="LOCAL−00001" summary="izmjena directorija README">
       <option name="closed" value="true" />
@@ -538,7 +560,14 @@
       <option name="presentableId" value="LOCAL−00048" />
       <updated>1779798685233</updated>
     </task>
-    <option name="localTasksCounter" value="49" />
+    <task id="LOCAL−00049" summary="Update dependecy-a">
+      <option name="closed" value="true" />
+      <created>1780051719465</created>
+      <option name="number" value="LOCAL−00049" />
+      <option name="presentableId" value="LOCAL−00049" />
+      <updated>1780051719465</updated>
+    </task>
+    <option name="localTasksCounter" value="50" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -556,8 +585,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="image_url je sada array sa slikama, prvi link u array-u je cove a ostalo su generic slike igara -&gt; prepravljena GameCard.tsx da radi na osnovu navedenog. U details.tsx prikazuje se više slike igare osim covera ( kako bi se kasnije ušteilo na prostoru. TODO: Mogucnost klika na sliku kako bi se bolje mogla vidjeti." />
-    <MESSAGE value="Daljni razvoj details.tsx zaslona + dodana mogucnost klika na sliku za veci prikaz." />
     <MESSAGE value="dodan user opis igre ( bilješke ), dodana mogucnost zoomina na slike ( pinch to zoom ), UI poboljšanja" />
     <MESSAGE value="Unaprijeđen geneic game info ( detalji ); dodane sve bitne ionformacije + serijali igara + ispravljen achivment text da ispiše kad korisnik nije još dodao niti jedan achv" />
     <MESSAGE value="popravak details.tsx ( krivi render zvjezdica )" />
@@ -581,7 +608,9 @@
     <MESSAGE value="Minimalne izmjene profile zaslona" />
     <MESSAGE value="100% implemntiran profile zaslon" />
     <MESSAGE value="dodan gum za izradu profila, dodan registerModal.tsx za izradu prfila ( aktivira se klikom na &quot;Izadi račun&quot; )." />
-    <option name="LAST_COMMIT_MESSAGE" value="dodan gum za izradu profila, dodan registerModal.tsx za izradu prfila ( aktivira se klikom na &quot;Izadi račun&quot; )." />
+    <MESSAGE value="Update dependecy-a" />
+    <MESSAGE value="Dodan redirect na Profile tab ako korisnik nije prijavljen" />
+    <option name="LAST_COMMIT_MESSAGE" value="Dodan redirect na Profile tab ako korisnik nije prijavljen" />
   </component>
   <component name="github-copilot-workspace">
     <instructionFileLocations>

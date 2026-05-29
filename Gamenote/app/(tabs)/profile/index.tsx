@@ -1,6 +1,7 @@
 import {Text, ScrollView, StyleSheet, TextInput, View, Alert, Image, Pressable, Linking} from "react-native";
 import {useLayoutEffect, useState} from "react";
 import {useTheme} from "@/context/theme";
+import {useAuth} from "@/context/auth";
 import {colors} from "@/constants/theme";
 import {SymbolView} from "expo-symbols";
 import {PLACEHOLDER_GAMES} from "@/constants/PLACEHOLDER_GAMES";
@@ -9,8 +10,7 @@ import {useNavigation, useRouter} from "expo-router";
 
 // noinspection JSUnusedGlobalSymbols
 export default function FavoritesScreen() {
-    const [loggedIn, setLoggedIn] = useState(false);
-    const [username, setUsername] = useState("");
+    const {loggedIn, setLoggedIn, username, setUsername} = useAuth();
     const [password, setPassword] = useState("");
     const {theme} = useTheme();
     const t = colors[theme];
