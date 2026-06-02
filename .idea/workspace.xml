@@ -4,9 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7b37eb79-ceff-44a4-81aa-7e12f61dfc1f" name="Changes" comment="Zamijenjen FavoritesProvider s AuthProvider i integracija auth konteksta u FavoritesScreen, dodan redirect na Profile tab ako korisnik nije prijavljen">
-      <change beforePath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/.idea/workspace.xml" beforePathEscaped="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/.idea/workspace.xml" afterPathEscaped="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/(tabs)/profile/index.tsx" beforePathEscaped="$PROJECT_DIR$/Gamenote/app/(tabs)/profile/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/(tabs)/profile/index.tsx" afterPathEscaped="$PROJECT_DIR$/Gamenote/app/(tabs)/profile/index.tsx" afterDir="false" />
+    <list default="true" id="7b37eb79-ceff-44a4-81aa-7e12f61dfc1f" name="Changes" comment="Dodan label da se korisniku kaže da gleda demo podatke ako nije prijavljen, ostale manje izmjene">
+      <change beforePath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/(tabs)/_layout.tsx" beforePathEscaped="$PROJECT_DIR$/Gamenote/app/(tabs)/_layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/(tabs)/_layout.tsx" afterPathEscaped="$PROJECT_DIR$/Gamenote/app/(tabs)/_layout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/(tabs)/home/index.tsx" beforePathEscaped="$PROJECT_DIR$/Gamenote/app/(tabs)/home/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/(tabs)/home/index.tsx" afterPathEscaped="$PROJECT_DIR$/Gamenote/app/(tabs)/home/index.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -229,14 +229,7 @@
       <workItem from="1778842808495" duration="47054000" />
       <workItem from="1780051486975" duration="850000" />
       <workItem from="1780053195879" duration="3806000" />
-      <workItem from="1780403082293" duration="833000" />
-    </task>
-    <task id="LOCAL−00002" summary="izmjena homescreena">
-      <option name="closed" value="true" />
-      <created>1775132335678</created>
-      <option name="number" value="LOCAL−00002" />
-      <option name="presentableId" value="LOCAL−00002" />
-      <updated>1775132335678</updated>
+      <workItem from="1780403082293" duration="1321000" />
     </task>
     <task id="LOCAL−00003" summary="dodani osnovni tabovi ali treba popraviti ikone u njima i sf icon fix">
       <option name="closed" value="true" />
@@ -574,7 +567,14 @@
       <option name="presentableId" value="LOCAL−00050" />
       <updated>1780054935446</updated>
     </task>
-    <option name="localTasksCounter" value="51" />
+    <task id="LOCAL−00051" summary="Dodan label da se korisniku kaže da gleda demo podatke ako nije prijavljen, ostale manje izmjene">
+      <option name="closed" value="true" />
+      <created>1780403955176</created>
+      <option name="number" value="LOCAL−00051" />
+      <option name="presentableId" value="LOCAL−00051" />
+      <updated>1780403955176</updated>
+    </task>
+    <option name="localTasksCounter" value="52" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -592,7 +592,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Unaprijeđen geneic game info ( detalji ); dodane sve bitne ionformacije + serijali igara + ispravljen achivment text da ispiše kad korisnik nije još dodao niti jedan achv" />
     <MESSAGE value="popravak details.tsx ( krivi render zvjezdica )" />
     <MESSAGE value="Dodan modalEdit.tsx" />
     <MESSAGE value="U potpunosti implementiran modalEdit.tsx" />
@@ -617,7 +616,8 @@
     <MESSAGE value="Update dependecy-a" />
     <MESSAGE value="Dodan redirect na Profile tab ako korisnik nije prijavljen" />
     <MESSAGE value="Zamijenjen FavoritesProvider s AuthProvider i integracija auth konteksta u FavoritesScreen, dodan redirect na Profile tab ako korisnik nije prijavljen" />
-    <option name="LAST_COMMIT_MESSAGE" value="Zamijenjen FavoritesProvider s AuthProvider i integracija auth konteksta u FavoritesScreen, dodan redirect na Profile tab ako korisnik nije prijavljen" />
+    <MESSAGE value="Dodan label da se korisniku kaže da gleda demo podatke ako nije prijavljen, ostale manje izmjene" />
+    <option name="LAST_COMMIT_MESSAGE" value="Dodan label da se korisniku kaže da gleda demo podatke ako nije prijavljen, ostale manje izmjene" />
   </component>
   <component name="github-copilot-workspace">
     <instructionFileLocations>

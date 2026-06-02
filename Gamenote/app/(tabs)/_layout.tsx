@@ -1,4 +1,7 @@
 import {Icon, Label, NativeTabs} from "expo-router/unstable-native-tabs";
+import {useSegments} from "expo-router";
+import * as Haptics from "expo-haptics";
+import {useEffect, useRef} from "react";
 
 // noinspection JSUnusedGlobalSymbols
 export default function TabsLayout() {
@@ -10,15 +13,15 @@ export default function TabsLayout() {
         <NativeTabs>
             <NativeTabs.Trigger name="home">
                 <Label>Početna</Label>
-              <Icon
-                    sf={{ default: "house", selected: "house.fill" }}
+                <Icon
+                    sf={{default: "house", selected: "house.fill"}}
                     drawable="ic_menu_view"
                 />
             </NativeTabs.Trigger>
 
             <NativeTabs.Trigger name="favorites">
                 <Label>Moje igre</Label>
-                <Icon sf={{ default: "bookmark", selected: "bookmark.fill" }} drawable="ic_menu_agenda"/>
+                <Icon sf={{default: "bookmark", selected: "bookmark.fill"}} drawable="ic_menu_agenda"/>
             </NativeTabs.Trigger>
 
             <NativeTabs.Trigger name="search" role="search">

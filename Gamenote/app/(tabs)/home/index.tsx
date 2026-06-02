@@ -199,8 +199,8 @@ const styles = StyleSheet.create({
     },
     image: {
         alignSelf: "center",
-        width: 200,
-        height: 250,
+        width: 300,
+        height: 320,
         borderRadius: 8,
         paddingBottom: 8,
     },
