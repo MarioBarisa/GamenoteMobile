@@ -415,7 +415,7 @@ export default function FavoritesScreen() {
                             }]}
                             onPress={() => {
                                 setLoggedIn(false);
-                                Alert.alert("Logged out", "You are logged out.");
+                                Alert.alert("Uspješno si se odjavio.");
                             }}
                         >
                             <SymbolView
@@ -448,19 +448,19 @@ export default function FavoritesScreen() {
                             style={{width: 20, height: 20, alignSelf: "center", margin: 5}} tintColor={'#FFFFFF'}
                         />
                         <Text style={[styles.textBodyCenterHiglighted, {color: '#FFFFFF'}]}>
-                            Trenutno gledaš demo podatke.
+                            Trenutno gledaš demo podatke
                         </Text>
                     </View>
                     <SymbolView
                         name={"person.crop.circle"}
                         style={{width: 110, height: 110, alignSelf: "center", margin: 5}}
                     />
-                    <Text style={[styles.textBodyCenterHiglighted, {color: t.accent}]}>
-                        Napravi Gamenote profil ili se prijavi
+                    <Text style={[styles.textBodyCenterHiglighted, {color: t.text}]}>
+                       Napravi Gamenote profil ili se prijavi
                     </Text>
                     <View style={{padding: 15, gap: 8, marginTop: 10}}>
                         <TextInput
-                            placeholder="Gamenote Username"
+                            placeholder="Gamenote Username"  // <Text style={{color: '#dd2316'}}>Gamenote</Text>
                             placeholderTextColor={t.secondaryText}
                             clearButtonMode="unless-editing"
                             style={[styles.systemInput, {color: t.text}]}

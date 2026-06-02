@@ -4,9 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7b37eb79-ceff-44a4-81aa-7e12f61dfc1f" name="Changes" comment="Dodan label da se korisniku kaže da gleda demo podatke ako nije prijavljen, ostale manje izmjene">
+    <list default="true" id="7b37eb79-ceff-44a4-81aa-7e12f61dfc1f" name="Changes" comment="dodan haptic feedback između promjene tabova.">
+      <change beforePath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/.idea/workspace.xml" beforePathEscaped="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/.idea/workspace.xml" afterPathEscaped="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/(tabs)/_layout.tsx" beforePathEscaped="$PROJECT_DIR$/Gamenote/app/(tabs)/_layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/(tabs)/_layout.tsx" afterPathEscaped="$PROJECT_DIR$/Gamenote/app/(tabs)/_layout.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/(tabs)/home/index.tsx" beforePathEscaped="$PROJECT_DIR$/Gamenote/app/(tabs)/home/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/(tabs)/home/index.tsx" afterPathEscaped="$PROJECT_DIR$/Gamenote/app/(tabs)/home/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/(tabs)/profile/index.tsx" beforePathEscaped="$PROJECT_DIR$/Gamenote/app/(tabs)/profile/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/(tabs)/profile/index.tsx" afterPathEscaped="$PROJECT_DIR$/Gamenote/app/(tabs)/profile/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/_layout.tsx" beforePathEscaped="$PROJECT_DIR$/Gamenote/app/_layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/_layout.tsx" afterPathEscaped="$PROJECT_DIR$/Gamenote/app/_layout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/settings.tsx" beforePathEscaped="$PROJECT_DIR$/Gamenote/app/settings.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/settings.tsx" afterPathEscaped="$PROJECT_DIR$/Gamenote/app/settings.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/package-lock.json" beforePathEscaped="$PROJECT_DIR$/Gamenote/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/package-lock.json" afterPathEscaped="$PROJECT_DIR$/Gamenote/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/package.json" beforePathEscaped="$PROJECT_DIR$/Gamenote/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/package.json" afterPathEscaped="$PROJECT_DIR$/Gamenote/package.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -229,21 +234,7 @@
       <workItem from="1778842808495" duration="47054000" />
       <workItem from="1780051486975" duration="850000" />
       <workItem from="1780053195879" duration="3806000" />
-      <workItem from="1780403082293" duration="1321000" />
-    </task>
-    <task id="LOCAL−00003" summary="dodani osnovni tabovi ali treba popraviti ikone u njima i sf icon fix">
-      <option name="closed" value="true" />
-      <created>1775410943040</created>
-      <option name="number" value="LOCAL−00003" />
-      <option name="presentableId" value="LOCAL−00003" />
-      <updated>1775410943040</updated>
-    </task>
-    <task id="LOCAL−00004" summary="update packages-a">
-      <option name="closed" value="true" />
-      <created>1775474669890</created>
-      <option name="number" value="LOCAL−00004" />
-      <option name="presentableId" value="LOCAL−00004" />
-      <updated>1775474669890</updated>
+      <workItem from="1780403082293" duration="2781000" />
     </task>
     <task id="LOCAL−00005" summary="Prelazak na EXPO44 -&gt; poptuno novi projekt.">
       <option name="closed" value="true" />
@@ -574,7 +565,21 @@
       <option name="presentableId" value="LOCAL−00051" />
       <updated>1780403955176</updated>
     </task>
-    <option name="localTasksCounter" value="52" />
+    <task id="LOCAL−00052" summary="Povecana velicina slike &quot;Jump back in.&quot; sectiona">
+      <option name="closed" value="true" />
+      <created>1780404460114</created>
+      <option name="number" value="LOCAL−00052" />
+      <option name="presentableId" value="LOCAL−00052" />
+      <updated>1780404460114</updated>
+    </task>
+    <task id="LOCAL−00053" summary="dodan haptic feedback između promjene tabova.">
+      <option name="closed" value="true" />
+      <created>1780405005972</created>
+      <option name="number" value="LOCAL−00053" />
+      <option name="presentableId" value="LOCAL−00053" />
+      <updated>1780405005972</updated>
+    </task>
+    <option name="localTasksCounter" value="54" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -592,8 +597,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="popravak details.tsx ( krivi render zvjezdica )" />
-    <MESSAGE value="Dodan modalEdit.tsx" />
     <MESSAGE value="U potpunosti implementiran modalEdit.tsx" />
     <MESSAGE value="Dodan picker za platformu" />
     <MESSAGE value="Veliki code clean-up, refactor game related importa kako bi svi imali single-point-of-refrence" />
@@ -617,7 +620,9 @@
     <MESSAGE value="Dodan redirect na Profile tab ako korisnik nije prijavljen" />
     <MESSAGE value="Zamijenjen FavoritesProvider s AuthProvider i integracija auth konteksta u FavoritesScreen, dodan redirect na Profile tab ako korisnik nije prijavljen" />
     <MESSAGE value="Dodan label da se korisniku kaže da gleda demo podatke ako nije prijavljen, ostale manje izmjene" />
-    <option name="LAST_COMMIT_MESSAGE" value="Dodan label da se korisniku kaže da gleda demo podatke ako nije prijavljen, ostale manje izmjene" />
+    <MESSAGE value="Povecana velicina slike &quot;Jump back in.&quot; sectiona" />
+    <MESSAGE value="dodan haptic feedback između promjene tabova." />
+    <option name="LAST_COMMIT_MESSAGE" value="dodan haptic feedback između promjene tabova." />
   </component>
   <component name="github-copilot-workspace">
     <instructionFileLocations>

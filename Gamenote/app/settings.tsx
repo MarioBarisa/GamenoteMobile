@@ -1,9 +1,11 @@
 import {ScrollView, View, Text, StyleSheet, Switch} from "react-native";
 import {useTheme} from "@/context/theme";
+import {useSettings} from "@/context/settings";
 import {colors} from "@/constants/theme";
 
 export default function SettingsScreen() {
     const {theme, preference, setPreference} = useTheme();
+    const {vibrationsEnabled, setVibrationsEnabled} = useSettings();
     const t = colors[theme];
 
     const isDarkForced = preference === "dark";
@@ -53,7 +55,7 @@ export default function SettingsScreen() {
                     <View>
                         <Text style={[styles.title, {color: t.text}]}>Korist iOS default</Text>
                         <Text style={[styles.subtitle, {color: t.secondaryText}]}>
-                            Gamenote koristi iOS default.
+                            Gamenote koristi iOS default temu.
                         </Text>
                     </View>
                     <Switch
@@ -89,12 +91,11 @@ export default function SettingsScreen() {
                 <View style={styles.row}>
                     <View>
                     <Text style={[styles.title, {color: t.text}]}>Vibracije</Text>
-                    <Text style={[styles.subtitle, { color: t.secondaryText}]}>Omoguci haptick feedback</Text>
+                    <Text style={[styles.subtitle, { color: t.secondaryText}]}>Haptic feedback za promjene tabova.</Text>
                     </View>
                     <Switch
-                        value={true}
-                        onValueChange={() => {
-                        }}
+                        value={vibrationsEnabled}
+                        onValueChange={setVibrationsEnabled}
                         trackColor={{
                             false: "rgba(120,120,128,0.32)",
                             true: "#34C759",

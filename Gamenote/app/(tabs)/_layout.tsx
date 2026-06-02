@@ -1,6 +1,7 @@
 import {Icon, Label, NativeTabs} from "expo-router/unstable-native-tabs";
 import {useSegments} from "expo-router";
 import * as Haptics from "expo-haptics";
+import {useSettings} from "@/context/settings";
 import {useEffect, useRef} from "react";
 
 // noinspection JSUnusedGlobalSymbols
@@ -11,13 +12,14 @@ export default function TabsLayout() {
     const segments = useSegments();
     const tabSegment = segments?.[1];
     const previousTabRef = useRef(tabSegment);
+    const {vibrationsEnabled} = useSettings();
 
     useEffect(() => {
-        if (tabSegment && tabSegment !== previousTabRef.current) {
-            Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+        if (vibrationsEnabled && tabSegment && tabSegment !== previousTabRef.current) {
+            Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
             previousTabRef.current = tabSegment;
         }
-    }, [tabSegment]);
+    }, [tabSegment, vibrationsEnabled]);
 
     return (
         <NativeTabs>

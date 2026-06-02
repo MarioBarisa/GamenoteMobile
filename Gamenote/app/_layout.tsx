@@ -1,6 +1,7 @@
 import {Stack} from "expo-router";
 import {GroupsProvider} from "@/context/GroupsContext";
 import {ThemeProvider} from "@/context/theme";
+import {SettingsProvider} from "@/context/settings";
 import {AuthProvider} from "@/context/auth";
 import {useNavigationTheme} from "@/constants/navigationTheme";
 
@@ -65,7 +66,9 @@ function RootNavigator() {
 export default function RootLayout() {
     return (
         <ThemeProvider>
-            <RootNavigator/>
+            <SettingsProvider>
+                <RootNavigator/>
+            </SettingsProvider>
         </ThemeProvider>
     );
 }
