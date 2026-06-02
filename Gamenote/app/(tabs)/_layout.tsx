@@ -8,6 +8,16 @@ export default function TabsLayout() {
 
     // Apple SF icons online list https://hotpot.ai/free-icons
 
+    const segments = useSegments();
+    const tabSegment = segments?.[1];
+    const previousTabRef = useRef(tabSegment);
+
+    useEffect(() => {
+        if (tabSegment && tabSegment !== previousTabRef.current) {
+            Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+            previousTabRef.current = tabSegment;
+        }
+    }, [tabSegment]);
 
     return (
         <NativeTabs>
