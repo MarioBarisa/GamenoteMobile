@@ -452,7 +452,7 @@ export default function FavoritesScreen() {
                         </Text>
                     </View>
                     <SymbolView
-                        name={"person.crop.circle"}
+                        name={"person.crop.circle.badge.plus"}
                         style={{width: 110, height: 110, alignSelf: "center", margin: 5}}
                     />
                     <Text style={[styles.textBodyCenterHiglighted, {color: t.text}]}>

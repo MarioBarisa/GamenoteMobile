@@ -4,14 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7b37eb79-ceff-44a4-81aa-7e12f61dfc1f" name="Changes" comment="dodan haptic feedback između promjene tabova.">
+    <list default="true" id="7b37eb79-ceff-44a4-81aa-7e12f61dfc1f" name="Changes" comment="part 2 - dodan async-storage za persisten spremanje postavki, povezan gumb za haptic feedback u postavkama sa tab switching-om">
       <change beforePath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/.idea/workspace.xml" beforePathEscaped="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/.idea/workspace.xml" afterPathEscaped="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/(tabs)/_layout.tsx" beforePathEscaped="$PROJECT_DIR$/Gamenote/app/(tabs)/_layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/(tabs)/_layout.tsx" afterPathEscaped="$PROJECT_DIR$/Gamenote/app/(tabs)/_layout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app.json" beforePathEscaped="$PROJECT_DIR$/Gamenote/app.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app.json" afterPathEscaped="$PROJECT_DIR$/Gamenote/app.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/(tabs)/profile/index.tsx" beforePathEscaped="$PROJECT_DIR$/Gamenote/app/(tabs)/profile/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/(tabs)/profile/index.tsx" afterPathEscaped="$PROJECT_DIR$/Gamenote/app/(tabs)/profile/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/_layout.tsx" beforePathEscaped="$PROJECT_DIR$/Gamenote/app/_layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/_layout.tsx" afterPathEscaped="$PROJECT_DIR$/Gamenote/app/_layout.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/settings.tsx" beforePathEscaped="$PROJECT_DIR$/Gamenote/app/settings.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/settings.tsx" afterPathEscaped="$PROJECT_DIR$/Gamenote/app/settings.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/package-lock.json" beforePathEscaped="$PROJECT_DIR$/Gamenote/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/package-lock.json" afterPathEscaped="$PROJECT_DIR$/Gamenote/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/package.json" beforePathEscaped="$PROJECT_DIR$/Gamenote/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/package.json" afterPathEscaped="$PROJECT_DIR$/Gamenote/package.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -234,21 +230,7 @@
       <workItem from="1778842808495" duration="47054000" />
       <workItem from="1780051486975" duration="850000" />
       <workItem from="1780053195879" duration="3806000" />
-      <workItem from="1780403082293" duration="2781000" />
-    </task>
-    <task id="LOCAL−00005" summary="Prelazak na EXPO44 -&gt; poptuno novi projekt.">
-      <option name="closed" value="true" />
-      <created>1775855434517</created>
-      <option name="number" value="LOCAL−00005" />
-      <option name="presentableId" value="LOCAL−00005" />
-      <updated>1775855434517</updated>
-    </task>
-    <task id="LOCAL−00006" summary="minimalni bug fixevi">
-      <option name="closed" value="true" />
-      <created>1775907703200</created>
-      <option name="number" value="LOCAL−00006" />
-      <option name="presentableId" value="LOCAL−00006" />
-      <updated>1775907703200</updated>
+      <workItem from="1780403082293" duration="4139000" />
     </task>
     <task id="LOCAL−00007" summary="Dodani osnovni tabovi, podešavanje tema i ekran za favorite. Minimalni polish ruta">
       <option name="closed" value="true" />
@@ -579,7 +561,21 @@
       <option name="presentableId" value="LOCAL−00053" />
       <updated>1780405005972</updated>
     </task>
-    <option name="localTasksCounter" value="54" />
+    <task id="LOCAL−00054" summary="dodan async-storage za persisten spremanje postavki, povezan gumb za haptic feedback u postavkama sa tab switching-om">
+      <option name="closed" value="true" />
+      <created>1780405925153</created>
+      <option name="number" value="LOCAL−00054" />
+      <option name="presentableId" value="LOCAL−00054" />
+      <updated>1780405925154</updated>
+    </task>
+    <task id="LOCAL−00055" summary="part 2 - dodan async-storage za persisten spremanje postavki, povezan gumb za haptic feedback u postavkama sa tab switching-om">
+      <option name="closed" value="true" />
+      <created>1780406095025</created>
+      <option name="number" value="LOCAL−00055" />
+      <option name="presentableId" value="LOCAL−00055" />
+      <updated>1780406095025</updated>
+    </task>
+    <option name="localTasksCounter" value="56" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -597,8 +593,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="U potpunosti implementiran modalEdit.tsx" />
-    <MESSAGE value="Dodan picker za platformu" />
     <MESSAGE value="Veliki code clean-up, refactor game related importa kako bi svi imali single-point-of-refrence" />
     <MESSAGE value="Micanje nepotrebnih importova po cijelom projektu, dodavanje custom kategorija achvn ( % ) za sve podržane platforme -&gt; edit details.tsx i editModal.tsx" />
     <MESSAGE value="Dodana lagana vibracija kada se spremi igra putem modalEdit.tsx" />
@@ -622,7 +616,9 @@
     <MESSAGE value="Dodan label da se korisniku kaže da gleda demo podatke ako nije prijavljen, ostale manje izmjene" />
     <MESSAGE value="Povecana velicina slike &quot;Jump back in.&quot; sectiona" />
     <MESSAGE value="dodan haptic feedback između promjene tabova." />
-    <option name="LAST_COMMIT_MESSAGE" value="dodan haptic feedback između promjene tabova." />
+    <MESSAGE value="dodan async-storage za persisten spremanje postavki, povezan gumb za haptic feedback u postavkama sa tab switching-om" />
+    <MESSAGE value="part 2 - dodan async-storage za persisten spremanje postavki, povezan gumb za haptic feedback u postavkama sa tab switching-om" />
+    <option name="LAST_COMMIT_MESSAGE" value="part 2 - dodan async-storage za persisten spremanje postavki, povezan gumb za haptic feedback u postavkama sa tab switching-om" />
   </component>
   <component name="github-copilot-workspace">
     <instructionFileLocations>
