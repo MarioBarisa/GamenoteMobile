@@ -19,7 +19,7 @@ export default function FavoritesScreen() {
 
     useLayoutEffect(() => { // CUSTOM POZDRAV TITLE ZA USERNAME
         navigation.setOptions({
-            title: loggedIn && username ? `Pozdrav, ${username}!` : "Profil",
+            title: loggedIn && username ? `Pozdrav, ${username}!` : "Dobrodošao!",
         });
     }, [navigation, loggedIn, username]);
 
@@ -434,12 +434,29 @@ export default function FavoritesScreen() {
 
             {!loggedIn && (
                 <View>
+                    <View style={{
+                        flexDirection: "row",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        backgroundColor: t.accent,
+                        borderRadius: 32,
+                        margin: 12,
+                        padding: 6
+                    }}>
+                        <SymbolView
+                            name={"info.circle.fill"}
+                            style={{width: 20, height: 20, alignSelf: "center", margin: 5}} tintColor={'#FFFFFF'}
+                        />
+                        <Text style={[styles.textBodyCenterHiglighted, {color: '#FFFFFF'}]}>
+                            Trenutno gledaš demo podatke.
+                        </Text>
+                    </View>
                     <SymbolView
                         name={"person.crop.circle"}
                         style={{width: 110, height: 110, alignSelf: "center", margin: 5}}
                     />
                     <Text style={[styles.textBodyCenterHiglighted, {color: t.accent}]}>
-                        Napravite profil ili se prijavite.
+                        Napravi Gamenote profil ili se prijavi
                     </Text>
                     <View style={{padding: 15, gap: 8, marginTop: 10}}>
                         <TextInput

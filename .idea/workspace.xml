@@ -4,12 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7b37eb79-ceff-44a4-81aa-7e12f61dfc1f" name="Changes" comment="Dodan redirect na Profile tab ako korisnik nije prijavljen">
+    <list default="true" id="7b37eb79-ceff-44a4-81aa-7e12f61dfc1f" name="Changes" comment="Zamijenjen FavoritesProvider s AuthProvider i integracija auth konteksta u FavoritesScreen, dodan redirect na Profile tab ako korisnik nije prijavljen">
       <change beforePath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/.idea/workspace.xml" beforePathEscaped="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/.idea/workspace.xml" afterPathEscaped="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/(tabs)/index.tsx" beforePathEscaped="$PROJECT_DIR$/Gamenote/app/(tabs)/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/(tabs)/index.tsx" afterPathEscaped="$PROJECT_DIR$/Gamenote/app/(tabs)/index.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/(tabs)/profile/index.tsx" beforePathEscaped="$PROJECT_DIR$/Gamenote/app/(tabs)/profile/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/(tabs)/profile/index.tsx" afterPathEscaped="$PROJECT_DIR$/Gamenote/app/(tabs)/profile/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/_layout.tsx" beforePathEscaped="$PROJECT_DIR$/Gamenote/app/_layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/_layout.tsx" afterPathEscaped="$PROJECT_DIR$/Gamenote/app/_layout.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/context/favorites.tsx" beforePathEscaped="$PROJECT_DIR$/Gamenote/context/favorites.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/context/favorites.tsx" afterPathEscaped="$PROJECT_DIR$/Gamenote/context/favorites.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -19,7 +16,7 @@
   <component name="CopilotChats">
     <option name="panelChat">
       <chat>
-        <option name="activeSessionId" value="6644fff3-7256-4687-bf1d-ad239933e91f" />
+        <option name="activeSessionId" value="6bac1b42-6712-4087-ba27-94861fb02887" />
         <option name="sessions">
           <session>
             <option name="chatType" value="PANEL" />
@@ -71,12 +68,21 @@
             <option name="modeId" value="Ask" />
             <option name="modelType" value="builtin_family" />
             <option name="modelValue" value="auto" />
+            <option name="status" value="Completed" />
             <option name="targetType" value="LOCAL" />
           </session>
           <session>
             <option name="chatType" value="PANEL" />
             <option name="id" value="6644fff3-7256-4687-bf1d-ad239933e91f" />
             <option name="modeId" value="Ask" />
+            <option name="modelType" value="builtin_family" />
+            <option name="modelValue" value="auto" />
+            <option name="targetType" value="LOCAL" />
+          </session>
+          <session>
+            <option name="chatType" value="PANEL" />
+            <option name="id" value="6bac1b42-6712-4087-ba27-94861fb02887" />
+            <option name="modeId" value="Agent" />
             <option name="modelType" value="builtin_family" />
             <option name="modelValue" value="auto" />
             <option name="targetType" value="LOCAL" />
@@ -88,8 +94,8 @@
   </component>
   <component name="CopilotPersistence">
     <persistenceIdMap>
-      <entry key="_/Users/mariobarisa/Desktop//Osobno/GamenoteMobile" value="3BnhLSTOxjFVNfgTjSLmchQK7qB" />
       <entry key="_/Users/mariobarisa/Desktop//Osobno/GamenoteMobile" value="3EOcjkTquuKugmuBdefVsunXhNU" />
+      <entry key="_/Users/mariobarisa/Desktop//Osobno/GamenoteMobile" value="3BnhLSTOxjFVNfgTjSLmchQK7qB" />
     </persistenceIdMap>
   </component>
   <component name="CopilotUserSelectedChatMode">
@@ -126,7 +132,7 @@
   }
 }</component>
   <component name="ProblemsViewState">
-    <option name="selectedTabId" value="CurrentFile" />
+    <option name="selectedTabId" value="ProjectErrors" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 6,
@@ -222,14 +228,8 @@
       <workItem from="1778522820896" duration="11644000" />
       <workItem from="1778842808495" duration="47054000" />
       <workItem from="1780051486975" duration="850000" />
-      <workItem from="1780053195879" duration="1352000" />
-    </task>
-    <task id="LOCAL−00001" summary="izmjena directorija README">
-      <option name="closed" value="true" />
-      <created>1775131138616</created>
-      <option name="number" value="LOCAL−00001" />
-      <option name="presentableId" value="LOCAL−00001" />
-      <updated>1775131138616</updated>
+      <workItem from="1780053195879" duration="3806000" />
+      <workItem from="1780403082293" duration="833000" />
     </task>
     <task id="LOCAL−00002" summary="izmjena homescreena">
       <option name="closed" value="true" />
@@ -567,7 +567,14 @@
       <option name="presentableId" value="LOCAL−00049" />
       <updated>1780051719465</updated>
     </task>
-    <option name="localTasksCounter" value="50" />
+    <task id="LOCAL−00050" summary="Zamijenjen FavoritesProvider s AuthProvider i integracija auth konteksta u FavoritesScreen, dodan redirect na Profile tab ako korisnik nije prijavljen">
+      <option name="closed" value="true" />
+      <created>1780054935445</created>
+      <option name="number" value="LOCAL−00050" />
+      <option name="presentableId" value="LOCAL−00050" />
+      <updated>1780054935446</updated>
+    </task>
+    <option name="localTasksCounter" value="51" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -585,7 +592,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="dodan user opis igre ( bilješke ), dodana mogucnost zoomina na slike ( pinch to zoom ), UI poboljšanja" />
     <MESSAGE value="Unaprijeđen geneic game info ( detalji ); dodane sve bitne ionformacije + serijali igara + ispravljen achivment text da ispiše kad korisnik nije još dodao niti jedan achv" />
     <MESSAGE value="popravak details.tsx ( krivi render zvjezdica )" />
     <MESSAGE value="Dodan modalEdit.tsx" />
@@ -610,7 +616,8 @@
     <MESSAGE value="dodan gum za izradu profila, dodan registerModal.tsx za izradu prfila ( aktivira se klikom na &quot;Izadi račun&quot; )." />
     <MESSAGE value="Update dependecy-a" />
     <MESSAGE value="Dodan redirect na Profile tab ako korisnik nije prijavljen" />
-    <option name="LAST_COMMIT_MESSAGE" value="Dodan redirect na Profile tab ako korisnik nije prijavljen" />
+    <MESSAGE value="Zamijenjen FavoritesProvider s AuthProvider i integracija auth konteksta u FavoritesScreen, dodan redirect na Profile tab ako korisnik nije prijavljen" />
+    <option name="LAST_COMMIT_MESSAGE" value="Zamijenjen FavoritesProvider s AuthProvider i integracija auth konteksta u FavoritesScreen, dodan redirect na Profile tab ako korisnik nije prijavljen" />
   </component>
   <component name="github-copilot-workspace">
     <instructionFileLocations>
