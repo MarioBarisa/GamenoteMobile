@@ -5,6 +5,7 @@ import {Ionicons} from "@expo/vector-icons";
 import {useRouter} from "expo-router";
 import {Game} from "@/common/Game"
 import {STATUS_CONFIG, STATUS_PLATFORM} from "@/common/StatusCommons";
+import {achievementPercent, progressColor} from "@/common/ProgressSources";
 
 const CARD_WIDTH = Dimensions.get('window').width-32;
 const IMAGE_HEIGHT = Math.round(CARD_WIDTH * 8 / 16); //za 16:9 cover
@@ -27,28 +28,12 @@ export default function GameCard({ game }: Props) {
 
   const imageUri = game.image_url || game.background_image || null;
 
-  const achievementPercent = (() => {
-  if (!game.progress_value || !game.progress_total) return 0
-  const v = Math.min(game.progress_value, game.progress_total)
-  return Math.round((v / game.progress_total) * 100)
-})()
-
-    //BOJE PROGRESS BARA PREMA POSTOTKU PROLAZNOSTI
-  const progressColor = (() => {
-    const clamped = Math.max(0, Math.min(achievementPercent, 100))
-    if (clamped >= 100) return '#0d36f9'
-    if (clamped >= 98) return '#f90d74'
-    if (clamped >= 95) return '#12f90d'
-    if (clamped >= 90) return '#22C55E'
-    if (clamped >= 70) return '#84CC16'
-    if (clamped >= 45) return '#FACC15'
-    if (clamped >= 20) return '#F97316'
-    return '#EF4444'
-  })()
+  const pct = achievementPercent(game.progress_value, game.progress_total);
+  const prColor = progressColor(game.progress_value, game.progress_total);
 
   return (
 
-      <Pressable onPress={handlePress} style={({pressed})=>[{opacity: pressed ? 0.8 : 1}]}>
+      <Pressable onPress={handlePress} accessibilityLabel={`Otvori detalje igre ${game.title}`} style={({pressed})=>[{opacity: pressed ? 0.8 : 1}]}>
     <View style={[
       styles.card,
       {
@@ -129,14 +114,14 @@ export default function GameCard({ game }: Props) {
             {typeof game.progress_value === 'number' && typeof game.progress_total === 'number' && game.progress_total > 0 ? (
                 <View style={styles.progressSection}>
                     <View style={[styles.progressTrack, {backgroundColor: theme === 'dark' ? '#2C2C2E' : '#E5E5EA' }]}>
-                        <View style={[styles.progressFill, { width: `${achievementPercent}%` as any, backgroundColor: progressColor }]} />
+                        <View style={[styles.progressFill, { width: `${pct}%`, backgroundColor: prColor }]} />
                     </View>
                     <View style={styles.progressLabels}>
                         <Text style={[styles.progressLabel, {color: t.text}]}>
                             {Math.min(game.progress_value, game.progress_total)}/{game.progress_total}
                         </Text>
                         <Text style={[styles.progressPercent, {color: t.secondaryText}]}>
-                            {achievementPercent}%
+                            {pct}%
                         </Text>
 
                     </View>

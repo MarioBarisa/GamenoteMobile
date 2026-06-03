@@ -194,9 +194,10 @@ export default function ModalEditGroups() {
                         onPress={() => { // SAVE GUMB
                             handleSave();
                             if (Platform.OS === 'ios') {
-                                Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium); //medium vibracija kada se igra uspješno spremi
+                                Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium); //medium vibracija kada se grupa uspješno spremi
                             }
                         }}
+                        accessibilityLabel="Spremi izmjene grupe"
                         style={[styles.saveButton, {backgroundColor: t.accent}]}
                     >
                         <Text style={{color: '#fff', fontWeight: '700', fontSize: 16}}>Spremi izmjene</Text>

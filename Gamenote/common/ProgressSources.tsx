@@ -39,3 +39,22 @@ export function progressLabel(  //HELPER FUNKCIJA ZA PROGRESS
 export function isProgressModeKey(key: string): key is ProgressModeKey {
   return key in PROGRESS_MODE_MAP;
 }
+
+export function achievementPercent(value?: number, total?: number): number {
+  if (!value || !total || total <= 0) return 0
+  const v = Math.min(value, total)
+  return Math.round((v / total) * 100)
+}
+
+//BOJE PROGRESS BARA PREMA POSTOTKU PROLAZNOSTI
+export function progressColor(value?: number, total?: number): string {
+  const pct = achievementPercent(value, total)
+  if (pct >= 100) return '#0d36f9'
+  if (pct >= 98) return '#f90d74'
+  if (pct >= 95) return '#12f90d'
+  if (pct >= 90) return '#22C55E'
+  if (pct >= 70) return '#84CC16'
+  if (pct >= 45) return '#FACC15'
+  if (pct >= 20) return '#F97316'
+  return '#EF4444'
+}

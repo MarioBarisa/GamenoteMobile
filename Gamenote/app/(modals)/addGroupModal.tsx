@@ -211,6 +211,7 @@ export default function AddGroupModal() {
 
                 <Pressable
                     onPress={handleSave}
+                    accessibilityLabel="Dodaj grupu"
                     style={[styles.saveButton, {backgroundColor: t.accent}]}
                 >
                     <Text style={{color: '#fff', fontWeight: '700', fontSize: 16}}>Dodaj grupu</Text>

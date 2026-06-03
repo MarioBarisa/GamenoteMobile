@@ -241,6 +241,7 @@ export default function ModalEdit() {
                             Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium); //medium vibracija kada se igra uspješno spremi
                         }
                     }}
+                    accessibilityLabel="Spremi promjene"
                     style={[styles.saveButton, {backgroundColor: t.accent}]}
                 >
                     <Text style={{color: '#fff', fontWeight: '700', fontSize: 16}}>Spremi</Text>

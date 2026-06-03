@@ -25,10 +25,8 @@ export default function SearchIndex() {
     }
     results.sort((a, b) => {
       if (sort) {
-        // default (sort = false): sort po playtime-u (silazno)
         return (b.rating || 0) - (a.rating || 0);
       } else {
-          // sort  uključen (sort = true): sort po ocjeni (silazno)
         return (b.play_time || 0) - (a.play_time || 0);
       }
     });
@@ -54,11 +52,12 @@ export default function SearchIndex() {
           title: "Pretraži Gamenote",
           headerRight: () => (
             <TouchableOpacity
-              onPress={async () => { await Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light) //za samo korištenje neke header funkcije light vibracija, za dugo držanje jača vibracija ( alert = bolji kickback )
+              accessibilityLabel="Sortiraj po ocjeni"
+              onPress={async () => { await Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light)
                   setSort(prev => !prev)
               }}
               onLongPress={async () => { await Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium)
-                  Alert.alert("Sortiranje", "Sortiraj rezultate pretrage. Ako je sortiranje uključeno igre koje najviše igraš su prve.")
+                  Alert.alert("Sortiranje", "Sortiraj po ocjeni. Ako je sortiranje isključeno igre su poredane po vremenu igranja.")
               }}
               style={{ justifyContent: 'center', alignItems: 'center'}}>
              <SymbolView
@@ -71,6 +70,7 @@ export default function SearchIndex() {
           ),
           headerLeft: () => (
             <TouchableOpacity
+              accessibilityLabel="Filtriraj svoje igre"
               onPress={async () => { await Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light)
                   setUserGamenotesOnly(prev => !prev)
               }}

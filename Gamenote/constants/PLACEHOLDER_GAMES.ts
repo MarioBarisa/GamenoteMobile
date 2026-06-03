@@ -1,5 +1,4 @@
 import {Game} from "@/common/Game";
-import {ProgressModeKey} from "@/common/ProgressSources";
 
 export const PLACEHOLDER_GAMES: Game[] = [
     {

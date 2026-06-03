@@ -48,6 +48,7 @@ export default function SettingsScreen() {
                             false: "rgba(120,120,128,0.32)",
                             true: "#34C759",
                         }}
+                        thumbColor={theme === "dark" ? "#FFFFFF" : "#000000"} //KAKO STAVVTITI DA GUM IMA DRUGACIJU BOJU!!! thumbColor={theme === "dark" ? "#000" : "#FFF"}
                     />
                 </View>
 
@@ -67,7 +68,7 @@ export default function SettingsScreen() {
                             false: "rgba(120,120,128,0.32)",
                             true: "#0a58ff",
                         }}
-                       //KAKO STAVVTITI DA GUM IMA DRUGACIJU BOJU!!! thumbColor={theme === "dark" ? "#000" : "#FFF"}
+                        thumbColor={theme === "dark" ? "#FFFFFF" : "#000000"}
                     />
                 </View>
             </View>
@@ -105,15 +106,15 @@ export default function SettingsScreen() {
 
                 <View style={styles.row}>
                     <View>
-                    <Text style={[styles.title, {color: t.text}]}>Zvukovi</Text>
-                        <Text style={[styles.subtitle, {color: t.secondaryText}]}>Omoguci zvukove.</Text>
+                    <Text style={[styles.title, {color: t.secondaryText}]}>Zvukovi</Text>
+                        <Text style={[styles.subtitle, {color: t.secondaryText}]}>Dolazi uskoro.</Text>
                     </View>
                     <Switch
-                        value={true}
-                        onValueChange={() => {
-                        }}
+                        value={false}
+                        onValueChange={() => {}}
+                        disabled
                         trackColor={{
-                            false: "rgba(120,120,128,0.32)",
+                            false: "rgba(120,120,128,0.16)",
                             true: "#34C759",
                         }}
                     />

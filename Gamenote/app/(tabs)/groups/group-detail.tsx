@@ -42,7 +42,7 @@ export default function GroupDetail(){
                             }}
                             asChild
                         >
-                            <Pressable hitSlop={10}>
+                            <Pressable accessibilityLabel="Uredi grupu" hitSlop={10}>
                                 <SymbolView
                                     name="square.and.pencil"
                                     resizeMode="scaleAspectFit"

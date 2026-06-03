@@ -7,7 +7,7 @@ import {useTheme} from "@/context/theme";
 import {colors} from "@/constants/theme";
 import {SymbolView} from "expo-symbols";
 import {STATUS_CONFIG, STATUS_PLATFORM} from "@/common/StatusCommons";
-import {isProgressModeKey, PROGRESS_MODE_MAP, progressLabel} from "@/common/ProgressSources";
+import {isProgressModeKey, PROGRESS_MODE_MAP, progressLabel, progressColor} from "@/common/ProgressSources";
 
 
 const SCREEN_WIDTH = Dimensions.get("window").width;
@@ -31,26 +31,7 @@ export default function Index() {
         return <Text style={{color: t.text, padding: 16}}>Igra nije pronađena</Text>
     }
 
-    //boja dostignuća
-    const progressColor = (() => {
-        let achievementPercent = 0;
-        if (game?.progress_value !== undefined) {
-            if (game.progress_total && game.progress_total > 0) {
-                achievementPercent = (game.progress_value / game.progress_total) * 100;
-            } else {
-                achievementPercent = game.progress_value;
-            }
-        }
-        const clamped = Math.max(0, Math.min(achievementPercent, 100))
-        if (clamped >= 100) return '#0d36f9'
-        if (clamped >= 98) return '#f90d74'
-        if (clamped >= 95) return '#12f90d'
-        if (clamped >= 90) return '#22C55E'
-        if (clamped >= 70) return '#84CC16'
-        if (clamped >= 45) return '#FACC15'
-        if (clamped >= 20) return '#F97316'
-        return '#EF4444'
-    })()
+    const prColor = progressColor(game.progress_value, game.progress_total)
 
     const mode = game.progress_mode && isProgressModeKey(game.progress_mode)
         ? PROGRESS_MODE_MAP[game.progress_mode]
@@ -72,8 +53,6 @@ export default function Index() {
         return '#FF0000'                    // Negative
     })()
 
-    // @ts-ignore
-    // @ts-ignore
     return (
         <>
             <Stack.Screen
@@ -89,7 +68,7 @@ export default function Index() {
                             }}
                             asChild
                         >
-                            <Pressable hitSlop={10}>
+                            <Pressable accessibilityLabel="Uredi igru" hitSlop={10}>
                                 <SymbolView
                                     name="square.and.pencil"
                                     resizeMode="scaleAspectFit"
@@ -192,7 +171,7 @@ export default function Index() {
                                         color: t.secondaryText,
                                         fontWeight: '700',
                                     }}>{mode?.label ?? 'Progress'}</Text>
-                                    <Text style={{fontSize: 18, fontWeight: '800', color: progressColor}}>
+                                    <Text style={{fontSize: 18, fontWeight: '800', color: prColor}}>
                                         {label}
                                     </Text>
                                 </View>
@@ -420,8 +399,8 @@ export default function Index() {
                             x: (selectedIndex ?? 0) * SCREEN_WIDTH,
                             y: 0,
                         }}
-                    >{/*@ts-ignore*/}
-                        {game.image_url.map((uri) => (
+                    >
+                        {(game.image_url ?? []).map((uri) => (
                             <ScrollView
                                 key={uri}
                                 style={styles.fullscreenSlide}

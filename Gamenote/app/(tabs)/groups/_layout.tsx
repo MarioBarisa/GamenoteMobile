@@ -17,7 +17,7 @@ export default function GroupsLayout() {
                 options={{
                     title: "Grupe",
                     headerRight: () => (
-                        <Pressable onPress={() => router.push("/(modals)/addGroupModal")} hitSlop={10}>
+                        <Pressable accessibilityLabel="Dodaj novu grupu" onPress={() => router.push("/(modals)/addGroupModal")} hitSlop={10}>
                             <SymbolView
                                 name={"rectangle.stack.badge.plus"}
                                 resizeMode="scaleAspectFit"

@@ -16,8 +16,7 @@ export default function HomeIndex() {
 
     let playtime = 0;
     for (const game of PLACEHOLDER_GAMES) {
-        // @ts-ignore
-        playtime = playtime + game.play_time;
+        playtime = playtime + (game.play_time ?? 0);
     }
 
     const gameNumber = PLACEHOLDER_GAMES.length;
@@ -47,8 +46,6 @@ export default function HomeIndex() {
       })
   }
 
-    // @ts-ignore
-    // @ts-ignore
     return (
         <ScrollView
             style={{backgroundColor: t.background}}

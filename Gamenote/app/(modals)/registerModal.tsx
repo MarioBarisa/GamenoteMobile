@@ -273,7 +273,7 @@ export default function RegisterModal() {
                         gap: 6,
                         opacity: pressed ? 0.6 : 1
                     }]}
-                    accessibilityLabel={"Register Button"}
+                    accessibilityLabel="Izradi račun"
                     onPress={handleRegister}
                 >
                     <SymbolView
@@ -288,6 +288,7 @@ export default function RegisterModal() {
 
                 <Pressable
                     onPress={() => router.back()}
+                    accessibilityLabel="Odustani"
                     style={[styles.cancelButton, {backgroundColor: theme === 'dark' ? '#2C2C2E' : '#E5E5EA'}]}
                 >
                     <Text style={{color: t.text, fontWeight: '600', fontSize: 14}}>Odustani</Text>

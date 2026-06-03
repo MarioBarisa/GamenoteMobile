@@ -43,6 +43,7 @@ export default function GroupsIndex() {
                     return (
                         <TouchableOpacity
                             key={group.id}
+                            accessibilityLabel={`Otvori grupu ${group.name}`}
                             style={[styles.card, {backgroundColor: t.card}]}
                             onPress={() => router.push({
                                 pathname: "/(tabs)/groups/group-detail",

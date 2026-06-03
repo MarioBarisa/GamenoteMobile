@@ -347,10 +347,10 @@ export default function FavoritesScreen() {
                             <SymbolView
                                 name="trophy.fill"
                                 style={{width: 24, height: 24}}
-                                tintColor={userInfo.totalPlaytime >= 1000 && userInfo.totalPlaytime >= 3000 && userInfo.totalPlaytime >= 100 && userInfo.finishedGames >= 25 && userInfo.totalGames >= 50 && userInfo.bestGames >= 10 ? "#C0C0C0" : t.secondaryText}
+                                tintColor={userInfo.totalGames >= 50 && userInfo.finishedGames >= 25 && userInfo.totalPlaytime >= 3000 && userInfo.bestGames >= 10 ? "#C0C0C0" : t.secondaryText}
                             />
                             <Text style={{
-                                color: userInfo.totalPlaytime >= 1000 && userInfo.totalPlaytime >= 3000 && userInfo.totalPlaytime >= 100 && userInfo.finishedGames >= 25 && userInfo.totalGames >= 50 && userInfo.bestGames >= 10 ? "#C0C0C0" : t.secondaryText,
+                                color: userInfo.totalGames >= 50 && userInfo.finishedGames >= 25 && userInfo.totalPlaytime >= 3000 && userInfo.bestGames >= 10 ? "#C0C0C0" : t.secondaryText,
                                 fontWeight: "bold",
                                 fontSize: 11,
                                 textAlign: "center"
@@ -379,8 +379,8 @@ export default function FavoritesScreen() {
                     </View>
                     <View style={{flexDirection: "row", gap: 12, justifyContent: "center"}}>
 
-                        {/* ACCOUNT MNG */}
                         <Pressable
+                            accessibilityLabel="Upravljaj računom"
                             style={({pressed}) => [{
                                 backgroundColor: t.backgroundModal,
                                 margin: 4, padding: 12,
@@ -402,8 +402,8 @@ export default function FavoritesScreen() {
                             </Text>
                         </Pressable>
 
-                        {/* ODJAVA */}
                         <Pressable
+                            accessibilityLabel="Odjavi se"
                             style={({pressed}) => [{
                                 backgroundColor: t.backgroundModal,
                                 margin: 4, padding: 12,
@@ -490,8 +490,8 @@ export default function FavoritesScreen() {
                                     gap: 6,
                                     opacity: pressed ? 0.6 : 1
                                 }]}
-                                accessibilityLabel={"Login Button"}
-                                onPress={() => {
+                        accessibilityLabel="Prijavi se"
+                        onPress={() => {
                                     if (password === "") {
                                         Alert.alert("Fali lozinka.", "Unesite ispravnu lozinku.");
                                     } else {
@@ -518,7 +518,7 @@ export default function FavoritesScreen() {
                                     gap: 6,
                                     opacity: pressed ? 0.6 : 1
                                 }]}
-                                accessibilityLabel={"Register Button"}
+                                accessibilityLabel="Izradi račun"
                                 onPress={() => router.push('/(modals)/registerModal')}
                             >
                                 <SymbolView
