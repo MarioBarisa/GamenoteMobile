@@ -246,7 +246,7 @@ export default function FavoritesScreen() {
                         padding: 4
                     }}>
 
-                        <View style={{alignItems: "center", gap: 6, padding: 8, width: "30%"}}>
+                        <View style={{alignItems: "center", gap: 4, padding: 4, width: "30%"}}>
                             <SymbolView
                                 name="flag.fill"
                                 style={{width: 24, height: 24}}
@@ -257,13 +257,16 @@ export default function FavoritesScreen() {
                                 fontWeight: "bold",
                                 fontSize: 11,
                                 textAlign: "center"
-                            }}>Beginner</Text>
-                            <Text style={{color: t.secondaryText, fontSize: 10, textAlign: "center"}}>Dodaj prvu
+                            }}
+                            numberOfLines={1}
+                            adjustsFontSizeToFit
+                            minimumFontScale={0.7}>Beginner</Text>
+                            <Text style={{color: t.secondaryText, fontSize: 10, textAlign: "center"}}
+                            numberOfLines={2}>Dodaj prvu
                                 igru</Text>
                         </View>
 
-                        {/* Kolekcionar - 50+ igara */}
-                        <View style={{alignItems: "center", gap: 6, padding: 8, width: "30%"}}>
+                        <View style={{alignItems: "center", gap: 4, padding: 4, width: "30%"}}>
                             <SymbolView
                                 name="bookmark.fill"
                                 style={{width: 24, height: 24}}
@@ -274,12 +277,15 @@ export default function FavoritesScreen() {
                                 fontWeight: "bold",
                                 fontSize: 11,
                                 textAlign: "center"
-                            }}>Kolekcionar</Text>
-                            <Text style={{color: t.secondaryText, fontSize: 10, textAlign: "center"}}>50+ igara</Text>
+                            }}
+                            numberOfLines={1}
+                            adjustsFontSizeToFit
+                            minimumFontScale={0.7}>Kolekcionar</Text>
+                            <Text style={{color: t.secondaryText, fontSize: 10, textAlign: "center"}}
+                            numberOfLines={2}>50+ igara</Text>
                         </View>
 
-                        {/* 25+ završenih igara */}
-                        <View style={{alignItems: "center", gap: 6, padding: 8, width: "30%"}}>
+                        <View style={{alignItems: "center", gap: 4, padding: 4, width: "30%"}}>
                             <SymbolView
                                 name="checkmark.seal.fill"
                                 style={{width: 24, height: 24}}
@@ -290,13 +296,16 @@ export default function FavoritesScreen() {
                                 fontWeight: "bold",
                                 fontSize: 11,
                                 textAlign: "center"
-                            }}>Completion master</Text>
-                            <Text style={{color: t.secondaryText, fontSize: 10, textAlign: "center"}}>Završi 25
+                            }}
+                            numberOfLines={1}
+                            adjustsFontSizeToFit
+                            minimumFontScale={0.7}>Completion master</Text>
+                            <Text style={{color: t.secondaryText, fontSize: 10, textAlign: "center"}}
+                            numberOfLines={2}>Završi 25
                                 igara</Text>
                         </View>
 
-                        {/* 100+ sati */}
-                        <View style={{alignItems: "center", gap: 6, padding: 8, width: "30%"}}>
+                        <View style={{alignItems: "center", gap: 4, padding: 4, width: "30%"}}>
                             <SymbolView
                                 name="bolt.fill"
                                 style={{width: 24, height: 24}}
@@ -307,12 +316,15 @@ export default function FavoritesScreen() {
                                 fontWeight: "bold",
                                 fontSize: 11,
                                 textAlign: "center"
-                            }}>Brzinski</Text>
-                            <Text style={{color: t.secondaryText, fontSize: 10, textAlign: "center"}}>100+ sati</Text>
+                            }}
+                            numberOfLines={1}
+                            adjustsFontSizeToFit
+                            minimumFontScale={0.7}>Brzinski</Text>
+                            <Text style={{color: t.secondaryText, fontSize: 10, textAlign: "center"}}
+                            numberOfLines={2}>100+ sati</Text>
                         </View>
 
-                        {/* Hardcore - 1000+ sati */}
-                        <View style={{alignItems: "center", gap: 6, padding: 8, width: "30%"}}>
+                        <View style={{alignItems: "center", gap: 4, padding: 4, width: "30%"}}>
                             <SymbolView
                                 name="flame.fill"
                                 style={{width: 24, height: 24}}
@@ -323,12 +335,15 @@ export default function FavoritesScreen() {
                                 fontWeight: "bold",
                                 fontSize: 11,
                                 textAlign: "center"
-                            }}>Hardcore</Text>
-                            <Text style={{color: t.secondaryText, fontSize: 10, textAlign: "center"}}>1000+ sati</Text>
+                            }}
+                            numberOfLines={1}
+                            adjustsFontSizeToFit
+                            minimumFontScale={0.7}>Hardcore</Text>
+                            <Text style={{color: t.secondaryText, fontSize: 10, textAlign: "center"}}
+                            numberOfLines={2}>1000+ sati</Text>
                         </View>
 
-                        {/* Legend - 3000+ sati */}
-                        <View style={{alignItems: "center", gap: 6, padding: 8, width: "30%"}}>
+                        <View style={{alignItems: "center", gap: 4, padding: 4, width: "30%"}}>
                             <SymbolView
                                 name="crown.fill"
                                 style={{width: 24, height: 24}}
@@ -339,11 +354,14 @@ export default function FavoritesScreen() {
                                 fontWeight: "bold",
                                 fontSize: 11,
                                 textAlign: "center"
-                            }}>Legend</Text>
-                            <Text style={{color: t.secondaryText, fontSize: 10, textAlign: "center"}}>3000+ sati</Text>
+                            }}
+                            numberOfLines={1}
+                            adjustsFontSizeToFit
+                            minimumFontScale={0.7}>Legend</Text>
+                            <Text style={{color: t.secondaryText, fontSize: 10, textAlign: "center"}}
+                            numberOfLines={2}>3000+ sati</Text>
                         </View>
-                        {/* EXTRA FORA -> gamenote platinum i GOTY enjoyer*/}
-                        <View style={{alignItems: "center", gap: 6, padding: 8, width: "30%"}}>
+                        <View style={{alignItems: "center", gap: 4, padding: 4, width: "30%"}}>
                             <SymbolView
                                 name="trophy.fill"
                                 style={{width: 24, height: 24}}
@@ -354,13 +372,16 @@ export default function FavoritesScreen() {
                                 fontWeight: "bold",
                                 fontSize: 11,
                                 textAlign: "center"
-                            }}>Gamenote Platinum</Text>
-                            <Text style={{color: t.secondaryText, fontSize: 10, textAlign: "center"}}>100% Gamenote
+                            }}
+                            numberOfLines={1}
+                            adjustsFontSizeToFit
+                            minimumFontScale={0.7}>Gamenote Platinum</Text>
+                            <Text style={{color: t.secondaryText, fontSize: 10, textAlign: "center"}}
+                            numberOfLines={2}>100% Gamenote
                                 Completion</Text>
                         </View>
 
-                        {/* GOTY enjoyer */}
-                        <View style={{alignItems: "center", gap: 6, padding: 8, width: "30%"}}>
+                        <View style={{alignItems: "center", gap: 4, padding: 4, width: "30%"}}>
                             <SymbolView
                                 name="medal.fill"
                                 style={{width: 24, height: 24}}
@@ -371,13 +392,17 @@ export default function FavoritesScreen() {
                                 fontWeight: "bold",
                                 fontSize: 11,
                                 textAlign: "center"
-                            }}>GOTY enjoyer</Text>
-                            <Text style={{color: t.secondaryText, fontSize: 10, textAlign: "center"}}>Odigrano 10+ igara
+                            }}
+                            numberOfLines={1}
+                            adjustsFontSizeToFit
+                            minimumFontScale={0.7}>GOTY enjoyer</Text>
+                            <Text style={{color: t.secondaryText, fontSize: 10, textAlign: "center"}}
+                            numberOfLines={2}>Odigrano 10+ igara
                                 s MAX ocjenom</Text>
                         </View>
 
                     </View>
-                    <View style={{flexDirection: "row", gap: 12, justifyContent: "center"}}>
+                    <View style={{flexDirection: "row", gap: 12, justifyContent: "center", flexWrap: "wrap"}}>
 
                         <Pressable
                             accessibilityLabel="Upravljaj računom"
@@ -477,6 +502,8 @@ export default function FavoritesScreen() {
                         <View style={{
                             flexDirection: "row",
                             alignItems: "center",
+                            justifyContent: "center",
+                            flexWrap: "wrap",
                             margin: 12,
                             gap: 4
                         }}>

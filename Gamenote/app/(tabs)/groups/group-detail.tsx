@@ -145,7 +145,7 @@ const styles = StyleSheet.create({
   },
   gameImage: {
     width: 80,
-    height: 80,
+    aspectRatio: 1,
   },
   gameInfo: {
     flex: 1,

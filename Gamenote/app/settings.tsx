@@ -33,7 +33,7 @@ export default function SettingsScreen() {
                 </Text>
 
                 <View style={styles.row}>
-                    <View>
+                    <View style={{flex: 1, marginRight: 12}}>
                         <Text style={[styles.title, {color: t.text}]}>Dark Mode</Text>
                         <Text style={[styles.subtitle, {color: t.secondaryText}]}>
                             Koristi Dark Mode.
@@ -53,7 +53,7 @@ export default function SettingsScreen() {
                 </View>
 
                 <View style={styles.row}>
-                    <View>
+                    <View style={{flex: 1, marginRight: 12}}>
                         <Text style={[styles.title, {color: t.text}]}>Korist iOS default</Text>
                         <Text style={[styles.subtitle, {color: t.secondaryText}]}>
                             Gamenote koristi iOS default temu.
@@ -90,7 +90,7 @@ export default function SettingsScreen() {
                 </Text>
 
                 <View style={styles.row}>
-                    <View>
+                    <View style={{flex: 1, marginRight: 12}}>
                     <Text style={[styles.title, {color: t.text}]}>Vibracije</Text>
                     <Text style={[styles.subtitle, { color: t.secondaryText}]}>Haptic feedback za promjene tabova.</Text>
                     </View>
@@ -105,7 +105,7 @@ export default function SettingsScreen() {
                 </View>
 
                 <View style={styles.row}>
-                    <View>
+                    <View style={{flex: 1, marginRight: 12}}>
                     <Text style={[styles.title, {color: t.secondaryText}]}>Zvukovi</Text>
                         <Text style={[styles.subtitle, {color: t.secondaryText}]}>Dolazi uskoro.</Text>
                     </View>

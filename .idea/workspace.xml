@@ -4,30 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7b37eb79-ceff-44a4-81aa-7e12f61dfc1f" name="Changes" comment="manje izmjene">
+    <list default="true" id="7b37eb79-ceff-44a4-81aa-7e12f61dfc1f" name="Changes" comment="Veliki code cleanup: dodan privacyIdentifier ( za app store -&gt; TREBA GA POPUNITI ), brisanje starih datoteka, gumb za zvuk u postavkama je greyed-out, platinum uvjeti popravljeni, dodani accessibilityLabeli na svim touchable objektima, progressColor u jednoj datoteci umjesto copy paste posvuda, ErrorCatching wrapper">
       <change beforePath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/.idea/workspace.xml" beforePathEscaped="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/.idea/workspace.xml" afterPathEscaped="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app.json" beforePathEscaped="$PROJECT_DIR$/Gamenote/app.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app.json" afterPathEscaped="$PROJECT_DIR$/Gamenote/app.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/(modals)/addGroupModal.tsx" beforePathEscaped="$PROJECT_DIR$/Gamenote/app/(modals)/addGroupModal.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/(modals)/addGroupModal.tsx" afterPathEscaped="$PROJECT_DIR$/Gamenote/app/(modals)/addGroupModal.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/(modals)/modalEdit.tsx" beforePathEscaped="$PROJECT_DIR$/Gamenote/app/(modals)/modalEdit.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/(modals)/modalEdit.tsx" afterPathEscaped="$PROJECT_DIR$/Gamenote/app/(modals)/modalEdit.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/(modals)/modalEditGroups.tsx" beforePathEscaped="$PROJECT_DIR$/Gamenote/app/(modals)/modalEditGroups.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/(modals)/modalEditGroups.tsx" afterPathEscaped="$PROJECT_DIR$/Gamenote/app/(modals)/modalEditGroups.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/(modals)/registerModal.tsx" beforePathEscaped="$PROJECT_DIR$/Gamenote/app/(modals)/registerModal.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/(modals)/registerModal.tsx" afterPathEscaped="$PROJECT_DIR$/Gamenote/app/(modals)/registerModal.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/(tabs)/groups/_layout.tsx" beforePathEscaped="$PROJECT_DIR$/Gamenote/app/(tabs)/groups/_layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/(tabs)/groups/_layout.tsx" afterPathEscaped="$PROJECT_DIR$/Gamenote/app/(tabs)/groups/_layout.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/(tabs)/groups/group-detail.tsx" beforePathEscaped="$PROJECT_DIR$/Gamenote/app/(tabs)/groups/group-detail.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/(tabs)/groups/group-detail.tsx" afterPathEscaped="$PROJECT_DIR$/Gamenote/app/(tabs)/groups/group-detail.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/(tabs)/groups/index.tsx" beforePathEscaped="$PROJECT_DIR$/Gamenote/app/(tabs)/groups/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/(tabs)/groups/index.tsx" afterPathEscaped="$PROJECT_DIR$/Gamenote/app/(tabs)/groups/index.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/(tabs)/home/index.tsx" beforePathEscaped="$PROJECT_DIR$/Gamenote/app/(tabs)/home/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/(tabs)/home/index.tsx" afterPathEscaped="$PROJECT_DIR$/Gamenote/app/(tabs)/home/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/(tabs)/index.tsx" beforePathEscaped="$PROJECT_DIR$/Gamenote/app/(tabs)/index.tsx" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/(tabs)/profile/index.tsx" beforePathEscaped="$PROJECT_DIR$/Gamenote/app/(tabs)/profile/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/(tabs)/profile/index.tsx" afterPathEscaped="$PROJECT_DIR$/Gamenote/app/(tabs)/profile/index.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/(tabs)/search/index.tsx" beforePathEscaped="$PROJECT_DIR$/Gamenote/app/(tabs)/search/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/(tabs)/search/index.tsx" afterPathEscaped="$PROJECT_DIR$/Gamenote/app/(tabs)/search/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/_layout.tsx" beforePathEscaped="$PROJECT_DIR$/Gamenote/app/_layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/_layout.tsx" afterPathEscaped="$PROJECT_DIR$/Gamenote/app/_layout.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/details.tsx" beforePathEscaped="$PROJECT_DIR$/Gamenote/app/details.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/details.tsx" afterPathEscaped="$PROJECT_DIR$/Gamenote/app/details.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/settings.tsx" beforePathEscaped="$PROJECT_DIR$/Gamenote/app/settings.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/settings.tsx" afterPathEscaped="$PROJECT_DIR$/Gamenote/app/settings.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/common/ProgressSources.tsx" beforePathEscaped="$PROJECT_DIR$/Gamenote/common/ProgressSources.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/common/ProgressSources.tsx" afterPathEscaped="$PROJECT_DIR$/Gamenote/common/ProgressSources.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/components/GameCard.tsx" beforePathEscaped="$PROJECT_DIR$/Gamenote/components/GameCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/components/GameCard.tsx" afterPathEscaped="$PROJECT_DIR$/Gamenote/components/GameCard.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/constants/PLACEHOLDER_GAMES.ts" beforePathEscaped="$PROJECT_DIR$/Gamenote/constants/PLACEHOLDER_GAMES.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/constants/PLACEHOLDER_GAMES.ts" afterPathEscaped="$PROJECT_DIR$/Gamenote/constants/PLACEHOLDER_GAMES.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/context/theme.tsx" beforePathEscaped="$PROJECT_DIR$/Gamenote/context/theme.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/context/theme.tsx" afterPathEscaped="$PROJECT_DIR$/Gamenote/context/theme.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/legacyComponents/favorites.tsx" beforePathEscaped="$PROJECT_DIR$/Gamenote/legacyComponents/favorites.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/package.json" beforePathEscaped="$PROJECT_DIR$/Gamenote/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/package.json" afterPathEscaped="$PROJECT_DIR$/Gamenote/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/tsconfig.json" beforePathEscaped="$PROJECT_DIR$/Gamenote/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/tsconfig.json" afterPathEscaped="$PROJECT_DIR$/Gamenote/tsconfig.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -115,8 +104,8 @@
   </component>
   <component name="CopilotPersistence">
     <persistenceIdMap>
-      <entry key="_/Users/mariobarisa/Desktop//Osobno/GamenoteMobile" value="3EOcjkTquuKugmuBdefVsunXhNU" />
       <entry key="_/Users/mariobarisa/Desktop//Osobno/GamenoteMobile" value="3BnhLSTOxjFVNfgTjSLmchQK7qB" />
+      <entry key="_/Users/mariobarisa/Desktop//Osobno/GamenoteMobile" value="3EdZqkVC0WWMHjyF6i0PC26kwO7" />
     </persistenceIdMap>
   </component>
   <component name="CopilotUserSelectedChatMode">
@@ -250,14 +239,8 @@
       <workItem from="1778842808495" duration="47054000" />
       <workItem from="1780051486975" duration="850000" />
       <workItem from="1780053195879" duration="3806000" />
-      <workItem from="1780403082293" duration="6532000" />
-    </task>
-    <task id="LOCAL−00008" summary="Prijevod određenih screnova na HR.">
-      <option name="closed" value="true" />
-      <created>1776253182475</created>
-      <option name="number" value="LOCAL−00008" />
-      <option name="presentableId" value="LOCAL−00008" />
-      <updated>1776253182475</updated>
+      <workItem from="1780403082293" duration="8338000" />
+      <workItem from="1780510602533" duration="4389000" />
     </task>
     <task id="LOCAL−00009" summary="Implementacija Gamecarda. Dodana osnovna komponenta + cover image.">
       <option name="closed" value="true" />
@@ -595,7 +578,14 @@
       <option name="presentableId" value="LOCAL−00056" />
       <updated>1780407249599</updated>
     </task>
-    <option name="localTasksCounter" value="57" />
+    <task id="LOCAL−00057" summary="Veliki code cleanup: dodan privacyIdentifier ( za app store -&gt; TREBA GA POPUNITI ), brisanje starih datoteka, gumb za zvuk u postavkama je greyed-out, platinum uvjeti popravljeni, dodani accessibilityLabeli na svim touchable objektima, progressColor u jednoj datoteci umjesto copy paste posvuda, ErrorCatching wrapper">
+      <option name="closed" value="true" />
+      <created>1780486964359</created>
+      <option name="number" value="LOCAL−00057" />
+      <option name="presentableId" value="LOCAL−00057" />
+      <updated>1780486964359</updated>
+    </task>
+    <option name="localTasksCounter" value="58" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -613,7 +603,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Micanje nepotrebnih importova po cijelom projektu, dodavanje custom kategorija achvn ( % ) za sve podržane platforme -&gt; edit details.tsx i editModal.tsx" />
     <MESSAGE value="Dodana lagana vibracija kada se spremi igra putem modalEdit.tsx" />
     <MESSAGE value="početna stranica sada učitava igre koje imaju status playing, moje igre stranica učitava sve igre, dodan haptick feedback na header gumbe unutar search section-a" />
     <MESSAGE value="Ispravljen naziv 'realaseDate' u 'releaseDate' u više datoteka i refaktoriran status igre na korištenje tipa GameStatus, dodan status edit u modalEdit.tsx," />
@@ -638,7 +627,8 @@
     <MESSAGE value="dodan async-storage za persisten spremanje postavki, povezan gumb za haptic feedback u postavkama sa tab switching-om" />
     <MESSAGE value="part 2 - dodan async-storage za persisten spremanje postavki, povezan gumb za haptic feedback u postavkama sa tab switching-om" />
     <MESSAGE value="manje izmjene" />
-    <option name="LAST_COMMIT_MESSAGE" value="manje izmjene" />
+    <MESSAGE value="Veliki code cleanup: dodan privacyIdentifier ( za app store -&gt; TREBA GA POPUNITI ), brisanje starih datoteka, gumb za zvuk u postavkama je greyed-out, platinum uvjeti popravljeni, dodani accessibilityLabeli na svim touchable objektima, progressColor u jednoj datoteci umjesto copy paste posvuda, ErrorCatching wrapper" />
+    <option name="LAST_COMMIT_MESSAGE" value="Veliki code cleanup: dodan privacyIdentifier ( za app store -&gt; TREBA GA POPUNITI ), brisanje starih datoteka, gumb za zvuk u postavkama je greyed-out, platinum uvjeti popravljeni, dodani accessibilityLabeli na svim touchable objektima, progressColor u jednoj datoteci umjesto copy paste posvuda, ErrorCatching wrapper" />
   </component>
   <component name="github-copilot-workspace">
     <instructionFileLocations>

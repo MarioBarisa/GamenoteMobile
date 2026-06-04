@@ -75,13 +75,12 @@ export default function ModalEditGroups() {
                         <View style={{flexDirection: 'row', gap: 8, paddingVertical: 8}}>
                             <Text style={[styles.label, {color: t.text, paddingTop: 8}]}>Ime grupe: </Text>
                             <TextInput style={[styles.titleInput, {
+                                flex: 1,
                                 color: t.text,
-                                backgroundColor: theme === 'dark' ? '#2C2C2E' : '#E5E5EA' //BILJEŠKE USERA
+                                backgroundColor: theme === 'dark' ? '#2C2C2E' : '#E5E5EA'
                             }]}
                                        value={form.name ?? ''}
                                        onChangeText={v => patch('name', v)}
-                                //multiline={true}
-                                //numberOfLines={}
                                        placeholder="Naslov grupe?..."
                                        placeholderTextColor={t.secondaryText}
                                        textAlignVertical="top"/>

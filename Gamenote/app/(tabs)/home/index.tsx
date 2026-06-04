@@ -40,9 +40,12 @@ export default function HomeIndex() {
     }, [PLACEHOLDER_GAMES]);
 
       const handlePress = () => {
+      if (Platform.OS === "ios") {
+          Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
+      }
       router.push({
           pathname: '/(modals)/modalEdit',
-          params: {game: JSON.stringify(jumpBackGame)}, // šalje se cijeli game object
+          params: {game: JSON.stringify(jumpBackGame)},
       })
   }
 
@@ -63,7 +66,7 @@ export default function HomeIndex() {
                     borderRadius: 12,
                 }}
             >
-                <View>
+                <View style={{flex: 1, alignItems: "center"}}>
                     <Text style={[styles.name, {color: t.text}]}>Ukupno igara</Text>
                     <Text
                         style={{
@@ -76,7 +79,7 @@ export default function HomeIndex() {
                         {gameNumber}
                     </Text>
                 </View>
-                <View>
+                <View style={{flex: 1, alignItems: "center"}}>
                     <Text style={[styles.name, {color: t.text}]}>Vrijeme igranja</Text>
                     <Text
                         style={{
@@ -89,7 +92,7 @@ export default function HomeIndex() {
                         {playtime}
                     </Text>
                 </View>
-                <View>
+                <View style={{flex: 1, alignItems: "center"}}>
                     <Text style={[styles.name, {color: t.text}]}>Završene igre</Text>
                     <Text
                         style={{
@@ -162,15 +165,9 @@ export default function HomeIndex() {
                 )}
 
                 <Pressable
-                    onPress={() => {
-                        // SAVE GUMB
-                        // handleSave();
-                        if (Platform.OS === "ios") {
-                            Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
-                        }
-                    }}
+                    onPress={handlePress}
                     style={[styles.saveButton, {backgroundColor: "#605DFF"}]}
-                ><Pressable onPress={handlePress}>
+                >
                     <View style={{flexDirection: "row", alignItems: "center", gap: 6}}>
 
                         <Text style={{color: "#fff", fontWeight: "700", fontSize: 16}}>
@@ -181,7 +178,7 @@ export default function HomeIndex() {
                             style={{width: 24, height: 24}}
                             tintColor={"#fff"}
                         />
-                    </View></Pressable>
+                    </View>
                 </Pressable>
             </View>
         </ScrollView>
@@ -196,10 +193,10 @@ const styles = StyleSheet.create({
     },
     image: {
         alignSelf: "center",
-        width: 300,
-        height: 320,
+        width: "100%",
+        aspectRatio: 0.9375,
+        maxWidth: 400,
         borderRadius: 8,
-        paddingBottom: 8,
     },
     title: {
         fontSize: 22,

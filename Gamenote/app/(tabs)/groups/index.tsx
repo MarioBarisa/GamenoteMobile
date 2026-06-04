@@ -162,12 +162,12 @@ const styles = StyleSheet.create({
     },
     gameImage: {
         width: '100%',
-        height: 75,
+        aspectRatio: 4 / 3,
         borderRadius: 6,
         backgroundColor: '#f0f0f0',
     },
     gameImageSingle: {
-        height: 120,
+        aspectRatio: 16 / 9,
         borderRadius: 8,
     },
 });

@@ -69,7 +69,7 @@ export default function SearchIndex() {
             </TouchableOpacity>
           ),
           headerLeft: () => (
-            <TouchableOpacity
+                <TouchableOpacity
               accessibilityLabel="Filtriraj svoje igre"
               onPress={async () => { await Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light)
                   setUserGamenotesOnly(prev => !prev)

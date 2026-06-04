@@ -1,4 +1,4 @@
-import {View, Text, StyleSheet, Dimensions, Image, Pressable} from 'react-native'
+import {View, Text, StyleSheet, Image, Pressable, useWindowDimensions} from 'react-native'
 import { colors } from '@/constants/theme'
 import { useTheme } from '@/context/theme'
 import {Ionicons} from "@expo/vector-icons";
@@ -6,9 +6,6 @@ import {useRouter} from "expo-router";
 import {Game} from "@/common/Game"
 import {STATUS_CONFIG, STATUS_PLATFORM} from "@/common/StatusCommons";
 import {achievementPercent, progressColor} from "@/common/ProgressSources";
-
-const CARD_WIDTH = Dimensions.get('window').width-32;
-const IMAGE_HEIGHT = Math.round(CARD_WIDTH * 8 / 16); //za 16:9 cover
 
 interface Props {
   game: Game
@@ -18,6 +15,8 @@ export default function GameCard({ game }: Props) {
   const { theme } = useTheme()
   const t = colors[theme]
     const router = useRouter();
+    const {width: SCREEN_WIDTH} = useWindowDimensions();
+    const isLargeScreen = SCREEN_WIDTH >= 400;
 
   const handlePress = () => {
       router.push({
@@ -51,14 +50,14 @@ export default function GameCard({ game }: Props) {
         />
         ) : (
           <View style={[styles.imagePlaceholder, { backgroundColor: t.background }]}>
-            <Text style={{ color: t.secondaryText, fontSize: 13 }}>Nema slike</Text>
+            <Text style={{ color: t.secondaryText, fontSize: isLargeScreen ? 15 : 13 }}>Nema slike</Text>
           </View>
         )}
       </View>
 
       {/* body igre */}
-      <View style={styles.cardBody}>
-        <Text style={[styles.title, { color: t.text }]} numberOfLines={2}>
+      <View style={[styles.cardBody, {padding: isLargeScreen ? 10 : 8}]}>
+        <Text style={[styles.title, { color: t.text, fontSize: isLargeScreen ? 18 : 16 }]} numberOfLines={2}>
           {game.title}
         </Text>
 
@@ -69,7 +68,7 @@ export default function GameCard({ game }: Props) {
                         styles.badge,
                         {backgroundColor: STATUS_CONFIG[game.status].bg, marginRight: 8}
                     ]}>
-                        <Text style={[styles.badgeText, {color: STATUS_CONFIG[game.status].text}]}>
+                        <Text style={[styles.badgeText, {color: STATUS_CONFIG[game.status].text, fontSize: isLargeScreen ? 13 : 11}]}>
                             {STATUS_CONFIG[game.status].label}
                         </Text>
                     </View>
@@ -82,7 +81,7 @@ export default function GameCard({ game }: Props) {
                             <Ionicons
                                 key={star}
                                 name={star <= game.rating! ? 'star' : 'star-outline'}
-                            size={14}
+                            size={isLargeScreen ? 16 : 14}
                             color={star<=game.rating! ? '#FF9F0A' : t.secondaryText}
                             style={{marginRight: 2}}/>
                         ))}
@@ -101,7 +100,7 @@ export default function GameCard({ game }: Props) {
                           backgroundColor: theme === 'dark' ? '#2C2C2E' : '#F2F2F7',
                         }
                     ]}>
-                        <Text style={[styles.badgePlaytime, {color: STATUS_PLATFORM[game.platform].text}]}>
+                        <Text style={[styles.badgePlaytime, {color: STATUS_PLATFORM[game.platform].text, fontSize: isLargeScreen ? 13 : 11}]}>
                             {typeof game.play_time === 'number'
                               ? `${game.play_time}h via ${STATUS_PLATFORM[game.platform].label}`
                               : `via ${STATUS_PLATFORM[game.platform].label}`}
@@ -117,10 +116,10 @@ export default function GameCard({ game }: Props) {
                         <View style={[styles.progressFill, { width: `${pct}%`, backgroundColor: prColor }]} />
                     </View>
                     <View style={styles.progressLabels}>
-                        <Text style={[styles.progressLabel, {color: t.text}]}>
+                        <Text style={[styles.progressLabel, {color: t.text, fontSize: isLargeScreen ? 12 : 10}]}>
                             {Math.min(game.progress_value, game.progress_total)}/{game.progress_total}
                         </Text>
-                        <Text style={[styles.progressPercent, {color: t.secondaryText}]}>
+                        <Text style={[styles.progressPercent, {color: t.secondaryText, fontSize: isLargeScreen ? 12 : 10}]}>
                             {pct}%
                         </Text>
 
@@ -148,7 +147,7 @@ const styles = StyleSheet.create({
     imageContainer: {
         position: 'relative',
         width: '100%',
-        height: IMAGE_HEIGHT,
+        aspectRatio: 16 / 9,
     },
     image: {
         width: '100%',

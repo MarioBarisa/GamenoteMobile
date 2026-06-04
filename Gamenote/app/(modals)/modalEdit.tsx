@@ -279,7 +279,8 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         padding: 12,
         fontSize: 16,
-        width: 80,
+        minWidth: 60,
+        maxWidth: 80,
         textAlign: 'center',
     },
     notesInput: {

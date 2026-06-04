@@ -88,6 +88,7 @@ export default function AddGroupModal() {
                         <Text style={[styles.label, {color: t.text, paddingTop: 8}]}>Ime grupe: </Text>
                         <TextInput
                             style={[styles.titleInput, {
+                                flex: 1,
                                 color: t.text,
                                 backgroundColor: theme === 'dark' ? '#2C2C2E' : '#E5E5EA'
                             }]}

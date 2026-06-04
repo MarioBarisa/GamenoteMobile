@@ -1,6 +1,6 @@
 import {useLocalSearchParams, Stack, Link} from "expo-router";
 import {useState} from "react";
-import {Image, ScrollView, StyleSheet, Text, View, Pressable, Dimensions, Modal} from "react-native";
+import {Image, ScrollView, StyleSheet, Text, View, Pressable, useWindowDimensions, Modal} from "react-native";
 import {useSafeAreaInsets} from "react-native-safe-area-context";
 import {Game} from "@/common/Game";
 import {useTheme} from "@/context/theme";
@@ -9,13 +9,12 @@ import {SymbolView} from "expo-symbols";
 import {STATUS_CONFIG, STATUS_PLATFORM} from "@/common/StatusCommons";
 import {isProgressModeKey, PROGRESS_MODE_MAP, progressLabel, progressColor} from "@/common/ProgressSources";
 
-
-const SCREEN_WIDTH = Dimensions.get("window").width;
-
 export default function Index() {
     const {theme} = useTheme();
     const t = colors[theme];
     const insets = useSafeAreaInsets();
+    const {width: SCREEN_WIDTH} = useWindowDimensions();
+    const isLargeScreen = SCREEN_WIDTH >= 400;
     const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
     const [showDetails, setShowDetails] = useState<boolean>(false);
     const {game: gameParam} = useLocalSearchParams<{ game: string }>()
@@ -108,7 +107,7 @@ export default function Index() {
                                     <Image
                                         key={uri}
                                         source={{uri}}
-                                        style={styles.coverImage}
+                                        style={[styles.coverImage, {width: SCREEN_WIDTH - 32}]}
                                         resizeMode="cover"/></Pressable>
                             ))}
                         </ScrollView>
@@ -119,10 +118,9 @@ export default function Index() {
                         padding: 8,
                         flexDirection: 'row',
                         alignItems: 'center',
-                        flexWrap: 'wrap',
-                        justifyContent: 'space-evenly'
+                        justifyContent: 'center',
+                        gap: 8,
                     }}>
-                        {/*  možda maknuti space-evenly? ,STATUS BADGES */}
                         {game.status ? (
                             <View
                                 style={[
@@ -133,30 +131,29 @@ export default function Index() {
                                     },
                                 ]}
                             >
-                                <Text style={{color: '#fff', fontWeight: '700'}}>
+                                <Text style={{color: '#fff', fontWeight: '700', fontSize: isLargeScreen ? 15 : 13}}>
                                     {STATUS_CONFIG[game.status]?.label}
                                 </Text>
                             </View>
                         ) : null}
 
-                        {/* platforma i playtime */}
-                        <View>
-                            {game.platform && STATUS_PLATFORM[game.platform] ? (
-                                <View style={[
-                                    styles.badge,
-                                    {
-                                        marginRight: 8,
-                                        backgroundColor: theme === 'dark' ? '#2C2C2E' : '#F2F2F7',
-                                    }
-                                ]}>
-                                    <Text style={[styles.boldFont, {color: STATUS_PLATFORM[game.platform].text}]}>
-                                        {typeof game.play_time === 'number'
-                                            ? `${game.play_time}h via ${STATUS_PLATFORM[game.platform].label}`
-                                            : `via ${STATUS_PLATFORM[game.platform].label}`}
-                                    </Text>
-                                </View>
-                            ) : null}
-                        </View>
+                        {game.platform && STATUS_PLATFORM[game.platform] ? (
+                            <View style={[
+                                styles.badge,
+                                {
+                                    backgroundColor: theme === 'dark' ? '#2C2C2E' : '#F2F2F7',
+                                }
+                            ]}>
+                                <Text style={[styles.boldFont, {color: STATUS_PLATFORM[game.platform].text, fontSize: isLargeScreen ? 15 : 13}]}
+                                      numberOfLines={1}
+                                      adjustsFontSizeToFit
+                                      minimumFontScale={0.8}>
+                                    {typeof game.play_time === 'number'
+                                        ? `${game.play_time}h via ${STATUS_PLATFORM[game.platform].label}`
+                                        : `via ${STATUS_PLATFORM[game.platform].label}`}
+                                </Text>
+                            </View>
+                        ) : null}
                     </View>
                     <View style={{paddingHorizontal: 12, paddingVertical: 8, gap: 16}}>
 
@@ -200,30 +197,36 @@ export default function Index() {
                                 flexDirection: 'row',
                                 alignItems: 'center',
                                 justifyContent: 'center',
-                                gap: 8,
+                                gap: 6,
                                 backgroundColor: theme === 'dark' ? '#2C2C2E' : '#F2F2F7',
-                                paddingVertical: 8,
-                                paddingHorizontal: 16,
+                                paddingVertical: isLargeScreen ? 8 : 6,
+                                paddingHorizontal: isLargeScreen ? 16 : 12,
                                 borderRadius: 8,
                                 alignSelf: 'center'
                             }}>
                                 {game.start_date ? (
-                                    <Text style={{color: '#51d834', fontWeight: '700', fontSize: 14}}>
+                                    <Text style={{color: '#51d834', fontWeight: '700', fontSize: isLargeScreen ? 15 : 13}}
+                                          numberOfLines={1}
+                                          adjustsFontSizeToFit
+                                          minimumFontScale={0.8}>
                                         Start: {new Date(game.start_date).toLocaleDateString('hr-HR')}
                                     </Text>
-                                ) : <Text style={{color: t.secondaryText, fontSize: 14}}>?</Text>}
+                                ) : <Text style={{color: t.secondaryText, fontSize: isLargeScreen ? 15 : 13}}>?</Text>}
 
                                 <SymbolView
                                     name="arrow.right"
-                                    style={{width: 16, height: 16}}
+                                    style={{width: isLargeScreen ? 16 : 14, height: isLargeScreen ? 16 : 14}}
                                     tintColor={t.secondaryText}
                                 />
 
                                 {game.end_date ? (
-                                    <Text style={{color: '#607de8', fontWeight: '700', fontSize: 14}}>
+                                    <Text style={{color: '#607de8', fontWeight: '700', fontSize: isLargeScreen ? 15 : 13}}
+                                          numberOfLines={1}
+                                          adjustsFontSizeToFit
+                                          minimumFontScale={0.8}>
                                         End: {new Date(game.end_date).toLocaleDateString('hr-HR')}
                                     </Text>
-                                ) : <Text style={{color: t.secondaryText, fontSize: 14}}>Sada</Text>}
+                                ) : <Text style={{color: t.secondaryText, fontSize: isLargeScreen ? 15 : 13}}>Sada</Text>}
                             </View>
                         )}
                         {/* bilješke korisnika */}
@@ -342,7 +345,7 @@ export default function Index() {
                                             >
                                                 <Image
                                                     source={{uri: item.background_image}}
-                                                    style={{width: 100, height: 70, borderRadius: 4}}
+                                                    style={{width: 100, aspectRatio: 10 / 7, borderRadius: 4}}
                                                     resizeMode="cover"
                                                 />
                                                 <View style={{flex: 1}}>
@@ -403,7 +406,7 @@ export default function Index() {
                         {(game.image_url ?? []).map((uri) => (
                             <ScrollView
                                 key={uri}
-                                style={styles.fullscreenSlide}
+                                style={{width: SCREEN_WIDTH, height: '100%'}}
                                 minimumZoomScale={1}
                                 maximumZoomScale={5}
                                 showsHorizontalScrollIndicator={false}
@@ -412,7 +415,7 @@ export default function Index() {
                             >
                                 <Image
                                     source={{uri}}
-                                    style={{width: SCREEN_WIDTH, height: SCREEN_WIDTH * 0.75}}
+                                    style={{width: SCREEN_WIDTH, aspectRatio: 4 / 3}}
                                     resizeMode="contain"
                                 />
                             </ScrollView>
@@ -428,8 +431,8 @@ export default function Index() {
 
 const styles = StyleSheet.create({
     coverImage: {
-        width: SCREEN_WIDTH - 32,
-        height: 240,
+        width: '100%',
+        aspectRatio: 16 / 9,
         borderRadius: 12,
     },
     title: {
@@ -481,9 +484,5 @@ const styles = StyleSheet.create({
         color: "#fff",
         fontSize: 16,
         fontWeight: "700",
-    },
-    fullscreenSlide: {
-        width: SCREEN_WIDTH,
-        height: "100%",
     },
 })
