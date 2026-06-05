@@ -4,6 +4,7 @@ export const STATUS_CONFIG = {
     completed: {label: "Completed", bg: '#30D158', text: '#FFFFFF'},
     dropped: {label: "Dropped", bg: '#FF453A', text: '#FFFFFF'},
     backlog: {label: "Backlog", bg: '#b364da', text: '#FFFFFF'},
+    wishlist: {label: "Wishlist", bg: '#00ddf1', text: '#FFFFFF'},
 }
 
 export const STATUS_PLATFORM: Record<string, { label: string; text: string }> = {
@@ -33,4 +34,5 @@ export const GAME_STATUSES = [
   'completed',
   'dropped',
   'backlog',
+    'wishlist',
 ] as const

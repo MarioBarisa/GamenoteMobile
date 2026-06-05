@@ -119,7 +119,7 @@ export const PLACEHOLDER_GAMES: Game[] = [
         title: 'Hollow Knight',
         game_id: "6",
         platform: 'Nintendo Switch',
-        status: 'backlog',
+        status: 'wishlist',
         rating: 3,
         metacriticScore: 84,
         ageRating: 12,

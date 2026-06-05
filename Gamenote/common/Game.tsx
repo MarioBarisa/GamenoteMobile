@@ -7,7 +7,7 @@ export interface Game {
   game_id: string
   platform?: string
   genre?: string
-  status?: GameStatus //'playing' | 'paused' | 'completed' | 'dropped' | 'backlog'
+  status?: GameStatus //'playing' | 'paused' | 'completed' | 'dropped' | 'backlog' | 'wishlist'
   rating?: number
   metacriticScore: number
   ageRating: number
