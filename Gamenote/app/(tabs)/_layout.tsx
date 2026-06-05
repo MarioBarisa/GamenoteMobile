@@ -22,7 +22,7 @@ export default function TabsLayout() {
     }, [tabSegment, vibrationsEnabled]);
 
     return (
-        <NativeTabs>
+        <NativeTabs minimizeBehavior="onScrollDown">
             <NativeTabs.Trigger name="home">
                 <Label>Početna</Label>
                 <Icon

@@ -9,7 +9,7 @@ import {SymbolView} from "expo-symbols";
 import {STATUS_CONFIG, STATUS_PLATFORM} from "@/common/StatusCommons";
 import {isProgressModeKey, PROGRESS_MODE_MAP, progressLabel, progressColor} from "@/common/ProgressSources";
 
-export default function Index() {
+export default function GameDetailsScreen() {
     const {theme} = useTheme();
     const t = colors[theme];
     const insets = useSafeAreaInsets();
@@ -46,10 +46,10 @@ export default function Index() {
             meta = game.metacriticScore;
         }
         const clamped = Math.max(0, Math.min(meta, 100))
-        if (clamped >= 90) return '#00CE7A' // Must Play
-        if (clamped >= 75) return '#66CC33' // Positive
-        if (clamped >= 50) return '#FFCC33' // Mixed
-        return '#FF0000'                    // Negative
+        if (clamped >= 90) return '#00CE7A'
+        if (clamped >= 75) return '#66CC33'
+        if (clamped >= 50) return '#FFCC33'
+        return '#FF0000'
     })()
 
     return (
@@ -57,7 +57,6 @@ export default function Index() {
             <Stack.Screen
                 options={{
                     title: game.title,
-                    //animation: 'none',
                     headerBackTitle: 'Natrag',
                     headerRight: () => (
                         <Link
@@ -94,7 +93,7 @@ export default function Index() {
                         <ScrollView
                             horizontal
                             decelerationRate="fast"
-                            snapToInterval={(SCREEN_WIDTH - 32) + 8} /* Cover slike,  širina slike + gap */
+                            snapToInterval={(SCREEN_WIDTH - 32) + 8}
                             showsHorizontalScrollIndicator={false}
                             contentContainerStyle={{
                                 gap: 8,
@@ -113,7 +112,6 @@ export default function Index() {
                         </ScrollView>
 
                     )}
-                    {/* Info row */}
                     <View style={{
                         padding: 8,
                         flexDirection: 'row',
@@ -158,9 +156,7 @@ export default function Index() {
                     <View style={{paddingHorizontal: 12, paddingVertical: 8, gap: 16}}>
 
 
-                        {/* Progress i Ocjena */}
                         <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
-                            {/* Progress */}
                             {label ? (
                                 <View style={{gap: 2}}>
                                     <Text style={{
@@ -191,7 +187,6 @@ export default function Index() {
 
                         </View>
 
-                        {/* start i end datumi */}
                         {!!(game.start_date || game.end_date) && (
                             <View style={{
                                 flexDirection: 'row',
@@ -229,7 +224,6 @@ export default function Index() {
                                 ) : <Text style={{color: t.secondaryText, fontSize: isLargeScreen ? 15 : 13}}>Sada</Text>}
                             </View>
                         )}
-                        {/* bilješke korisnika */}
                         <Text style={{color: t.text, fontSize: 20, fontWeight: '600'}}>Tvoje bilješke:</Text>
                         {game.notes ? (
                             <Text style={{fontStyle: 'italic', fontSize: 14, color: t.text}}>{game.notes}</Text>
@@ -237,7 +231,6 @@ export default function Index() {
 
                     </View>
                 </View>
-                {/* Detalji o igri: Godina izlaska, developer, opis, metacritic ocjena, serijal */}
                 <View style={[styles.card, {
                     backgroundColor: t.card,
                     borderColor: theme === 'dark' ? '#2C2C2E' : '#E5E5EA',
@@ -327,11 +320,11 @@ export default function Index() {
                                     <Text style={{color: t.secondaryText, fontSize: 14, marginBottom: 4}}>
                                         Igre iz serijala
                                     </Text>
-                                    {game.series.map((item, index) => { // Dodan index
+                                    {game.series.map((item, index) => {
                                         const year = item.released ? item.released.split('-')[0] : '';
                                         return (
                                             <Pressable
-                                                key={`${item.id}-${index}`} // Garantira unikatnost čak i ako API vrati duplikate
+                                                key={`${item.id}-${index}`}
                                                 onPress={() => { /* Ovdje dodaj navigaciju na detalje ove igre */
                                                 }}
                                                 style={{

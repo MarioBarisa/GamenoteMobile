@@ -12,6 +12,7 @@ export default function FavoritesLayout() {
           title: "Tvoj Gamenote",
         }}
       />
+        <Stack.Screen name="details" />
     </Stack>
   );
 }

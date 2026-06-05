@@ -12,6 +12,7 @@ export default function HomeLayout() {
           title: "Trenutno igraš",
         }}
       />
+        <Stack.Screen name="details" />
     </Stack>
   );
 }

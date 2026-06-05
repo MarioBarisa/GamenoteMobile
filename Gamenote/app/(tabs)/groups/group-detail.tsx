@@ -54,7 +54,7 @@ export default function GroupDetail(){
                     ),
                 }}
             />
-            <ScrollView style={{backgroundColor: t.background}} contentContainerStyle={{paddingBottom: 16}}>
+            <ScrollView style={{backgroundColor: t.background}} contentContainerStyle={{paddingBottom: 16}} contentInsetAdjustmentBehavior="automatic" >
                 <View style={styles.ratingRow}>
                     {group.type && (
                         <Text style={{

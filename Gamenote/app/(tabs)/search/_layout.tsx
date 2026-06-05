@@ -12,6 +12,7 @@ export default function SearchLayout() {
           title: "Pretraži Gamenote",
         }}
       />
+        <Stack.Screen name="details" />
     </Stack>
   );
 }

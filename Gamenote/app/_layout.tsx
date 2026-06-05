@@ -19,12 +19,6 @@ function RootNavigator() {
                                           headerShown: false,
                                           title: "Početna",
                                       }}/>
-                        <Stack.Screen name="details"
-                                      options={{
-                                          headerBackButtonDisplayMode: "minimal",
-                                      //   headerLargeTitle: true,
-                                      //  title: "Detalji", -> naziv dodan unutar details.tsx kako bi svaki naslov bio = naziv igre
-                                      }}/>
                         <Stack.Screen
                             name="(modals)/modalEditGroups"
                             options={{

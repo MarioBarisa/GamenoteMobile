@@ -2,7 +2,7 @@ import {View, Text, StyleSheet, Image, Pressable, useWindowDimensions} from 'rea
 import { colors } from '@/constants/theme'
 import { useTheme } from '@/context/theme'
 import {Ionicons} from "@expo/vector-icons";
-import {useRouter} from "expo-router";
+import {useRouter, useSegments} from "expo-router";
 import {Game} from "@/common/Game"
 import {STATUS_CONFIG, STATUS_PLATFORM} from "@/common/StatusCommons";
 import {achievementPercent, progressColor} from "@/common/ProgressSources";
@@ -15,13 +15,15 @@ export default function GameCard({ game }: Props) {
   const { theme } = useTheme()
   const t = colors[theme]
     const router = useRouter();
+    const segments = useSegments();
+    const tab = segments[1] as 'home' | 'favorites' | 'search';
     const {width: SCREEN_WIDTH} = useWindowDimensions();
     const isLargeScreen = SCREEN_WIDTH >= 400;
 
   const handlePress = () => {
       router.push({
-          pathname: '/details',
-          params: {game: JSON.stringify(game)}, // šalje se cijeli game object
+          pathname: `/${tab}/details`,
+          params: {game: JSON.stringify(game)},
       })
   }
 
