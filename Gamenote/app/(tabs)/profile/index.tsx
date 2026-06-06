@@ -19,7 +19,7 @@ export default function FavoritesScreen() {
 
     useLayoutEffect(() => { // CUSTOM POZDRAV TITLE ZA USERNAME
         navigation.setOptions({
-            title: loggedIn && username ? `Pozdrav, ${username}!` : "Dobrodošao!",
+            title: loggedIn && username ? `Pozdrav ${username}!` : "Dobrodošao!",
         });
     }, [navigation, loggedIn, username]);
 
