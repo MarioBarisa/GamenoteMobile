@@ -45,6 +45,13 @@ function RootNavigator() {
                                 title: "Izradi račun",
                             }}
                         />
+                        <Stack.Screen
+                            name="(modals)/onboardingModal"
+                            options={{
+                                presentation: 'modal',
+                                headerShown: false,
+                            }}
+                        />
                         <Stack.Screen name="settings"
                                       options={{
                                           headerShown: true,

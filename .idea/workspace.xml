@@ -5,9 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7b37eb79-ceff-44a4-81aa-7e12f61dfc1f" name="Changes" comment="Dodan &lt;Badge&gt; indikator kada korisnik nije prijavljen + minimalna izmjena u Profile screenu">
+      <change afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/assets/gamenote/gamenote.png" afterPathEscaped="$PROJECT_DIR$/Gamenote/assets/gamenote/gamenote.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/.idea/workspace.xml" beforePathEscaped="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/.idea/workspace.xml" afterPathEscaped="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/(tabs)/_layout.tsx" beforePathEscaped="$PROJECT_DIR$/Gamenote/app/(tabs)/_layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/(tabs)/_layout.tsx" afterPathEscaped="$PROJECT_DIR$/Gamenote/app/(tabs)/_layout.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/(tabs)/profile/index.tsx" beforePathEscaped="$PROJECT_DIR$/Gamenote/app/(tabs)/profile/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/(tabs)/profile/index.tsx" afterPathEscaped="$PROJECT_DIR$/Gamenote/app/(tabs)/profile/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/_layout.tsx" beforePathEscaped="$PROJECT_DIR$/Gamenote/app/_layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/_layout.tsx" afterPathEscaped="$PROJECT_DIR$/Gamenote/app/_layout.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -95,8 +96,8 @@
   </component>
   <component name="CopilotPersistence">
     <persistenceIdMap>
-      <entry key="_/Users/mariobarisa/Desktop//Osobno/GamenoteMobile" value="3BnhLSTOxjFVNfgTjSLmchQK7qB" />
       <entry key="_/Users/mariobarisa/Desktop//Osobno/GamenoteMobile" value="3EionO5PEhc1jxEwqpVMvl4IG3W" />
+      <entry key="_/Users/mariobarisa/Desktop//Osobno/GamenoteMobile" value="3BnhLSTOxjFVNfgTjSLmchQK7qB" />
     </persistenceIdMap>
   </component>
   <component name="CopilotUserSelectedChatMode">
@@ -158,33 +159,34 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
-    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;javascript.preferred.runtime.type.id&quot;: &quot;node&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/mariobarisa/Desktop/💻/Osobno/GamenoteMobile&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.standard&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.standard&quot;: &quot;&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;com.github.copilot.settings.general.GeneralConfigurable&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;/Users/mariobarisa/Desktop/💻/Osobno/GamenoteMobile/Gamenote/node_modules/typescript/lib&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "codeWithMe.voiceChat.enabledByDefault": "false",
+    "git-widget-placeholder": "main",
+    "javascript.preferred.runtime.type.id": "node",
+    "last_opened_file_path": "/Users/mariobarisa/Desktop/💻/Osobno/GamenoteMobile/Gamenote/assets/gamenote",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.standard": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.standard": "",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "run.code.analysis.last.selected.profile": "pProject Default",
+    "settings.editor.selected.configurable": "com.github.copilot.settings.general.GeneralConfigurable",
+    "ts.external.directory.path": "/Users/mariobarisa/Desktop/💻/Osobno/GamenoteMobile/Gamenote/node_modules/typescript/lib",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/Gamenote/assets/gamenote" />
       <recent name="$PROJECT_DIR$/Gamenote/app/(tabs)/groups" />
       <recent name="$PROJECT_DIR$/Gamenote/app/(tabs)" />
     </key>
@@ -199,7 +201,7 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-js-predefined-d6986cc7102b-3bd3a6803838-JavaScript-WS-261.22158.274" />
+        <option value="bundled-js-predefined-d6986cc7102b-31caf2ab9e3c-JavaScript-WS-261.25134.101" />
       </set>
     </attachedChunks>
   </component>
@@ -233,14 +235,8 @@
       <workItem from="1780403082293" duration="8338000" />
       <workItem from="1780510602533" duration="5112000" />
       <workItem from="1780657091857" duration="5191000" />
-      <workItem from="1780670918002" duration="1482000" />
-    </task>
-    <task id="LOCAL−00012" summary="Progress bar sada ima drugaciji color uzimajuci u obzir %-ak prolaznosti u igri, manje izmjene velicine fontova i game slike">
-      <option name="closed" value="true" />
-      <created>1776773902133</created>
-      <option name="number" value="LOCAL−00012" />
-      <option name="presentableId" value="LOCAL−00012" />
-      <updated>1776773902133</updated>
+      <workItem from="1780670918002" duration="1502000" />
+      <workItem from="1781002319627" duration="5786000" />
     </task>
     <task id="LOCAL−00013" summary="Minimalne izmjene + update README.md">
       <option name="closed" value="true" />
@@ -578,7 +574,14 @@
       <option name="presentableId" value="LOCAL−00060" />
       <updated>1780664203110</updated>
     </task>
-    <option name="localTasksCounter" value="61" />
+    <task id="LOCAL−00061" summary="Dodan &lt;Badge&gt; indikator kada korisnik nije prijavljen + minimalna izmjena u Profile screenu">
+      <option name="closed" value="true" />
+      <created>1780742926135</created>
+      <option name="number" value="LOCAL−00061" />
+      <option name="presentableId" value="LOCAL−00061" />
+      <updated>1780742926135</updated>
+    </task>
+    <option name="localTasksCounter" value="62" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -596,7 +599,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Dodan osnovni stats bar na početnu stranicu." />
     <MESSAGE value="Dodana podrška za grupe igara kroz GroupsContext, uključujući dodavanje i uklanjanje grupa te povezivanje igara s grupama." />
     <MESSAGE value="Dodan screen sa više detalja o grupama, unutar grupa dodano opcionalno polje sa komentarima korisnika, minimalne izmjene ikona unutar tab bar-a i prikaza starsa" />
     <MESSAGE value="minimalne nadopune prošlog commita" />
@@ -621,7 +623,8 @@
     <MESSAGE value="Popravljeni različiti omjeri i veličine dijelova aplikacije kako bi se aplikacija ispravno priakzivala na različitim rezolucijama / veličinama ekrana" />
     <MESSAGE value="Dodan wishlist game status u StatusCommons.tsx" />
     <MESSAGE value="Dodan minimizeBehavior=&quot;onScrollDown&quot; kako bi se TabBar smanjio tokom scrolla. Dodan details kao zasebni screen bez pushScreen kako bi se tab bar mogao i tamo prikazitavi + popravak ružnog title fade-ina od prije navedennog fixa." />
-    <option name="LAST_COMMIT_MESSAGE" value="Dodan minimizeBehavior=&quot;onScrollDown&quot; kako bi se TabBar smanjio tokom scrolla. Dodan details kao zasebni screen bez pushScreen kako bi se tab bar mogao i tamo prikazitavi + popravak ružnog title fade-ina od prije navedennog fixa." />
+    <MESSAGE value="Dodan &lt;Badge&gt; indikator kada korisnik nije prijavljen + minimalna izmjena u Profile screenu" />
+    <option name="LAST_COMMIT_MESSAGE" value="Dodan &lt;Badge&gt; indikator kada korisnik nije prijavljen + minimalna izmjena u Profile screenu" />
   </component>
   <component name="github-copilot-workspace">
     <instructionFileLocations>

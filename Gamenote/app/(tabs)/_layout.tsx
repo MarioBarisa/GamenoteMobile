@@ -1,9 +1,12 @@
 import {Icon, Label, NativeTabs, Badge} from "expo-router/unstable-native-tabs";
-import {useSegments} from "expo-router";
+import {router, useSegments} from "expo-router";
 import * as Haptics from "expo-haptics";
 import {useSettings} from "@/context/settings";
 import {useEffect, useRef} from "react";
 import {useAuth} from "@/context/auth";
+
+const DEV_IGNORE_REDIRECT_PROFILE = true;
+let onboardingShown = false;
 
 // noinspection JSUnusedGlobalSymbols
 export default function TabsLayout() {
@@ -14,6 +17,16 @@ export default function TabsLayout() {
     const tabSegment = segments?.[1];
     const previousTabRef = useRef(tabSegment);
     const {vibrationsEnabled} = useSettings();
+
+    useEffect(() => {
+        if (DEV_IGNORE_REDIRECT_PROFILE && !onboardingShown) {
+            onboardingShown = true;
+            const timer = setTimeout(() => {
+                router.push("/(modals)/onboardingModal");
+            }, 300);
+            return () => clearTimeout(timer);
+        }
+    }, []);
 
     useEffect(() => {
         if (vibrationsEnabled && tabSegment && tabSegment !== previousTabRef.current) {
@@ -55,6 +68,5 @@ export default function TabsLayout() {
             </NativeTabs.Trigger>
 
         </NativeTabs>
-
     );
 }
