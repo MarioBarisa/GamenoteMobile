@@ -46,7 +46,7 @@ export default function OnboardingModal() {
     return (
         <ScrollView
             contentContainerStyle={styles.container}
-            style={{backgroundColor: t.backgroundModal}}
+            style={{backgroundColor: t.onboarding}} //#b8c1c1
             contentInsetAdjustmentBehavior="automatic"
             automaticallyAdjustContentInsets={true}
             keyboardShouldPersistTaps="handled"
