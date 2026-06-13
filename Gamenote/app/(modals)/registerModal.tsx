@@ -4,6 +4,7 @@ import {useRouter} from "expo-router";
 import {Alert, Platform, Pressable, ScrollView, StyleSheet, Text, TextInput, View} from "react-native";
 import {SymbolView} from "expo-symbols";
 import * as Haptics from "expo-haptics";
+import * as WebBrowser from "expo-web-browser";
 import {useState} from "react";
 
 interface RegisterFormData {
@@ -285,7 +286,23 @@ export default function RegisterModal() {
                         Izradi račun
                     </Text>
                 </Pressable>
-
+                <View style={{flexDirection: "row", gap: 8, alignItems: "center"}}>
+                    <SymbolView
+                        name={"info.circle.fill"}
+                        style={{width: 18, height: 18}}
+                        tintColor={"#ffffff"}
+                    />
+                    <Text style={{color: t.secondaryText}}>
+                        Izradom računa pristaješ na{" "}
+                        <Text
+                            style={{textDecorationLine: "underline", color: t.accent}}
+                            onPress={() => WebBrowser.openBrowserAsync("http://gamenote.eu/tos")}
+                        >
+                            uvjete korištenja Gamenote-a
+                        </Text>
+                        .
+                    </Text>
+                </View>
                 <Pressable
                     onPress={() => router.back()}
                     accessibilityLabel="Odustani"
