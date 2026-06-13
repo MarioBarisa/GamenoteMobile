@@ -1,6 +1,6 @@
 import {useLocalSearchParams, Stack, Link} from "expo-router";
 import {useState} from "react";
-import {Image, ScrollView, StyleSheet, Text, View, Pressable, useWindowDimensions, Modal} from "react-native";
+import {Image, ScrollView, StyleSheet, Text, View, Pressable, useWindowDimensions, Modal, Alert} from "react-native";
 import {useSafeAreaInsets} from "react-native-safe-area-context";
 import {Game} from "@/common/Game";
 import {useTheme} from "@/context/theme";
@@ -58,23 +58,37 @@ export default function GameDetailsScreen() {
                 options={{
                     title: game.title,
                     headerBackTitle: 'Natrag',
-                    headerRight: () => (
-                        <Link
-                            href={{
-                                pathname: "/(modals)/modalEdit",
-                                params: {game: gameParam}
-                            }}
-                            asChild
-                        >
-                            <Pressable accessibilityLabel="Uredi igru" hitSlop={10}>
+                    headerRight: () => (<View style={{flexDirection: 'row', alignItems: 'center', gap: 4}}>
+                            <Link
+                                href={{pathname: "/(modals)/modalEdit", params: {game: gameParam}}}
+                                asChild
+                            >
+                                <Pressable accessibilityLabel="Uredi igru" hitSlop={10} style={{marginRight: 6, marginLeft: 4}}>
+                                    <SymbolView
+                                        name="square.and.pencil"
+                                        resizeMode="scaleAspectFit"
+                                        style={{width: 32, height: 32}}
+                                        tintColor={t.text}
+                                    />
+                                </Pressable>
+                            </Link>
+
+                            <Pressable
+                                accessibilityLabel="Podijeli igru."
+                                hitSlop={10}
+                                onPress={() => {Alert.alert('', `Link je kopiran.`, [   {text: 'Ok', onPress: () => null}
+        ]);// ovdje netlify function za share gen
+                                }}
+                                style={{marginRight: 6, marginLeft: 4}}
+                            >
                                 <SymbolView
-                                    name="square.and.pencil"
+                                    name="square.and.arrow.up"
                                     resizeMode="scaleAspectFit"
-                                    style={{width: 32, height: 32, justifyContent: 'center'}}
+                                    style={{width: 32, height: 32}}
                                     tintColor={t.text}
                                 />
                             </Pressable>
-                        </Link>
+                        </View>
                     ),
                 }}
             />

@@ -4,13 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7b37eb79-ceff-44a4-81aa-7e12f61dfc1f" name="Changes" comment="Dodan TOS u register formu">
+    <list default="true" id="7b37eb79-ceff-44a4-81aa-7e12f61dfc1f" name="Changes" comment="Dodan GameCardCompact.tsx za prikazivanje više igara u manjem prostoru za power usere">
       <change beforePath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/.idea/workspace.xml" beforePathEscaped="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/.idea/workspace.xml" afterPathEscaped="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/(tabs)/favorites/index.tsx" beforePathEscaped="$PROJECT_DIR$/Gamenote/app/(tabs)/favorites/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/(tabs)/favorites/index.tsx" afterPathEscaped="$PROJECT_DIR$/Gamenote/app/(tabs)/favorites/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/(tabs)/home/index.tsx" beforePathEscaped="$PROJECT_DIR$/Gamenote/app/(tabs)/home/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/(tabs)/home/index.tsx" afterPathEscaped="$PROJECT_DIR$/Gamenote/app/(tabs)/home/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/(tabs)/search/index.tsx" beforePathEscaped="$PROJECT_DIR$/Gamenote/app/(tabs)/search/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/(tabs)/search/index.tsx" afterPathEscaped="$PROJECT_DIR$/Gamenote/app/(tabs)/search/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/settings.tsx" beforePathEscaped="$PROJECT_DIR$/Gamenote/app/settings.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/settings.tsx" afterPathEscaped="$PROJECT_DIR$/Gamenote/app/settings.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/context/settings.tsx" beforePathEscaped="$PROJECT_DIR$/Gamenote/context/settings.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/context/settings.tsx" afterPathEscaped="$PROJECT_DIR$/Gamenote/context/settings.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/components/GameDetailsScreen.tsx" beforePathEscaped="$PROJECT_DIR$/Gamenote/components/GameDetailsScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/components/GameDetailsScreen.tsx" afterPathEscaped="$PROJECT_DIR$/Gamenote/components/GameDetailsScreen.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -239,14 +235,7 @@
       <workItem from="1780657091857" duration="5191000" />
       <workItem from="1780670918002" duration="1502000" />
       <workItem from="1781002319627" duration="9057000" />
-      <workItem from="1781352561322" duration="1841000" />
-    </task>
-    <task id="LOCAL−00015" summary="search bar sada radi nad videoigrama">
-      <option name="closed" value="true" />
-      <created>1776859428816</created>
-      <option name="number" value="LOCAL−00015" />
-      <option name="presentableId" value="LOCAL−00015" />
-      <updated>1776859428817</updated>
+      <workItem from="1781352561322" duration="2699000" />
     </task>
     <task id="LOCAL−00016" summary="Dodani gumb za toggle između korisnikovog Gamenote-a i globalne Gamenote baze prilikom pretrage te gumb za sortiranje. Potrebna implementacija">
       <option name="closed" value="true" />
@@ -584,7 +573,14 @@
       <option name="presentableId" value="LOCAL−00063" />
       <updated>1781353480080</updated>
     </task>
-    <option name="localTasksCounter" value="64" />
+    <task id="LOCAL−00064" summary="Dodan GameCardCompact.tsx za prikazivanje više igara u manjem prostoru za power usere">
+      <option name="closed" value="true" />
+      <created>1781355085682</created>
+      <option name="number" value="LOCAL−00064" />
+      <option name="presentableId" value="LOCAL−00064" />
+      <updated>1781355085682</updated>
+    </task>
+    <option name="localTasksCounter" value="65" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -602,7 +598,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="minimalne nadopune prošlog commita" />
     <MESSAGE value="bolja organizacija projekta ( dodana modals mapa )" />
     <MESSAGE value="U tab baru fill sf ikone se renderiraju samo kada korinsik je na tom tab-u, dodan selection igara za dodavanje / micanje istih unutar modalEditGroups.tsx" />
     <MESSAGE value="dodan modal addGroupModal.tsx putem kojeg se mogu dodati nove grupe, manje ispravke UI-a. Dodana &quot;Jump back in!&quot; section na home koja prikazuje igre koje su ili pazuirane ili u backlogu, TBI: gumb igraj danas otvara modal igre." />
@@ -627,7 +622,8 @@
     <MESSAGE value="Dodan &lt;Badge&gt; indikator kada korisnik nije prijavljen + minimalna izmjena u Profile screenu" />
     <MESSAGE value="Dodan welcom modal." />
     <MESSAGE value="Dodan TOS u register formu" />
-    <option name="LAST_COMMIT_MESSAGE" value="Dodan TOS u register formu" />
+    <MESSAGE value="Dodan GameCardCompact.tsx za prikazivanje više igara u manjem prostoru za power usere" />
+    <option name="LAST_COMMIT_MESSAGE" value="Dodan GameCardCompact.tsx za prikazivanje više igara u manjem prostoru za power usere" />
   </component>
   <component name="github-copilot-workspace">
     <instructionFileLocations>
