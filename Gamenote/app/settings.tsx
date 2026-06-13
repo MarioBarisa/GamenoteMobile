@@ -5,7 +5,7 @@ import {colors} from "@/constants/theme";
 
 export default function SettingsScreen() {
     const {theme, preference, setPreference} = useTheme();
-    const {vibrationsEnabled, setVibrationsEnabled} = useSettings();
+    const {vibrationsEnabled, setVibrationsEnabled, compactCards, setCompactCards} = useSettings();
     const t = colors[theme];
 
     const isDarkForced = preference === "dark";
@@ -69,6 +69,20 @@ export default function SettingsScreen() {
                             true: "#0a58ff",
                         }}
                         thumbColor={theme === "dark" ? "#FFFFFF" : "#000000"}
+                    />
+                </View>
+                <View style={styles.row}>
+                    <View style={{flex: 1, marginRight: 12}}>
+                        <Text style={[styles.title, {color: t.text}]}>Compact GameCard prikaz</Text>
+                        <Text style={[styles.subtitle, {color: t.secondaryText}]}>Prikaži 2 igre po retku (manje kartice).</Text>
+                    </View>
+                    <Switch
+                        value={compactCards}
+                        onValueChange={setCompactCards}
+                        trackColor={{
+                            false: "rgba(120,120,128,0.32)",
+                            true: "#34C759",
+                        }}
                     />
                 </View>
             </View>

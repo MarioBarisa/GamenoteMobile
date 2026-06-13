@@ -1,9 +1,11 @@
 import { useMemo, useState } from "react";
-import {ScrollView, TouchableOpacity, Alert} from "react-native";
+import {ScrollView, TouchableOpacity, Alert, View} from "react-native";
 import { Stack } from "expo-router";
 import { useTheme } from "@/context/theme";
+import { useSettings } from "@/context/settings";
 import { colors } from "@/constants/theme";
 import GameCard from "@/components/GameCard";
+import GameCardCompact from "@/components/GameCardCompact";
 import * as Haptics from 'expo-haptics';
 import {PLACEHOLDER_GAMES} from "@/constants/PLACEHOLDER_GAMES";
 import { SymbolView } from "expo-symbols";
@@ -44,6 +46,7 @@ export default function SearchIndex() {
 
   const { theme } = useTheme();
   const t = colors[theme];
+  const {compactCards} = useSettings();
 
   return (
     <>
@@ -98,9 +101,17 @@ export default function SearchIndex() {
       contentContainerStyle={{ padding: 16, gap: 0 }}
       contentInsetAdjustmentBehavior="automatic"
     >
-      {filteredGames.map((game, i) => (
-        <GameCard key={game.title} game={game} />
-      ))}
+      {compactCards ? (
+        <View style={{flexDirection: 'row', flexWrap: 'wrap', gap: 12}}>
+          {filteredGames.map((game, i) => (
+            <GameCardCompact key={game.title} game={game} />
+          ))}
+        </View>
+      ) : (
+        filteredGames.map((game, i) => (
+          <GameCard key={game.title} game={game} />
+        ))
+      )}
     </ScrollView>
     </>
   );

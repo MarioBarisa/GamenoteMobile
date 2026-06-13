@@ -2,6 +2,8 @@ import {Image, Platform, Pressable, ScrollView, StyleSheet, Text, View} from "re
 import {useTheme} from "@/context/theme";
 import {colors} from "@/constants/theme";
 import GameCard from "@/components/GameCard";
+import GameCardCompact from "@/components/GameCardCompact";
+import {useSettings} from "@/context/settings";
 import {PLACEHOLDER_GAMES} from "@/constants/PLACEHOLDER_GAMES";
 import {useMemo} from "react";
 import * as Haptics from "expo-haptics";
@@ -13,6 +15,7 @@ import {router} from "expo-router";
 export default function HomeIndex() {
     const {theme} = useTheme();
     const t = colors[theme];
+    const {compactCards} = useSettings();
 
     let playtime = 0;
     for (const game of PLACEHOLDER_GAMES) {
@@ -107,9 +110,21 @@ export default function HomeIndex() {
                 </View>
             </View>
 
-            {PLACEHOLDER_GAMES.filter((g) => g.status === "playing").map((game, i) => (
-                <GameCard key={i} game={game}/>
-            ))}
+            {(() => {
+                const igre = PLACEHOLDER_GAMES.filter((g) => g.status === "playing");
+                if (compactCards) {
+                    return (
+                        <View style={{flexDirection: 'row', flexWrap: 'wrap', gap: 12}}>
+                            {igre.map((game, i) => (
+                                <GameCardCompact key={i} game={game}/>
+                            ))}
+                        </View>
+                    );
+                }
+                return igre.map((game, i) => (
+                    <GameCard key={i} game={game}/>
+                ));
+            })()}
 
             <View
                 style={{
