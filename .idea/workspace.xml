@@ -4,10 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7b37eb79-ceff-44a4-81aa-7e12f61dfc1f" name="Changes" comment="Dodan GameCardCompact.tsx za prikazivanje više igara u manjem prostoru za power usere">
+    <list default="true" id="7b37eb79-ceff-44a4-81aa-7e12f61dfc1f" name="Changes" comment="Dodana nova boja za onboarding da se vidi gamenote logo u light-mode">
       <change beforePath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/.idea/workspace.xml" beforePathEscaped="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/.idea/workspace.xml" afterPathEscaped="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/(modals)/onboardingModal.tsx" beforePathEscaped="$PROJECT_DIR$/Gamenote/app/(modals)/onboardingModal.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/(modals)/onboardingModal.tsx" afterPathEscaped="$PROJECT_DIR$/Gamenote/app/(modals)/onboardingModal.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/constants/theme.ts" beforePathEscaped="$PROJECT_DIR$/Gamenote/constants/theme.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/constants/theme.ts" afterPathEscaped="$PROJECT_DIR$/Gamenote/constants/theme.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/(tabs)/profile/index.tsx" beforePathEscaped="$PROJECT_DIR$/Gamenote/app/(tabs)/profile/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/(tabs)/profile/index.tsx" afterPathEscaped="$PROJECT_DIR$/Gamenote/app/(tabs)/profile/index.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -237,13 +236,6 @@
       <workItem from="1780670918002" duration="1502000" />
       <workItem from="1781002319627" duration="9057000" />
       <workItem from="1781352561322" duration="2699000" />
-    </task>
-    <task id="LOCAL−00016" summary="Dodani gumb za toggle između korisnikovog Gamenote-a i globalne Gamenote baze prilikom pretrage te gumb za sortiranje. Potrebna implementacija">
-      <option name="closed" value="true" />
-      <created>1776945205825</created>
-      <option name="number" value="LOCAL−00016" />
-      <option name="presentableId" value="LOCAL−00016" />
-      <updated>1776945205825</updated>
     </task>
     <task id="LOCAL−00017" summary="Implementirani osnovni sort mehanizam">
       <option name="closed" value="true" />
@@ -581,7 +573,14 @@
       <option name="presentableId" value="LOCAL−00064" />
       <updated>1781355085682</updated>
     </task>
-    <option name="localTasksCounter" value="65" />
+    <task id="LOCAL−00065" summary="Dodana nova boja za onboarding da se vidi gamenote logo u light-mode">
+      <option name="closed" value="true" />
+      <created>1781364631874</created>
+      <option name="number" value="LOCAL−00065" />
+      <option name="presentableId" value="LOCAL−00065" />
+      <updated>1781364631874</updated>
+    </task>
+    <option name="localTasksCounter" value="66" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -599,7 +598,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="bolja organizacija projekta ( dodana modals mapa )" />
     <MESSAGE value="U tab baru fill sf ikone se renderiraju samo kada korinsik je na tom tab-u, dodan selection igara za dodavanje / micanje istih unutar modalEditGroups.tsx" />
     <MESSAGE value="dodan modal addGroupModal.tsx putem kojeg se mogu dodati nove grupe, manje ispravke UI-a. Dodana &quot;Jump back in!&quot; section na home koja prikazuje igre koje su ili pazuirane ili u backlogu, TBI: gumb igraj danas otvara modal igre." />
     <MESSAGE value="Gumb&quot; Igraj danas!&quot; sada otvara editmodal.tsx" />
@@ -624,7 +622,8 @@
     <MESSAGE value="Dodan welcom modal." />
     <MESSAGE value="Dodan TOS u register formu" />
     <MESSAGE value="Dodan GameCardCompact.tsx za prikazivanje više igara u manjem prostoru za power usere" />
-    <option name="LAST_COMMIT_MESSAGE" value="Dodan GameCardCompact.tsx za prikazivanje više igara u manjem prostoru za power usere" />
+    <MESSAGE value="Dodana nova boja za onboarding da se vidi gamenote logo u light-mode" />
+    <option name="LAST_COMMIT_MESSAGE" value="Dodana nova boja za onboarding da se vidi gamenote logo u light-mode" />
   </component>
   <component name="github-copilot-workspace">
     <instructionFileLocations>

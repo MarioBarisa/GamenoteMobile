@@ -1,4 +1,4 @@
-import {Text, ScrollView, StyleSheet, TextInput, View, Alert, Image, Pressable, Linking} from "react-native";
+import {Text, ScrollView, StyleSheet, TextInput, View, Alert, Image, Pressable} from "react-native";
 import {useLayoutEffect, useState} from "react";
 import {useTheme} from "@/context/theme";
 import {useAuth} from "@/context/auth";
@@ -6,6 +6,7 @@ import {colors} from "@/constants/theme";
 import {SymbolView} from "expo-symbols";
 import {PLACEHOLDER_GAMES} from "@/constants/PLACEHOLDER_GAMES";
 import {useNavigation, useRouter} from "expo-router";
+import * as WebBrowser from "expo-web-browser";
 
 
 // noinspection JSUnusedGlobalSymbols
@@ -415,7 +416,7 @@ export default function FavoritesScreen() {
                                 gap: 6,
                                 opacity: pressed ? 0.6 : 1,
                             }]}
-                            onPress={() => Linking.openURL("https://gamenote.barisa.me/profile")}
+                             onPress={() => WebBrowser.openBrowserAsync("http://gamenote.eu/profile")}
                         >
                             <SymbolView
                                 name={"person.crop.circle" as any}
