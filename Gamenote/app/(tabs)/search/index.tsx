@@ -14,7 +14,7 @@ import { SymbolView } from "expo-symbols";
 export default function SearchIndex() {
   const [search, setSearch] = useState("");
   const [userGamenotesOnly, setUserGamenotesOnly] = useState(false);
-  const [sort, setSort] = useState(false);
+  const [sort] = useState(false);
   const PLACEHOLDER_IGRE = PLACEHOLDER_GAMES;
 
   const filteredGames = useMemo(() => {
@@ -54,24 +54,6 @@ export default function SearchIndex() {
         options={{
           title: "Pretraži Gamenote",
           headerRight: () => (
-            <TouchableOpacity
-              accessibilityLabel="Sortiraj po ocjeni"
-              onPress={async () => { await Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light)
-                  setSort(prev => !prev)
-              }}
-              onLongPress={async () => { await Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium)
-                  Alert.alert("Sortiranje", "Sortiraj po ocjeni. Ako je sortiranje isključeno igre su poredane po vremenu igranja.")
-              }}
-              style={{ justifyContent: 'center', alignItems: 'center'}}>
-             <SymbolView
-                 key={sort ? "line.horizontal.3.decrease.circle.fill" : "line.horizontal.3.decrease.circle"}
-                 name={sort ? "line.horizontal.3.decrease.circle.fill" : "line.horizontal.3.decrease.circle"}
-                resizeMode="scaleAspectFit"
-                style={{ width: 36, height: 30 }}
-              />
-            </TouchableOpacity>
-          ),
-          headerLeft: () => (
                 <TouchableOpacity
               accessibilityLabel="Filtriraj svoje igre"
               onPress={async () => { await Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light)
@@ -87,6 +69,7 @@ export default function SearchIndex() {
                 name={userGamenotesOnly ? "bookmark.fill" : "bookmark"}
                 resizeMode="scaleAspectFit"
                  style={{ width: 36, height: 30 }}
+                 tintColor={t.text}
               />
             </TouchableOpacity>
           ),

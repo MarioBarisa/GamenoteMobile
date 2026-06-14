@@ -4,9 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7b37eb79-ceff-44a4-81aa-7e12f61dfc1f" name="Changes" comment="Dodana nova boja za onboarding da se vidi gamenote logo u light-mode">
+    <list default="true" id="7b37eb79-ceff-44a4-81aa-7e12f61dfc1f" name="Changes" comment="Dodano dodatno filtriranje unutar &quot;Tvoj Gamenote&quot; screena -&gt; filtriranje po platformi i ocjeni korisnika/playtime. Maknuto filtriranje po ocjeni korisnika/playtime iz search screena">
       <change beforePath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/.idea/workspace.xml" beforePathEscaped="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/.idea/workspace.xml" afterPathEscaped="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/(tabs)/profile/index.tsx" beforePathEscaped="$PROJECT_DIR$/Gamenote/app/(tabs)/profile/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/(tabs)/profile/index.tsx" afterPathEscaped="$PROJECT_DIR$/Gamenote/app/(tabs)/profile/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/(tabs)/favorites/index.tsx" beforePathEscaped="$PROJECT_DIR$/Gamenote/app/(tabs)/favorites/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/(tabs)/favorites/index.tsx" afterPathEscaped="$PROJECT_DIR$/Gamenote/app/(tabs)/favorites/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/(tabs)/search/index.tsx" beforePathEscaped="$PROJECT_DIR$/Gamenote/app/(tabs)/search/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/(tabs)/search/index.tsx" afterPathEscaped="$PROJECT_DIR$/Gamenote/app/(tabs)/search/index.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -598,7 +599,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="U tab baru fill sf ikone se renderiraju samo kada korinsik je na tom tab-u, dodan selection igara za dodavanje / micanje istih unutar modalEditGroups.tsx" />
     <MESSAGE value="dodan modal addGroupModal.tsx putem kojeg se mogu dodati nove grupe, manje ispravke UI-a. Dodana &quot;Jump back in!&quot; section na home koja prikazuje igre koje su ili pazuirane ili u backlogu, TBI: gumb igraj danas otvara modal igre." />
     <MESSAGE value="Gumb&quot; Igraj danas!&quot; sada otvara editmodal.tsx" />
     <MESSAGE value="U potpunosti preuređen details screen -&gt; dodana detaljna statistika." />
@@ -623,7 +623,8 @@
     <MESSAGE value="Dodan TOS u register formu" />
     <MESSAGE value="Dodan GameCardCompact.tsx za prikazivanje više igara u manjem prostoru za power usere" />
     <MESSAGE value="Dodana nova boja za onboarding da se vidi gamenote logo u light-mode" />
-    <option name="LAST_COMMIT_MESSAGE" value="Dodana nova boja za onboarding da se vidi gamenote logo u light-mode" />
+    <MESSAGE value="Dodano dodatno filtriranje unutar &quot;Tvoj Gamenote&quot; screena -&gt; filtriranje po platformi i ocjeni korisnika/playtime. Maknuto filtriranje po ocjeni korisnika/playtime iz search screena" />
+    <option name="LAST_COMMIT_MESSAGE" value="Dodano dodatno filtriranje unutar &quot;Tvoj Gamenote&quot; screena -&gt; filtriranje po platformi i ocjeni korisnika/playtime. Maknuto filtriranje po ocjeni korisnika/playtime iz search screena" />
   </component>
   <component name="github-copilot-workspace">
     <instructionFileLocations>
