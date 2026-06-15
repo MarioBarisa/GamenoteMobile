@@ -6,8 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="7b37eb79-ceff-44a4-81aa-7e12f61dfc1f" name="Changes" comment="Dodano dodatno filtriranje unutar &quot;Tvoj Gamenote&quot; screena -&gt; filtriranje po platformi i ocjeni korisnika/playtime. Maknuto filtriranje po ocjeni korisnika/playtime iz search screena">
       <change beforePath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/.idea/workspace.xml" beforePathEscaped="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/.idea/workspace.xml" afterPathEscaped="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app.json" beforePathEscaped="$PROJECT_DIR$/Gamenote/app.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app.json" afterPathEscaped="$PROJECT_DIR$/Gamenote/app.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/(tabs)/favorites/index.tsx" beforePathEscaped="$PROJECT_DIR$/Gamenote/app/(tabs)/favorites/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/(tabs)/favorites/index.tsx" afterPathEscaped="$PROJECT_DIR$/Gamenote/app/(tabs)/favorites/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/(tabs)/search/index.tsx" beforePathEscaped="$PROJECT_DIR$/Gamenote/app/(tabs)/search/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/(tabs)/search/index.tsx" afterPathEscaped="$PROJECT_DIR$/Gamenote/app/(tabs)/search/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/package.json" beforePathEscaped="$PROJECT_DIR$/Gamenote/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/package.json" afterPathEscaped="$PROJECT_DIR$/Gamenote/package.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -95,8 +96,8 @@
   </component>
   <component name="CopilotPersistence">
     <persistenceIdMap>
-      <entry key="_/Users/mariobarisa/Desktop//Osobno/GamenoteMobile" value="3BnhLSTOxjFVNfgTjSLmchQK7qB" />
       <entry key="_/Users/mariobarisa/Desktop//Osobno/GamenoteMobile" value="3F56PPXGprNPKe5LePQPJRSYkZC" />
+      <entry key="_/Users/mariobarisa/Desktop//Osobno/GamenoteMobile" value="3BnhLSTOxjFVNfgTjSLmchQK7qB" />
     </persistenceIdMap>
   </component>
   <component name="CopilotUserSelectedChatMode">
@@ -141,6 +142,18 @@
 }</component>
   <component name="ProjectId" id="3BnhLSTOxjFVNfgTjSLmchQK7qB" />
   <component name="ProjectSessionTemplates">
+    <option name="inlineTemplate">
+      <template>
+        <option name="modeId" value="Ask" />
+        <option name="model">
+          <model>
+            <option name="modelType" value="builtin_family" />
+            <option name="modelValue" value="auto" />
+          </model>
+        </option>
+        <option name="targetType" value="LOCAL" />
+      </template>
+    </option>
     <option name="panelTemplate">
       <template>
         <option name="modeId" value="Agent" />
@@ -237,6 +250,7 @@
       <workItem from="1780670918002" duration="1502000" />
       <workItem from="1781002319627" duration="9057000" />
       <workItem from="1781352561322" duration="2699000" />
+      <workItem from="1781470346483" duration="1099000" />
     </task>
     <task id="LOCAL−00017" summary="Implementirani osnovni sort mehanizam">
       <option name="closed" value="true" />
