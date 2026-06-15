@@ -5,7 +5,7 @@ import GameCard from "@/components/GameCard";
 import GameCardCompact from "@/components/GameCardCompact";
 import {useSettings} from "@/context/settings";
 import {PLACEHOLDER_GAMES} from "@/constants/PLACEHOLDER_GAMES";
-import {useMemo} from "react";
+import {useMemo, useState} from "react";
 import * as Haptics from "expo-haptics";
 import {SymbolView} from "expo-symbols";
 import {STATUS_CONFIG} from "@/common/StatusCommons";
@@ -16,23 +16,24 @@ export default function HomeIndex() {
     const {theme} = useTheme();
     const t = colors[theme];
     const {compactCards} = useSettings();
+    const [games, setGames] = useState(PLACEHOLDER_GAMES);
 
     let playtime = 0;
-    for (const game of PLACEHOLDER_GAMES) {
+    for (const game of games) {
         playtime = playtime + (game.play_time ?? 0);
     }
 
-    const gameNumber = PLACEHOLDER_GAMES.length;
+    const gameNumber = games.length;
 
     let finishedGames = 0;
-    for (const game of PLACEHOLDER_GAMES) {
+    for (const game of games) {
         if (game.status === "completed") {
             finishedGames += 1;
         }
     }
 
     const jumpBackGame = useMemo(() => {
-        const moguce = PLACEHOLDER_GAMES.filter(
+        const moguce = games.filter(
             (g) => g.status === "paused" || g.status === "backlog"
         );
         if (!moguce.length) {
@@ -40,7 +41,7 @@ export default function HomeIndex() {
         } else {
             return moguce[Math.floor(Math.random() * moguce.length)];
         }
-    }, [PLACEHOLDER_GAMES]);
+    }, [games]);
 
       const handlePress = () => {
       if (Platform.OS === "ios") {
@@ -111,18 +112,18 @@ export default function HomeIndex() {
             </View>
 
             {(() => {
-                const igre = PLACEHOLDER_GAMES.filter((g) => g.status === "playing");
+                const igre = games.filter((g) => g.status === "playing");
                 if (compactCards) {
                     return (
                         <View style={{flexDirection: 'row', flexWrap: 'wrap', gap: 12}}>
-                            {igre.map((game, i) => (
-                                <GameCardCompact key={i} game={game}/>
+                            {igre.map((game) => (
+                                <GameCardCompact key={game.game_id} game={game} onDelete={(id) => setGames(prev => prev.filter(g => g.game_id !== id))}/>
                             ))}
                         </View>
                     );
                 }
-                return igre.map((game, i) => (
-                    <GameCard key={i} game={game}/>
+                return igre.map((game) => (
+                    <GameCard key={game.game_id} game={game} onDelete={(id) => setGames(prev => prev.filter(g => g.game_id !== id))}/>
                 ));
             })()}
 

@@ -15,10 +15,10 @@ export default function SearchIndex() {
   const [search, setSearch] = useState("");
   const [userGamenotesOnly, setUserGamenotesOnly] = useState(false);
   const [sort] = useState(false);
-  const PLACEHOLDER_IGRE = PLACEHOLDER_GAMES;
+  const [games, setGames] = useState(PLACEHOLDER_GAMES);
 
   const filteredGames = useMemo(() => {
-    let results = [...PLACEHOLDER_IGRE];
+    let results = [...games];
 
     if (search) {
       results = results.filter((game) =>
@@ -34,7 +34,7 @@ export default function SearchIndex() {
     });
 
     return results;
-  }, [search, sort]); // <- Obavezno dodati 'sort' u ovisnosti (dependency array)
+  }, [games, search, sort]); // <- Obavezno moram biti 'sort' u ovisnosti (dependency array)
 
     function searchBarText(vrsta: boolean){
         if(vrsta){
@@ -86,13 +86,13 @@ export default function SearchIndex() {
     >
       {compactCards ? (
         <View style={{flexDirection: 'row', flexWrap: 'wrap', gap: 12}}>
-          {filteredGames.map((game, i) => (
-            <GameCardCompact key={game.title} game={game} />
+          {filteredGames.map((game) => (
+            <GameCardCompact key={game.game_id} game={game} onDelete={(id) => setGames(prev => prev.filter(g => g.game_id !== id))} />
           ))}
         </View>
       ) : (
-        filteredGames.map((game, i) => (
-          <GameCard key={game.title} game={game} />
+        filteredGames.map((game) => (
+          <GameCard key={game.game_id} game={game} onDelete={(id) => setGames(prev => prev.filter(g => g.game_id !== id))} />
         ))
       )}
     </ScrollView>

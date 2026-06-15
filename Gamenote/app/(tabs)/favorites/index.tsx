@@ -32,13 +32,15 @@ export default function FavoritesScreen() {
     const t = colors[theme];
     const {compactCards} = useSettings();
 
+    const [games, setGames] = useState(PLACEHOLDER_GAMES);
+
     const platforms = useMemo(
-        () => [...new Set(PLACEHOLDER_GAMES.map(g => g.platform).filter(Boolean))] as string[],
-        []
+        () => [...new Set(games.map(g => g.platform).filter(Boolean))] as string[],
+        [games]
     );
 
     const filteredGames = useMemo(() => {
-        let results = [...PLACEHOLDER_GAMES];
+        let results = [...games];
         if (platformFilter) {
             results = results.filter(g => g.platform === platformFilter);
         }
@@ -53,7 +55,7 @@ export default function FavoritesScreen() {
             results.sort((a, b) => (b.play_time || 0) - (a.play_time || 0));
         }
         return results;
-    }, [sortBy, platformFilter, statusFilter]);
+    }, [games, sortBy, platformFilter, statusFilter]);
 
     function toggleSort() {
         Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light); // nije potrbeno jace, samo light tap da korisnik dobije feedback
@@ -153,13 +155,13 @@ export default function FavoritesScreen() {
                 </View>
                 {compactCards ? (
                     <View style={{flexDirection: 'row', flexWrap: 'wrap', gap: 12}}>
-                        {filteredGames.map((game, i) => (
-                            <GameCardCompact key={i} game={game}/>
+                        {filteredGames.map((game) => (
+                            <GameCardCompact key={game.game_id} game={game} onDelete={(id) => setGames(prev => prev.filter(g => g.game_id !== id))}/>
                         ))}
                     </View>
                 ) : (
-                    filteredGames.map((game, i) => (
-                        <GameCard key={i} game={game}/>
+                    filteredGames.map((game) => (
+                        <GameCard key={game.game_id} game={game} onDelete={(id) => setGames(prev => prev.filter(g => g.game_id !== id))}/>
                     ))
                 )}
             </ScrollView>
