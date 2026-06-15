@@ -32,6 +32,10 @@ export default function GroupsLayout() {
                 name="group-detail"
                 options={{}}
             />
+            <Stack.Screen
+                name="details"
+                options={{}}
+            />
         </Stack>
     );
 }

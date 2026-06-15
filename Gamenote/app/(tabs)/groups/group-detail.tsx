@@ -1,4 +1,4 @@
-import {useLocalSearchParams, Stack, Link} from "expo-router";
+import {useLocalSearchParams, Stack, Link, useRouter} from "expo-router";
 import {useTheme} from "@/context/theme";
 import {colors} from "@/constants/theme"
 import {useGroups} from "@/context/GroupsContext";
@@ -13,6 +13,7 @@ export default function GroupDetail(){
     const { theme } = useTheme();
     const t = colors[theme];
     const {groups, getGamesInGroup } = useGroups();
+    const router = useRouter();
 
     const group = groups.find((g)=>g.id === id); // AKO grupa NIJE PRONAĐENA
     if(!group){
@@ -93,25 +94,30 @@ export default function GroupDetail(){
                 </Text>
 
                 {games.map((game, index) => (
-                    <View key={index} style={[styles.gameCard, {backgroundColor: t.card}]}>
-                        {game?.image_url?.[0] ? (
-                            <Image source={{uri: game.image_url[0]}} style={styles.gameImage} resizeMode="cover"/>
-                        ) : (
-                            <View style={[styles.gameImage, {
-                                backgroundColor: t.background,
-                                justifyContent: "center",
-                                alignItems: "center"
-                            }]}>
-                                <Ionicons name="image-outline" size={24} color={t.secondaryText}/>
-                            </View>
-                        )}
-                        <View style={styles.gameInfo}>
-                            <Text style={{color: t.text, fontWeight: "600", fontSize: 15}}>{game?.title}</Text>
-                            {game?.genre && (
-                                <Text style={{color: t.secondaryText, fontSize: 12, marginTop: 2}}>{game.genre}</Text>
+                    <Pressable key={index} onPress={() => router.push({ //KADA KORISNIK KLIKNE NA NEKU IGRU OTVORI DETALJE IGRE
+                        pathname: "/(tabs)/groups/details",
+                        params: { game: JSON.stringify(game) },
+                    })}>
+                        <View style={[styles.gameCard, {backgroundColor: t.card}]}>
+                            {game?.image_url?.[0] ? (
+                                <Image source={{uri: game.image_url[0]}} style={styles.gameImage} resizeMode="cover"/>
+                            ) : (
+                                <View style={[styles.gameImage, {
+                                    backgroundColor: t.background,
+                                    justifyContent: "center",
+                                    alignItems: "center"
+                                }]}>
+                                    <Ionicons name="image-outline" size={24} color={t.secondaryText}/>
+                                </View>
                             )}
+                            <View style={styles.gameInfo}>
+                                <Text style={{color: t.text, fontWeight: "600", fontSize: 15}}>{game?.title}</Text>
+                                {game?.genre && (
+                                    <Text style={{color: t.secondaryText, fontSize: 12, marginTop: 2}}>{game.genre}</Text>
+                                )}
+                            </View>
                         </View>
-                    </View>
+                    </Pressable>
                 ))}
             </ScrollView>
         </>
