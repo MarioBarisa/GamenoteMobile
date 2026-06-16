@@ -3,7 +3,8 @@ import {useTheme} from "@/context/theme";
 import {colors} from "@/constants/theme"
 import {useGroups} from "@/context/GroupsContext";
 import {Image, ScrollView, Text, View, StyleSheet, Pressable,} from "react-native";
-import {PLACEHOLDER_GAMES} from "@/constants/PLACEHOLDER_GAMES";
+import {useUserGames} from "@/hooks/useUserGames";
+import {useMemo} from "react";
 import {SymbolView} from "expo-symbols";
 import {Ionicons} from "@expo/vector-icons";
 import {useTranslation} from "react-i18next";
@@ -16,6 +17,8 @@ export default function GroupDetail(){
     const t = colors[theme];
     const {groups, getGamesInGroup } = useGroups();
     const router = useRouter();
+    const {games: allGames} = useUserGames();
+    const gamesMap = useMemo(() => new Map(allGames.map(g => [g.game_id, g])), [allGames]);
 
     const group = groups.find((g)=>g.id === id); // AKO grupa NIJE PRONAĐENA
     if(!group){
@@ -28,8 +31,8 @@ export default function GroupDetail(){
 
     const gameIds = getGamesInGroup(group.id);
     const games = gameIds
-        .map((gameId) => PLACEHOLDER_GAMES.find((g)=>g.game_id === gameId))
-        .filter((game): game is (typeof PLACEHOLDER_GAMES)[number] => Boolean(game));
+        .map((gameId) => gamesMap.get(gameId))
+        .filter((game): game is NonNullable<typeof game> => Boolean(game));
 
     return (
         <>
@@ -101,8 +104,8 @@ export default function GroupDetail(){
                         params: { game: JSON.stringify(game) },
                     })}>
                         <View style={[styles.gameCard, {backgroundColor: t.card}]}>
-                            {game?.image_url?.[0] ? (
-                                <Image source={{uri: game.image_url[0]}} style={styles.gameImage} resizeMode="cover"/>
+                            {game?.image_url ? (
+                                <Image source={{uri: game.image_url}} style={styles.gameImage} resizeMode="cover"/>
                             ) : (
                                 <View style={[styles.gameImage, {
                                     backgroundColor: t.background,

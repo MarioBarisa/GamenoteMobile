@@ -1,10 +1,10 @@
-import {Text, ScrollView, StyleSheet, TextInput, View, Alert, Image, Pressable} from "react-native";
+import {Text, ScrollView, StyleSheet, TextInput, View, Alert, Image, Pressable, RefreshControl} from "react-native";
 import {useLayoutEffect, useState} from "react";
 import {useTheme} from "@/context/theme";
 import {useAuth} from "@/context/auth";
 import {colors} from "@/constants/theme";
 import {SymbolView} from "expo-symbols";
-import {PLACEHOLDER_GAMES} from "@/constants/PLACEHOLDER_GAMES";
+import {useUserGames} from "@/hooks/useUserGames";
 import {useNavigation, useRouter} from "expo-router";
 import * as WebBrowser from "expo-web-browser";
 import {useTranslation} from "react-i18next";
@@ -13,8 +13,10 @@ import {useTranslation} from "react-i18next";
 // noinspection JSUnusedGlobalSymbols
 export default function FavoritesScreen() {
     const {t: tr} = useTranslation();
-    const {loggedIn, setLoggedIn, username, setUsername} = useAuth();
+    const {loggedIn, username, signIn, signOut} = useAuth();
+    const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const {games, refresh, isLoading} = useUserGames();
     const {theme} = useTheme();
     const t = colors[theme];
     const navigation = useNavigation();
@@ -27,7 +29,7 @@ export default function FavoritesScreen() {
     }, [navigation, loggedIn, username, tr]);
 
     function userStats() {
-        const totalGames = PLACEHOLDER_GAMES.length;
+        const totalGames = games.length;
 
         let totalPlaytime = 0;
         let finishedGames = 0;
@@ -39,7 +41,7 @@ export default function FavoritesScreen() {
         let switchGames = 0;
         let bestGames = 0;
 
-        for (const game of PLACEHOLDER_GAMES) {
+        for (const game of games) {
             const playTime = game.play_time ?? 0;
             totalPlaytime += playTime;
 
@@ -134,6 +136,7 @@ export default function FavoritesScreen() {
         <ScrollView
             style={{backgroundColor: t.background}}
             contentInsetAdjustmentBehavior="automatic"
+            refreshControl={<RefreshControl refreshing={isLoading} onRefresh={refresh} />}
         >
             {loggedIn && (
                 <View style={styles.container}>
@@ -435,8 +438,8 @@ export default function FavoritesScreen() {
                                 gap: 6,
                                 opacity: pressed ? 0.6 : 1,
                             }]}
-                            onPress={() => {
-                                setLoggedIn(false);
+                            onPress={async () => {
+                                await signOut();
                                 Alert.alert(tr("profile.logoutSuccess"));
                             }}
                         >
@@ -486,7 +489,7 @@ export default function FavoritesScreen() {
                             placeholderTextColor={t.secondaryText}
                             clearButtonMode="unless-editing"
                             style={[styles.systemInput, {color: t.text}]}
-                            onChangeText={setUsername}
+                            onChangeText={setEmail}
                         />
                         <TextInput
                             placeholder="Gamenote Password"
@@ -515,13 +518,16 @@ export default function FavoritesScreen() {
                                     opacity: pressed ? 0.6 : 1
                                 }]}
                         accessibilityLabel={tr("profile.loginA11y")}
-                        onPress={() => {
-                                    if (password === "") {
-                                        Alert.alert(tr("profile.missingPasswordTitle"), tr("profile.missingPasswordMsg"));
-                                    } else {
-                                        setLoggedIn(true);
-                                    }
-                                }}
+                         onPress={async () => {
+                                     if (password === "") {
+                                         Alert.alert(tr("profile.missingPasswordTitle"), tr("profile.missingPasswordMsg"));
+                                     } else {
+                                         const {success, error} = await signIn(email, password);
+                                         if (!success) {
+                                             Alert.alert(tr("profile.login"), error || "Pogrešna e-mail adresa ili lozinka.");
+                                         }
+                                     }
+                                 }}
                             >
                                 <SymbolView
                                     name={"arrow.right" as any}

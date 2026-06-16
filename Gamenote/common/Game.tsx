@@ -10,15 +10,16 @@ export interface Game {
   status?: GameStatus //'playing' | 'paused' | 'completed' | 'dropped' | 'backlog' | 'wishlist'
   rating?: number
   metacriticScore: number
-  ageRating: number
+  esrbRating?: string
   releaseDate: string
   webPage: string
   about: string
   series?: SeriesGame[];
   notes?: string
   publisher?: string
-  image_url?: string[]
-  background_image?: string[]
+  image_url?: string
+  background_image?: string
+  screenshot_urls?: string[]
   play_time?: number
   start_date?: string
   end_date?: string

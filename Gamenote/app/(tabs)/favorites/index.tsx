@@ -1,10 +1,10 @@
 import {useMemo, useState} from "react";
-import {ScrollView, View, Text, TouchableOpacity, ActionSheetIOS, Pressable} from "react-native";
+import {RefreshControl, ScrollView, View, Text, TouchableOpacity, ActionSheetIOS, Pressable} from "react-native";
 import {Stack} from "expo-router";
 import {useTheme} from "@/context/theme";
 import {useSettings} from "@/context/settings";
 import {colors} from "@/constants/theme";
-import {PLACEHOLDER_GAMES} from "@/constants/PLACEHOLDER_GAMES";
+import {useUserGames} from "@/hooks/useUserGames";
 import {STATUS_PLATFORM} from "@/common/StatusCommons";
 import GameCard from "@/components/GameCard";
 import GameCardCompact from "@/components/GameCardCompact";
@@ -35,7 +35,7 @@ export default function FavoritesScreen() {
     const t = colors[theme];
     const {compactCards} = useSettings();
 
-    const [games, setGames] = useState(PLACEHOLDER_GAMES);
+    const {games, deleteGame, refresh, isLoading} = useUserGames();
 
     const platforms = useMemo(
         () => [...new Set(games.map(g => g.platform).filter(Boolean))] as string[],
@@ -127,6 +127,7 @@ export default function FavoritesScreen() {
                 style={{backgroundColor: t.background}}
                 contentContainerStyle={{padding: 16, gap: 0}}
                 contentInsetAdjustmentBehavior="automatic"
+                refreshControl={<RefreshControl refreshing={isLoading} onRefresh={refresh} />}
             >
                 <View style={{
                     flexDirection: "row", justifyContent: "space-evenly", alignItems: "center",
@@ -159,12 +160,12 @@ export default function FavoritesScreen() {
                 {compactCards ? (
                     <View style={{flexDirection: 'row', flexWrap: 'wrap', gap: 12}}>
                         {filteredGames.map((game) => (
-                            <GameCardCompact key={game.game_id} game={game} onDelete={(id) => setGames(prev => prev.filter(g => g.game_id !== id))}/>
+                            <GameCardCompact key={game.game_id} game={game} onDelete={(id) => deleteGame(id)}/>
                         ))}
                     </View>
                 ) : (
                     filteredGames.map((game) => (
-                        <GameCard key={game.game_id} game={game} onDelete={(id) => setGames(prev => prev.filter(g => g.game_id !== id))}/>
+                        <GameCard key={game.game_id} game={game} onDelete={(id) => deleteGame(id)}/>
                     ))
                 )}
             </ScrollView>

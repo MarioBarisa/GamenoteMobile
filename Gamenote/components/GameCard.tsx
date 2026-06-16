@@ -80,7 +80,7 @@ export default function GameCard({ game, onDelete }: Props) {
               <View style={styles.imageContainer}>
                 {imageUri ? (
                   <Image
-                  source={{ uri: imageUri[0] }}
+                  source={{ uri: imageUri }}
                   style={[styles.image, { resizeMode: 'cover' }]}
                 />
                 ) : (

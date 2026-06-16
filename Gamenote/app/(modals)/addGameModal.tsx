@@ -20,53 +20,93 @@ import * as Haptics from 'expo-haptics';
 import {PROGRESS_MODES} from "@/common/ProgressSources";
 import {useTranslation} from "react-i18next";
 
-
-export default function ModalEdit() {
+export default function AddGameModal() {
     const {t: tr} = useTranslation();
     const {game: gameParam} = useLocalSearchParams<{ game: string }>();
     const router = useRouter();
     const {theme} = useTheme();
     const t = colors[theme];
-    const {updateGame} = useUserGames();
+    const {addGame} = useUserGames();
 
-    const handleSave = async () => {
-        if (form.progress_value !== undefined && form.progress_total !== undefined && form.progress_value > form.progress_total) {
-            Alert.alert(tr('editGame.errorTitle'), tr('editGame.achievementsError'));
-            return;
-        }
-        if (original.game_id) {
-            await updateGame(original.game_id, form);
-        }
-        Alert.alert(tr('editGame.savedTitle'), tr('editGame.savedMsg', {title: original.title}), [
-            {text: 'OK', onPress: () => router.back()}
-        ]);
-    }
-
-    const parseDate = (iso?: string) => iso ? new Date(iso) : new Date();
-
-    const original: Game = (() => {
+    const ravgGame: Partial<Game> = (() => {
         try {
-            return gameParam ? JSON.parse(gameParam) : {}
+            return gameParam ? JSON.parse(gameParam) : {};
         } catch {
-            return {}
+            return {};
         }
     })();
 
     const [form, setForm] = useState<Partial<Game>>({
-        status: original.status,
-        rating: original.rating,
-        play_time: original.play_time,
-        notes: original.notes,
-        start_date: original.start_date,
-        end_date: original.end_date,
-        progress_value: original.progress_value,
-        progress_total: original.progress_total,
-        platform: original.platform,
-        progress_mode: original.progress_mode,
+        status: undefined,
+        rating: undefined,
+        play_time: undefined,
+        notes: undefined,
+        start_date: undefined,
+        end_date: undefined,
+        progress_value: undefined,
+        progress_total: 100,
+        platform: undefined,
+        progress_mode: undefined,
     });
 
     const patch = (key: keyof Game, value: any) => setForm(prev => ({...prev, [key]: value}));
 
+    const validate = (): boolean => {
+        const missing: string[] = [];
+        if (!form.status) missing.push(tr('editGame.statusLabel'));
+        if (!form.platform) missing.push(tr('editGame.platformLabel'));
+        if (form.play_time === undefined || form.play_time === null) missing.push(tr('editGame.playtimeLabel'));
+        if (missing.length > 0) {
+            Alert.alert(tr('addGame.requiredAlert'), missing.join('\n'));
+            return false;
+        }
+        if (form.progress_value !== undefined && form.progress_total !== undefined && form.progress_value > form.progress_total) {
+            Alert.alert(tr('editGame.errorTitle'), tr('editGame.achievementsError'));
+            return false;
+        }
+        return true;
+    };
+
+    const handleAdd = async () => {
+        if (!validate()) return;
+
+        const completeGame: Game = {
+            title: ravgGame.title ?? '',
+            game_id: ravgGame.game_id ?? '',
+            image_url: ravgGame.image_url,
+            background_image: ravgGame.background_image,
+            screenshot_urls: ravgGame.screenshot_urls,
+            genre: ravgGame.genre,
+            publisher: ravgGame.publisher,
+            releaseDate: ravgGame.releaseDate ?? '',
+            metacriticScore: ravgGame.metacriticScore ?? 0,
+            esrbRating: ravgGame.esrbRating,
+            about: ravgGame.about ?? '',
+            webPage: ravgGame.webPage ?? '',
+            series: ravgGame.series,
+            platform: form.platform,
+            status: form.status,
+            play_time: form.play_time,
+            rating: form.rating,
+            notes: form.notes,
+            start_date: form.start_date,
+            end_date: form.end_date,
+            progress_value: form.progress_value,
+            progress_total: form.progress_total ?? 100,
+            progress_mode: form.progress_mode,
+        };
+
+        try {
+            await addGame(completeGame);
+            Alert.alert(tr('addGame.addedTitle'), tr('addGame.addedMsg', {title: completeGame.title}), [
+                {text: 'OK', onPress: () => router.back()}
+            ]);
+        } catch {
+            Alert.alert(tr('editGame.errorTitle'), tr('editGame.achievementsError'));
+        }
+    };
+
+    const parseDate = (iso?: string) => iso ? new Date(iso) : new Date();
 
     const PLATFORMS = [
         'PlayStation 5', 'PlayStation 4',
@@ -76,7 +116,6 @@ export default function ModalEdit() {
     ] as const;
 
     return (
-
         <ScrollView contentContainerStyle={{gap: 10, padding: 8}}
                     style={{backgroundColor: t.backgroundModal}}
                     contentInsetAdjustmentBehavior="automatic"
@@ -84,6 +123,22 @@ export default function ModalEdit() {
                     keyboardShouldPersistTaps="handled"
                     automaticallyAdjustKeyboardInsets={true}
         >
+            <View style={[styles.card, {
+                backgroundColor: t.card,
+                borderColor: theme === 'dark' ? '#2C2C2E' : '#E5E5EA',
+            }]}>
+                <View style={{padding: 16}}>
+                    <Text style={{color: t.text, fontSize: 22, fontWeight: '800'}} numberOfLines={2}>
+                        {ravgGame.title}
+                    </Text>
+                    {ravgGame.releaseDate ? (
+                        <Text style={{color: t.secondaryText, fontSize: 14, marginTop: 4}}>
+                            {ravgGame.releaseDate}
+                        </Text>
+                    ) : null}
+                </View>
+            </View>
+
             <View style={styles.section}>
                 <View style={{flexDirection: 'row', gap: 8, paddingVertical: 8}}>
                     <Text style={[styles.label, {color: t.text}]}>{tr('editGame.ratingLabel')}</Text>
@@ -99,7 +154,8 @@ export default function ModalEdit() {
                         </Pressable>
                     ))}
                 </View>
-                <View style={{flexDirection: 'row', gap: 8, paddingVertical: 8}}>
+
+                <View style={{flexDirection: 'row', gap: 8, paddingVertical: 8, alignItems: 'center'}}>
                     <Text style={[styles.label, {color: t.text}]}>{tr('editGame.startDateLabel')}</Text>
                     <DateTimePicker
                         value={parseDate(form.start_date)}
@@ -111,7 +167,8 @@ export default function ModalEdit() {
                         maximumDate={new Date()}
                     />
                 </View>
-                <View style={{flexDirection: 'row', gap: 8, paddingVertical: 8}}>
+
+                <View style={{flexDirection: 'row', gap: 8, paddingVertical: 8, alignItems: 'center'}}>
                     <Text style={[styles.label, {color: t.text}]}>{tr('editGame.endDateLabel')}</Text>
                     <DateTimePicker
                         value={parseDate(form.end_date)}
@@ -123,6 +180,7 @@ export default function ModalEdit() {
                         maximumDate={new Date()}
                     />
                 </View>
+
                 <View style={{flexDirection: "row", alignItems: "center", gap: 8}}>
                     <Text style={[styles.label, {color: t.text}]}>{tr('editGame.platformLabel')}</Text>
                     <Pressable
@@ -146,6 +204,7 @@ export default function ModalEdit() {
                                     tintColor={t.accent}/>
                     </Pressable>
                 </View>
+
                 <View style={{flexDirection: "row", alignItems: "center", gap: 8}}>
                     <Text style={[styles.label, {color: t.text}]}>{tr('editGame.progressLabel')}</Text>
                     <Pressable
@@ -164,6 +223,7 @@ export default function ModalEdit() {
                                     tintColor={t.accent}/>
                     </Pressable>
                 </View>
+
                 <View style={{flexDirection: "row", alignItems: "center", gap: 8}}>
                     <Text style={[styles.label, {color: t.text}]}>{tr('editGame.achievementsLabel')}</Text>
                     <TextInput style={[styles.numInput, {
@@ -188,6 +248,7 @@ export default function ModalEdit() {
                                placeholderTextColor={t.secondaryText}
                                maxLength={4}/>
                 </View>
+
                 <View style={{flexDirection: "row", alignItems: "center", gap: 8}}>
                     <Text style={[styles.label, {color: t.text}]}>{tr('editGame.playtimeLabel')}</Text>
                     <TextInput style={[styles.input, {
@@ -200,7 +261,7 @@ export default function ModalEdit() {
                                placeholder={tr('editGame.playtimePlaceholder')}
                                placeholderTextColor={t.secondaryText}/>
                 </View>
-                <View style={[{backgroundColor: theme === 'dark' ? '#2C2C2E' : '#E5E5EA'}]}/>
+
                 <View style={{flexDirection: "row", alignItems: "center", gap: 8}}>
                     <Text style={[styles.label, {color: t.text}]}>{tr('editGame.statusLabel')}</Text>
                     <Pressable
@@ -224,6 +285,7 @@ export default function ModalEdit() {
                                     tintColor={t.accent}/>
                     </Pressable>
                 </View>
+
                 <Text style={[styles.label, {color: t.text}]}>{tr('editGame.notesLabel')}</Text>
                 <TextInput style={[styles.notesInput, {
                     color: t.text,
@@ -236,17 +298,18 @@ export default function ModalEdit() {
                            placeholder={tr('editGame.notesPlaceholder')}
                            placeholderTextColor={t.secondaryText}
                            textAlignVertical="top"/>
+
                 <Pressable
                     onPress={() => {
-                        handleSave();
+                        handleAdd();
                         if (Platform.OS === 'ios') {
                             Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
                         }
                     }}
-                    accessibilityLabel={tr('editGame.saveA11y')}
+                    accessibilityLabel={tr('addGame.addButton')}
                     style={[styles.saveButton, {backgroundColor: t.accent}]}
                 >
-                    <Text style={{color: '#fff', fontWeight: '700', fontSize: 16}}>{tr('editGame.saveLabel')}</Text>
+                    <Text style={{color: '#fff', fontWeight: '700', fontSize: 16}}>{tr('addGame.addButton')}</Text>
                 </Pressable>
             </View>
         </ScrollView>
@@ -254,19 +317,21 @@ export default function ModalEdit() {
 }
 
 const styles = StyleSheet.create({
-    container: {flex: 1},
-    scroll: {flex: 1},
+    card: {
+        borderRadius: 12,
+        overflow: 'hidden',
+        marginBottom: 12,
+        borderWidth: StyleSheet.hairlineWidth,
+        shadowColor: '#000',
+        shadowOpacity: 0.08,
+        shadowRadius: 8,
+        shadowOffset: {width: 0, height: 3},
+        elevation: 2,
+    },
     section: {
         marginHorizontal: 16,
         marginTop: 10,
         gap: 8,
-    },
-    sectionTitle: {
-        fontSize: 13,
-        fontWeight: '600',
-        letterSpacing: 0.5,
-        textTransform: 'uppercase',
-        marginBottom: 4,
     },
     label: {
         fontSize: 18,
@@ -276,6 +341,7 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         padding: 12,
         fontSize: 16,
+        flex: 1,
     },
     numInput: {
         borderRadius: 10,
@@ -291,42 +357,11 @@ const styles = StyleSheet.create({
         fontSize: 15,
         minHeight: 100,
     },
-    statusRow: {
-        flexDirection: 'row',
-        flexWrap: 'wrap',
-        gap: 8,
-    },
-    statusPill: {
-        paddingHorizontal: 14,
-        paddingVertical: 8,
-        borderRadius: 20,
-    },
-    statusPillText: {
-        fontSize: 13,
-        fontWeight: '700',
-    },
-    dateButton: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        gap: 8,
-        borderRadius: 10,
-        padding: 12,
-    },
     saveButton: {
         margin: 16,
         padding: 16,
         borderRadius: 24,
         alignItems: 'center',
         marginBottom: 32,
-    },
-    saveButtonText: {
-        color: '#fff',
-        fontSize: 17,
-        fontWeight: '700',
-    },
-    divider: {
-        //height: StyleSheet.hairlineWidth,
-        marginHorizontal: 16,
-        marginTop: 20,
     },
 });

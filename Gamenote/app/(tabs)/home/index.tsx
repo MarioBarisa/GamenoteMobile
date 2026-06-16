@@ -1,11 +1,11 @@
-import {Image, Platform, Pressable, ScrollView, StyleSheet, Text, View} from "react-native";
+import {Image, Platform, Pressable, RefreshControl, ScrollView, StyleSheet, Text, View} from "react-native";
 import {useTheme} from "@/context/theme";
 import {colors} from "@/constants/theme";
 import GameCard from "@/components/GameCard";
 import GameCardCompact from "@/components/GameCardCompact";
 import {useSettings} from "@/context/settings";
-import {PLACEHOLDER_GAMES} from "@/constants/PLACEHOLDER_GAMES";
-import {useMemo, useState} from "react";
+import {useMemo} from "react";
+import {useUserGames} from "@/hooks/useUserGames";
 import * as Haptics from "expo-haptics";
 import {SymbolView} from "expo-symbols";
 import {STATUS_CONFIG} from "@/common/StatusCommons";
@@ -18,7 +18,7 @@ export default function HomeIndex() {
     const {theme} = useTheme();
     const t = colors[theme];
     const {compactCards} = useSettings();
-    const [games, setGames] = useState(PLACEHOLDER_GAMES);
+    const {games, deleteGame, refresh, isLoading} = useUserGames();
 
     let playtime = 0;
     for (const game of games) {
@@ -60,6 +60,7 @@ export default function HomeIndex() {
             style={{backgroundColor: t.background}}
             contentContainerStyle={{padding: 16, gap: 0}}
             contentInsetAdjustmentBehavior="automatic"
+            refreshControl={<RefreshControl refreshing={isLoading} onRefresh={refresh} />}
         >
             <View
                 style={{
@@ -119,13 +120,13 @@ export default function HomeIndex() {
                     return (
                         <View style={{flexDirection: 'row', flexWrap: 'wrap', gap: 12}}>
                             {igre.map((game) => (
-                                <GameCardCompact key={game.game_id} game={game} onDelete={(id) => setGames(prev => prev.filter(g => g.game_id !== id))}/>
+                                <GameCardCompact key={game.game_id} game={game} onDelete={(id) => deleteGame(id)}/>
                             ))}
                         </View>
                     );
                 }
                 return igre.map((game) => (
-                    <GameCard key={game.game_id} game={game} onDelete={(id) => setGames(prev => prev.filter(g => g.game_id !== id))}/>
+                    <GameCard key={game.game_id} game={game} onDelete={(id) => deleteGame(id)}/>
                 ));
             })()}
 
@@ -168,9 +169,9 @@ export default function HomeIndex() {
                             ) : null}
                         </View>
 
-                        {jumpBackGame.image_url?.[0] ? (
+                        {jumpBackGame.image_url ? (
                             <Image
-                                source={{uri: jumpBackGame.image_url[0]}}
+                                source={{uri: jumpBackGame.image_url}}
                                 style={styles.image}
                                 resizeMode="cover"
                             />

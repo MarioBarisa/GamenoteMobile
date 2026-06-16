@@ -7,7 +7,7 @@ import {SymbolView} from "expo-symbols";
 import * as Haptics from "expo-haptics";
 import {useState} from "react";
 import {useGroups} from "@/context/GroupsContext";
-import {PLACEHOLDER_GAMES} from "@/constants/PLACEHOLDER_GAMES";
+import {useUserGames} from "@/hooks/useUserGames";
 import {useTranslation} from "react-i18next";
 
 
@@ -17,6 +17,7 @@ export default function AddGroupModal() {
     const t = colors[theme]
     const router = useRouter();
     const {addGroup, addGameToGroup} = useGroups();
+    const {games} = useUserGames();
 
     const typeGroups = ["Collection", "Trilogy", "Franchise"];
 
@@ -65,7 +66,7 @@ export default function AddGroupModal() {
 
     const isGameSelected = (gameId: string) => selectedGameIds.includes(gameId);
     const [showAll, setShowAll] = useState(false);
-    const visibleGames = showAll ? PLACEHOLDER_GAMES : PLACEHOLDER_GAMES.slice(0, 5);
+    const visibleGames = showAll ? games : games.slice(0, 5);
 
     const toggleGame = (gameId: string) => {
         setSelectedGameIds(prev =>
@@ -183,13 +184,13 @@ export default function AddGroupModal() {
                             </Pressable>
                         );
                     })}
-                    {PLACEHOLDER_GAMES.length > 5 && (
+                    {games.length > 5 && (
                             <Pressable
                                 onPress={() => setShowAll(prev => !prev)}
                                 style={{paddingVertical: 10, alignItems: 'center'}}
                             >
                                 <Text style={{color: t.accent, fontSize: 14, fontWeight: '600'}}>
-                                    {showAll ? tr('addGroup.showLess') : tr('addGroup.showMore', {count: PLACEHOLDER_GAMES.length - 5})}
+                                    {showAll ? tr('addGroup.showLess') : tr('addGroup.showMore', {count: games.length - 5})}
                                 </Text>
                             </Pressable>
                         )}

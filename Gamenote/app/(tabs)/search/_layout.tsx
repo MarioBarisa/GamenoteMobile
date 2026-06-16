@@ -15,6 +15,7 @@ export default function SearchLayout() {
         }}
       />
         <Stack.Screen name="details" />
+        <Stack.Screen name="rawg-details" />
     </Stack>
   );
 }

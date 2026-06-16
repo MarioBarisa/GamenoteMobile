@@ -7,7 +7,7 @@ import {SymbolView} from "expo-symbols";
 import * as Haptics from "expo-haptics";
 import {useState} from "react";
 import {useGroups} from "@/context/GroupsContext";
-import {PLACEHOLDER_GAMES} from "@/constants/PLACEHOLDER_GAMES";
+import {useUserGames} from "@/hooks/useUserGames";
 import {useTranslation} from "react-i18next";
 
 
@@ -41,9 +41,10 @@ export default function ModalEditGroups() {
 
     const {addGameToGroup, removeGameFromGroup, getGamesInGroup} = useGroups();
     const gamesInGroup: string[] = group ? getGamesInGroup(group.id) : [];
+    const {games: allGames} = useUserGames();
 
     const [showAll, setShowAll] = useState(false);
-    const visibleGames = showAll ? PLACEHOLDER_GAMES : PLACEHOLDER_GAMES.slice(0, 5);
+    const visibleGames = showAll ? allGames : allGames.slice(0, 5);
 
     const handleSave = () => {
         if (Platform.OS === 'ios') Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
@@ -160,13 +161,13 @@ export default function ModalEditGroups() {
                                 </Pressable>
                             );
                         })}
-                        {PLACEHOLDER_GAMES.length > 5 && (
+                        {allGames.length > 5 && (
                             <Pressable
                                 onPress={() => setShowAll(prev => !prev)}
                                 style={{paddingVertical: 10, alignItems: 'center'}}
                             >
                                 <Text style={{color: t.accent, fontSize: 14, fontWeight: '600'}}>
-                                    {showAll ? tr('editGroup.showLess') : tr('editGroup.showMore', {count: PLACEHOLDER_GAMES.length - 5})}
+                                    {showAll ? tr('editGroup.showLess') : tr('editGroup.showMore', {count: allGames.length - 5})}
                                 </Text>
                             </Pressable>
                         )}

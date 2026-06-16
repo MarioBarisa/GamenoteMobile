@@ -5,9 +5,9 @@ import {useSettings} from "@/context/settings";
 import {useEffect, useRef} from "react";
 import {useAuth} from "@/context/auth";
 import {useTranslation} from "react-i18next";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
-const DEV_IGNORE_REDIRECT_PROFILE = true;
-let onboardingShown = false;
+const ONBOARDING_KEY = '@onboarding_complete';
 
 // noinspection JSUnusedGlobalSymbols
 export default function TabsLayout() {
@@ -21,14 +21,17 @@ export default function TabsLayout() {
     const {vibrationsEnabled} = useSettings();
 
     useEffect(() => {
-        if (DEV_IGNORE_REDIRECT_PROFILE && !onboardingShown) {
-            onboardingShown = true;
-            const timer = setTimeout(() => {
-                router.push("/(modals)/onboardingModal");
-            }, 300);
-            return () => clearTimeout(timer);
-        }
-    }, []);
+        if (loggedIn) return;
+        AsyncStorage.getItem(ONBOARDING_KEY).then(seen => {
+            if (!seen) {
+                const timer = setTimeout(() => {
+                    router.push("/(modals)/onboardingModal");
+                    AsyncStorage.setItem(ONBOARDING_KEY, 'true');
+                }, 300);
+                return () => clearTimeout(timer);
+            }
+        });
+    }, [loggedIn]);
 
     useEffect(() => {
         if (vibrationsEnabled && tabSegment && tabSegment !== previousTabRef.current) {

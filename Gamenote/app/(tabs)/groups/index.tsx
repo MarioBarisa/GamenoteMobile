@@ -1,9 +1,10 @@
-import {ScrollView, Text, View, StyleSheet, Image, TouchableOpacity} from "react-native";
+import {RefreshControl, ScrollView, Text, View, StyleSheet, Image, TouchableOpacity} from "react-native";
 import {useTheme} from "@/context/theme";
 import {colors} from "@/constants/theme";
 import {useGroups} from "@/context/GroupsContext";
 import {Ionicons} from "@expo/vector-icons";
-import {PLACEHOLDER_GAMES} from "@/constants/PLACEHOLDER_GAMES";
+import {useUserGames} from "@/hooks/useUserGames";
+import {useMemo} from "react";
 import {router} from "expo-router";
 import {SymbolView} from "expo-symbols";
 import {useTranslation} from "react-i18next";
@@ -18,13 +19,15 @@ export default function GroupsIndex() {
     const {t: tr} = useTranslation();
     const {theme} = useTheme();
     const t = colors[theme];
-    const {groups, getGamesInGroup} = useGroups();
+    const {groups, getGamesInGroup, refreshGroups, isLoading: isLoadingGroups} = useGroups();
+    const {games, refresh: refreshGames, isLoading: isLoadingGames} = useUserGames();
+    const gamesMap = useMemo(() => new Map(games.map(g => [g.game_id, g])), [games]);
 
     const getGroupGameImages = (groupId: string) => {
         const gameIds = getGamesInGroup(groupId);
         return gameIds
             .slice(0, 4)
-            .map(gameId => PLACEHOLDER_GAMES.find(g => g.game_id === gameId))
+            .map(gameId => gamesMap.get(gameId))
             .filter(Boolean);
     };
 
@@ -32,6 +35,12 @@ export default function GroupsIndex() {
         <ScrollView
             style={{backgroundColor: t.background}}
             contentInsetAdjustmentBehavior="automatic"
+            refreshControl={
+              <RefreshControl
+                refreshing={isLoadingGroups || isLoadingGames}
+                onRefresh={() => { refreshGames(); refreshGroups(); }}
+              />
+            }
         >
             {groups.length === 0 ? (
                 <Text style={{color: t.text, fontSize: 26, fontWeight: "bold", textAlign: "center", padding: 32}}>
@@ -89,9 +98,9 @@ export default function GroupsIndex() {
                                                     isSingle && styles.gameImageWrapperSingle,
                                                 ]}
                                             >
-                                                {game?.image_url?.[0] ? (
+                                                {game?.image_url ? (
                                                     <Image
-                                                        source={{uri: game.image_url[0]}}
+                                                        source={{uri: game.image_url}}
                                                         style={[
                                                             styles.gameImage,
                                                             isSingle && styles.gameImageSingle,

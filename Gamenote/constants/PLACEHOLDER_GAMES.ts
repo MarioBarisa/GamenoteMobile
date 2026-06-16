@@ -10,7 +10,7 @@ export const PLACEHOLDER_GAMES: Game[] = [
         publisher: 'Nintendo of Europe',
         rating: 5,
         metacriticScore: 84,
-        ageRating: 12,
+        esrbRating: 'T',
         releaseDate: "21.07.2017",
         webPage: "http://splatoon.nintendo.com/",
         about: 'For the first time, take Turf War battles on-the-go with the Nintendo Switch™ system, and use any of the console\'s portable play styles for intense local multiplayer* action. Even team up for new 4-player co-op fun in Salmon Run! Two years have passed since the original Splatoon™ game was released, and two years have also passed in Inkopolis! So expect a fresh wave of fashion, not to mention new weapons and gear. Dual wield the new Splat Dualies or stick to mainstays like chargers and rollers, which have been remixed with new strategic possibilities. As always, Turf War is the favored sport among Inklings, but they also dig ranked battles, taking down Octarians in a robust single-player campaign, and battling enemy Salmonids in one dangerous part-time job!',
@@ -32,8 +32,8 @@ export const PLACEHOLDER_GAMES: Game[] = [
         progress_mode: 'completion_nintendo',
         start_date: "2025-11-11",
         end_date: "2025-11-12",
-        image_url: [
-            "https://media.rawg.io/media/games/24b/24b68f500fd138c3146d8856f0dd55b4.jpg",
+        image_url: "https://media.rawg.io/media/games/24b/24b68f500fd138c3146d8856f0dd55b4.jpg",
+        screenshot_urls: [
             "https://media.rawg.io/media/screenshots/3ea/3eadccae65f82027a0e0ddc1f4ea5d52.jpg",
             "https://media.rawg.io/media/screenshots/ea6/ea669a514a8fdd905b5d67384561014b.jpg",
             "https://media.rawg.io/media/screenshots/441/44158afb4810a7141760dc3b03d143ba.jpg"]
@@ -46,7 +46,7 @@ export const PLACEHOLDER_GAMES: Game[] = [
         status: 'playing',
         rating: 4,
         metacriticScore: 95,
-        ageRating: 12,
+        esrbRating: 'T',
         releaseDate: "21.07.2018",
         webPage: "http://zelda.nintendo.com/",
         about: 'For the first time, take Turf War battles on-the-go with the Nintendo Switch™ system, and use any of the console\'s portable play styles for intense local multiplayer* action. Even team up for new 4-player co-op fun in Salmon Run! Two years have passed since the original Splatoon™ game was released, and two years have also passed in Inkopolis! So expect a fresh wave of fashion, not to mention new weapons and gear. Dual wield the new Splat Dualies or stick to mainstays like chargers and rollers, which have been remixed with new strategic possibilities. As always, Turf War is the favored sport among Inklings, but they also dig ranked battles, taking down Octarians in a robust single-player campaign, and battling enemy Salmonids in one dangerous part-time job!',
@@ -55,8 +55,7 @@ export const PLACEHOLDER_GAMES: Game[] = [
         progress_value: 106,
         progress_total: 152,
         progress_mode: 'completion_nintendo',
-        image_url: ['https://imgs.search.brave.com/2cSE4AyYrHjAAvueNp8XOOWOgsBWRCW-ZjnCKNcHXAI/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9zdGF0/aWMwLnBvbHlnb25p/bWFnZXMuY29tL3dv/cmRwcmVzcy93cC1j/b250ZW50L3VwbG9h/ZHMvY2hvcnVzL3Vw/bG9hZHMvY2hvcnVz/X2Fzc2V0L2ZpbGUv/MjQ1ODI5MDQvemVs/ZGFfbWFzdGVyX3N3/b3JkX3RvdGsuanBn/P3E9NDkmZml0PWNy/b3Amdz02NDImaD0z/OTMmZHByPTI'
-        ]
+        image_url: 'https://imgs.search.brave.com/2cSE4AyYrHjAAvueNp8XOOWOgsBWRCW-ZjnCKNcHXAI/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9zdGF0/aWMwLnBvbHlnb25p/bWFnZXMuY29tL3dv/cmRwcmVzcy93cC1j/b250ZW50L3VwbG9h/ZHMvY2hvcnVzL3Vw/bG9hZHMvY2hvcnVz/X2Fzc2V0L2ZpbGUv/MjQ1ODI5MDQvemVs/ZGFfbWFzdGVyX3N3/b3JkX3RvdGsuanBn/P3E9NDkmZml0PWNy/b3Amdz02NDImaD0z/OTMmZHByPTI'
     },
     {
         title: 'Horizon Forbidden West',
@@ -66,7 +65,7 @@ export const PLACEHOLDER_GAMES: Game[] = [
         status: 'paused',
         rating: 4,
         metacriticScore: 90,
-        ageRating: 16,
+        esrbRating: 'M',
         releaseDate: "21.07.2023",
         webPage: "http://playstation.com",
         about: 'For the first time, take Turf War battles on-the-go with the Nintendo Switch™ system, and use any of the console\'s portable play styles for intense local multiplayer* action. Even team up for new 4-player co-op fun in Salmon Run! Two years have passed since the original Splatoon™ game was released, and two years have also passed in Inkopolis! So expect a fresh wave of fashion, not to mention new weapons and gear. Dual wield the new Splat Dualies or stick to mainstays like chargers and rollers, which have been remixed with new strategic possibilities. As always, Turf War is the favored sport among Inklings, but they also dig ranked battles, taking down Octarians in a robust single-player campaign, and battling enemy Salmonids in one dangerous part-time job!',
@@ -75,7 +74,7 @@ export const PLACEHOLDER_GAMES: Game[] = [
         progress_value: 78,
         progress_total: 112,
         progress_mode: 'trophies_psn',
-        image_url: ['https://media.rawg.io/media/games/bf7/bf73b105ccbba42107986bbcd96fcada.jpg']
+        image_url: 'https://media.rawg.io/media/games/bf7/bf73b105ccbba42107986bbcd96fcada.jpg'
     },
     {
         title: 'Kena: Bridge of Spirits',
@@ -85,7 +84,7 @@ export const PLACEHOLDER_GAMES: Game[] = [
         status: 'completed',
         rating: 5,
         metacriticScore: 98,
-        ageRating: 12,
+        esrbRating: 'T',
         releaseDate: "22.03.2022",
         webPage: "http://kenagame.com/",
         about: 'For the first time, take Turf War battles on-the-go with the Nintendo Switch™ system, and use any of the console\'s portable play styles for intense local multiplayer* action. Even team up for new 4-player co-op fun in Salmon Run! Two years have passed since the original Splatoon™ game was released, and two years have also passed in Inkopolis! So expect a fresh wave of fashion, not to mention new weapons and gear. Dual wield the new Splat Dualies or stick to mainstays like chargers and rollers, which have been remixed with new strategic possibilities. As always, Turf War is the favored sport among Inklings, but they also dig ranked battles, taking down Octarians in a robust single-player campaign, and battling enemy Salmonids in one dangerous part-time job!',
@@ -94,7 +93,7 @@ export const PLACEHOLDER_GAMES: Game[] = [
         progress_value: 100,
         progress_total: 100,
         progress_mode: 'trophies_psn',
-        image_url: ['https://media.rawg.io/media/games/91d/91ddeef8d5ebee7f21faa89efa0f2201.jpg']
+        image_url: 'https://media.rawg.io/media/games/91d/91ddeef8d5ebee7f21faa89efa0f2201.jpg'
     },
     {
         title: 'Persona 5 Royal',
@@ -103,7 +102,7 @@ export const PLACEHOLDER_GAMES: Game[] = [
         status: 'dropped',
         rating: 1,
         metacriticScore: 22,
-        ageRating: 12,
+        esrbRating: 'T',
         releaseDate: "21.07.2017",
         webPage: "http://splatoon.nintendo.com/",
         about: 'For the first time, take Turf War battles on-the-go with the Nintendo Switch™ system, and use any of the console\'s portable play styles for intense local multiplayer* action. Even team up for new 4-player co-op fun in Salmon Run! Two years have passed since the original Splatoon™ game was released, and two years have also passed in Inkopolis! So expect a fresh wave of fashion, not to mention new weapons and gear. Dual wield the new Splat Dualies or stick to mainstays like chargers and rollers, which have been remixed with new strategic possibilities. As always, Turf War is the favored sport among Inklings, but they also dig ranked battles, taking down Octarians in a robust single-player campaign, and battling enemy Salmonids in one dangerous part-time job!',
@@ -112,8 +111,7 @@ export const PLACEHOLDER_GAMES: Game[] = [
         progress_value: 0,
         progress_total: 100,
         progress_mode: 'achievements_xbox',
-        image_url: ['https://imgs.search.brave.com/zJWaU601KmF-GXFWqrVQau3ilaFBFSmJ6T49xtUDBjo/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93YWxs/cGFwZXJzLmNvbS9p/bWFnZXMvZmVhdHVy/ZWQvcGVyc29uYS01/LXBpY3R1cmVzLXZ4/eTNodTV5bzVjZWxo/bWIuanBn'
-        ]
+        image_url: 'https://imgs.search.brave.com/zJWaU601KmF-GXFWqrVQau3ilaFBFSmJ6T49xtUDBjo/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93YWxs/cGFwZXJzLmNvbS9p/bWFnZXMvZmVhdHVy/ZWQvcGVyc29uYS01/LXBpY3R1cmVzLXZ4/eTNodTV5bzVjZWxo/bWIuanBn'
     },
     {
         title: 'Hollow Knight',
@@ -122,7 +120,7 @@ export const PLACEHOLDER_GAMES: Game[] = [
         status: 'wishlist',
         rating: 3,
         metacriticScore: 84,
-        ageRating: 12,
+        esrbRating: 'T',
         releaseDate: "21.07.2017",
         webPage: "http://splatoon.nintendo.com/",
         about: 'For the first time, take Turf War battles on-the-go with the Nintendo Switch™ system, and use any of the console\'s portable play styles for intense local multiplayer* action. Even team up for new 4-player co-op fun in Salmon Run! Two years have passed since the original Splatoon™ game was released, and two years have also passed in Inkopolis! So expect a fresh wave of fashion, not to mention new weapons and gear. Dual wield the new Splat Dualies or stick to mainstays like chargers and rollers, which have been remixed with new strategic possibilities. As always, Turf War is the favored sport among Inklings, but they also dig ranked battles, taking down Octarians in a robust single-player campaign, and battling enemy Salmonids in one dangerous part-time job!',
@@ -131,6 +129,6 @@ export const PLACEHOLDER_GAMES: Game[] = [
         progress_value: 0,
         progress_total: 100,
         progress_mode: 'achievements_steam',
-        image_url: ['https://imgs.search.brave.com/rGo8wNTrFG5myKCED8JEG-u_5X9FJ-L5JW9Pf_t5ENQ/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93YWxs/cGFwZXJjYXZlLmNv/bS93cC93cDcwOTc0/MDguanBn']
+        image_url: 'https://imgs.search.brave.com/rGo8wNTrFG5myKCED8JEG-u_5X9FJ-L5JW9Pf_t5ENQ/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93YWxs/cGFwZXJjYXZlLmNv/bS93cC93cDcwOTc0/MDguanBn'
     },
 ]

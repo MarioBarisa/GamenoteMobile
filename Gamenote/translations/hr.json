@@ -26,6 +26,7 @@
     "addGroupTitle": "Dodaj novu grupu",
     "editGroupTitle": "Uredi info grupe",
     "editGameTitle": "Uredi igru",
+    "addGameTitle": "Dodaj igru",
     "registerTitle": "Izradi račun"
   },
   "home": {
@@ -49,7 +50,13 @@
     "title": "Pretraži Gamenote",
     "filterA11y": "Filtriraj svoje igre",
     "filterTitle": "Tvoji Gamenote",
-    "filterMessage": "Ovaj gumb uključuje filtiranje prikaza samo na tvoje dodane igre. Inače tražiš cijeli Gamenote database."
+    "filterMessage": "Ovaj gumb uključuje filtiranje prikaza samo na tvoje dodane igre. Inače tražiš cijeli Gamenote database.",
+    "rawgSectionTitle": "RAWG Rezultati",
+    "rawgNoResults": "Nema pronađenih igara",
+    "rawgSearching": "Tražim...",
+    "loginRequired": "Prijavi se da bi pretražio Gamenote bazu.",
+    "inLibrary": "Igra dodana u Gamenote",
+    "viewInLibrary": "Pogledaj u Gamenote"
   },
   "profile": {
     "greetingLogged": "Pozdrav {{username}}!",
@@ -169,6 +176,14 @@
     "playtimePlaceholder": "Npr. 120",
     "achievementPlaceholder": "0"
   },
+  "addGame": {
+    "title": "Dodaj u Gamenote",
+    "addButton": "Dodaj igru",
+    "addedTitle": "Igra dodana",
+    "addedMsg": "{{title}} je dodana u tvoj Gamenote.",
+    "requiredField": "Ovo polje je obavezno",
+    "requiredAlert": "Molimo ispunite sva obavezna polja."
+  },
   "addGroup": {
     "nameMissingTitle": "Nedostaje naziv",
     "nameMissingMsg": "Upiši ime grupe.",
@@ -228,7 +243,9 @@
     "metacritic": "Metacritic Ocjena:",
     "seriesSection": "Igre iz serijala",
     "descriptionSection": "Opis",
-    "progressLabel": "Progress"
+    "progressLabel": "Progress",
+    "noPrequel": "Nema prequel",
+    "noSequel": "Nema sequel"
   },
   "errorBoundary": {
     "title": "Nešto je pošlo po krivu",

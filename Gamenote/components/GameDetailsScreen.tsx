@@ -1,14 +1,53 @@
-import {useLocalSearchParams, Stack, Link} from "expo-router";
+import {useLocalSearchParams, Stack, Link, useRouter, useSegments} from "expo-router";
 import {useState} from "react";
 import {Image, ScrollView, StyleSheet, Text, View, Pressable, useWindowDimensions, Modal, Alert} from "react-native";
 import {useSafeAreaInsets} from "react-native-safe-area-context";
 import {Game} from "@/common/Game";
+import {SeriesGame} from "@/common/GameSeries";
 import {useTheme} from "@/context/theme";
 import {colors} from "@/constants/theme";
 import {SymbolView} from "expo-symbols";
 import {STATUS_CONFIG, STATUS_PLATFORM} from "@/common/StatusCommons";
 import {isProgressModeKey, PROGRESS_MODE_MAP, progressLabel, progressColor} from "@/common/ProgressSources";
 import {useTranslation} from "react-i18next";
+import {useUserGames} from "@/hooks/useUserGames";
+
+function getPrequelAndSequel(series: SeriesGame[], currentReleaseDate: string): { prequel?: SeriesGame; sequel?: SeriesGame } {
+  const sorted = [...series].sort((a, b) => {
+    if (!a.released) return 1;
+    if (!b.released) return -1;
+    return new Date(a.released).getTime() - new Date(b.released).getTime();
+  });
+
+  const currentIndex = sorted.findIndex(s => s.released === currentReleaseDate);
+
+  if (currentIndex === -1) {
+    if (!currentReleaseDate) return {};
+    const currentDate = new Date(currentReleaseDate).getTime();
+    let closestBefore: SeriesGame | undefined;
+    let closestAfter: SeriesGame | undefined;
+    let minBeforeDiff = Infinity;
+    let minAfterDiff = Infinity;
+
+    for (const s of sorted) {
+      if (!s.released) continue;
+      const diff = new Date(s.released).getTime() - currentDate;
+      if (diff < 0 && Math.abs(diff) < minBeforeDiff) {
+        minBeforeDiff = Math.abs(diff);
+        closestBefore = s;
+      } else if (diff > 0 && diff < minAfterDiff) {
+        minAfterDiff = diff;
+        closestAfter = s;
+      }
+    }
+    return { prequel: closestBefore, sequel: closestAfter };
+  }
+
+  return {
+    prequel: currentIndex > 0 ? sorted[currentIndex - 1] : undefined,
+    sequel: currentIndex < sorted.length - 1 ? sorted[currentIndex + 1] : undefined,
+  };
+}
 
 export default function GameDetailsScreen() {
     const {t: tr} = useTranslation();
@@ -20,6 +59,10 @@ export default function GameDetailsScreen() {
     const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
     const [showDetails, setShowDetails] = useState<boolean>(false);
     const {game: gameParam} = useLocalSearchParams<{ game: string }>()
+    const {games: userGames} = useUserGames();
+    const router = useRouter();
+    const segments = useSegments();
+    const tab = segments[1] as 'home' | 'favorites' | 'search';
 
     const game: Game | null = (() => {
         try {
@@ -32,6 +75,24 @@ export default function GameDetailsScreen() {
         return <Text style={{color: t.text, padding: 16}}>{tr('gameDetails.notFound')}</Text>
     }
 
+    const navigateToReferencedGame = (seriesItem: SeriesGame) => {
+      const matched = userGames.find(g => g.game_id === String(seriesItem.id));
+      if (matched) {
+        router.push({
+          pathname: `/(tabs)/${tab}/details`,
+          params: {game: JSON.stringify(matched)},
+        });
+      } else {
+        router.push({
+          pathname: '/(tabs)/search/rawg-details',
+          params: {game: JSON.stringify({id: seriesItem.id, name: seriesItem.name, background_image: seriesItem.background_image})},
+        });
+      }
+    };
+
+    const {prequel, sequel} = getPrequelAndSequel(game?.series ?? [], game?.releaseDate ?? '');
+
+    const galleryImages = [game.image_url, ...(game.screenshot_urls ?? [])].filter(Boolean) as string[];
     const prColor = progressColor(game.progress_value, game.progress_total)
 
     const mode = game.progress_mode && isProgressModeKey(game.progress_mode)
@@ -105,7 +166,7 @@ export default function GameDetailsScreen() {
                     },
                 ]}>
 
-                    {Array.isArray(game.image_url) && game.image_url.length > 0 && (
+                    {galleryImages.length > 0 && (
                         <ScrollView
                             horizontal
                             decelerationRate="fast"
@@ -117,16 +178,15 @@ export default function GameDetailsScreen() {
                                 paddingTop: 8,
                                 paddingBottom: 8
                             }}>
-                            {game.image_url.map((uri, index) => (
+                            {galleryImages.map((uri, index) => (
                                 <Pressable key={uri} onPress={() => setSelectedIndex(index)}>
                                     <Image
-                                        key={uri}
                                         source={{uri}}
                                         style={[styles.coverImage, {width: SCREEN_WIDTH - 32}]}
-                                        resizeMode="cover"/></Pressable>
+                                        resizeMode="cover"/>
+                                </Pressable>
                             ))}
                         </ScrollView>
-
                     )}
                     <View style={{
                         padding: 8,
@@ -335,13 +395,12 @@ export default function GameDetailsScreen() {
                                     <Text style={{color: t.secondaryText, fontSize: 14, marginBottom: 4}}>
                                         {tr("gameDetails.seriesSection")}
                                     </Text>
-                                    {game.series.map((item, index) => {
-                                        const year = item.released ? item.released.split('-')[0] : '';
+                                    {prequel ? (() => {
+                                        const year = prequel.released ? prequel.released.split('-')[0] : '';
                                         return (
                                             <Pressable
-                                                key={`${item.id}-${index}`}
-                                                onPress={() => { /* Ovdje dodaj navigaciju na detalje ove igre */
-                                                }}
+                                                key={`prequel-${prequel.id}`}
+                                                onPress={() => navigateToReferencedGame(prequel)}
                                                 style={{
                                                     flexDirection: 'row',
                                                     alignItems: 'center',
@@ -352,7 +411,7 @@ export default function GameDetailsScreen() {
                                                 }}
                                             >
                                                 <Image
-                                                    source={{uri: item.background_image}}
+                                                    source={{uri: prequel.background_image}}
                                                     style={{width: 100, aspectRatio: 10 / 7, borderRadius: 4}}
                                                     resizeMode="cover"
                                                 />
@@ -361,7 +420,7 @@ export default function GameDetailsScreen() {
                                                         style={{color: t.text, fontSize: 14, fontWeight: '600'}}
                                                         numberOfLines={1}
                                                     >
-                                                        {item.name}
+                                                        {prequel.name}
                                                     </Text>
                                                     {year ? (
                                                         <Text style={{color: t.secondaryText, fontSize: 12}}>
@@ -371,7 +430,51 @@ export default function GameDetailsScreen() {
                                                 </View>
                                             </Pressable>
                                         );
-                                    })}
+                                    })() : (
+                                        <Text style={{color: t.secondaryText, fontSize: 13, fontStyle: 'italic'}}>
+                                            {tr("gameDetails.noPrequel")}
+                                        </Text>
+                                    )}
+                                    {sequel ? (() => {
+                                        const year = sequel.released ? sequel.released.split('-')[0] : '';
+                                        return (
+                                            <Pressable
+                                                key={`sequel-${sequel.id}`}
+                                                onPress={() => navigateToReferencedGame(sequel)}
+                                                style={{
+                                                    flexDirection: 'row',
+                                                    alignItems: 'center',
+                                                    gap: 12,
+                                                    backgroundColor: theme === 'dark' ? '#2C2C2E' : '#F2F2F7',
+                                                    padding: 8,
+                                                    borderRadius: 8,
+                                                }}
+                                            >
+                                                <Image
+                                                    source={{uri: sequel.background_image}}
+                                                    style={{width: 100, aspectRatio: 10 / 7, borderRadius: 4}}
+                                                    resizeMode="cover"
+                                                />
+                                                <View style={{flex: 1}}>
+                                                    <Text
+                                                        style={{color: t.text, fontSize: 14, fontWeight: '600'}}
+                                                        numberOfLines={1}
+                                                    >
+                                                        {sequel.name}
+                                                    </Text>
+                                                    {year ? (
+                                                        <Text style={{color: t.secondaryText, fontSize: 12}}>
+                                                            {year}.
+                                                        </Text>
+                                                    ) : null}
+                                                </View>
+                                            </Pressable>
+                                        );
+                                    })() : (
+                                        <Text style={{color: t.secondaryText, fontSize: 13, fontStyle: 'italic'}}>
+                                            {tr("gameDetails.noSequel")}
+                                        </Text>
+                                    )}
                                 </View>
                             ) : null}
 
@@ -402,33 +505,35 @@ export default function GameDetailsScreen() {
                             />
                         </Pressable>
                     </View>
-                    <ScrollView
-                        horizontal
-                        pagingEnabled
-                        showsHorizontalScrollIndicator={false}
-                        contentOffset={{
-                            x: (selectedIndex ?? 0) * SCREEN_WIDTH,
-                            y: 0,
-                        }}
-                    >
-                        {(game.image_url ?? []).map((uri) => (
-                            <ScrollView
-                                key={uri}
-                                style={{width: SCREEN_WIDTH, height: '100%'}}
-                                minimumZoomScale={1}
-                                maximumZoomScale={5}
-                                showsHorizontalScrollIndicator={false}
-                                showsVerticalScrollIndicator={false}
-                                centerContent={true}
-                            >
-                                <Image
-                                    source={{uri}}
-                                    style={{width: SCREEN_WIDTH, aspectRatio: 4 / 3}}
-                                    resizeMode="contain"
-                                />
-                            </ScrollView>
-                        ))}
-                    </ScrollView>
+                    {galleryImages.length > 0 && (
+                        <ScrollView
+                            horizontal
+                            pagingEnabled
+                            showsHorizontalScrollIndicator={false}
+                            contentOffset={{
+                                x: (selectedIndex ?? 0) * SCREEN_WIDTH,
+                                y: 0,
+                            }}
+                        >
+                            {galleryImages.map((uri) => (
+                                <ScrollView
+                                    key={uri}
+                                    style={{width: SCREEN_WIDTH, height: '100%'}}
+                                    minimumZoomScale={1}
+                                    maximumZoomScale={5}
+                                    showsHorizontalScrollIndicator={false}
+                                    showsVerticalScrollIndicator={false}
+                                    centerContent={true}
+                                >
+                                    <Image
+                                        source={{uri}}
+                                        style={{width: SCREEN_WIDTH, aspectRatio: 4 / 3}}
+                                        resizeMode="contain"
+                                    />
+                                </ScrollView>
+                            ))}
+                        </ScrollView>
+                    )}
                 </View>
             </Modal>
         </>

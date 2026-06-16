@@ -26,6 +26,7 @@
     "addGroupTitle": "Add new group",
     "editGroupTitle": "Edit group info",
     "editGameTitle": "Edit game",
+    "addGameTitle": "Add Game",
     "registerTitle": "Make an Account"
   },
   "home": {
@@ -49,7 +50,13 @@
     "title": "Search Gamenote",
     "filterA11y": "Filter your games",
     "filterTitle": "Your Gamenote",
-    "filterMessage": "This button toggles filtering to show only your added games. Otherwise, you search the entire Gamenote database."
+    "filterMessage": "This button toggles filtering to show only your added games. Otherwise, you search the entire Gamenote database.",
+    "rawgSectionTitle": "RAWG Results",
+    "rawgNoResults": "No games found",
+    "rawgSearching": "Searching...",
+    "loginRequired": "Please log in to search the Gamenote database.",
+    "inLibrary": "Added to Gamenote",
+    "viewInLibrary": "View in Gamenote"
   },
   "profile": {
     "greetingLogged": "Hello {{username}}!",
@@ -169,6 +176,14 @@
     "playtimePlaceholder": "e.g. 120",
     "achievementPlaceholder": "0"
   },
+  "addGame": {
+    "title": "Add to Gamenote",
+    "addButton": "Add Game",
+    "addedTitle": "Game added",
+    "addedMsg": "{{title}} has been added to your Gamenote.",
+    "requiredField": "This field is required",
+    "requiredAlert": "Please fill in all required fields."
+  },
   "addGroup": {
     "nameMissingTitle": "Name missing",
     "nameMissingMsg": "Enter a group name.",
@@ -228,7 +243,9 @@
     "metacritic": "Metacritic Score:",
     "seriesSection": "Series",
     "descriptionSection": "Description",
-    "progressLabel": "Progress"
+    "progressLabel": "Progress",
+    "noPrequel": "No prequel",
+    "noSequel": "No sequel"
   },
   "errorBoundary": {
     "title": "Something went wrong",

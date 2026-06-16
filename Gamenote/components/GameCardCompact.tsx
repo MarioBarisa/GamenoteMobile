@@ -74,7 +74,7 @@ export default function GameCardCompact({ game, onDelete }: Props) {
             ]}>
               <View style={styles.imageContainer}>
                 {imageUri ? (
-                  <Image source={{ uri: imageUri[0] }} style={styles.image} resizeMode="cover" />
+                  <Image source={{ uri: imageUri }} style={styles.image} resizeMode="cover" />
                 ) : (
                   <View style={[styles.imagePlaceholder, { backgroundColor: t.background }]}>
                     <Text style={{ color: t.secondaryText, fontSize: 12 }}>{tr('common.noImage')}</Text>
