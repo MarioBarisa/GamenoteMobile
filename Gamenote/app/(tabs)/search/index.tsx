@@ -9,6 +9,7 @@ import GameCardCompact from "@/components/GameCardCompact";
 import * as Haptics from 'expo-haptics';
 import {PLACEHOLDER_GAMES} from "@/constants/PLACEHOLDER_GAMES";
 import { SymbolView } from "expo-symbols";
+import {useTranslation} from "react-i18next";
 
 // noinspection JSUnusedGlobalSymbols
 export default function SearchIndex() {
@@ -36,11 +37,13 @@ export default function SearchIndex() {
     return results;
   }, [games, search, sort]); // <- Obavezno moram biti 'sort' u ovisnosti (dependency array)
 
+    const {t: tr} = useTranslation();
+
     function searchBarText(vrsta: boolean){
         if(vrsta){
-            return "Pretraži svoji Gamenote"
+            return tr("search.placeholderMyGames")
         } else{
-            return "Pretraži Gamenote DB"
+            return tr("search.placeholderDB")
         }
     }
 
@@ -52,15 +55,15 @@ export default function SearchIndex() {
     <>
       <Stack.Screen
         options={{
-          title: "Pretraži Gamenote",
+          title: tr("search.title"),
           headerRight: () => (
                 <TouchableOpacity
-              accessibilityLabel="Filtriraj svoje igre"
+              accessibilityLabel={tr("search.filterA11y")}
               onPress={async () => { await Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light)
                   setUserGamenotesOnly(prev => !prev)
               }}
               onLongPress={async () => { await Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium)
-                  Alert.alert("Tvoji Gamenote", "Ovaj gumb uključuje filtiranje prikaza samo na tvoje dodane igre. Inače tražiš cijeli Gamenote database.")
+                  Alert.alert(tr("search.filterTitle"), tr("search.filterMessage"))
               }}
               style={{ justifyContent: 'center', alignItems: 'center'}}>
 

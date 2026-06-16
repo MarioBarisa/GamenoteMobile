@@ -7,6 +7,7 @@ import {Game} from "@/common/Game"
 import {STATUS_CONFIG, STATUS_PLATFORM} from "@/common/StatusCommons";
 import {achievementPercent, progressColor} from "@/common/ProgressSources";
 import * as Haptics from 'expo-haptics';
+import {useTranslation} from "react-i18next";
 
 interface Props {
   game: Game
@@ -14,6 +15,7 @@ interface Props {
 }
 
 export default function GameCard({ game, onDelete }: Props) {
+  const {t: tr} = useTranslation();
   const { theme } = useTheme()
   const t = colors[theme]
     const router = useRouter();
@@ -37,9 +39,9 @@ export default function GameCard({ game, onDelete }: Props) {
   }
 
   const handleDelete = () => {
-    Alert.alert('Izbriši igru', `Jesi li siguran da želiš izbrisati "${game.title}"?`, [
-      {text: 'Odustani', style: 'cancel'},
-      {text: 'Izbriši', style: 'destructive', onPress: () => onDelete?.(game.game_id)},
+    Alert.alert(tr('gameCard.deleteTitle'), tr('gameCard.deleteMessage', {title: game.title}), [
+      {text: tr('common.cancel'), style: 'cancel'},
+      {text: tr('common.delete'), style: 'destructive', onPress: () => onDelete?.(game.game_id)},
     ])
   }
 
@@ -48,7 +50,7 @@ export default function GameCard({ game, onDelete }: Props) {
     ActionSheetIOS.showActionSheetWithOptions(
       {
         title: game.title,
-        options: ['Uredi', 'Izbriši', 'Odustani'],
+        options: [tr('gameCard.actionEdit'), tr('gameCard.actionDelete'), tr('common.cancel')],
         cancelButtonIndex: 2,
         destructiveButtonIndex: 1,
       },
@@ -65,7 +67,7 @@ export default function GameCard({ game, onDelete }: Props) {
   const prColor = progressColor(game.progress_value, game.progress_total);
 
   return (
-      <Pressable onPress={handlePress} onLongPress={handleContextMenu} accessibilityLabel={`Otvori detalje igre ${game.title}`} style={({pressed})=>[{opacity: pressed ? 0.8 : 1}]}>
+      <Pressable onPress={handlePress} onLongPress={handleContextMenu} accessibilityLabel={tr('gameCard.openA11y', {title: game.title})} style={({pressed})=>[{opacity: pressed ? 0.8 : 1}]}>
             <View style={[
               styles.card,
               {
@@ -83,7 +85,7 @@ export default function GameCard({ game, onDelete }: Props) {
                 />
                 ) : (
                   <View style={[styles.imagePlaceholder, { backgroundColor: t.background }]}>
-                    <Text style={{ color: t.secondaryText, fontSize: isLargeScreen ? 15 : 13 }}>Nema slike</Text>
+                    <Text style={{ color: t.secondaryText, fontSize: isLargeScreen ? 15 : 13 }}>{tr('common.noImage')}</Text>
                   </View>
                 )}
               </View>

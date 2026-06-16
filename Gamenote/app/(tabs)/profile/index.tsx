@@ -7,10 +7,12 @@ import {SymbolView} from "expo-symbols";
 import {PLACEHOLDER_GAMES} from "@/constants/PLACEHOLDER_GAMES";
 import {useNavigation, useRouter} from "expo-router";
 import * as WebBrowser from "expo-web-browser";
+import {useTranslation} from "react-i18next";
 
 
 // noinspection JSUnusedGlobalSymbols
 export default function FavoritesScreen() {
+    const {t: tr} = useTranslation();
     const {loggedIn, setLoggedIn, username, setUsername} = useAuth();
     const [password, setPassword] = useState("");
     const {theme} = useTheme();
@@ -20,9 +22,9 @@ export default function FavoritesScreen() {
 
     useLayoutEffect(() => { // CUSTOM POZDRAV TITLE ZA USERNAME
         navigation.setOptions({
-            title: loggedIn && username ? `Pozdrav ${username}!` : "Dobrodošao!",
+            title: loggedIn && username ? tr("profile.greetingLogged", {username}) : tr("profile.greetingGuest"),
         });
-    }, [navigation, loggedIn, username]);
+    }, [navigation, loggedIn, username, tr]);
 
     function userStats() {
         const totalGames = PLACEHOLDER_GAMES.length;
@@ -80,8 +82,8 @@ export default function FavoritesScreen() {
 
         const funFact =
             totalGames > 0
-                ? `Igras Nintendo naslove u ${Math.round((switchGames / totalGames) * 100)}% kolekcije.`
-                : "Dodaj jos koju igru za statistiku!";
+                ? tr("profile.funFact", {percent: Math.round((switchGames / totalGames) * 100)})
+                : tr("profile.funFactFallback");
 
         return {
             totalGames,
@@ -155,25 +157,24 @@ export default function FavoritesScreen() {
                         fontSize: 12,
                         alignSelf: "center"
                     }}>{username}@email.com</Text>
-                    <Text style={{color: t.text, fontWeight: "bold", fontSize: 22, alignSelf: "center"}}>Tvoja Gamenote
-                        statistika</Text>
+                    <Text style={{color: t.text, fontWeight: "bold", fontSize: 22, alignSelf: "center"}}>{tr("profile.statsTitle")}</Text>
                     <View style={styles.row}>
                         <StatCard
-                            label="Ukupno igara"
+                            label={tr("profile.totalGames")}
                             value={String(userInfo.totalGames)}
                             valueColor="#F43098"
                             symbolName="gamecontroller.fill"
                             symbolColor="#F43098"
                         />
                         <StatCard
-                            label="Sati igranja"
+                            label={tr("profile.hoursPlayed")}
                             value={`${userInfo.totalPlaytime}h`}
                             valueColor="#6476ff"
                             symbolName="clock.fill"
                             symbolColor="#6476ff"
                         />
                         <StatCard
-                            label="Završene"
+                            label={tr("profile.completed")}
                             value={String(userInfo.finishedGames)}
                             valueColor="#00D391"
                             symbolName="checkmark.circle.fill"
@@ -183,21 +184,21 @@ export default function FavoritesScreen() {
 
                     <View style={styles.row}>
                         <StatCard
-                            label="Prolaznost"
+                            label={tr("profile.completionRate")}
                             value={`${userInfo.completionRate}%`}
                             valueColor="#8116f3"
                             symbolName="chart.pie.fill"
                             symbolColor="#8116f3"
                         />
                         <StatCard
-                            label="AVG playtime"
+                            label={tr("profile.avgPlaytime")}
                             value={`${userInfo.avgPlaytime}h`}
                             valueColor="#fb2b61"
                             symbolName="chart.bar.fill"
                             symbolColor="#fb2b61"
                         />
                         <StatCard
-                            label="U danima"
+                            label={tr("profile.inDays")}
                             value={`${(userInfo.totalPlaytime / 24).toFixed(1)}d`}
                             valueColor="#fb9207"
                             symbolName="calendar"
@@ -207,7 +208,7 @@ export default function FavoritesScreen() {
 
                     <View style={styles.row}>
                         <StatCard
-                            label="Omiljena igra"
+                            label={tr("profile.favoriteGame")}
                             value={userInfo.favoriteGameTitle}
                             valueColor="#ffd700"
                             symbolName="star.fill"
@@ -215,7 +216,7 @@ export default function FavoritesScreen() {
                             wide
                         />
                         <StatCard
-                            label="Omiljen genre"
+                            label={tr("profile.favoriteGenre")}
                             value={userInfo.favoriteGenre}
                             valueColor="#006ad3"
                             symbolName="tag.fill"
@@ -235,8 +236,7 @@ export default function FavoritesScreen() {
                             <Text style={[styles.funFactBody, {color: "#00aaf3"}]}>{userInfo.funFact}</Text>
                         </View>
                     </View>*/}
-                    <Text style={{color: t.text, fontWeight: "bold", fontSize: 22, alignSelf: "center", margin: 12}}>Gamenote
-                        postignuća</Text>
+                    <Text style={{color: t.text, fontWeight: "bold", fontSize: 22, alignSelf: "center", margin: 12}}>{tr("profile.achievementsTitle")}</Text>
                     <View style={{
                         backgroundColor: t.backgroundModal,
                         borderRadius: 32,
@@ -261,10 +261,9 @@ export default function FavoritesScreen() {
                             }}
                             numberOfLines={1}
                             adjustsFontSizeToFit
-                            minimumFontScale={0.7}>Beginner</Text>
+                            minimumFontScale={0.7}>{tr("profile.achBeginner")}</Text>
                             <Text style={{color: t.secondaryText, fontSize: 10, textAlign: "center"}}
-                            numberOfLines={2}>Dodaj prvu
-                                igru</Text>
+                            numberOfLines={2}>{tr("profile.achBeginnerDesc")}</Text>
                         </View>
 
                         <View style={{alignItems: "center", gap: 4, padding: 4, width: "30%"}}>
@@ -281,9 +280,9 @@ export default function FavoritesScreen() {
                             }}
                             numberOfLines={1}
                             adjustsFontSizeToFit
-                            minimumFontScale={0.7}>Kolekcionar</Text>
+                            minimumFontScale={0.7}>{tr("profile.achCollector")}</Text>
                             <Text style={{color: t.secondaryText, fontSize: 10, textAlign: "center"}}
-                            numberOfLines={2}>50+ igara</Text>
+                            numberOfLines={2}>{tr("profile.achCollectorDesc")}</Text>
                         </View>
 
                         <View style={{alignItems: "center", gap: 4, padding: 4, width: "30%"}}>
@@ -300,10 +299,9 @@ export default function FavoritesScreen() {
                             }}
                             numberOfLines={1}
                             adjustsFontSizeToFit
-                            minimumFontScale={0.7}>Completion master</Text>
+                            minimumFontScale={0.7}>{tr("profile.achCompletionMaster")}</Text>
                             <Text style={{color: t.secondaryText, fontSize: 10, textAlign: "center"}}
-                            numberOfLines={2}>Završi 25
-                                igara</Text>
+                            numberOfLines={2}>{tr("profile.achCompletionMasterDesc")}</Text>
                         </View>
 
                         <View style={{alignItems: "center", gap: 4, padding: 4, width: "30%"}}>
@@ -320,9 +318,9 @@ export default function FavoritesScreen() {
                             }}
                             numberOfLines={1}
                             adjustsFontSizeToFit
-                            minimumFontScale={0.7}>Brzinski</Text>
+                            minimumFontScale={0.7}>{tr("profile.achSpeedster")}</Text>
                             <Text style={{color: t.secondaryText, fontSize: 10, textAlign: "center"}}
-                            numberOfLines={2}>100+ sati</Text>
+                            numberOfLines={2}>{tr("profile.achSpeedsterDesc")}</Text>
                         </View>
 
                         <View style={{alignItems: "center", gap: 4, padding: 4, width: "30%"}}>
@@ -339,9 +337,9 @@ export default function FavoritesScreen() {
                             }}
                             numberOfLines={1}
                             adjustsFontSizeToFit
-                            minimumFontScale={0.7}>Hardcore</Text>
+                            minimumFontScale={0.7}>{tr("profile.achHardcore")}</Text>
                             <Text style={{color: t.secondaryText, fontSize: 10, textAlign: "center"}}
-                            numberOfLines={2}>1000+ sati</Text>
+                            numberOfLines={2}>{tr("profile.achHardcoreDesc")}</Text>
                         </View>
 
                         <View style={{alignItems: "center", gap: 4, padding: 4, width: "30%"}}>
@@ -358,9 +356,9 @@ export default function FavoritesScreen() {
                             }}
                             numberOfLines={1}
                             adjustsFontSizeToFit
-                            minimumFontScale={0.7}>Legend</Text>
+                            minimumFontScale={0.7}>{tr("profile.achLegend")}</Text>
                             <Text style={{color: t.secondaryText, fontSize: 10, textAlign: "center"}}
-                            numberOfLines={2}>3000+ sati</Text>
+                            numberOfLines={2}>{tr("profile.achLegendDesc")}</Text>
                         </View>
                         <View style={{alignItems: "center", gap: 4, padding: 4, width: "30%"}}>
                             <SymbolView
@@ -376,10 +374,9 @@ export default function FavoritesScreen() {
                             }}
                             numberOfLines={1}
                             adjustsFontSizeToFit
-                            minimumFontScale={0.7}>Gamenote Platinum</Text>
+                            minimumFontScale={0.7}>{tr("profile.achPlatinum")}</Text>
                             <Text style={{color: t.secondaryText, fontSize: 10, textAlign: "center"}}
-                            numberOfLines={2}>100% Gamenote
-                                Completion</Text>
+                            numberOfLines={2}>{tr("profile.achPlatinumDesc")}</Text>
                         </View>
 
                         <View style={{alignItems: "center", gap: 4, padding: 4, width: "30%"}}>
@@ -396,17 +393,16 @@ export default function FavoritesScreen() {
                             }}
                             numberOfLines={1}
                             adjustsFontSizeToFit
-                            minimumFontScale={0.7}>GOTY enjoyer</Text>
+                            minimumFontScale={0.7}>{tr("profile.achGoty")}</Text>
                             <Text style={{color: t.secondaryText, fontSize: 10, textAlign: "center"}}
-                            numberOfLines={2}>Odigrano 10+ igara
-                                s MAX ocjenom</Text>
+                            numberOfLines={2}>{tr("profile.achGotyDesc")}</Text>
                         </View>
 
                     </View>
                     <View style={{flexDirection: "row", gap: 12, justifyContent: "center", flexWrap: "wrap"}}>
 
                         <Pressable
-                            accessibilityLabel="Upravljaj računom"
+                            accessibilityLabel={tr("profile.manageAccountA11y")}
                             style={({pressed}) => [{
                                 backgroundColor: t.backgroundModal,
                                 margin: 4, padding: 12,
@@ -424,12 +420,12 @@ export default function FavoritesScreen() {
                                 tintColor={t.accent}
                             />
                             <Text style={{color: t.accent, fontWeight: "600", fontSize: 15}}>
-                                Upravljaj računom
+                                {tr("profile.manageAccount")}
                             </Text>
                         </Pressable>
 
                         <Pressable
-                            accessibilityLabel="Odjavi se"
+                            accessibilityLabel={tr("profile.logoutA11y")}
                             style={({pressed}) => [{
                                 backgroundColor: t.backgroundModal,
                                 margin: 4, padding: 12,
@@ -441,7 +437,7 @@ export default function FavoritesScreen() {
                             }]}
                             onPress={() => {
                                 setLoggedIn(false);
-                                Alert.alert("Uspješno si se odjavio.");
+                                Alert.alert(tr("profile.logoutSuccess"));
                             }}
                         >
                             <SymbolView
@@ -450,7 +446,7 @@ export default function FavoritesScreen() {
                                 tintColor={t.destructive}
                             />
                             <Text style={{color: t.destructive, fontWeight: "600", fontSize: 15}}>
-                                Odjavi se.
+                                {tr("profile.logout")}
                             </Text>
                         </Pressable>
 
@@ -474,7 +470,7 @@ export default function FavoritesScreen() {
                             style={{width: 20, height: 20, alignSelf: "center", margin: 5}} tintColor={'#FFFFFF'}
                         />
                         <Text style={[styles.textBodyCenterHiglighted, {color: '#FFFFFF'}]}>
-                            Trenutno gledaš demo podatke
+                            {tr("profile.demoBanner")}
                         </Text>
                     </View>
                     <SymbolView
@@ -482,7 +478,7 @@ export default function FavoritesScreen() {
                         style={{width: 110, height: 110, alignSelf: "center", margin: 5}}
                     />
                     <Text style={[styles.textBodyCenterHiglighted, {color: t.text}]}>
-                       Napravi Gamenote profil ili se prijavi
+                       {tr("profile.demoPrompt")}
                     </Text>
                     <View style={{padding: 15, gap: 8, marginTop: 10}}>
                         <TextInput
@@ -518,10 +514,10 @@ export default function FavoritesScreen() {
                                     gap: 6,
                                     opacity: pressed ? 0.6 : 1
                                 }]}
-                        accessibilityLabel="Prijavi se"
+                        accessibilityLabel={tr("profile.loginA11y")}
                         onPress={() => {
                                     if (password === "") {
-                                        Alert.alert("Fali lozinka.", "Unesite ispravnu lozinku.");
+                                        Alert.alert(tr("profile.missingPasswordTitle"), tr("profile.missingPasswordMsg"));
                                     } else {
                                         setLoggedIn(true);
                                     }
@@ -533,7 +529,7 @@ export default function FavoritesScreen() {
                                     tintColor={t.accent}
                                 />
                                 <Text style={{color: t.accent, fontWeight: "600", fontSize: 20}}>
-                                    Prijavi se
+                                    {tr("profile.login")}
                                 </Text>
                             </Pressable>
                             <Pressable
@@ -546,7 +542,7 @@ export default function FavoritesScreen() {
                                     gap: 6,
                                     opacity: pressed ? 0.6 : 1
                                 }]}
-                                accessibilityLabel="Izradi račun"
+                                accessibilityLabel={tr("profile.registerA11y")}
                                 onPress={() => router.push('/(modals)/registerModal')}
                             >
                                 <SymbolView
@@ -555,7 +551,7 @@ export default function FavoritesScreen() {
                                     tintColor={t.accent}
                                 />
                                 <Text style={{color: t.accent, fontWeight: "600", fontSize: 20}}>
-                                    Izradi račun
+                                    {tr("profile.register")}
                                 </Text>
                             </Pressable>
                         </View>

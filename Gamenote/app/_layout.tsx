@@ -1,13 +1,16 @@
 import {Stack} from "expo-router";
+import {useTranslation} from "react-i18next";
 import {GroupsProvider} from "@/context/GroupsContext";
 import {ThemeProvider} from "@/context/theme";
 import {SettingsProvider} from "@/context/settings";
 import {AuthProvider} from "@/context/auth";
 import {useNavigationTheme} from "@/constants/navigationTheme";
 import ErrorBoundary from "@/components/ErrorBoundary";
+import "@/utils/i18n";
 
 function RootNavigator() {
     const navTheme = useNavigationTheme();
+    const {t} = useTranslation();
 
     return (
         <ErrorBoundary>
@@ -17,32 +20,32 @@ function RootNavigator() {
                         <Stack.Screen name="(tabs)"
                                       options={{
                                           headerShown: false,
-                                          title: "Početna",
+                                          title: t("tabs.home"),
                                       }}/>
                         <Stack.Screen
                             name="(modals)/modalEditGroups"
                             options={{
-                                presentation: 'modal', title: "Uredi Info grupe",
+                                presentation: 'modal', title: t("screens.editGroupTitle"),
                             }}
                         />
                         <Stack.Screen
                             name="(modals)/addGroupModal"
                             options={{
-                                presentation: 'modal', title: "Dodaj novu grupu",
+                                presentation: 'modal', title: t("screens.addGroupTitle"),
                             }}
                         />
                         <Stack.Screen
                             name="(modals)/modalEdit"
                             options={{
                                 presentation: 'modal',
-                                title: "Uredi igru",
+                                title: t("screens.editGameTitle"),
                             }}
                         />
                         <Stack.Screen
                             name="(modals)/registerModal"
                             options={{
                                 presentation: 'modal',
-                                title: "Izradi račun",
+                                title: t("screens.registerTitle"),
                             }}
                         />
                         <Stack.Screen
@@ -55,7 +58,7 @@ function RootNavigator() {
                         <Stack.Screen name="settings"
                                       options={{
                                           headerShown: true,
-                                          title: "Postavke",
+                                          title: t("screens.settingsTitle"),
                                           headerBackButtonDisplayMode: "minimal",
                                       }}/>
                     </Stack>

@@ -10,20 +10,23 @@ import GameCard from "@/components/GameCard";
 import GameCardCompact from "@/components/GameCardCompact";
 import {SymbolView} from "expo-symbols";
 import * as Haptics from 'expo-haptics';
+import {useTranslation} from "react-i18next";
 
 type FilterKey = 'top_rated' | 'completed' | 'playing' | 'paused' | 'dropped' | 'backlog' | 'wishlist';
 
 const FILTER_ITEMS: { key: FilterKey; icon: string; label: string; color: string }[] = [ // vrsta switchera
     {key: 'top_rated', icon: 'star.fill', label: '5/5', color: '#FFD700'},
     {key: 'completed', icon: 'rosette', label: '100%', color: '#30D158'},
-    {key: 'playing', icon: 'play.circle', label: 'Igram', color: '#0A84FF'},
-    {key: 'paused', icon: 'pause.circle', label: 'Pauza', color: '#FF9F0A'},
+    {key: 'playing', icon: 'play.circle', label: 'Playing', color: '#0A84FF'},
+    {key: 'paused', icon: 'pause.circle', label: 'Paused', color: '#FF9F0A'},
+
     {key: 'dropped', icon: 'multiply.circle', label: 'Dropped', color: '#FF453A'},
     {key: 'backlog', icon: 'tray.full', label: 'Backlog', color: '#b364da'},
     {key: 'wishlist', icon: 'heart', label: 'Wishlist', color: '#00ddf1'},
 ];
 
 export default function FavoritesScreen() {
+    const {t: tr} = useTranslation();
     const [sortBy, setSortBy] = useState<'rating' | 'playtime'>('rating');
     const [platformFilter, setPlatformFilter] = useState<string | null>(null);
     const [statusFilter, setStatusFilter] = useState<FilterKey | null>(null);
@@ -65,8 +68,8 @@ export default function FavoritesScreen() {
     function showPlatformSheet() {
         ActionSheetIOS.showActionSheetWithOptions(
             {
-                title: "Odaberi platformu:",
-                options: ['Odustani', 'Sve platforme', ...platforms],
+                title: tr("favorites.selectPlatform"),
+                options: [tr("common.cancel"), tr("favorites.allPlatforms"), ...platforms],
                 cancelButtonIndex: 0,
             },
             (i) => {
@@ -83,7 +86,7 @@ export default function FavoritesScreen() {
                 options={{
                     headerRight: () => (
                         <TouchableOpacity
-                            accessibilityLabel="Sortiraj igre"
+                            accessibilityLabel={tr("favorites.sortLabel")}
                             onPress={toggleSort}
                         >
                             <SymbolView
@@ -95,7 +98,7 @@ export default function FavoritesScreen() {
                     ),
                     headerLeft: () => (
                         <TouchableOpacity
-                            accessibilityLabel="Filtriraj po platformi"
+                            accessibilityLabel={tr("favorites.filterPlatformLabel")}
                             onPress={showPlatformSheet}
                         >
                             {platformFilter ? (

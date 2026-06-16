@@ -1,20 +1,38 @@
-import {ScrollView, View, Text, StyleSheet, Switch} from "react-native";
+import {ScrollView, View, Text, StyleSheet, Switch, ActionSheetIOS, Pressable} from "react-native";
 import {useTheme} from "@/context/theme";
 import {useSettings} from "@/context/settings";
 import {colors} from "@/constants/theme";
+import {useTranslation} from "react-i18next";
+import * as Haptics from "expo-haptics";
 
 export default function SettingsScreen() {
     const {theme, preference, setPreference} = useTheme();
-    const {vibrationsEnabled, setVibrationsEnabled, compactCards, setCompactCards} = useSettings();
-    const t = colors[theme];
+    const {vibrationsEnabled, setVibrationsEnabled, compactCards, setCompactCards, language, setLanguage} = useSettings();
+    const {t} = useTranslation();
+    const c = colors[theme];
 
     const isDarkForced = preference === "dark";
     const isSystem = preference === "system";
 
+    const showLanguagePicker = () => {
+        Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+        ActionSheetIOS.showActionSheetWithOptions(
+            {
+                title: t("settings.language"),
+                options: ["Hrvatski", "English", t("common.cancel")],
+                cancelButtonIndex: 2,
+            },
+            (index) => {
+                if (index === 0) setLanguage("hr");
+                if (index === 1) setLanguage("en");
+            }
+        );
+    };
+
     return (
         <ScrollView
             contentInsetAdjustmentBehavior="automatic"
-            style={{backgroundColor: t.background}}
+            style={{backgroundColor: c.background}}
             contentContainerStyle={styles.container}
         >
             <View
@@ -28,15 +46,15 @@ export default function SettingsScreen() {
                     },
                 ]}
             >
-                <Text style={[styles.sectionTitle, {color: t.secondaryText}]}>
-                    Izgled
+                <Text style={[styles.sectionTitle, {color: c.secondaryText}]}>
+                    {t("settings.appearance")}
                 </Text>
 
                 <View style={styles.row}>
                     <View style={{flex: 1, marginRight: 12}}>
-                        <Text style={[styles.title, {color: t.text}]}>Dark Mode</Text>
-                        <Text style={[styles.subtitle, {color: t.secondaryText}]}>
-                            Koristi Dark Mode.
+                        <Text style={[styles.title, {color: c.text}]}>{t("settings.darkMode")}</Text>
+                        <Text style={[styles.subtitle, {color: c.secondaryText}]}>
+                            {t("settings.darkModeDesc")}
                         </Text>
                     </View>
                     <Switch
@@ -54,9 +72,9 @@ export default function SettingsScreen() {
 
                 <View style={styles.row}>
                     <View style={{flex: 1, marginRight: 12}}>
-                        <Text style={[styles.title, {color: t.text}]}>Korist iOS default</Text>
-                        <Text style={[styles.subtitle, {color: t.secondaryText}]}>
-                            Gamenote koristi iOS default temu.
+                        <Text style={[styles.title, {color: c.text}]}>{t("settings.iosDefault")}</Text>
+                        <Text style={[styles.subtitle, {color: c.secondaryText}]}>
+                            {t("settings.iosDefaultDesc")}
                         </Text>
                     </View>
                     <Switch
@@ -73,8 +91,8 @@ export default function SettingsScreen() {
                 </View>
                 <View style={styles.row}>
                     <View style={{flex: 1, marginRight: 12}}>
-                        <Text style={[styles.title, {color: t.text}]}>Compact GameCard prikaz</Text>
-                        <Text style={[styles.subtitle, {color: t.secondaryText}]}>Prikaži 2 igre po retku (manje kartice).</Text>
+                        <Text style={[styles.title, {color: c.text}]}>{t("settings.compactCards")}</Text>
+                        <Text style={[styles.subtitle, {color: c.secondaryText}]}>{t("settings.compactCardsDesc")}</Text>
                     </View>
                     <Switch
                         value={compactCards}
@@ -99,14 +117,24 @@ export default function SettingsScreen() {
                     },
                 ]}
             >
-                <Text style={[styles.sectionTitle, {color: t.secondaryText}]}>
-                    Ostalo
+                <Text style={[styles.sectionTitle, {color: c.secondaryText}]}>
+                    {t("settings.other")}
                 </Text>
+
+                <Pressable style={styles.row} onPress={showLanguagePicker}>
+                    <View style={{flex: 1, marginRight: 12}}>
+                        <Text style={[styles.title, {color: c.text}]}>{t("settings.language")}</Text>
+                        <Text style={[styles.subtitle, {color: c.secondaryText}]}>{t("settings.languageDesc")}</Text>
+                    </View>
+                    <Text style={{color: c.accent, fontSize: 17, fontWeight: "500"}}>
+                        {language === "en" ? "English" : "Hrvatski"}
+                    </Text>
+                </Pressable>
 
                 <View style={styles.row}>
                     <View style={{flex: 1, marginRight: 12}}>
-                    <Text style={[styles.title, {color: t.text}]}>Vibracije</Text>
-                    <Text style={[styles.subtitle, { color: t.secondaryText}]}>Haptic feedback za promjene tabova.</Text>
+                    <Text style={[styles.title, {color: c.text}]}>{t("settings.vibration")}</Text>
+                    <Text style={[styles.subtitle, { color: c.secondaryText}]}>{t("settings.vibrationDesc")}</Text>
                     </View>
                     <Switch
                         value={vibrationsEnabled}
@@ -120,8 +148,8 @@ export default function SettingsScreen() {
 
                 <View style={styles.row}>
                     <View style={{flex: 1, marginRight: 12}}>
-                    <Text style={[styles.title, {color: t.secondaryText}]}>Zvukovi</Text>
-                        <Text style={[styles.subtitle, {color: t.secondaryText}]}>Dolazi uskoro.</Text>
+                    <Text style={[styles.title, {color: c.secondaryText}]}>{t("settings.sounds")}</Text>
+                        <Text style={[styles.subtitle, {color: c.secondaryText}]}>{t("settings.soundsDesc")}</Text>
                     </View>
                     <Switch
                         value={false}

@@ -6,6 +6,7 @@ import {SymbolView} from "expo-symbols";
 import * as Haptics from "expo-haptics";
 import * as WebBrowser from "expo-web-browser";
 import {useState} from "react";
+import {useTranslation} from "react-i18next";
 
 interface RegisterFormData {
     username: string;
@@ -22,6 +23,7 @@ interface ValidationErrors {
 }
 
 export default function RegisterModal() {
+    const {t: tr} = useTranslation();
     const {theme} = useTheme();
     const t = colors[theme];
     const router = useRouter();
@@ -71,28 +73,28 @@ export default function RegisterModal() {
 
         // provjer username
         if (!form.username.trim()) {
-            newErrors.username = 'Korisničko ime ne smije biti prazno';
+            newErrors.username = tr('register.usernameEmpty');
         }
 
         // provjera email-a
         if (!form.email.trim()) {
-            newErrors.email = 'Email je obavezan';
+            newErrors.email = tr('register.emailRequired');
         } else if (!validateEmail(form.email)) {
-            newErrors.email = 'Unesite ispravan email';
+            newErrors.email = tr('register.emailInvalid');
         }
 
         // validacija passworda
         if (!form.password) {
-            newErrors.password = 'Lozinka je obavezna';
+            newErrors.password = tr('register.passwordRequired');
         } else if (!validatePassword(form.password)) {
-            newErrors.password = 'Lozinka mora biti minimalno 8 znakova,\ns brojem ili miješanjem velikih i malih slova';
+            newErrors.password = tr('register.passwordLength');
         }
 
         // potvrda passworda
         if (!form.confirmPassword) {
-            newErrors.confirmPassword = 'Potvrda lozinke je obavezna';
+            newErrors.confirmPassword = tr('register.confirmRequired');
         } else if (form.password !== form.confirmPassword) {
-            newErrors.confirmPassword = 'Lozinke se ne poklapaju';
+            newErrors.confirmPassword = tr('register.passwordsMismatch');
         }
 
         setErrors(newErrors);
@@ -109,8 +111,8 @@ export default function RegisterModal() {
         }
 
         Alert.alert(
-            'Račun izrađen',
-            `Dobrodošli, ${form.username}!`,
+            tr('register.accountCreated'),
+            tr('register.welcomeMsg', {username: form.username}),
             [
                 {
                     text: 'OK',
@@ -131,9 +133,8 @@ export default function RegisterModal() {
         >
             <View style={styles.section}>
 
-                {/* Korisničko ime */}
                 <View style={styles.formGroup}>
-                    <Text style={[styles.label, {color: t.text}]}>Korisničko ime:</Text>
+                    <Text style={[styles.label, {color: t.text}]}>{tr('register.usernameLabel')}</Text>
                     <TextInput
                         style={[
                             styles.input,
@@ -146,7 +147,7 @@ export default function RegisterModal() {
                         ]}
                         value={form.username}
                         onChangeText={v => updateField('username', v)}
-                        placeholder="Unesi korisničko ime"
+                        placeholder={tr('register.usernamePlaceholder')}
                         placeholderTextColor={t.secondaryText}
                     />
                     {errors.username && (
@@ -158,7 +159,7 @@ export default function RegisterModal() {
 
                 {/* Email */}
                 <View style={styles.formGroup}>
-                    <Text style={[styles.label, {color: t.text}]}>Email:</Text>
+                    <Text style={[styles.label, {color: t.text}]}>{tr('register.emailLabel')}</Text>
                     <TextInput
                         style={[
                             styles.input,
@@ -171,7 +172,7 @@ export default function RegisterModal() {
                         ]}
                         value={form.email}
                         onChangeText={v => updateField('email', v)}
-                        placeholder="tvoj@email.com"
+                        placeholder={tr('register.emailPlaceholder')}
                         placeholderTextColor={t.secondaryText}
                         keyboardType="email-address"
                         autoCapitalize="none"
@@ -185,7 +186,7 @@ export default function RegisterModal() {
 
                 {/* Lozinka */}
                 <View style={styles.formGroup}>
-                    <Text style={[styles.label, {color: t.text}]}>Lozinka:</Text>
+                    <Text style={[styles.label, {color: t.text}]}>{tr('register.passwordLabel')}</Text>
                     <View style={{flexDirection: 'row', alignItems: 'center', gap: 8}}>
                         <TextInput
                             style={[
@@ -200,7 +201,7 @@ export default function RegisterModal() {
                             ]}
                             value={form.password}
                             onChangeText={v => updateField('password', v)}
-                            placeholder="Minimalno 8 znakova"
+                            placeholder={tr('register.passwordPlaceholder')}
                             placeholderTextColor={t.secondaryText}
                             secureTextEntry={!showPassword}
                         />
@@ -221,13 +222,13 @@ export default function RegisterModal() {
                         </Text>
                     )}
                     <Text style={[styles.helperText, {color: t.secondaryText}]}>
-                        Mora sadržavati minimalno 8 znakova i brojeve ili miješanje velikih/malih slova!
+                        {tr('register.passwordHelper')}
                     </Text>
                 </View>
 
                 {/* Potvrda lozinke */}
                 <View style={styles.formGroup}>
-                    <Text style={[styles.label, {color: t.text}]}>Potvrdi lozinku:</Text>
+                    <Text style={[styles.label, {color: t.text}]}>{tr('register.confirmLabel')}</Text>
                     <View style={{flexDirection: 'row', alignItems: 'center', gap: 8}}>
                         <TextInput
                             style={[
@@ -242,7 +243,7 @@ export default function RegisterModal() {
                             ]}
                             value={form.confirmPassword}
                             onChangeText={v => updateField('confirmPassword', v)}
-                            placeholder="Ponovi lozinku"
+                            placeholder={tr('register.confirmPlaceholder')}
                             placeholderTextColor={t.secondaryText}
                             secureTextEntry={!showConfirmPassword}
                         />
@@ -274,7 +275,7 @@ export default function RegisterModal() {
                         gap: 6,
                         opacity: pressed ? 0.6 : 1
                     }]}
-                    accessibilityLabel="Izradi račun"
+                    accessibilityLabel={tr('register.registerButton')}
                     onPress={handleRegister}
                 >
                     <SymbolView
@@ -283,7 +284,7 @@ export default function RegisterModal() {
                         tintColor={"#ffffff"}
                     />
                     <Text style={{color: "#ffffff", fontWeight: "600", fontSize: 20}}>
-                        Izradi račun
+                        {tr('register.registerButton')}
                     </Text>
                 </Pressable>
                 <View style={{flexDirection: "row", gap: 8, alignItems: "center"}}>
@@ -293,22 +294,22 @@ export default function RegisterModal() {
                         tintColor={"#ffffff"}
                     />
                     <Text style={{color: t.secondaryText}}>
-                        Izradom računa pristaješ na{" "}
+                        {tr('register.termsPrefix')}{" "}
                         <Text
                             style={{textDecorationLine: "underline", color: t.accent}}
                             onPress={() => WebBrowser.openBrowserAsync("http://gamenote.eu/tos")}
                         >
-                            uvjete korištenja Gamenote-a
+                            {tr('register.termsLink')}
                         </Text>
                         .
                     </Text>
                 </View>
                 <Pressable
                     onPress={() => router.back()}
-                    accessibilityLabel="Odustani"
+                    accessibilityLabel={tr("common.cancel")}
                     style={[styles.cancelButton, {backgroundColor: theme === 'dark' ? '#2C2C2E' : '#E5E5EA'}]}
                 >
-                    <Text style={{color: t.text, fontWeight: '600', fontSize: 14}}>Odustani</Text>
+                    <Text style={{color: t.text, fontWeight: '600', fontSize: 14}}>{tr("common.cancel")}</Text>
                 </Pressable>
             </View>
         </ScrollView>

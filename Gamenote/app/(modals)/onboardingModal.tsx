@@ -4,37 +4,39 @@ import {router} from "expo-router";
 import {Image, Pressable, ScrollView, StyleSheet, Text, View} from "react-native";
 import {SymbolView} from "expo-symbols";
 import {useResponsive} from "@/utils/useResponsive";
+import {useTranslation} from "react-i18next";
 
 interface FeatureItem {
     icon: string;
-    title: string;
-    description: string;
+    titleKey: string;
+    descKey: string;
 }
 
 const FEATURES: FeatureItem[] = [
     {
         icon: "bookmark.fill",
-        title: "Prati svoju kolekciju",
-        description: "Dodaj, organiziraj i prati sve svoje igre na jednom mjestu",
+        titleKey: "onboarding.feature1Title",
+        descKey: "onboarding.feature1Desc",
     },
     {
         icon: "star.fill",
-        title: "Ocjenjuj i recenziraj",
-        description: "Daj ocjene, bilježi recenzije i prati napredak kroz igre",
+        titleKey: "onboarding.feature2Title",
+        descKey: "onboarding.feature2Desc",
     },
     {
         icon: "list.clipboard.fill",
-        title: "Upravljaj backlogom",
-        description: "Planiraj što ćeš igrati i nikad ne zaboravi naslov",
+        titleKey: "onboarding.feature3Title",
+        descKey: "onboarding.feature3Desc",
     },
     {
         icon: "chart.line.uptrend.xyaxis",
-        title: "Statistike i uvid",
-        description: "Vidi svoje gaming navike i vrijeme provedeno u igrama",
+        titleKey: "onboarding.feature4Title",
+        descKey: "onboarding.feature4Desc",
     },
 ];
 
 export default function OnboardingModal() {
+    const {t: tr} = useTranslation();
     const {theme} = useTheme();
     const t = colors[theme];
     const {scale} = useResponsive();
@@ -59,10 +61,10 @@ export default function OnboardingModal() {
                     resizeMode="contain"
                 />
                 <Text style={[styles.title, {color: t.text, fontSize: scale(20)}]}>
-                    Dobrodošao u Gamenote!
+                    {tr("onboarding.welcome")}
                 </Text>
                 <Text style={[styles.subtitle, {color: t.secondaryText, fontSize: scale(15)}]}>
-                    Tvoj osobni vodič kroz svijet videoigara
+                    {tr("onboarding.subtitle")}
                 </Text>
             </View>
 
@@ -78,10 +80,10 @@ export default function OnboardingModal() {
                         </View>
                         <View style={styles.featureTextContainer}>
                             <Text style={[styles.featureTitle, {color: t.text, fontSize: scale(16)}]}>
-                                {item.title}
+                                {tr(item.titleKey)}
                             </Text>
                             <Text style={[styles.featureDescription, {color: t.secondaryText, fontSize: scale(14)}]}>
-                                {item.description}
+                                {tr(item.descKey)}
                             </Text>
                         </View>
                     </View>
@@ -97,7 +99,7 @@ export default function OnboardingModal() {
                     onPress={handleContinue}
                 >
                     <Text style={[styles.continueText, {fontSize: scale(17)}]}>
-                        Nastavi
+                        {tr("common.continue")}
                     </Text>
                 </Pressable>
 

@@ -17,9 +17,11 @@ import DateTimePicker, {DateTimePickerEvent} from "@react-native-community/datet
 import {STATUS_CONFIG, GAME_STATUSES} from "@/common/StatusCommons";
 import * as Haptics from 'expo-haptics';
 import {PROGRESS_MODES} from "@/common/ProgressSources";
+import {useTranslation} from "react-i18next";
 
 
 export default function ModalEdit() {
+    const {t: tr} = useTranslation();
     const {game: gameParam} = useLocalSearchParams<{ game: string }>();
     const router = useRouter();
     const {theme} = useTheme();
@@ -27,13 +29,10 @@ export default function ModalEdit() {
 
     const handleSave = () => {
         if (form.progress_value !== undefined && form.progress_total !== undefined && form.progress_value > form.progress_total) {
-            Alert.alert('Greška', 'Broj osvojenih postignuća ne može biti veći od ukupnog broja.');
+            Alert.alert(tr('editGame.errorTitle'), tr('editGame.achievementsError'));
             return;
         }
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        const updated: Game = {...original, ...form};
-        //TU DOLAZI SUPABASE IMPLEMENTACIJA KASINIJE!!!!!!!!
-        Alert.alert('Spremljeno', `${original.title} ažuriran.`, [
+        Alert.alert(tr('editGame.savedTitle'), tr('editGame.savedMsg', {title: original.title}), [
             {text: 'OK', onPress: () => router.back()}
         ]);
     }
@@ -82,10 +81,10 @@ export default function ModalEdit() {
         >
             <View style={styles.section}>
                 <View style={{flexDirection: 'row', gap: 8, paddingVertical: 8}}>
-                    <Text style={[styles.label, {color: t.text}]}>Ocjena:</Text>
+                    <Text style={[styles.label, {color: t.text}]}>{tr('editGame.ratingLabel')}</Text>
                     {[1, 2, 3, 4, 5].map(star => (
                         <Pressable key={star}
-                                   onPress={() => patch('rating', star === form.rating ? undefined : star)} //OCJENA IGRE
+                                   onPress={() => patch('rating', star === form.rating ? undefined : star)}
                                    hitSlop={8}>
                             <SymbolView
                                 name={star <= (form.rating ?? 0) ? 'star.fill' : 'star'}
@@ -96,9 +95,9 @@ export default function ModalEdit() {
                     ))}
                 </View>
                 <View style={{flexDirection: 'row', gap: 8, paddingVertical: 8}}>
-                    <Text style={[styles.label, {color: t.text}]}>Početak igranja:</Text>
+                    <Text style={[styles.label, {color: t.text}]}>{tr('editGame.startDateLabel')}</Text>
                     <DateTimePicker
-                        value={parseDate(form.start_date)}  //DATUMI POČETKA I KRAJA IGRNAJA
+                        value={parseDate(form.start_date)}
                         mode="date"
                         display="compact"
                         onChange={(e: DateTimePickerEvent, date?: Date) => {
@@ -108,7 +107,7 @@ export default function ModalEdit() {
                     />
                 </View>
                 <View style={{flexDirection: 'row', gap: 8, paddingVertical: 8}}>
-                    <Text style={[styles.label, {color: t.text}]}>Kraj igranja:</Text>
+                    <Text style={[styles.label, {color: t.text}]}>{tr('editGame.endDateLabel')}</Text>
                     <DateTimePicker
                         value={parseDate(form.end_date)}
                         mode="date"
@@ -120,49 +119,48 @@ export default function ModalEdit() {
                     />
                 </View>
                 <View style={{flexDirection: "row", alignItems: "center", gap: 8}}>
-                    <Text style={[styles.label, {color: t.text}]}>Platforma: </Text>
+                    <Text style={[styles.label, {color: t.text}]}>{tr('editGame.platformLabel')}</Text>
                     <Pressable
                         onPress={() => Alert.alert(
-                            'Odaberi platformu',  // ODABIR PLATFORME NA KOJOJ JE IGRA IGRANA
-
+                            tr('editGame.platformPickerTitle'),
                             undefined,
                             [
                                 ...PLATFORMS.map(p => ({
                                     text: p,
                                     onPress: () => patch('platform', p),
                                 })),
-                                {text: 'Odustani', style: 'cancel'},
+                                {text: tr('common.cancel'), style: 'cancel'},
                             ]
                         )}
                         style={{flexDirection: 'row', alignItems: 'center', gap: 6}}
                     >
                         <Text style={{color: t.text, fontSize: 15, fontWeight: '500'}}>
-                            {form.platform ?? 'Odaberi platformu'}
+                            {form.platform ?? tr('editGame.platformDefault')}
                         </Text>
                         <SymbolView name="chevron.up.chevron.down" style={{width: 14, height: 14}}
                                     tintColor={t.accent}/>
                     </Pressable>
                 </View>
                 <View style={{flexDirection: "row", alignItems: "center", gap: 8}}>
-                    <Text style={[styles.label, {color: t.text}]}>Vrsta Progresa: </Text>
+                    <Text style={[styles.label, {color: t.text}]}>{tr('editGame.progressLabel')}</Text>
                     <Pressable
                         onPress={() =>
-                            Alert.alert('Odaberi vrstu progressa', undefined, [
+                            Alert.alert(tr('editGame.progressPickerTitle'), undefined, [
                                 ...PROGRESS_MODES.map(m => ({
                                     text: m.label,
                                     onPress: () => patch('progress_mode', m.key),
                                 })),
-                                {text: 'Odustani', style: "cancel"},
+                                {text: tr('common.cancel'), style: "cancel"},
                             ])} style={{flexDirection: "row", alignItems: "center", gap: 6}}>
                         <Text style={{color: t.text, fontSize: 16, fontWeight: '500'}}>
-                            {form.progress_mode ? PROGRESS_MODES.find(m => m.key === form.progress_mode)?.label : 'Odaberi'}
+                            {form.progress_mode ? PROGRESS_MODES.find(m => m.key === form.progress_mode)?.label : tr('editGame.progressDefault')}
                         </Text>
                         <SymbolView name="chevron.up.chevron.down" style={{width: 14, height: 14}}
                                     tintColor={t.accent}/>
                     </Pressable>
                 </View>
                 <View style={{flexDirection: "row", alignItems: "center", gap: 8}}>
-                    <Text style={[styles.label, {color: t.text}]}>Postignuća: </Text>
+                    <Text style={[styles.label, {color: t.text}]}>{tr('editGame.achievementsLabel')}</Text>
                     <TextInput style={[styles.numInput, {
                         color: t.text,
                         backgroundColor: theme === 'dark' ? '#2C2C2E' : '#E5E5EA'
@@ -170,7 +168,7 @@ export default function ModalEdit() {
                                value={form.progress_value?.toString() ?? ''}
                                onChangeText={v => patch('progress_value', v === '' ? undefined : parseInt(v))}
                                keyboardType="numeric"
-                               placeholder="0"
+                               placeholder={tr('editGame.achievementPlaceholder')}
                                placeholderTextColor={t.secondaryText}
                                maxLength={4}/>
                     <Text style={{color: t.secondaryText, fontSize: 18}}>/</Text>
@@ -181,70 +179,69 @@ export default function ModalEdit() {
                                value={form.progress_total?.toString() ?? ''}
                                onChangeText={v => patch('progress_total', v === '' ? undefined : parseInt(v))}
                                keyboardType="numeric"
-                               placeholder="0"
+                               placeholder={tr('editGame.achievementPlaceholder')}
                                placeholderTextColor={t.secondaryText}
                                maxLength={4}/>
                 </View>
                 <View style={{flexDirection: "row", alignItems: "center", gap: 8}}>
-                    <Text style={[styles.label, {color: t.text}]}>Playtime: </Text>
+                    <Text style={[styles.label, {color: t.text}]}>{tr('editGame.playtimeLabel')}</Text>
                     <TextInput style={[styles.input, {
                         color: t.text,
                         backgroundColor: theme === 'dark' ? '#2C2C2E' : '#E5E5EA'
-                    }]} //PLAYTIME IGRE
+                    }]}
                                value={form.play_time?.toString() ?? ''}
                                onChangeText={v => patch('play_time', v === '' ? undefined : parseInt(v))}
                                keyboardType="number-pad"
-                               placeholder="Npr. 120"
+                               placeholder={tr('editGame.playtimePlaceholder')}
                                placeholderTextColor={t.secondaryText}/>
                 </View>
                 <View style={[{backgroundColor: theme === 'dark' ? '#2C2C2E' : '#E5E5EA'}]}/>
                 <View style={{flexDirection: "row", alignItems: "center", gap: 8}}>
-                    <Text style={[styles.label, {color: t.text}]}>Status igranja: </Text>
+                    <Text style={[styles.label, {color: t.text}]}>{tr('editGame.statusLabel')}</Text>
                     <Pressable
                         onPress={() => Alert.alert(
-                            'Odaberi status igranja',
-
+                            tr('editGame.statusPickerTitle'),
                             undefined,
                             [
                                 ...GAME_STATUSES.map(status => ({
                                     text: STATUS_CONFIG[status].label,
                                     onPress: () => patch('status', status),
                                 })),
-                                {text: 'Odustani', style: 'cancel'},
+                                {text: tr('common.cancel'), style: 'cancel'},
                             ]
                         )}
                         style={{flexDirection: 'row', alignItems: 'center', gap: 6}}
                     >
                         <Text style={{color: t.text, fontSize: 15, fontWeight: '500'}}>
-                            {form.status ? STATUS_CONFIG[form.status].label : 'Odaberi status igranja'}
+                            {form.status ? STATUS_CONFIG[form.status].label : tr('editGame.statusDefault')}
                         </Text>
                         <SymbolView name="chevron.up.chevron.down" style={{width: 14, height: 14}}
                                     tintColor={t.accent}/>
                     </Pressable>
                 </View>
-                <Text style={[styles.label, {color: t.text}]}>Tvoje bilješke:</Text>
+                <Text style={[styles.label, {color: t.text}]}>{tr('editGame.notesLabel')}</Text>
                 <TextInput style={[styles.notesInput, {
                     color: t.text,
-                    backgroundColor: theme === 'dark' ? '#2C2C2E' : '#E5E5EA' //BILJEŠKE USERA
+                    backgroundColor: theme === 'dark' ? '#2C2C2E' : '#E5E5EA'
                 }]}
                            value={form.notes ?? ''}
                            onChangeText={v => patch('notes', v)}
                            multiline={true}
                            numberOfLines={10}
-                           placeholder="Dodaj bilješke..."
+                           placeholder={tr('editGame.notesPlaceholder')}
                            placeholderTextColor={t.secondaryText}
                            textAlignVertical="top"/>
                 <Pressable
                     onPress={() => {
                         handleSave();
                         if (Platform.OS === 'ios') {
-                            Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium); //medium vibracija kada se igra uspješno spremi
+                            Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
                         }
                     }}
-                    accessibilityLabel="Spremi promjene"
+                    accessibilityLabel={tr('editGame.saveA11y')}
                     style={[styles.saveButton, {backgroundColor: t.accent}]}
                 >
-                    <Text style={{color: '#fff', fontWeight: '700', fontSize: 16}}>Spremi</Text>
+                    <Text style={{color: '#fff', fontWeight: '700', fontSize: 16}}>{tr('editGame.saveLabel')}</Text>
                 </Pressable>
             </View>
         </ScrollView>

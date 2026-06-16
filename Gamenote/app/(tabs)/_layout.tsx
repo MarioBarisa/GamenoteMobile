@@ -4,12 +4,14 @@ import * as Haptics from "expo-haptics";
 import {useSettings} from "@/context/settings";
 import {useEffect, useRef} from "react";
 import {useAuth} from "@/context/auth";
+import {useTranslation} from "react-i18next";
 
 const DEV_IGNORE_REDIRECT_PROFILE = true;
 let onboardingShown = false;
 
 // noinspection JSUnusedGlobalSymbols
 export default function TabsLayout() {
+    const {t} = useTranslation();
 
     // Apple SF icons online list https://hotpot.ai/free-icons
     const {loggedIn} = useAuth();
@@ -38,7 +40,7 @@ export default function TabsLayout() {
     return (
         <NativeTabs minimizeBehavior="onScrollDown">
             <NativeTabs.Trigger name="home">
-                <Label>Početna</Label>
+                <Label>{t("tabs.home")}</Label>
                 <Icon
                     sf={{default: "house", selected: "house.fill"}}
                     drawable="ic_menu_view"
@@ -46,24 +48,24 @@ export default function TabsLayout() {
             </NativeTabs.Trigger>
 
             <NativeTabs.Trigger name="favorites">
-                <Label>Moje igre</Label>
+                <Label>{t("tabs.favorites")}</Label>
                 <Icon sf={{default: "bookmark", selected: "bookmark.fill"}} drawable="ic_menu_agenda"/>
             </NativeTabs.Trigger>
 
             <NativeTabs.Trigger name="search" role="search">
-                <Label>Pretraži</Label>
+                <Label>{t("tabs.search")}</Label>
                 <Icon sf="magnifyingglass" drawable="ic_menu_search"/>
             </NativeTabs.Trigger>
 
 
             <NativeTabs.Trigger name="groups">
-                <Label>Grupe</Label>
+                <Label>{t("tabs.groups")}</Label>
                 <Icon sf={{default: "rectangle.stack", selected: "rectangle.stack.fill"}} drawable="ic_menu_agenda"/>
             </NativeTabs.Trigger>
 
             <NativeTabs.Trigger name="profile">
                  {!loggedIn && <Badge>!</Badge>}
-                <Label>Profil</Label>
+                <Label>{t("tabs.profile")}</Label>
                 <Icon sf={{default: "person", selected: "person.fill"}} drawable="ic_menu_agenda"/>
             </NativeTabs.Trigger>
 

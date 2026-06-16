@@ -4,15 +4,15 @@ import {useLocalSearchParams, useRouter} from "expo-router";
 import {Alert, Platform, Pressable, ScrollView, StyleSheet, Text, TextInput, View} from "react-native";
 import {Group} from "@/common/groups";
 import {SymbolView} from "expo-symbols";
-//import DateTimePicker, {DateTimePickerEvent} from "@react-native-community/datetimepicker";
 import * as Haptics from "expo-haptics";
 import {useState} from "react";
 import {useGroups} from "@/context/GroupsContext";
 import {PLACEHOLDER_GAMES} from "@/constants/PLACEHOLDER_GAMES";
-//import {GAME_STATUSES, STATUS_CONFIG} from "@/common/StatusCommons";
+import {useTranslation} from "react-i18next";
 
 
 export default function ModalEditGroups() {
+    const {t: tr} = useTranslation();
     const {theme} = useTheme()
     const t = colors[theme]
     const router = useRouter();
@@ -48,7 +48,7 @@ export default function ModalEditGroups() {
     const handleSave = () => {
         if (Platform.OS === 'ios') Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
         const updated = {...original, ...form}; // tu doalzi supabase
-        Alert.alert('Spremljena', `"${updated.name}" grupa.`, [
+        Alert.alert(tr('editGroup.savedTitle'), tr('editGroup.savedMsg', {name: updated.name}), [
             {text: 'OK', onPress: () => router.back()}
         ]);
 
@@ -60,7 +60,7 @@ export default function ModalEditGroups() {
     const patch = (key: keyof Group, value: any) => setForm(prev => ({...prev, [key]: value}));
 
     if (!group) {
-        return <Text style={{color: t.text, padding: 16}}>Grupa nije pronađena</Text>;
+        return <Text style={{color: t.text, padding: 16}}>{tr('editGroup.notFound')}</Text>;
     } else {
         return (
             <ScrollView contentContainerStyle={{gap: 10, padding: 8}}
@@ -73,7 +73,7 @@ export default function ModalEditGroups() {
                 <View style={styles.section}>
                     <View style={{flexDirection: 'column', gap: 8, paddingVertical: 8}}>
                         <View style={{flexDirection: 'row', gap: 8, paddingVertical: 8}}>
-                            <Text style={[styles.label, {color: t.text, paddingTop: 8}]}>Ime grupe: </Text>
+                            <Text style={[styles.label, {color: t.text, paddingTop: 8}]}>{tr('editGroup.nameLabel')}</Text>
                             <TextInput style={[styles.titleInput, {
                                 flex: 1,
                                 color: t.text,
@@ -81,23 +81,22 @@ export default function ModalEditGroups() {
                             }]}
                                        value={form.name ?? ''}
                                        onChangeText={v => patch('name', v)}
-                                       placeholder="Naslov grupe?..."
+                                       placeholder={tr('editGroup.namePlaceholder')}
                                        placeholderTextColor={t.secondaryText}
                                        textAlignVertical="top"/>
                         </View>
                         <View style={{flexDirection: 'row', gap: 8, paddingVertical: 8}}>
-                            <Text style={[styles.label, {color: t.text}]}>Vrsta grupe: </Text>
+                            <Text style={[styles.label, {color: t.text}]}>{tr('editGroup.typeLabel')}</Text>
                             <Pressable
                                 onPress={() => Alert.alert(
-                                    'Odaberi vrstu grupe',
-
+                                    tr('editGroup.typePickerTitle'),
                                     undefined,
                                     [
                                         ...typeGroups.map(status => ({
                                             text: status,
                                             onPress: () => patch('type', status),
                                         })),
-                                        {text: 'Odustani', style: 'cancel'},
+                                        {text: tr('common.cancel'), style: 'cancel'},
                                     ]
                                 )}
                                 style={{flexDirection: 'row', alignItems: 'center', gap: 6}}
@@ -110,7 +109,7 @@ export default function ModalEditGroups() {
                             </Pressable>
                         </View>
                         <View style={{flexDirection: 'row', gap: 8, paddingVertical: 8}}>
-                            <Text style={[styles.label, {color: t.text, paddingTop: 6}]}>Ocjena:</Text>
+                            <Text style={[styles.label, {color: t.text, paddingTop: 6}]}>{tr('editGroup.ratingLabel')}</Text>
                             {[1, 2, 3, 4, 5].map(star => (
                                 <Pressable key={star}
                                            onPress={() => patch('rating', star === form.rating ? undefined : star)} //OCJENA GRUPE
@@ -125,7 +124,7 @@ export default function ModalEditGroups() {
                         </View>
                     </View>
                     <View style={{flexDirection: "column", gap: 8, paddingVertical: 8}}>
-                        <Text style={[styles.label, {color: t.text}]}>Igre u grupi:</Text>
+                        <Text style={[styles.label, {color: t.text}]}>{tr('editGroup.gamesLabel')}</Text>
                         {visibleGames.map((game) => {
                             const isInGroup = gamesInGroup.includes(game.game_id);
                             return (
@@ -167,7 +166,7 @@ export default function ModalEditGroups() {
                                 style={{paddingVertical: 10, alignItems: 'center'}}
                             >
                                 <Text style={{color: t.accent, fontSize: 14, fontWeight: '600'}}>
-                                    {showAll ? 'Prikaži manje' : `Prikaži još ${PLACEHOLDER_GAMES.length - 5} igara`}
+                                    {showAll ? tr('editGroup.showLess') : tr('editGroup.showMore', {count: PLACEHOLDER_GAMES.length - 5})}
                                 </Text>
                             </Pressable>
                         )}
@@ -175,7 +174,7 @@ export default function ModalEditGroups() {
 
                     </View>
                     <View style={{flexDirection: 'column', gap: 8, paddingVertical: 8}}>
-                        <Text style={[styles.label, {color: t.text}]}>Tvoje bilješke:</Text>
+                        <Text style={[styles.label, {color: t.text}]}>{tr('editGroup.notesLabel')}</Text>
                         <TextInput style={[styles.notesInput, {
                             color: t.text,
                             backgroundColor: theme === 'dark' ? '#2C2C2E' : '#E5E5EA'
@@ -184,7 +183,7 @@ export default function ModalEditGroups() {
                                    onChangeText={v => patch('user_notes', v)}
                                    multiline={true}
                                    numberOfLines={10}
-                                   placeholder="Dodaj bilješke..."
+                                   placeholder={tr('editGroup.notesPlaceholder')}
                                    placeholderTextColor={t.secondaryText}
                                    textAlignVertical="top"/>
                     </View>
@@ -196,10 +195,10 @@ export default function ModalEditGroups() {
                                 Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium); //medium vibracija kada se grupa uspješno spremi
                             }
                         }}
-                        accessibilityLabel="Spremi izmjene grupe"
+                        accessibilityLabel={tr('editGroup.saveA11y')}
                         style={[styles.saveButton, {backgroundColor: t.accent}]}
                     >
-                        <Text style={{color: '#fff', fontWeight: '700', fontSize: 16}}>Spremi izmjene</Text>
+                        <Text style={{color: '#fff', fontWeight: '700', fontSize: 16}}>{tr('editGroup.saveLabel')}</Text>
                     </Pressable>
                 </View>
             </ScrollView>

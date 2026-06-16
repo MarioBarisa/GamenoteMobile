@@ -8,9 +8,11 @@ import * as Haptics from "expo-haptics";
 import {useState} from "react";
 import {useGroups} from "@/context/GroupsContext";
 import {PLACEHOLDER_GAMES} from "@/constants/PLACEHOLDER_GAMES";
+import {useTranslation} from "react-i18next";
 
 
 export default function AddGroupModal() {
+    const {t: tr} = useTranslation();
     const {theme} = useTheme()
     const t = colors[theme]
     const router = useRouter();
@@ -33,7 +35,7 @@ export default function AddGroupModal() {
 
     const handleSave = () => {
         if (!form.name?.trim()) {
-            Alert.alert('Nedostaje naziv', 'Upiši ime grupe.');
+            Alert.alert(tr('addGroup.nameMissingTitle'), tr('addGroup.nameMissingMsg'));
             return;
         }
 
@@ -56,7 +58,7 @@ export default function AddGroupModal() {
             Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
         }
 
-        Alert.alert('', `Grupa "${form.name?.trim()}" je dodana.`, [ //'' je empty  kako bi alert bio u jednom redu.
+        Alert.alert(tr('addGroup.addedTitle'), tr('addGroup.addedMsg', {name: form.name?.trim()}), [  //'' je empty  kako bi alert bio u jednom redu.
             {text: 'OK', onPress: () => router.back()}
         ]);
     };
@@ -85,7 +87,7 @@ export default function AddGroupModal() {
             <View style={styles.section}>
                 <View style={{flexDirection: 'column', gap: 8, paddingVertical: 8}}>
                     <View style={{flexDirection: 'row', gap: 8, paddingVertical: 8}}>
-                        <Text style={[styles.label, {color: t.text, paddingTop: 8}]}>Ime grupe: </Text>
+                        <Text style={[styles.label, {color: t.text, paddingTop: 8}]}>{tr('addGroup.nameLabel')}</Text>
                         <TextInput
                             style={[styles.titleInput, {
                                 flex: 1,
@@ -94,23 +96,23 @@ export default function AddGroupModal() {
                             }]}
                             value={form.name ?? ''}
                             onChangeText={v => patch('name', v)}
-                            placeholder="Naslov grupe?..."
+                            placeholder={tr('addGroup.namePlaceholder')}
                             placeholderTextColor={t.secondaryText}
                             textAlignVertical="top"
                         />
                     </View>
                     <View style={{flexDirection: 'row', gap: 8, paddingVertical: 8}}>
-                        <Text style={[styles.label, {color: t.text}]}>Vrsta grupe: </Text>
+                        <Text style={[styles.label, {color: t.text}]}>{tr('addGroup.typeLabel')}</Text>
                         <Pressable
                             onPress={() => Alert.alert(
-                                'Odaberi vrstu grupe',
+                                tr('addGroup.typePickerTitle'),
                                 undefined,
                                 [
                                     ...typeGroups.map(type => ({
                                         text: type,
                                         onPress: () => patch('type', type),
                                     })),
-                                    {text: 'Odustani', style: 'cancel'},
+                                    {text: tr('common.cancel'), style: 'cancel'},
                                 ]
                             )}
                             style={{flexDirection: 'row', alignItems: 'center', gap: 6}}
@@ -126,7 +128,7 @@ export default function AddGroupModal() {
                         </Pressable>
                     </View>
                     <View style={{flexDirection: 'row', gap: 8, paddingVertical: 8}}>
-                        <Text style={[styles.label, {color: t.text, paddingTop: 6}]}>Ocjena:</Text>
+                        <Text style={[styles.label, {color: t.text, paddingTop: 6}]}>{tr('addGroup.ratingLabel')}</Text>
                         {[1, 2, 3, 4, 5].map(star => (
                             <Pressable
                                 key={star}
@@ -144,7 +146,7 @@ export default function AddGroupModal() {
                 </View>
 
                 <View style={{flexDirection: 'column', gap: 8, paddingVertical: 8}}>
-                    <Text style={[styles.label, {color: t.text}]}>Dodaj igre:</Text>
+                    <Text style={[styles.label, {color: t.text}]}>{tr('addGroup.addGamesLabel')}</Text>
                     {visibleGames.map((game) => {
                         const isSelected = isGameSelected(game.game_id);
 
@@ -187,14 +189,14 @@ export default function AddGroupModal() {
                                 style={{paddingVertical: 10, alignItems: 'center'}}
                             >
                                 <Text style={{color: t.accent, fontSize: 14, fontWeight: '600'}}>
-                                    {showAll ? 'Prikaži manje' : `Prikaži još ${PLACEHOLDER_GAMES.length - 5} igara`}
+                                    {showAll ? tr('addGroup.showLess') : tr('addGroup.showMore', {count: PLACEHOLDER_GAMES.length - 5})}
                                 </Text>
                             </Pressable>
                         )}
                 </View>
 
                 <View style={{flexDirection: 'column', gap: 8, paddingVertical: 8}}>
-                    <Text style={[styles.label, {color: t.text}]}>Tvoje bilješke:</Text>
+                    <Text style={[styles.label, {color: t.text}]}>{tr('addGroup.notesLabel')}</Text>
                     <TextInput
                         style={[styles.notesInput, {
                             color: t.text,
@@ -204,7 +206,7 @@ export default function AddGroupModal() {
                         onChangeText={v => patch('user_notes', v)}
                         multiline={true}
                         numberOfLines={10}
-                        placeholder="Dodaj bilješke..."
+                        placeholder={tr('addGroup.notesPlaceholder')}
                         placeholderTextColor={t.secondaryText}
                         textAlignVertical="top"
                     />
@@ -212,10 +214,10 @@ export default function AddGroupModal() {
 
                 <Pressable
                     onPress={handleSave}
-                    accessibilityLabel="Dodaj grupu"
+                    accessibilityLabel={tr('addGroup.saveA11y')}
                     style={[styles.saveButton, {backgroundColor: t.accent}]}
                 >
-                    <Text style={{color: '#fff', fontWeight: '700', fontSize: 16}}>Dodaj grupu</Text>
+                    <Text style={{color: '#fff', fontWeight: '700', fontSize: 16}}>{tr('addGroup.saveLabel')}</Text>
                 </Pressable>
             </View>
         </ScrollView>

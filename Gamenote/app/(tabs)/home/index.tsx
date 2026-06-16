@@ -10,9 +10,11 @@ import * as Haptics from "expo-haptics";
 import {SymbolView} from "expo-symbols";
 import {STATUS_CONFIG} from "@/common/StatusCommons";
 import {router} from "expo-router";
+import {useTranslation} from "react-i18next";
 
 // noinspection JSUnusedGlobalSymbols
 export default function HomeIndex() {
+    const {t: tr} = useTranslation();
     const {theme} = useTheme();
     const t = colors[theme];
     const {compactCards} = useSettings();
@@ -71,7 +73,7 @@ export default function HomeIndex() {
                 }}
             >
                 <View style={{flex: 1, alignItems: "center"}}>
-                    <Text style={[styles.name, {color: t.text}]}>Ukupno igara</Text>
+                    <Text style={[styles.name, {color: t.text}]}>{tr("home.totalGames")}</Text>
                     <Text
                         style={{
                             textAlign: "center",
@@ -84,7 +86,7 @@ export default function HomeIndex() {
                     </Text>
                 </View>
                 <View style={{flex: 1, alignItems: "center"}}>
-                    <Text style={[styles.name, {color: t.text}]}>Vrijeme igranja</Text>
+                    <Text style={[styles.name, {color: t.text}]}>{tr("home.playtime")}</Text>
                     <Text
                         style={{
                             textAlign: "center",
@@ -97,7 +99,7 @@ export default function HomeIndex() {
                     </Text>
                 </View>
                 <View style={{flex: 1, alignItems: "center"}}>
-                    <Text style={[styles.name, {color: t.text}]}>Završene igre</Text>
+                    <Text style={[styles.name, {color: t.text}]}>{tr("home.completedGames")}</Text>
                     <Text
                         style={{
                             textAlign: "center",
@@ -176,7 +178,7 @@ export default function HomeIndex() {
                     </>
                 ) : (
                     <Text style={[styles.name, {color: t.text}]}>
-                        Sve igre su odigrane. Bravo!
+                        {tr("home.allPlayed")}
                     </Text>
                 )}
 
@@ -187,7 +189,7 @@ export default function HomeIndex() {
                     <View style={{flexDirection: "row", alignItems: "center", gap: 6}}>
 
                         <Text style={{color: "#fff", fontWeight: "700", fontSize: 16}}>
-                            Igraj danas!
+                            {tr("home.playToday")}
                         </Text>
                         <SymbolView
                             name="play.circle.fill"

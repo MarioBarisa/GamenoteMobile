@@ -6,6 +6,7 @@ import {Ionicons} from "@expo/vector-icons";
 import {PLACEHOLDER_GAMES} from "@/constants/PLACEHOLDER_GAMES";
 import {router} from "expo-router";
 import {SymbolView} from "expo-symbols";
+import {useTranslation} from "react-i18next";
 
 const getGameCountLabel = (n: number) => {
     if (n === 1) return '1 igra';
@@ -14,6 +15,7 @@ const getGameCountLabel = (n: number) => {
 };
 
 export default function GroupsIndex() {
+    const {t: tr} = useTranslation();
     const {theme} = useTheme();
     const t = colors[theme];
     const {groups, getGamesInGroup} = useGroups();
@@ -33,7 +35,7 @@ export default function GroupsIndex() {
         >
             {groups.length === 0 ? (
                 <Text style={{color: t.text, fontSize: 26, fontWeight: "bold", textAlign: "center", padding: 32}}>
-                    Nemaš još niti jednu grupu.
+                    {tr("groups.empty")}
                 </Text>
             ) : (
                 groups.map((group) => {
@@ -43,7 +45,7 @@ export default function GroupsIndex() {
                     return (
                         <TouchableOpacity
                             key={group.id}
-                            accessibilityLabel={`Otvori grupu ${group.name}`}
+                            accessibilityLabel={tr("groups.openA11y", {name: group.name})}
                             style={[styles.card, {backgroundColor: t.card}]}
                             onPress={() => router.push({
                                 pathname: "/(tabs)/groups/group-detail",

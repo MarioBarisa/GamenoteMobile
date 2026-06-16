@@ -6,9 +6,11 @@ import {Image, ScrollView, Text, View, StyleSheet, Pressable,} from "react-nativ
 import {PLACEHOLDER_GAMES} from "@/constants/PLACEHOLDER_GAMES";
 import {SymbolView} from "expo-symbols";
 import {Ionicons} from "@expo/vector-icons";
+import {useTranslation} from "react-i18next";
 
 
 export default function GroupDetail(){
+    const { t: tr } = useTranslation();
     const { id } = useLocalSearchParams<{ id: string }>();
     const { theme } = useTheme();
     const t = colors[theme];
@@ -19,7 +21,7 @@ export default function GroupDetail(){
     if(!group){
         return (
             <View style={{flex: 1, justifyContent: "center", alignItems: "center", backgroundColor: t.background}}>
-                <Text style={{color: t.text}}>Grupa nije pronađena.</Text>
+                <Text style={{color: t.text}}>{tr("groups.notFound")}</Text>
             </View>
         );
     }
@@ -34,16 +36,16 @@ export default function GroupDetail(){
             <Stack.Screen
                 options={{
                     title: group.name,
-                    headerBackTitle: 'Natrag',
+                    headerBackTitle: tr("common.back"),
                      headerRight: () => (
                         <Link
                             href={{
                                 pathname: "/(modals)/modalEditGroups",
-                                params: {group: JSON.stringify(group)}, // cijeli group objekt kao prop
+                                params: {group: JSON.stringify(group)},
                             }}
                             asChild
                         >
-                            <Pressable accessibilityLabel="Uredi grupu" hitSlop={10}>
+                            <Pressable accessibilityLabel={tr("groups.editA11y")} hitSlop={10}>
                                 <SymbolView
                                     name="square.and.pencil"
                                     resizeMode="scaleAspectFit"
@@ -63,7 +65,7 @@ export default function GroupDetail(){
                             fontSize: 18,
                             marginTop: 14,
                             fontWeight: "700"
-                        }}><Text style={{color: t.secondaryText}}>Tip grupe: </Text>{group.type}</Text>
+                        }}><Text style={{color: t.secondaryText}}>{tr("groups.typeLabel")}</Text>{group.type}</Text>
                     )}
                     {group.created_at && (
                         <Text style={{
@@ -71,7 +73,7 @@ export default function GroupDetail(){
                             fontSize: 14,
                             marginTop: 14,
                             fontWeight: "700"
-                        }}><Text style={{color: t.secondaryText}}>Grupa napravljena: </Text>{group.created_at}</Text>
+                        }}><Text style={{color: t.secondaryText}}>{tr("groups.createdLabel")}</Text>{group.created_at}</Text>
                     )}
                     {group.user_notes && (
                         <Text style={{color: t.text, fontSize: 16, marginTop: 14, fontStyle: "italic"}}>{group.user_notes}</Text>
@@ -90,7 +92,7 @@ export default function GroupDetail(){
                     </View>
                 )}
                 <Text style={{color: t.secondaryText, fontSize: 13, margin: 16, marginBottom: 8}}>
-                    {games.length} {games.length === 1 ? "igra" : "igara"}
+                    {games.length > 0 ? `${games.length} ${games.length === 1 ? tr("groups.gameCountSingle") : tr("groups.gameCountLabel", {count: games.length})}` : ""}
                 </Text>
 
                 {games.map((game, index) => (

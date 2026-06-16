@@ -8,8 +8,10 @@ import {colors} from "@/constants/theme";
 import {SymbolView} from "expo-symbols";
 import {STATUS_CONFIG, STATUS_PLATFORM} from "@/common/StatusCommons";
 import {isProgressModeKey, PROGRESS_MODE_MAP, progressLabel, progressColor} from "@/common/ProgressSources";
+import {useTranslation} from "react-i18next";
 
 export default function GameDetailsScreen() {
+    const {t: tr} = useTranslation();
     const {theme} = useTheme();
     const t = colors[theme];
     const insets = useSafeAreaInsets();
@@ -27,7 +29,7 @@ export default function GameDetailsScreen() {
         }
     })();
     if (!game) {
-        return <Text style={{color: t.text, padding: 16}}>Igra nije pronađena</Text>
+        return <Text style={{color: t.text, padding: 16}}>{tr('gameDetails.notFound')}</Text>
     }
 
     const prColor = progressColor(game.progress_value, game.progress_total)
@@ -57,13 +59,13 @@ export default function GameDetailsScreen() {
             <Stack.Screen
                 options={{
                     title: game.title,
-                    headerBackTitle: 'Natrag',
+                    headerBackTitle: tr("common.back"),
                     headerRight: () => (<View style={{flexDirection: 'row', alignItems: 'center', gap: 4}}>
                             <Link
                                 href={{pathname: "/(modals)/modalEdit", params: {game: gameParam}}}
                                 asChild
                             >
-                                <Pressable accessibilityLabel="Uredi igru" hitSlop={10} style={{marginRight: 6, marginLeft: 4}}>
+                                <Pressable accessibilityLabel={tr("gameDetails.editA11y")} hitSlop={10} style={{marginRight: 6, marginLeft: 4}}>
                                     <SymbolView
                                         name="square.and.pencil"
                                         resizeMode="scaleAspectFit"
@@ -74,9 +76,9 @@ export default function GameDetailsScreen() {
                             </Link>
 
                             <Pressable
-                                accessibilityLabel="Podijeli igru."
+                                accessibilityLabel={tr("gameDetails.shareA11y")}
                                 hitSlop={10}
-                                onPress={() => {Alert.alert('', `Link je kopiran.`, [   {text: 'Ok', onPress: () => null}
+                                onPress={() => {Alert.alert('', tr("gameDetails.linkCopied"), [   {text: 'Ok', onPress: () => null}
         ]);// ovdje netlify function za share gen
                                 }}
                                 style={{marginRight: 6, marginLeft: 4}}
@@ -177,14 +179,13 @@ export default function GameDetailsScreen() {
                                         fontSize: 12,
                                         color: t.secondaryText,
                                         fontWeight: '700',
-                                    }}>{mode?.label ?? 'Progress'}</Text>
+                                    }}>{mode?.label ?? tr("gameDetails.progressLabel")}</Text>
                                     <Text style={{fontSize: 18, fontWeight: '800', color: prColor}}>
                                         {label}
                                     </Text>
                                 </View>
                             ) : (
-                                <Text style={{fontSize: 16, fontWeight: '600', color: t.secondaryText}}>Još nema
-                                    progressa</Text>)}
+                                <Text style={{fontSize: 16, fontWeight: '600', color: t.secondaryText}}>{tr("gameDetails.noProgress")}</Text>)}
 
                             {typeof game.rating === 'number' && (
                                 <View style={{flexDirection: 'row', gap: 4}}>
@@ -218,7 +219,7 @@ export default function GameDetailsScreen() {
                                           numberOfLines={1}
                                           adjustsFontSizeToFit
                                           minimumFontScale={0.8}>
-                                        Start: {new Date(game.start_date).toLocaleDateString('hr-HR')}
+                                        {tr("gameDetails.startLabel")}{new Date(game.start_date).toLocaleDateString('en-GB')}
                                     </Text>
                                 ) : <Text style={{color: t.secondaryText, fontSize: isLargeScreen ? 15 : 13}}>?</Text>}
 
@@ -233,12 +234,12 @@ export default function GameDetailsScreen() {
                                           numberOfLines={1}
                                           adjustsFontSizeToFit
                                           minimumFontScale={0.8}>
-                                        End: {new Date(game.end_date).toLocaleDateString('hr-HR')}
+                                        {tr("gameDetails.endLabel")}{new Date(game.end_date).toLocaleDateString('en-GB')}
                                     </Text>
-                                ) : <Text style={{color: t.secondaryText, fontSize: isLargeScreen ? 15 : 13}}>Sada</Text>}
+                                ) : <Text style={{color: t.secondaryText, fontSize: isLargeScreen ? 15 : 13}}>{tr("gameDetails.now")}</Text>}
                             </View>
                         )}
-                        <Text style={{color: t.text, fontSize: 20, fontWeight: '600'}}>Tvoje bilješke:</Text>
+                        <Text style={{color: t.text, fontSize: 20, fontWeight: '600'}}>{tr("gameDetails.notesLabel")}</Text>
                         {game.notes ? (
                             <Text style={{fontStyle: 'italic', fontSize: 14, color: t.text}}>{game.notes}</Text>
                         ) : null}
@@ -259,7 +260,7 @@ export default function GameDetailsScreen() {
                         }}
                     >
                         <Text style={{color: t.text, fontSize: 18, fontWeight: '700'}}>
-                            Detalji igre
+                            {tr("gameDetails.detailsSection")}
                         </Text>
                         <SymbolView
                             name={showDetails ? 'chevron.up' : 'chevron.down'}
@@ -278,14 +279,14 @@ export default function GameDetailsScreen() {
                         }}>
                             {game.genre ? (
                                 <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-                                    <Text style={{color: t.secondaryText, fontSize: 14}}>Žanr</Text>
+                                    <Text style={{color: t.secondaryText, fontSize: 14}}>{tr("gameDetails.genre")}</Text>
                                     <Text style={{color: t.text, fontSize: 14, fontWeight: '600'}}>{game.genre}</Text>
                                 </View>
                             ) : null}
 
                             {game.publisher ? (
                                 <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-                                    <Text style={{color: t.secondaryText, fontSize: 14}}>Developer</Text>
+                                    <Text style={{color: t.secondaryText, fontSize: 14}}>{tr("gameDetails.developer")}</Text>
                                     <Text
                                         style={{color: t.text, fontSize: 14, fontWeight: '600'}}>{game.publisher}</Text>
                                 </View>
@@ -293,7 +294,7 @@ export default function GameDetailsScreen() {
 
                             {game.releaseDate ? (
                                 <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-                                    <Text style={{color: t.secondaryText, fontSize: 14}}>Godina izlaska</Text>
+                                    <Text style={{color: t.secondaryText, fontSize: 14}}>{tr("gameDetails.releaseYear")}</Text>
                                     <Text style={{
                                         color: t.text,
                                         fontSize: 14,
@@ -308,7 +309,7 @@ export default function GameDetailsScreen() {
                                     justifyContent: 'space-between',
                                     alignItems: 'center'
                                 }}>
-                                    <Text style={{color: t.secondaryText, fontSize: 14}}>Metacritic Ocjena:</Text>
+                                    <Text style={{color: t.secondaryText, fontSize: 14}}>{tr("gameDetails.metacritic")}</Text>
                                     <View style={{
                                         backgroundColor: metacriticColor,
                                         width: 36,
@@ -332,7 +333,7 @@ export default function GameDetailsScreen() {
                             {game.series && game.series.length > 0 ? (
                                 <View style={{gap: 8, marginTop: 8}}>
                                     <Text style={{color: t.secondaryText, fontSize: 14, marginBottom: 4}}>
-                                        Igre iz serijala
+                                        {tr("gameDetails.seriesSection")}
                                     </Text>
                                     {game.series.map((item, index) => {
                                         const year = item.released ? item.released.split('-')[0] : '';
@@ -376,7 +377,7 @@ export default function GameDetailsScreen() {
 
                             {game.about ? (
                                 <View style={{gap: 4}}>
-                                    <Text style={{color: t.secondaryText, fontSize: 14}}>Opis</Text>
+                                    <Text style={{color: t.secondaryText, fontSize: 14}}>{tr("gameDetails.descriptionSection")}</Text>
                                     <Text style={{color: t.text, fontSize: 14, lineHeight: 20}}>{game.about}</Text>
                                 </View>
                             ) : null}
