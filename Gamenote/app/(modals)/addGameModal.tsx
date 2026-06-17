@@ -3,6 +3,7 @@ import {
     Pressable,
     ScrollView,
     StyleSheet,
+    Switch,
     Text,
     TextInput,
     View
@@ -48,6 +49,7 @@ export default function AddGameModal() {
         platform: undefined,
         progress_mode: undefined,
     });
+    const [includeDescription, setIncludeDescription] = useState(false);
 
     const patch = (key: keyof Game, value: any) => setForm(prev => ({...prev, [key]: value}));
 
@@ -55,7 +57,6 @@ export default function AddGameModal() {
         const missing: string[] = [];
         if (!form.status) missing.push(tr('editGame.statusLabel'));
         if (!form.platform) missing.push(tr('editGame.platformLabel'));
-        if (form.play_time === undefined || form.play_time === null) missing.push(tr('editGame.playtimeLabel'));
         if (missing.length > 0) {
             Alert.alert(tr('addGame.requiredAlert'), missing.join('\n'));
             return false;
@@ -81,7 +82,7 @@ export default function AddGameModal() {
             releaseDate: ravgGame.releaseDate ?? '',
             metacriticScore: ravgGame.metacriticScore ?? 0,
             esrbRating: ravgGame.esrbRating,
-            about: ravgGame.about ?? '',
+            about: includeDescription ? ravgGame.about ?? '' : undefined,
             webPage: ravgGame.webPage ?? '',
             series: ravgGame.series,
             platform: form.platform,
@@ -284,6 +285,15 @@ export default function AddGameModal() {
                         <SymbolView name="chevron.up.chevron.down" style={{width: 14, height: 14}}
                                     tintColor={t.accent}/>
                     </Pressable>
+                </View>
+
+                <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between'}}>
+                    <Text style={[styles.label, {color: t.text}]}>{tr('addGame.includeDescription')}</Text>
+                    <Switch
+                        value={includeDescription}
+                        onValueChange={setIncludeDescription}
+                        trackColor={{false: t.secondaryText, true: t.accent}}
+                    />
                 </View>
 
                 <Text style={[styles.label, {color: t.text}]}>{tr('editGame.notesLabel')}</Text>

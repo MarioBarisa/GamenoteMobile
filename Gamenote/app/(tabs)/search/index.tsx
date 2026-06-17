@@ -16,7 +16,7 @@ import {searchGames} from "@/services/gamesApi";
 // noinspection JSUnusedGlobalSymbols
 export default function SearchIndex() {
   const [search, setSearch] = useState("");
-  const [userGamenotesOnly, setUserGamenotesOnly] = useState(false);
+  const [userGamenotesOnly, setUserGamenotesOnly] = useState(true);
   const [sort] = useState(false);
   const [rawgResults, setRawgResults] = useState<any[]>([]);
   const [isSearching, setIsSearching] = useState(false);
@@ -139,6 +139,18 @@ export default function SearchIndex() {
           )
         ) : (
           <>
+            {!isSearching && !search && rawgResults.length === 0 && (
+              <Pressable
+                onPress={() => {/* Native search bar is revealed via pull-down */}}
+                style={{alignItems: 'center', justifyContent: 'center', paddingVertical: 48, gap: 8}}
+              >
+                <SymbolView name="magnifyingglass" style={{width: 32, height: 32}} tintColor={t.secondaryText} />
+                <Text style={{color: t.secondaryText, fontSize: 15, textAlign: 'center'}}>
+                  {tr('search.rawgPrompt')}
+                </Text>
+              </Pressable>
+            )}
+
             {isSearching && (
               <Text style={{color: t.secondaryText, textAlign: 'center', padding: 16}}>
                 {tr('search.rawgSearching')}

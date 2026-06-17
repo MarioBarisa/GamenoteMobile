@@ -50,9 +50,10 @@
     "title": "Search Gamenote",
     "filterA11y": "Filter your games",
     "filterTitle": "Your Gamenote",
-    "filterMessage": "This button toggles filtering to show only your added games. Otherwise, you search the entire Gamenote database.",
-    "rawgSectionTitle": "RAWG Results",
+    "filterMessage": "This button switches to searching the entire Gamenote database. Otherwise, you browse your added games.",
+    "rawgSectionTitle": "Gamenote Database",
     "rawgNoResults": "No games found",
+    "rawgPrompt": "Start typing to search the Gamenote database",
     "rawgSearching": "Searching...",
     "loginRequired": "Please log in to search the Gamenote database.",
     "inLibrary": "Added to Gamenote",
@@ -182,7 +183,8 @@
     "addedTitle": "Game added",
     "addedMsg": "{{title}} has been added to your Gamenote.",
     "requiredField": "This field is required",
-    "requiredAlert": "Please fill in all required fields."
+    "requiredAlert": "Please fill in all required fields.",
+    "includeDescription": "Include description"
   },
   "addGroup": {
     "nameMissingTitle": "Name missing",

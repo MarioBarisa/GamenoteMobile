@@ -13,7 +13,7 @@ import {useTranslation} from "react-i18next";
 // noinspection JSUnusedGlobalSymbols
 export default function FavoritesScreen() {
     const {t: tr} = useTranslation();
-    const {loggedIn, username, signIn, signOut} = useAuth();
+    const {loggedIn, user, username, signIn, signOut} = useAuth();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const {games, refresh, isLoading} = useUserGames();
@@ -24,9 +24,9 @@ export default function FavoritesScreen() {
 
     useLayoutEffect(() => { // CUSTOM POZDRAV TITLE ZA USERNAME
         navigation.setOptions({
-            title: loggedIn && username ? tr("profile.greetingLogged", {username}) : tr("profile.greetingGuest"),
+            title: loggedIn && user?.user_metadata?.name ? tr("profile.greetingLogged", {username: user.user_metadata.name}) : tr("profile.greetingGuest"),
         });
-    }, [navigation, loggedIn, username, tr]);
+    }, [navigation, loggedIn, user, tr]);
 
     function userStats() {
         const totalGames = games.length;
@@ -57,7 +57,8 @@ export default function FavoritesScreen() {
 
             // Omiljeni zanr = zanr koji se najcesce pojavljuje u igrama s rating >= 4
             if ((game.rating ?? 0) >= 4 && game.genre) {
-                highRatedGenreCount.set(game.genre, (highRatedGenreCount.get(game.genre) ?? 0) + 1);
+                const firstGenre = game.genre.split(',')[0].trim();
+                highRatedGenreCount.set(firstGenre, (highRatedGenreCount.get(firstGenre) ?? 0) + 1);
             }
             if ((game.rating ?? 0) >= 5) {
                 bestGames++;
@@ -140,26 +141,44 @@ export default function FavoritesScreen() {
         >
             {loggedIn && (
                 <View style={styles.container}>
-                    <Image
-                        source={{uri: "https://i.ibb.co/DgTDkWKD/IMG-3485.jpg"}}
-                        style={{
+                    {user?.user_metadata?.avatar_url ? (
+                        <Image
+                            source={{uri: user.user_metadata.avatar_url}}
+                            style={{
+                                width: 150,
+                                height: 150,
+                                resizeMode: "cover",
+                                borderRadius: 360,
+                                margin: 5,
+                                alignSelf: "center",
+                            }}
+                        />
+                    ) : (
+                        <View style={{
                             width: 150,
                             height: 150,
-                            resizeMode: "cover",
                             borderRadius: 360,
                             margin: 5,
                             alignSelf: "center",
-                            //borderColor: t.secondaryText,
-                            //borderWidth: 4
-
-                        }}
-                    />
+                            backgroundColor: t.backgroundModal,
+                            justifyContent: "center",
+                            alignItems: "center",
+                        }}>
+                            <Text style={{
+                                color: t.accent,
+                                fontSize: 56,
+                                fontWeight: "700",
+                            }}>
+                                {(user?.email ?? username ?? '?').charAt(0).toUpperCase()}
+                            </Text>
+                        </View>
+                    )}
                     <Text style={{
                         color: t.secondaryText,
                         fontWeight: "bold",
                         fontSize: 12,
                         alignSelf: "center"
-                    }}>{username}@email.com</Text>
+                    }}>{user?.email ?? username}</Text>
                     <Text style={{color: t.text, fontWeight: "bold", fontSize: 22, alignSelf: "center"}}>{tr("profile.statsTitle")}</Text>
                     <View style={styles.row}>
                         <StatCard

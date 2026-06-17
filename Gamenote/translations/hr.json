@@ -50,9 +50,10 @@
     "title": "Pretraži Gamenote",
     "filterA11y": "Filtriraj svoje igre",
     "filterTitle": "Tvoji Gamenote",
-    "filterMessage": "Ovaj gumb uključuje filtiranje prikaza samo na tvoje dodane igre. Inače tražiš cijeli Gamenote database.",
-    "rawgSectionTitle": "RAWG Rezultati",
+    "filterMessage": "Ovaj gumb prebacuje na pretraživanje cijele Gamenote baze. Inače pregledavaš svoje dodane igre.",
+    "rawgSectionTitle": "Gamenote Database",
     "rawgNoResults": "Nema pronađenih igara",
+    "rawgPrompt": "Započni tipkati za pretragu Gamenote baze podataka",
     "rawgSearching": "Tražim...",
     "loginRequired": "Prijavi se da bi pretražio Gamenote bazu.",
     "inLibrary": "Igra dodana u Gamenote",
@@ -182,7 +183,8 @@
     "addedTitle": "Igra dodana",
     "addedMsg": "{{title}} je dodana u tvoj Gamenote.",
     "requiredField": "Ovo polje je obavezno",
-    "requiredAlert": "Molimo ispunite sva obavezna polja."
+    "requiredAlert": "Molimo ispunite sva obavezna polja.",
+    "includeDescription": "Dodaj opis"
   },
   "addGroup": {
     "nameMissingTitle": "Nedostaje naziv",
