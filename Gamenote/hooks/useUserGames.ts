@@ -192,6 +192,7 @@ export function useUserGames() {
     }
 
     setGames(prev => [...prev, game]);
+    await fetchGames();
   };
 
   const updateGame = async (gameId: string, updates: Partial<Game>): Promise<void> => {
@@ -210,6 +211,7 @@ export function useUserGames() {
     }
 
     setGames(prev => prev.map(g => g.game_id === gameId ? {...g, ...updates} : g));
+    await fetchGames();
   };
 
   const deleteGame = async (gameId: string): Promise<void> => {
@@ -230,6 +232,7 @@ export function useUserGames() {
     }
 
     setGames(prev => prev.filter(g => g.game_id !== gameId));
+    await fetchGames();
   };
 
   return {

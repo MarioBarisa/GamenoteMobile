@@ -130,83 +130,89 @@ export default function HomeIndex() {
                 ));
             })()}
 
-            <View
-                style={{
-                    backgroundColor: t.backgroundModal,
-                    borderRadius: 12,
-                    margin: 8,
-                    padding: 16,
-                    flexDirection: "column",
-                    gap: 12,
-                }}
-            >
-                <Text style={[styles.title, {color: "#F43098"}]}>Jump back in!</Text>
+            {jumpBackGame ? (
+                <View
+                    style={{
+                        backgroundColor: t.backgroundModal,
+                        borderRadius: 12,
+                        margin: 8,
+                        padding: 16,
+                        flexDirection: "column",
+                        gap: 12,
+                    }}
+                >
+                    <Text style={[styles.title, {color: "#F43098"}]}>Jump back in!</Text>
 
-                {jumpBackGame ? (
-                    <>
-                        <Text style={[styles.gameTitle, {color: t.text}]}>
-                            {jumpBackGame.title}
-                        </Text>
+                    <Text style={[styles.gameTitle, {color: t.text}]}>
+                        {jumpBackGame.title}
+                    </Text>
 
-                        <View
-                            style={{
-                                flexDirection: "row",
-                                gap: 12,
-                                alignItems: "center",
-                                justifyContent: "center",
-                            }}
-                        >
-                            {jumpBackGame.status ? (
-                                <Text style={[styles.gameInfo, {color: t.secondaryText}]}>
-                                    {STATUS_CONFIG[jumpBackGame.status].label}
-                                </Text>
-                            ) : null}
-
-                            {jumpBackGame.platform ? (
-                                <Text style={[styles.gameInfo, {color: t.secondaryText}]}>
-                                    {jumpBackGame.platform}
-                                </Text>
-                            ) : null}
-                        </View>
-
-                        {jumpBackGame.image_url ? (
-                            <Image
-                                source={{uri: jumpBackGame.image_url}}
-                                style={styles.image}
-                                resizeMode="cover"
-                            />
+                    <View
+                        style={{
+                            flexDirection: "row",
+                            gap: 12,
+                            alignItems: "center",
+                            justifyContent: "center",
+                        }}
+                    >
+                        {jumpBackGame.status ? (
+                            <Text style={[styles.gameInfo, {color: t.secondaryText}]}>
+                                {STATUS_CONFIG[jumpBackGame.status].label}
+                            </Text>
                         ) : null}
-                    </>
-                ) : (
-                    <Text style={[styles.name, {color: t.text}]}>
+
+                        {jumpBackGame.platform ? (
+                            <Text style={[styles.gameInfo, {color: t.secondaryText}]}>
+                                {jumpBackGame.platform}
+                            </Text>
+                        ) : null}
+                    </View>
+
+                    {jumpBackGame.image_url ? (
+                        <Image
+                            source={{uri: jumpBackGame.image_url}}
+                            style={styles.image}
+                            resizeMode="cover"
+                        />
+                    ) : null}
+
+                    <Pressable
+                        onPress={handlePress}
+                        style={[styles.saveButton, {backgroundColor: "#605DFF"}]}
+                    >
+                        <View style={{flexDirection: "row", alignItems: "center", gap: 6}}>
+                            <Text style={{color: "#fff", fontWeight: "700", fontSize: 16}}>
+                                {tr("home.playToday")}
+                            </Text>
+                            <SymbolView
+                                name="play.circle.fill"
+                                style={{width: 24, height: 24}}
+                                tintColor={"#fff"}
+                            />
+                        </View>
+                    </Pressable>
+                </View>
+            ) : (
+                <View
+                    style={{
+                        backgroundColor: t.backgroundModal,
+                        borderRadius: 12,
+                        margin: 8,
+                        padding: 16,
+                    }}
+                >
+                    <Text style={[styles.name, {color: "#00D391"}]}>
                         {tr("home.allPlayed")}
                     </Text>
-                )}
-
-                <Pressable
-                    onPress={handlePress}
-                    style={[styles.saveButton, {backgroundColor: "#605DFF"}]}
-                >
-                    <View style={{flexDirection: "row", alignItems: "center", gap: 6}}>
-
-                        <Text style={{color: "#fff", fontWeight: "700", fontSize: 16}}>
-                            {tr("home.playToday")}
-                        </Text>
-                        <SymbolView
-                            name="play.circle.fill"
-                            style={{width: 24, height: 24}}
-                            tintColor={"#fff"}
-                        />
-                    </View>
-                </Pressable>
-            </View>
+                </View>
+            )}
         </ScrollView>
     );
 }
 
 const styles = StyleSheet.create({
     name: {
-        fontSize: 12,
+        fontSize: 14,
         fontWeight: "bold",
         textAlign: "center",
     },

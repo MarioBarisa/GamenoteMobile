@@ -34,7 +34,7 @@
     "playtime": "Total playtime",
     "completedGames": "Completed games",
     "playToday": "Play today!",
-    "allPlayed": "All games have been completed! GG :)"
+    "allPlayed": "You have no paused or backlog games. GG!"
   },
   "favorites": {
     "filterPlaying": "Playing",
