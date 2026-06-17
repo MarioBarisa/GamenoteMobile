@@ -7,6 +7,7 @@ import {SymbolView} from "expo-symbols";
 import * as Haptics from "expo-haptics";
 import {useState} from "react";
 import {useGroups} from "@/context/GroupsContext";
+import {useAuth} from "@/context/auth";
 import {useUserGames} from "@/hooks/useUserGames";
 import {useTranslation} from "react-i18next";
 
@@ -17,6 +18,7 @@ export default function AddGroupModal() {
     const t = colors[theme]
     const router = useRouter();
     const {addGroup, addGameToGroup} = useGroups();
+    const {user} = useAuth();
     const {games} = useUserGames();
 
     const typeGroups = ["Collection", "Trilogy", "Franchise"];
@@ -34,32 +36,31 @@ export default function AddGroupModal() {
 
     const patch = (key: keyof Group, value: any) => setForm(prev => ({...prev, [key]: value}));
 
-    const handleSave = () => {
+    const handleSave = async () => {
         if (!form.name?.trim()) {
             Alert.alert(tr('addGroup.nameMissingTitle'), tr('addGroup.nameMissingMsg'));
             return;
         }
 
-        const groupId = Date.now().toString();
-        const createdAt = new Date().toISOString();
-
-        addGroup({
-            id: groupId,
-            created_at: createdAt,
-            user_id: 'user1',
+        const created = await addGroup({
             name: form.name.trim(),
             type: form.type ?? null,
             rating: form.rating ?? null,
             user_notes: form.user_notes ?? null,
+            user_id: user?.id ?? '',
         } as any);
 
-        selectedGameIds.forEach((gameId) => addGameToGroup(gameId, groupId));
+        const groupId = created?.id ?? Date.now().toString();
+
+        for (const gameId of selectedGameIds) {
+            await addGameToGroup(gameId, groupId);
+        }
 
         if (Platform.OS === 'ios') {
             Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
         }
 
-        Alert.alert(tr('addGroup.addedTitle'), tr('addGroup.addedMsg', {name: form.name?.trim()}), [  //'' je empty  kako bi alert bio u jednom redu.
+        Alert.alert(tr('addGroup.addedTitle'), tr('addGroup.addedMsg', {name: form.name?.trim()}), [
             {text: 'OK', onPress: () => router.back()}
         ]);
     };
@@ -149,13 +150,13 @@ export default function AddGroupModal() {
                 <View style={{flexDirection: 'column', gap: 8, paddingVertical: 8}}>
                     <Text style={[styles.label, {color: t.text}]}>{tr('addGroup.addGamesLabel')}</Text>
                     {visibleGames.map((game) => {
-                        const isSelected = isGameSelected(game.game_id);
+                        const isSelected = isGameSelected(game.db_id ?? game.game_id);
 
                         return (
                             <Pressable
                                 key={game.db_id ?? game.game_id}
                                 onPress={() => {
-                                    toggleGame(game.game_id);
+                                    toggleGame(game.db_id ?? game.game_id);
                                     if (Platform.OS === 'ios') {
                                         Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
                                     }

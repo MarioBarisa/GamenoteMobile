@@ -15,6 +15,7 @@ import {useState} from "react";
 import {SymbolView} from "expo-symbols";
 import DateTimePicker, {DateTimePickerEvent} from "@react-native-community/datetimepicker";
 import {useUserGames} from "@/hooks/useUserGames";
+import {useGroups} from "@/context/GroupsContext";
 import {STATUS_CONFIG, GAME_STATUSES} from "@/common/StatusCommons";
 import * as Haptics from 'expo-haptics';
 import {PROGRESS_MODES} from "@/common/ProgressSources";
@@ -28,21 +29,7 @@ export default function ModalEdit() {
     const {theme} = useTheme();
     const t = colors[theme];
     const {updateGame} = useUserGames();
-
-    const handleSave = async () => {
-        if (form.progress_value !== undefined && form.progress_total !== undefined && form.progress_value > form.progress_total) {
-            Alert.alert(tr('editGame.errorTitle'), tr('editGame.achievementsError'));
-            return;
-        }
-        if (original.game_id) {
-            await updateGame(original.game_id, form);
-        }
-        Alert.alert(tr('editGame.savedTitle'), tr('editGame.savedMsg', {title: original.title}), [
-            {text: 'OK', onPress: () => router.back()}
-        ]);
-    }
-
-    const parseDate = (iso?: string) => iso ? new Date(iso) : new Date();
+    const {groups, addGameToGroup, removeGameFromGroup, getGroupsForGame} = useGroups();
 
     const original: Game = (() => {
         try {
@@ -67,6 +54,29 @@ export default function ModalEdit() {
 
     const patch = (key: keyof Game, value: any) => setForm(prev => ({...prev, [key]: value}));
 
+    const parseDate = (iso?: string) => iso ? new Date(iso) : new Date();
+
+    const initialGroupIds = getGroupsForGame(original.db_id ?? original.game_id).map(g => g.id);
+    const [selectedGroupIds, setSelectedGroupIds] = useState<string[]>(initialGroupIds);
+
+    const handleSave = async () => {
+        if (form.progress_value !== undefined && form.progress_total !== undefined && form.progress_value > form.progress_total) {
+            Alert.alert(tr('editGame.errorTitle'), tr('editGame.achievementsError'));
+            return;
+        }
+        if (original.game_id) {
+            await updateGame(original.game_id, form);
+
+            const gameId = original.db_id ?? original.game_id;
+            const toAdd = selectedGroupIds.filter(id => !initialGroupIds.includes(id));
+            const toRemove = initialGroupIds.filter(id => !selectedGroupIds.includes(id));
+            for (const id of toRemove) await removeGameFromGroup(gameId, id);
+            for (const id of toAdd) await addGameToGroup(gameId, id);
+        }
+        Alert.alert(tr('editGame.savedTitle'), tr('editGame.savedMsg', {title: original.title}), [
+            {text: 'OK', onPress: () => router.back()}
+        ]);
+    }
 
     const PLATFORMS = [
         'PlayStation 5', 'PlayStation 4',
@@ -200,7 +210,42 @@ export default function ModalEdit() {
                                placeholder={tr('editGame.playtimePlaceholder')}
                                placeholderTextColor={t.secondaryText}/>
                 </View>
-                <View style={[{backgroundColor: theme === 'dark' ? '#2C2C2E' : '#E5E5EA'}]}/>
+                <View style={{flexDirection: 'column', gap: 6, paddingVertical: 8}}>
+                    <Text style={[styles.label, {color: t.text}]}>{tr('editGame.groupsSection')}</Text>
+                    <View style={{flexDirection: 'row', flexWrap: 'wrap', gap: 6}}>
+                        {groups.map(group => {
+                            const selected = selectedGroupIds.includes(group.id);
+                            return (
+                                <Pressable
+                                    key={group.id}
+                                    onPress={() => {
+                                        setSelectedGroupIds(prev =>
+                                            prev.includes(group.id)
+                                                ? prev.filter(id => id !== group.id)
+                                                : [...prev, group.id]
+                                        );
+                                    }}
+                                    style={{
+                                        flexDirection: 'row',
+                                        alignItems: 'center',
+                                        gap: 4,
+                                        paddingHorizontal: 12,
+                                        paddingVertical: 6,
+                                        borderRadius: 16,
+                                        backgroundColor: selected ? t.accent : (theme === 'dark' ? '#2C2C2E' : '#E5E5EA'),
+                                    }}
+                                >
+                                    <Text style={{color: selected ? '#fff' : t.text, fontSize: 13, fontWeight: '600'}}>
+                                        {group.name}
+                                    </Text>
+                                    {selected && (
+                                        <SymbolView name="checkmark" style={{width: 14, height: 14}} tintColor="#fff"/>
+                                    )}
+                                </Pressable>
+                            );
+                        })}
+                    </View>
+                </View>
                 <View style={{flexDirection: "row", alignItems: "center", gap: 8}}>
                     <Text style={[styles.label, {color: t.text}]}>{tr('editGame.statusLabel')}</Text>
                     <Pressable

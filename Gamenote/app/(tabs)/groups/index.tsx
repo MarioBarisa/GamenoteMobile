@@ -21,14 +21,15 @@ export default function GroupsIndex() {
     const t = colors[theme];
     const {groups, getGamesInGroup, refreshGroups, isLoading: isLoadingGroups} = useGroups();
     const {games, refresh: refreshGames, isLoading: isLoadingGames} = useUserGames();
-    const gamesMap = useMemo(() => new Map(games.map(g => [g.game_id, g])), [games]);
+    const gamesMap = useMemo(() => new Map(games.map(g => [g.db_id ?? g.game_id, g])), [games]);
 
     const getGroupGameImages = (groupId: string) => {
         const gameIds = getGamesInGroup(groupId);
-        return gameIds
+        const found = gameIds
             .slice(0, 4)
             .map(gameId => gamesMap.get(gameId))
             .filter(Boolean);
+        return Array.from({length: 4}, (_, i) => found[i] ?? null);
     };
 
     return (
@@ -49,7 +50,7 @@ export default function GroupsIndex() {
             ) : (
                 groups.map((group) => {
                     const groupGames = getGroupGameImages(group.id);
-                    const isSingle = groupGames.length === 1;
+                    const realCount = getGamesInGroup(group.id).length;
 
                     return (
                         <TouchableOpacity
@@ -87,48 +88,28 @@ export default function GroupsIndex() {
                                 ) : null}
                             </View>
 
-                            {groupGames.length > 0 && (
-                                <View style={styles.gamesPreview}>
-                                    <View style={styles.gameImagesRow}>
-                                        {groupGames.map((game, index) => (
-                                            <View
-                                                key={index}
-                                                style={[
-                                                    styles.gameImageWrapper,
-                                                    isSingle && styles.gameImageWrapperSingle,
-                                                ]}
-                                            >
-                                                {game?.image_url ? (
-                                                    <Image
-                                                        source={{uri: game.image_url}}
-                                                        style={[
-                                                            styles.gameImage,
-                                                            isSingle && styles.gameImageSingle,
-                                                        ]}
-                                                        resizeMode="cover"
-                                                    />
-                                                ) : (
-                                                    <View style={[
-                                                        styles.gameImage,
-                                                        isSingle && styles.gameImageSingle,
-                                                        {
-                                                            backgroundColor: t.background,
-                                                            justifyContent: 'center',
-                                                            alignItems: 'center'
-                                                        }
-                                                    ]}>
-                                                        <Ionicons name="image-outline" size={isSingle ? 24 : 14}
-                                                                  color={t.secondaryText}/>
-                                                    </View>
-                                                )}
-                                            </View>
-                                        ))}
-                                    </View>
-                                    <Text style={{color: t.secondaryText, fontSize: 11, marginTop: 4}}>
-                                        {getGameCountLabel(groupGames.length)}
-                                    </Text>
+                            <View style={styles.gamesPreview}>
+                                <View style={styles.gameImagesRow}>
+                                    {groupGames.map((game, index) => (
+                                        <View key={index} style={styles.gameImageWrapper}>
+                                            {game?.image_url ? (
+                                                <Image
+                                                    source={{uri: game.image_url}}
+                                                    style={styles.gameImage}
+                                                    resizeMode="cover"
+                                                />
+                                            ) : (
+                                                <View style={[styles.gameImage, styles.gameImagePlaceholder, {backgroundColor: t.background}]}>
+                                                    <Ionicons name="image-outline" size={18} color={t.secondaryText}/>
+                                                </View>
+                                            )}
+                                        </View>
+                                    ))}
                                 </View>
-                            )}
+                                <Text style={{color: t.secondaryText, fontSize: 11, marginTop: 4}}>
+                                    {getGameCountLabel(realCount)}
+                                </Text>
+                            </View>
                         </TouchableOpacity>
                     );
                 })
@@ -167,18 +148,13 @@ const styles = StyleSheet.create({
     gameImageWrapper: {
         flex: 1,
     },
-    gameImageWrapperSingle: {
-        flex: 0,
-        width: '100%',
-    },
     gameImage: {
         width: '100%',
-        aspectRatio: 4 / 3,
+        height: 72,
         borderRadius: 6,
-        backgroundColor: '#f0f0f0',
     },
-    gameImageSingle: {
-        aspectRatio: 16 / 9,
-        borderRadius: 8,
+    gameImagePlaceholder: {
+        justifyContent: 'center',
+        alignItems: 'center',
     },
 });

@@ -175,7 +175,8 @@
     "platformDefault": "Select a platform",
     "progressDefault": "Select",
     "playtimePlaceholder": "e.g. 120",
-    "achievementPlaceholder": "0"
+    "achievementPlaceholder": "0",
+    "groupsSection": "Groups:"
   },
   "addGame": {
     "title": "Add to Gamenote",
@@ -184,7 +185,8 @@
     "addedMsg": "{{title}} has been added to your Gamenote.",
     "requiredField": "This field is required",
     "requiredAlert": "Please fill in all required fields.",
-    "includeDescription": "Include description"
+    "includeDescription": "Include description",
+    "groupsSection": "Groups:"
   },
   "addGroup": {
     "nameMissingTitle": "Name missing",
@@ -219,7 +221,11 @@
     "saveA11y": "Save group changes",
     "saveLabel": "Save changes",
     "savedTitle": "Saved",
-    "savedMsg": "\"{{name}}\" group."
+    "savedMsg": "\"{{name}}\" group.",
+    "deleteLabel": "Delete group",
+    "deleteA11y": "Delete group",
+    "deleteTitle": "Delete group",
+    "deleteMessage": "Are you sure you want to delete \"{{name}}\"?"
   },
   "gameCard": {
     "deleteTitle": "Delete game",
@@ -245,6 +251,7 @@
     "metacritic": "Metacritic Score:",
     "seriesSection": "Series",
     "descriptionSection": "Description",
+    "groupsSection": "Groups",
     "progressLabel": "Progress",
     "noPrequel": "No prequel",
     "noSequel": "No sequel"

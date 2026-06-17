@@ -16,6 +16,7 @@ import {useState} from "react";
 import {SymbolView} from "expo-symbols";
 import DateTimePicker, {DateTimePickerEvent} from "@react-native-community/datetimepicker";
 import {useUserGames} from "@/hooks/useUserGames";
+import {useGroups} from "@/context/GroupsContext";
 import {STATUS_CONFIG, GAME_STATUSES} from "@/common/StatusCommons";
 import * as Haptics from 'expo-haptics';
 import {PROGRESS_MODES} from "@/common/ProgressSources";
@@ -28,6 +29,7 @@ export default function AddGameModal() {
     const {theme} = useTheme();
     const t = colors[theme];
     const {addGame} = useUserGames();
+    const {groups, addGameToGroup} = useGroups();
 
     const ravgGame: Partial<Game> = (() => {
         try {
@@ -50,6 +52,7 @@ export default function AddGameModal() {
         progress_mode: undefined,
     });
     const [includeDescription, setIncludeDescription] = useState(false);
+    const [selectedGroupIds, setSelectedGroupIds] = useState<string[]>([]);
 
     const patch = (key: keyof Game, value: any) => setForm(prev => ({...prev, [key]: value}));
 
@@ -99,6 +102,9 @@ export default function AddGameModal() {
 
         try {
             await addGame(completeGame);
+            for (const groupId of selectedGroupIds) {
+                await addGameToGroup(completeGame.game_id, groupId);
+            }
             Alert.alert(tr('addGame.addedTitle'), tr('addGame.addedMsg', {title: completeGame.title}), [
                 {text: 'OK', onPress: () => router.back()}
             ]);
@@ -294,6 +300,43 @@ export default function AddGameModal() {
                         onValueChange={setIncludeDescription}
                         trackColor={{false: t.secondaryText, true: t.accent}}
                     />
+                </View>
+
+                <View style={{flexDirection: 'column', gap: 6, paddingVertical: 8}}>
+                    <Text style={[styles.label, {color: t.text}]}>{tr('addGame.groupsSection')}</Text>
+                    <View style={{flexDirection: 'row', flexWrap: 'wrap', gap: 6}}>
+                        {groups.map(group => {
+                            const selected = selectedGroupIds.includes(group.id);
+                            return (
+                                <Pressable
+                                    key={group.id}
+                                    onPress={() => {
+                                        setSelectedGroupIds(prev =>
+                                            prev.includes(group.id)
+                                                ? prev.filter(id => id !== group.id)
+                                                : [...prev, group.id]
+                                        );
+                                    }}
+                                    style={{
+                                        flexDirection: 'row',
+                                        alignItems: 'center',
+                                        gap: 4,
+                                        paddingHorizontal: 12,
+                                        paddingVertical: 6,
+                                        borderRadius: 16,
+                                        backgroundColor: selected ? t.accent : (theme === 'dark' ? '#2C2C2E' : '#E5E5EA'),
+                                    }}
+                                >
+                                    <Text style={{color: selected ? '#fff' : t.text, fontSize: 13, fontWeight: '600'}}>
+                                        {group.name}
+                                    </Text>
+                                    {selected && (
+                                        <SymbolView name="checkmark" style={{width: 14, height: 14}} tintColor="#fff"/>
+                                    )}
+                                </Pressable>
+                            );
+                        })}
+                    </View>
                 </View>
 
                 <Text style={[styles.label, {color: t.text}]}>{tr('editGame.notesLabel')}</Text>

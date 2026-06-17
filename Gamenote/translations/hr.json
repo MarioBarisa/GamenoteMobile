@@ -175,7 +175,8 @@
     "platformDefault": "Odaberi platformu",
     "progressDefault": "Odaberi",
     "playtimePlaceholder": "Npr. 120",
-    "achievementPlaceholder": "0"
+    "achievementPlaceholder": "0",
+    "groupsSection": "Grupe:"
   },
   "addGame": {
     "title": "Dodaj u Gamenote",
@@ -184,7 +185,8 @@
     "addedMsg": "{{title}} je dodana u tvoj Gamenote.",
     "requiredField": "Ovo polje je obavezno",
     "requiredAlert": "Molimo ispunite sva obavezna polja.",
-    "includeDescription": "Dodaj opis"
+    "includeDescription": "Dodaj opis",
+    "groupsSection": "Grupe:"
   },
   "addGroup": {
     "nameMissingTitle": "Nedostaje naziv",
@@ -219,7 +221,11 @@
     "saveA11y": "Spremi izmjene grupe",
     "saveLabel": "Spremi izmjene",
     "savedTitle": "Spremljena",
-    "savedMsg": "\"{{name}}\" grupa."
+    "savedMsg": "\"{{name}}\" grupa.",
+    "deleteLabel": "Izbriši grupu",
+    "deleteA11y": "Izbriši grupu",
+    "deleteTitle": "Izbriši grupu",
+    "deleteMessage": "Jesi li siguran da želiš izbrisati \"{{name}}\"?"
   },
   "gameCard": {
     "deleteTitle": "Izbriši igru",
@@ -245,6 +251,7 @@
     "metacritic": "Metacritic Ocjena:",
     "seriesSection": "Igre iz serijala",
     "descriptionSection": "Opis",
+    "groupsSection": "Grupe",
     "progressLabel": "Progress",
     "noPrequel": "Nema prequel",
     "noSequel": "Nema sequel"

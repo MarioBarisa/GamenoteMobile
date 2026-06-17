@@ -18,7 +18,7 @@ export default function GroupDetail(){
     const {groups, getGamesInGroup } = useGroups();
     const router = useRouter();
     const {games: allGames} = useUserGames();
-    const gamesMap = useMemo(() => new Map(allGames.map(g => [g.game_id, g])), [allGames]);
+    const gamesMap = useMemo(() => new Map(allGames.map(g => [g.db_id ?? g.game_id, g])), [allGames]);
 
     const group = groups.find((g)=>g.id === id); // AKO grupa NIJE PRONAĐENA
     if(!group){
@@ -76,7 +76,7 @@ export default function GroupDetail(){
                             fontSize: 14,
                             marginTop: 14,
                             fontWeight: "700"
-                        }}><Text style={{color: t.secondaryText}}>{tr("groups.createdLabel")}</Text>{group.created_at}</Text>
+                        }}><Text style={{color: t.secondaryText}}>{tr("groups.createdLabel")}</Text>{new Date(group.created_at).toLocaleDateString('en-GB').replace(/\//g, '.')}</Text>
                     )}
                     {group.user_notes && (
                         <Text style={{color: t.text, fontSize: 16, marginTop: 14, fontStyle: "italic"}}>{group.user_notes}</Text>

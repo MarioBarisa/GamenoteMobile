@@ -11,6 +11,7 @@ import {STATUS_CONFIG, STATUS_PLATFORM} from "@/common/StatusCommons";
 import {isProgressModeKey, PROGRESS_MODE_MAP, progressLabel, progressColor} from "@/common/ProgressSources";
 import {useTranslation} from "react-i18next";
 import {useUserGames} from "@/hooks/useUserGames";
+import {useGroups} from "@/context/GroupsContext";
 
 function getPrequelAndSequel(series: SeriesGame[], currentReleaseDate: string): { prequel?: SeriesGame; sequel?: SeriesGame } {
   const sorted = [...series].sort((a, b) => {
@@ -60,6 +61,7 @@ export default function GameDetailsScreen() {
     const [showDetails, setShowDetails] = useState<boolean>(false);
     const {game: gameParam} = useLocalSearchParams<{ game: string }>()
     const {games: userGames} = useUserGames();
+    const {getGroupsForGame} = useGroups();
     const router = useRouter();
     const segments = useSegments();
     const tab = segments[1] as 'home' | 'favorites' | 'search';
@@ -303,6 +305,35 @@ export default function GameDetailsScreen() {
                         {game.notes ? (
                             <Text style={{fontStyle: 'italic', fontSize: 14, color: t.text}}>{game.notes}</Text>
                         ) : null}
+
+                        {(() => {
+                            const gameGroups = getGroupsForGame(game.db_id ?? game.game_id);
+                            if (gameGroups.length === 0) return null;
+                            return (
+                                <>
+                                    <Text style={{color: t.text, fontSize: 20, fontWeight: '600', marginTop: 12}}>{tr("gameDetails.groupsSection")}</Text>
+                                    {gameGroups.map((g) => (
+                                        <Pressable
+                                            key={g.id}
+                                            onPress={() => router.push({pathname: "/(tabs)/groups/group-detail", params: {id: g.id}})}
+                                            style={{
+                                                flexDirection: 'row',
+                                                alignItems: 'center',
+                                                justifyContent: 'space-between',
+                                                paddingVertical: 8,
+                                                paddingHorizontal: 12,
+                                                borderRadius: 10,
+                                                backgroundColor: theme === 'dark' ? '#2C2C2E' : '#E5E5EA',
+                                                marginTop: 4,
+                                            }}
+                                        >
+                                            <Text style={{color: t.text, fontSize: 14, fontWeight: '600', flex: 1}}>{g.name}</Text>
+                                            <SymbolView name="chevron.right" style={{width: 14, height: 14}} tintColor={t.secondaryText} />
+                                        </Pressable>
+                                    ))}
+                                </>
+                            );
+                        })()}
 
                     </View>
                 </View>

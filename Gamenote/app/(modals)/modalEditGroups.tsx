@@ -39,21 +39,39 @@ export default function ModalEditGroups() {
         user_notes: original.user_notes,
     });
 
-    const {addGameToGroup, removeGameFromGroup, getGamesInGroup} = useGroups();
+    const {addGameToGroup, removeGameFromGroup, getGamesInGroup, updateGroup, removeGroup, refreshGroups} = useGroups();
     const gamesInGroup: string[] = group ? getGamesInGroup(group.id) : [];
     const {games: allGames} = useUserGames();
 
     const [showAll, setShowAll] = useState(false);
     const visibleGames = showAll ? allGames : allGames.slice(0, 5);
 
-    const handleSave = () => {
+    const handleSave = async () => {
         if (Platform.OS === 'ios') Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
-        const updated = {...original, ...form}; // tu doalzi supabase
+        const updated = {...original, ...form};
+        await updateGroup(original.id, updated);
+        await refreshGroups();
         Alert.alert(tr('editGroup.savedTitle'), tr('editGroup.savedMsg', {name: updated.name}), [
             {text: 'OK', onPress: () => router.back()}
         ]);
+    }
 
-
+    const handleDelete = () => {
+        Alert.alert(
+            tr('editGroup.deleteTitle'),
+            tr('editGroup.deleteMessage', {name: original.name}),
+            [
+                {text: tr('common.cancel'), style: 'cancel'},
+                {
+                    text: tr('common.delete'),
+                    style: 'destructive',
+                    onPress: async () => {
+                        await removeGroup(original.id);
+                        router.back();
+                    }
+                },
+            ]
+        );
     }
 
     const typeGroups = ["Collection", "Trilogy", "Franchise"];
@@ -127,15 +145,15 @@ export default function ModalEditGroups() {
                     <View style={{flexDirection: "column", gap: 8, paddingVertical: 8}}>
                         <Text style={[styles.label, {color: t.text}]}>{tr('editGroup.gamesLabel')}</Text>
                         {visibleGames.map((game) => {
-                            const isInGroup = gamesInGroup.includes(game.game_id);
+                            const isInGroup = gamesInGroup.includes(game.db_id ?? game.game_id);
                             return (
                                 <Pressable
                                     key={game.db_id ?? game.game_id}
                                     onPress={() => {
                                         if (isInGroup) {
-                                            removeGameFromGroup(game.game_id, group.id);
+                                            removeGameFromGroup(game.db_id ?? game.game_id, group.id);
                                         } else {
-                                            addGameToGroup(game.game_id, group.id);
+                                            addGameToGroup(game.db_id ?? game.game_id, group.id);
                                         }
                                         if (Platform.OS === 'ios') {
                                             Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
@@ -190,16 +208,24 @@ export default function ModalEditGroups() {
                     </View>
 
                     <Pressable
-                        onPress={() => { // SAVE GUMB
+                        onPress={() => {
                             handleSave();
                             if (Platform.OS === 'ios') {
-                                Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium); //medium vibracija kada se grupa uspješno spremi
+                                Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
                             }
                         }}
                         accessibilityLabel={tr('editGroup.saveA11y')}
                         style={[styles.saveButton, {backgroundColor: t.accent}]}
                     >
                         <Text style={{color: '#fff', fontWeight: '700', fontSize: 16}}>{tr('editGroup.saveLabel')}</Text>
+                    </Pressable>
+
+                    <Pressable
+                        onPress={handleDelete}
+                        accessibilityLabel={tr('editGroup.deleteA11y')}
+                        style={[styles.saveButton, {backgroundColor: t.destructive}]}
+                    >
+                        <Text style={{color: '#fff', fontWeight: '700', fontSize: 16}}>{tr('editGroup.deleteLabel')}</Text>
                     </Pressable>
                 </View>
             </ScrollView>
