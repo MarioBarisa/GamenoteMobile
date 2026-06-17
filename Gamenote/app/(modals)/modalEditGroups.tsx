@@ -130,7 +130,7 @@ export default function ModalEditGroups() {
                             const isInGroup = gamesInGroup.includes(game.game_id);
                             return (
                                 <Pressable
-                                    key={game.game_id}
+                                    key={game.db_id ?? game.game_id}
                                     onPress={() => {
                                         if (isInGroup) {
                                             removeGameFromGroup(game.game_id, group.id);

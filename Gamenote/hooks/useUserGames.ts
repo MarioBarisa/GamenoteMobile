@@ -40,6 +40,7 @@ function supabaseRowToGame(row: any): Game {
   return {
     title: row.title ?? '',
     game_id: row.game_api_id ?? '',
+    db_id: row.id,
     platform: row.platform ?? undefined,
     genre: row.genre ?? undefined,
     status: status ?? undefined,

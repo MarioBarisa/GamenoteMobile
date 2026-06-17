@@ -206,6 +206,7 @@ const styles = StyleSheet.create({
     },
     infoRow: {
       flexDirection: 'row',
+      flexWrap: 'wrap',
       alignItems: 'center',
       paddingHorizontal: 10,
       padding: 4,

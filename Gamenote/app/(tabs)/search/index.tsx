@@ -129,12 +129,12 @@ export default function SearchIndex() {
           compactCards ? (
             <View style={{flexDirection: 'row', flexWrap: 'wrap', gap: 12}}>
               {filteredGames.map((game) => (
-                <GameCardCompact key={game.game_id} game={game} onDelete={(id) => deleteGame(id)} />
+                <GameCardCompact key={game.db_id ?? game.game_id} game={game} onDelete={(id) => deleteGame(id)} />
               ))}
             </View>
           ) : (
             filteredGames.map((game) => (
-              <GameCard key={game.game_id} game={game} onDelete={(id) => deleteGame(id)} />
+              <GameCard key={game.db_id ?? game.game_id} game={game} onDelete={(id) => deleteGame(id)} />
             ))
           )
         ) : (

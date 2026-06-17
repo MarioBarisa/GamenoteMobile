@@ -131,7 +131,8 @@ export default function FavoritesScreen() {
             >
                 <View style={{
                     flexDirection: "row", justifyContent: "space-evenly", alignItems: "center",
-                    backgroundColor: t.card, borderRadius: 12, marginBottom: 10, paddingVertical: 10
+                    backgroundColor: t.card, borderRadius: 12, marginBottom: 10, paddingVertical: 10,
+                    overflow: 'hidden'
                 }}>
                     {FILTER_ITEMS.map(item => {
                         const active = statusFilter === item.key;
@@ -143,13 +144,13 @@ export default function FavoritesScreen() {
                                     setStatusFilter(prev => prev === item.key ? null : item.key);
                                 }}
                                 style={{
-                                    alignItems: 'center', padding: 6, borderRadius: 10,
+                                    alignItems: 'center', padding: 4, borderRadius: 10,
                                     backgroundColor: active ? `${item.color}30` : 'transparent',
                                     opacity: statusFilter && !active ? 0.35 : 1
                                 }}
                             >
-                                <SymbolView name={item.icon as any} style={{width: 35, height: 35}}
-                                            tintColor={item.color}/>
+                                <SymbolView name={item.icon as any} style={{width: 28, height: 28}}
+                                            tintColor={item.color} />
                                 <Text style={{fontSize: 10, color: t.secondaryText, marginTop: 4, fontWeight: "bold"}}>
                                     {item.label}
                                 </Text>
@@ -160,12 +161,12 @@ export default function FavoritesScreen() {
                 {compactCards ? (
                     <View style={{flexDirection: 'row', flexWrap: 'wrap', gap: 12}}>
                         {filteredGames.map((game) => (
-                            <GameCardCompact key={game.game_id} game={game} onDelete={(id) => deleteGame(id)}/>
+                            <GameCardCompact key={game.db_id ?? game.game_id} game={game} onDelete={(id) => deleteGame(id)}/>
                         ))}
                     </View>
                 ) : (
                     filteredGames.map((game) => (
-                        <GameCard key={game.game_id} game={game} onDelete={(id) => deleteGame(id)}/>
+                        <GameCard key={game.db_id ?? game.game_id} game={game} onDelete={(id) => deleteGame(id)}/>
                     ))
                 )}
             </ScrollView>

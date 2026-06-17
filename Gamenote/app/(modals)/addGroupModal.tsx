@@ -153,7 +153,7 @@ export default function AddGroupModal() {
 
                         return (
                             <Pressable
-                                key={game.game_id}
+                                key={game.db_id ?? game.game_id}
                                 onPress={() => {
                                     toggleGame(game.game_id);
                                     if (Platform.OS === 'ios') {

@@ -89,8 +89,8 @@ export default function GameCardCompact({ game, onDelete }: Props) {
 
                 <View style={styles.infoRow}>
                   {game.status && STATUS_CONFIG[game.status] ? (
-                    <View style={[styles.badge, {backgroundColor: STATUS_CONFIG[game.status].bg, marginRight: 6}]}>
-                      <Text style={[styles.badgeText, {color: STATUS_CONFIG[game.status].text}]}>
+                    <View style={[styles.badge, {backgroundColor: STATUS_CONFIG[game.status].bg, marginRight: 6, flexShrink: 1}]}>
+                      <Text style={[styles.badgeText, {color: STATUS_CONFIG[game.status].text}]} numberOfLines={1} adjustsFontSizeToFit minimumFontScale={0.5}>
                         {STATUS_CONFIG[game.status].label}
                       </Text>
                     </View>
@@ -196,6 +196,7 @@ const styles = StyleSheet.create({
   ratingRow: {
     flexDirection: 'row',
     alignItems: 'center',
+    flexShrink: 0,
   },
   platformBadge: {
     alignSelf: 'flex-start',

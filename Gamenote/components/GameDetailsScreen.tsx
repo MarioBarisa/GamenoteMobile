@@ -340,7 +340,7 @@ export default function GameDetailsScreen() {
                             {game.genre ? (
                                 <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
                                     <Text style={{color: t.secondaryText, fontSize: 14}}>{tr("gameDetails.genre")}</Text>
-                                    <Text style={{color: t.text, fontSize: 14, fontWeight: '600'}}>{game.genre}</Text>
+                                    <Text style={{color: t.text, fontSize: 14, fontWeight: '600', flex: 1, textAlign: 'right'}}>{game.genre}</Text>
                                 </View>
                             ) : null}
 
@@ -348,7 +348,7 @@ export default function GameDetailsScreen() {
                                 <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
                                     <Text style={{color: t.secondaryText, fontSize: 14}}>{tr("gameDetails.developer")}</Text>
                                     <Text
-                                        style={{color: t.text, fontSize: 14, fontWeight: '600'}}>{game.publisher}</Text>
+                                        style={{color: t.text, fontSize: 14, fontWeight: '600', flex: 1, textAlign: 'right'}}>{game.publisher}</Text>
                                 </View>
                             ) : null}
 
