@@ -29,7 +29,7 @@ export async function signIn(email: string, password: string) {
 export async function signUp(email: string, password: string, name: string) {
   const { data: exists } = await supabase.rpc('check_email_exists', { p_email: email })
   if (exists) {
-    return { success: false as const, error: 'Korisnik s tom e-mail adresom već postoji.' }
+    return { success: false as const, error: 'An account with this email already exists.' }
   }
 
   const { data, error } = await supabase.auth.signUp({
@@ -45,6 +45,14 @@ export async function signUp(email: string, password: string, name: string) {
   }
 
   return { success: true as const, user: data.user }
+}
+
+export async function updateAvatar(avatarUrl: string) {
+  const { error } = await supabase.auth.updateUser({ data: { avatar_url: avatarUrl } })
+  if (error) {
+    return { success: false as const, error: translateError(error.message) }
+  }
+  return { success: true as const }
 }
 
 export async function updateUsername(name: string) {

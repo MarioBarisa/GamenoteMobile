@@ -1,19 +1,20 @@
 import {useTheme} from "@/context/theme";
 import {colors} from "@/constants/theme";
 import {useRouter} from "expo-router";
-import {Alert, Platform, Pressable, ScrollView, StyleSheet, Text, TextInput, View} from "react-native";
+import {Alert, Platform, Pressable, ScrollView, StyleSheet, Text, TextInput, View, Image} from "react-native";
 import {SymbolView} from "expo-symbols";
 import * as Haptics from "expo-haptics";
 import {useState} from "react";
 import {useTranslation} from "react-i18next";
 import {useAuth} from "@/context/auth";
+import * as WebBrowser from "expo-web-browser";
 
 export default function ManageAccountModal() {
     const {t: tr} = useTranslation();
     const {theme} = useTheme();
     const t = colors[theme];
     const router = useRouter();
-    const {username, updateUsername, updatePassword, deleteAccount} = useAuth();
+    const {user, username, avatarUrl, updateUsername, updatePassword, updateAvatar, deleteAccount} = useAuth();
 
     const [newUsername, setNewUsername] = useState(username);
     const [newPassword, setNewPassword] = useState('');
@@ -21,6 +22,8 @@ export default function ManageAccountModal() {
     const [isUpdatingUsername, setIsUpdatingUsername] = useState(false);
     const [isUpdatingPassword, setIsUpdatingPassword] = useState(false);
     const [isDeleting, setIsDeleting] = useState(false);
+    const [avatarInputUrl, setAvatarInputUrl] = useState('');
+    const [isSavingAvatar, setIsSavingAvatar] = useState(false);
 
     const handleUpdateUsername = async () => {
         if (!newUsername.trim()) {
@@ -105,6 +108,27 @@ export default function ManageAccountModal() {
         );
     };
 
+    const handleSaveAvatar = async () => {
+        if (!avatarInputUrl.trim()) return;
+
+        if (Platform.OS === 'ios') {
+            Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
+        }
+
+        setIsSavingAvatar(true);
+        const result = await updateAvatar(avatarInputUrl.trim());
+        setIsSavingAvatar(false);
+
+        if (result.success) {
+            setAvatarInputUrl('');
+            Alert.alert('', tr('profile.manageAccountAvatarSaved'));
+        } else {
+            Alert.alert('', result.error || '');
+        }
+    };
+
+    const currentAvatar = avatarUrl || `https://i.pravatar.cc/300?u=${encodeURIComponent(user?.email || 'default')}`;
+
     return (
         <ScrollView
             contentContainerStyle={{gap: 10, padding: 8}}
@@ -114,6 +138,58 @@ export default function ManageAccountModal() {
             keyboardShouldPersistTaps="handled"
             automaticallyAdjustKeyboardInsets={true}
         >
+            <View style={[styles.section, {alignItems: 'center'}]}>
+                <Image
+                    source={{uri: currentAvatar}}
+                    style={{
+                        width: 120,
+                        height: 120,
+                        borderRadius: 60,
+                        backgroundColor: theme === 'dark' ? '#2C2C2E' : '#E5E5EA',
+                    }}
+                />
+                <Text style={{color: t.secondaryText, fontSize: 13, textAlign: 'center', lineHeight: 18}}>
+                    {tr('profile.manageAccountAvatarUrlHint')}
+                </Text>
+                <Pressable onPress={() => WebBrowser.openBrowserAsync('https://imgbb.com')}>
+                    <Text style={{color: t.accent, fontSize: 13, textDecorationLine: 'underline'}}>
+                        imgbb.com
+                    </Text>
+                </Pressable>
+                <TextInput
+                    style={[
+                        styles.input,
+                        {width: '100%',
+                            color: t.text,
+                            backgroundColor: theme === 'dark' ? '#2C2C2E' : '#E5E5EA',
+                        },
+                    ]}
+                    value={avatarInputUrl}
+                    onChangeText={setAvatarInputUrl}
+                    placeholder={tr('profile.manageAccountAvatarUrlPlaceholder')}
+                    placeholderTextColor={t.secondaryText}
+                    autoCapitalize="none"
+                    autoCorrect={false}
+                />
+                <Pressable
+                    style={({pressed}) => [{
+                        backgroundColor: t.accent,
+                        padding: 12,
+                        borderRadius: 32,
+                        alignItems: "center",
+                        justifyContent: "center",
+                        width: '100%',
+                        opacity: pressed ? 0.6 : 1,
+                    }]}
+                    onPress={handleSaveAvatar}
+                    disabled={isSavingAvatar || !avatarInputUrl.trim()}
+                >
+                    <Text style={{color: '#fff', fontWeight: '600', fontSize: 16}}>
+                        {isSavingAvatar ? '...' : tr('common.save')}
+                    </Text>
+                </Pressable>
+            </View>
+
             <View style={styles.section}>
                 <Text style={[styles.sectionTitle, {color: t.text}]}>
                     {tr('profile.manageAccountUsernameLabel')}
