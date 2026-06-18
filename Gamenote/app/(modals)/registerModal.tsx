@@ -7,6 +7,7 @@ import * as Haptics from "expo-haptics";
 import * as WebBrowser from "expo-web-browser";
 import {useState} from "react";
 import {useTranslation} from "react-i18next";
+import {useAuth} from "@/context/auth";
 
 interface RegisterFormData {
     username: string;
@@ -38,6 +39,8 @@ export default function RegisterModal() {
     const [showPassword, setShowPassword] = useState(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
     const [errors, setErrors] = useState<ValidationErrors>({});
+    const [isLoading, setIsLoading] = useState(false);
+    const {signUp} = useAuth();
 
     const updateField = (field: keyof RegisterFormData, value: string) => {
         setForm(prev => ({...prev, [field]: value}));
@@ -101,7 +104,7 @@ export default function RegisterModal() {
         return Object.keys(newErrors).length === 0;
     };
 
-    const handleRegister = () => {
+    const handleRegister = async () => {
         if (!validateForm()) {
             return;
         }
@@ -110,16 +113,27 @@ export default function RegisterModal() {
             Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
         }
 
-        Alert.alert(
-            tr('register.accountCreated'),
-            tr('register.welcomeMsg', {username: form.username}),
-            [
-                {
-                    text: 'OK',
-                    onPress: () => router.back()
-                }
-            ]
-        );
+        setIsLoading(true);
+        const result = await signUp(form.email, form.password, form.username);
+        setIsLoading(false);
+
+        if (result.success) {
+            Alert.alert(
+                tr('register.accountCreated'),
+                tr('register.welcomeMsg', {username: form.username}),
+                [
+                    {
+                        text: 'OK',
+                        onPress: () => router.back()
+                    }
+                ]
+            );
+        } else {
+            Alert.alert(
+                tr('register.errorTitle'),
+                result.error || ''
+            );
+        }
     };
 
     return (
@@ -277,6 +291,7 @@ export default function RegisterModal() {
                     }]}
                     accessibilityLabel={tr('register.registerButton')}
                     onPress={handleRegister}
+                    disabled={isLoading}
                 >
                     <SymbolView
                         name={"person.crop.circle.badge.plus"}
@@ -284,7 +299,7 @@ export default function RegisterModal() {
                         tintColor={"#ffffff"}
                     />
                     <Text style={{color: "#ffffff", fontWeight: "600", fontSize: 20}}>
-                        {tr('register.registerButton')}
+                        {isLoading ? '...' : tr('register.registerButton')}
                     </Text>
                 </Pressable>
                 <View style={{flexDirection: "row", gap: 8, alignItems: "center"}}>

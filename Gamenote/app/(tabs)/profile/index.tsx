@@ -6,7 +6,6 @@ import {colors} from "@/constants/theme";
 import {SymbolView} from "expo-symbols";
 import {useUserGames} from "@/hooks/useUserGames";
 import {useNavigation, useRouter} from "expo-router";
-import * as WebBrowser from "expo-web-browser";
 import {useTranslation} from "react-i18next";
 
 
@@ -434,7 +433,7 @@ export default function FavoritesScreen() {
                                 gap: 6,
                                 opacity: pressed ? 0.6 : 1,
                             }]}
-                             onPress={() => WebBrowser.openBrowserAsync("http://gamenote.eu/profile")}
+                             onPress={() => router.push('/(modals)/manageAccountModal')}
                         >
                             <SymbolView
                                 name={"person.crop.circle" as any}

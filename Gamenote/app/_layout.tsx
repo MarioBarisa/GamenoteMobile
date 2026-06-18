@@ -83,6 +83,13 @@ function AppContent() {
                         headerShown: false,
                     }}
                 />
+                <Stack.Screen
+                    name="(modals)/manageAccountModal"
+                    options={{
+                        presentation: 'modal',
+                        title: t("screens.manageAccountTitle"),
+                    }}
+                />
                 <Stack.Screen name="settings"
                               options={{
                                   headerShown: true,

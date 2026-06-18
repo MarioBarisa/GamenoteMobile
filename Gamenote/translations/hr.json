@@ -27,7 +27,8 @@
     "editGroupTitle": "Uredi info grupe",
     "editGameTitle": "Uredi igru",
     "addGameTitle": "Dodaj igru",
-    "registerTitle": "Izradi račun"
+    "registerTitle": "Izradi račun",
+    "manageAccountTitle": "Upravljaj računom"
   },
   "home": {
     "totalGames": "Ukupno igara",
@@ -103,8 +104,19 @@
     "missingPasswordMsg": "Unesite ispravnu lozinku.",
     "registerA11y": "Izradi račun",
     "register": "Izradi račun",
-    "email": "Elektroička pošta",
-    "password": "Lozinka"
+    "email": "Elektronička pošta",
+    "password": "Lozinka",
+    "manageAccountUsernameLabel": "Korisničko ime",
+    "manageAccountUsernamePlaceholder": "Unesi novo korisničko ime",
+    "manageAccountUsernameSaved": "Korisničko ime ažurirano!",
+    "manageAccountPasswordLabel": "Nova lozinka",
+    "manageAccountPasswordPlaceholder": "Unesi novu lozinku",
+    "manageAccountPasswordConfirmLabel": "Potvrdi lozinku",
+    "manageAccountPasswordSaved": "Lozinka ažurirana!",
+    "manageAccountDeleteLabel": "Izbriši račun",
+    "manageAccountDeleteConfirmTitle": "Jesi li siguran?",
+    "manageAccountDeleteConfirmMsg": "Ova radnja je trajna i ne može se poništiti. Svi tvoji podaci bit će izbrisani.",
+    "manageAccountDeleteSuccess": "Račun izbrisan."
   },
   "groups": {
     "title": "Grupe",
@@ -136,8 +148,10 @@
     "emailInvalid": "Unesite ispravan email",
     "passwordRequired": "Lozinka je obavezna",
     "passwordLength": "Lozinka mora biti minimalno 8 znakova,\ns brojem ili miješanjem velikih i malih slova",
+    "emailAlreadyExists": "Račun s ovom e-poštom već postoji.",
     "confirmRequired": "Potvrda lozinke je obavezna",
     "passwordsMismatch": "Lozinke se ne poklapaju",
+    "errorTitle": "Registracija neuspješna",
     "accountCreated": "Račun izrađen",
     "registerButton": "Izradi račun",
     "welcomeMsg": "Dobrodošli, {{username}}!",

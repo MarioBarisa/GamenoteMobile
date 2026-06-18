@@ -27,7 +27,8 @@
     "editGroupTitle": "Edit group info",
     "editGameTitle": "Edit game",
     "addGameTitle": "Add Game",
-    "registerTitle": "Make an Account"
+    "registerTitle": "Make an Account",
+    "manageAccountTitle": "Manage Account"
   },
   "home": {
     "totalGames": "Number of games",
@@ -104,7 +105,18 @@
     "registerA11y": "Register",
     "register": "Register",
     "email": "Email",
-    "password": "Password"
+    "password": "Password",
+    "manageAccountUsernameLabel": "Username",
+    "manageAccountUsernamePlaceholder": "Enter new username",
+    "manageAccountUsernameSaved": "Username updated!",
+    "manageAccountPasswordLabel": "New password",
+    "manageAccountPasswordPlaceholder": "Enter new password",
+    "manageAccountPasswordConfirmLabel": "Confirm password",
+    "manageAccountPasswordSaved": "Password updated!",
+    "manageAccountDeleteLabel": "Delete account",
+    "manageAccountDeleteConfirmTitle": "Are you sure?",
+    "manageAccountDeleteConfirmMsg": "This action is permanent and cannot be undone. All your data will be deleted.",
+    "manageAccountDeleteSuccess": "Account deleted."
   },
   "groups": {
     "title": "Groups",
@@ -136,8 +148,10 @@
     "emailInvalid": "Enter a valid email address",
     "passwordRequired": "Password is required",
     "passwordLength": "Password must be at least 8 characters,\nwith a number or a mix of uppercase and lowercase letters",
+    "emailAlreadyExists": "An account with this email already exists.",
     "confirmRequired": "Password confirmation is required",
     "passwordsMismatch": "Passwords do not match",
+    "errorTitle": "Registration failed",
     "accountCreated": "Account created",
     "registerButton": "Create account",
     "welcomeMsg": "Welcome, {{username}}!",

@@ -14,6 +14,8 @@ type AuthContextValue = {
   signOut: () => Promise<void>;
   resetPassword: (email: string) => Promise<{ success: boolean; error: string }>;
   updatePassword: (newPassword: string) => Promise<{ success: boolean; error: string }>;
+  updateUsername: (name: string) => Promise<{ success: boolean; error?: string }>;
+  deleteAccount: () => Promise<{ success: boolean; error?: string }>;
 };
 
 const AuthContext = createContext<AuthContextValue | undefined>(undefined);
@@ -59,6 +61,14 @@ export function AuthProvider({children}: { children: ReactNode }) {
     await supabaseAuth.signOut();
   };
 
+  const updateUsername = async (name: string) => {
+    return await supabaseAuth.updateUsername(name);
+  };
+
+  const deleteAccount = async () => {
+    return await supabaseAuth.deleteAccount();
+  };
+
   const value = useMemo(
     () => ({
       loggedIn,
@@ -71,6 +81,8 @@ export function AuthProvider({children}: { children: ReactNode }) {
       signOut,
       resetPassword: supabaseAuth.resetPassword,
       updatePassword: supabaseAuth.updatePassword,
+      updateUsername,
+      deleteAccount,
     }),
     [loggedIn, user, session, username, isLoading]
   );
