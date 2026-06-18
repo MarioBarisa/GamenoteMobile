@@ -4,17 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7b37eb79-ceff-44a4-81aa-7e12f61dfc1f" name="Changes" comment="1.5/2 Supabase implementacije gotova. Ispravno implementirane grupe, igre se mogu dodati ili u editGroupModal ili tijekom dodavanja ili editanja detalja već dodate igre.">
+    <list default="true" id="7b37eb79-ceff-44a4-81aa-7e12f61dfc1f" name="Changes" comment="1.5/2 Supabase implementacije gotova. Ispravno implementirane grupe, igre se mogu dodati ili u editGroupModal ili tijekom dodavanja + tijekom editanja detalja već dodate igre.">
       <change beforePath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/.idea/workspace.xml" beforePathEscaped="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/.idea/workspace.xml" afterPathEscaped="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/(modals)/addGameModal.tsx" beforePathEscaped="$PROJECT_DIR$/Gamenote/app/(modals)/addGameModal.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/(modals)/addGameModal.tsx" afterPathEscaped="$PROJECT_DIR$/Gamenote/app/(modals)/addGameModal.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/(modals)/addGroupModal.tsx" beforePathEscaped="$PROJECT_DIR$/Gamenote/app/(modals)/addGroupModal.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/(modals)/addGroupModal.tsx" afterPathEscaped="$PROJECT_DIR$/Gamenote/app/(modals)/addGroupModal.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/(modals)/modalEdit.tsx" beforePathEscaped="$PROJECT_DIR$/Gamenote/app/(modals)/modalEdit.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/(modals)/modalEdit.tsx" afterPathEscaped="$PROJECT_DIR$/Gamenote/app/(modals)/modalEdit.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/(modals)/modalEditGroups.tsx" beforePathEscaped="$PROJECT_DIR$/Gamenote/app/(modals)/modalEditGroups.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/(modals)/modalEditGroups.tsx" afterPathEscaped="$PROJECT_DIR$/Gamenote/app/(modals)/modalEditGroups.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/(tabs)/groups/group-detail.tsx" beforePathEscaped="$PROJECT_DIR$/Gamenote/app/(tabs)/groups/group-detail.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/(tabs)/groups/group-detail.tsx" afterPathEscaped="$PROJECT_DIR$/Gamenote/app/(tabs)/groups/group-detail.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/(tabs)/groups/index.tsx" beforePathEscaped="$PROJECT_DIR$/Gamenote/app/(tabs)/groups/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/(tabs)/groups/index.tsx" afterPathEscaped="$PROJECT_DIR$/Gamenote/app/(tabs)/groups/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/common/Game.tsx" beforePathEscaped="$PROJECT_DIR$/Gamenote/common/Game.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/common/Game.tsx" afterPathEscaped="$PROJECT_DIR$/Gamenote/common/Game.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/components/GameDetailsScreen.tsx" beforePathEscaped="$PROJECT_DIR$/Gamenote/components/GameDetailsScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/components/GameDetailsScreen.tsx" afterPathEscaped="$PROJECT_DIR$/Gamenote/components/GameDetailsScreen.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/context/GroupsContext.tsx" beforePathEscaped="$PROJECT_DIR$/Gamenote/context/GroupsContext.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/context/GroupsContext.tsx" afterPathEscaped="$PROJECT_DIR$/Gamenote/context/GroupsContext.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/(tabs)/profile/index.tsx" beforePathEscaped="$PROJECT_DIR$/Gamenote/app/(tabs)/profile/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/app/(tabs)/profile/index.tsx" afterPathEscaped="$PROJECT_DIR$/Gamenote/app/(tabs)/profile/index.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/translations/en.json" beforePathEscaped="$PROJECT_DIR$/Gamenote/translations/en.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/translations/en.json" afterPathEscaped="$PROJECT_DIR$/Gamenote/translations/en.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/translations/hr.json" beforePathEscaped="$PROJECT_DIR$/Gamenote/translations/hr.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../..//Osobno/GamenoteMobile/Gamenote/translations/hr.json" afterPathEscaped="$PROJECT_DIR$/Gamenote/translations/hr.json" afterDir="false" />
     </list>
@@ -259,13 +251,6 @@
       <workItem from="1781002319627" duration="9057000" />
       <workItem from="1781352561322" duration="2699000" />
       <workItem from="1781470346483" duration="1099000" />
-    </task>
-    <task id="LOCAL−00023" summary="image_url je sada array sa slikama, prvi link u array-u je cove a ostalo su generic slike igara -&gt; prepravljena GameCard.tsx da radi na osnovu navedenog. U details.tsx prikazuje se više slike igare osim covera ( kako bi se kasnije ušteilo na prostoru. TODO: Mogucnost klika na sliku kako bi se bolje mogla vidjeti.">
-      <option name="closed" value="true" />
-      <created>1777464688469</created>
-      <option name="number" value="LOCAL−00023" />
-      <option name="presentableId" value="LOCAL−00023" />
-      <updated>1777464688469</updated>
     </task>
     <task id="LOCAL−00024" summary="Daljni razvoj details.tsx zaslona + dodana mogucnost klika na sliku za veci prikaz.">
       <option name="closed" value="true" />
@@ -603,7 +588,14 @@
       <option name="presentableId" value="LOCAL−00071" />
       <updated>1781698774949</updated>
     </task>
-    <option name="localTasksCounter" value="72" />
+    <task id="LOCAL−00072" summary="1.5/2 Supabase implementacije gotova. Ispravno implementirane grupe, igre se mogu dodati ili u editGroupModal ili tijekom dodavanja + tijekom editanja detalja već dodate igre.">
+      <option name="closed" value="true" />
+      <created>1781701445281</created>
+      <option name="number" value="LOCAL−00072" />
+      <option name="presentableId" value="LOCAL−00072" />
+      <updated>1781701445282</updated>
+    </task>
+    <option name="localTasksCounter" value="73" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -621,7 +613,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Dodan redirect na Profile tab ako korisnik nije prijavljen" />
     <MESSAGE value="Zamijenjen FavoritesProvider s AuthProvider i integracija auth konteksta u FavoritesScreen, dodan redirect na Profile tab ako korisnik nije prijavljen" />
     <MESSAGE value="Dodan label da se korisniku kaže da gleda demo podatke ako nije prijavljen, ostale manje izmjene" />
     <MESSAGE value="Povecana velicina slike &quot;Jump back in.&quot; sectiona" />
@@ -646,7 +637,8 @@
     <MESSAGE value="1/2 Supabase implementacije gotova. Final polish prije nastavka supabase implementacije." />
     <MESSAGE value="1/2 Supabase implementacije gotova. Porpavljena &quot;Jump back in!&quot; sekcija da se ispravno prikazuju njezine komponente. Dodan refrsh / fetch podataka kada korisnik doda ili izmjeni detalje igre." />
     <MESSAGE value="1.5/2 Supabase implementacije gotova. Ispravno implementirane grupe, igre se mogu dodati ili u editGroupModal ili tijekom dodavanja ili editanja detalja već dodate igre." />
-    <option name="LAST_COMMIT_MESSAGE" value="1.5/2 Supabase implementacije gotova. Ispravno implementirane grupe, igre se mogu dodati ili u editGroupModal ili tijekom dodavanja ili editanja detalja već dodate igre." />
+    <MESSAGE value="1.5/2 Supabase implementacije gotova. Ispravno implementirane grupe, igre se mogu dodati ili u editGroupModal ili tijekom dodavanja + tijekom editanja detalja već dodate igre." />
+    <option name="LAST_COMMIT_MESSAGE" value="1.5/2 Supabase implementacije gotova. Ispravno implementirane grupe, igre se mogu dodati ili u editGroupModal ili tijekom dodavanja + tijekom editanja detalja već dodate igre." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

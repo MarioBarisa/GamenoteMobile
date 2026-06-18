@@ -102,7 +102,9 @@
     "missingPasswordTitle": "Fali lozinka.",
     "missingPasswordMsg": "Unesite ispravnu lozinku.",
     "registerA11y": "Izradi račun",
-    "register": "Izradi račun"
+    "register": "Izradi račun",
+    "email": "Elektroička pošta",
+    "password": "Lozinka"
   },
   "groups": {
     "title": "Grupe",

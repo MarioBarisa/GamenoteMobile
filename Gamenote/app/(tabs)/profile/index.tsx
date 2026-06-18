@@ -504,14 +504,14 @@ export default function FavoritesScreen() {
                     </Text>
                     <View style={{padding: 15, gap: 8, marginTop: 10}}>
                         <TextInput
-                            placeholder="Gamenote Username"  // <Text style={{color: '#dd2316'}}>Gamenote</Text>
+                            placeholder={tr("profile.email")}  // <Text style={{color: '#dd2316'}}>Gamenote</Text>
                             placeholderTextColor={t.secondaryText}
                             clearButtonMode="unless-editing"
                             style={[styles.systemInput, {color: t.text}]}
                             onChangeText={setEmail}
                         />
                         <TextInput
-                            placeholder="Gamenote Password"
+                            placeholder={tr("profile.password")}
                             placeholderTextColor={t.secondaryText}
                             clearButtonMode="unless-editing"
                             secureTextEntry
