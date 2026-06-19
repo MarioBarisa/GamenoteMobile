@@ -4,13 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7b37eb79-ceff-44a4-81aa-7e12f61dfc1f" name="Changes" comment="1.5/2 Supabase implementacije gotova. Prilikom registracije korisnika potrebno je prihavtiti TOS klikom na checkmark.">
+    <list default="true" id="7b37eb79-ceff-44a4-81aa-7e12f61dfc1f" name="Changes" comment="AppStore pripreme: dodan link na politiku privatnosti unutar registracije računa, maknut sound switch iz postavki, popravljen info banner za placeholder data">
+      <change afterPath="$PROJECT_DIR$/Gamenote/assets/gamenote/icons/GamenoteIcon-iOS-ClearDark-1024x1024@1x.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Gamenote/assets/gamenote/icons/GamenoteIcon-iOS-ClearLight-1024x1024@1x.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Gamenote/assets/gamenote/icons/GamenoteIcon-iOS-Dark-1024x1024@1x.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Gamenote/assets/gamenote/icons/GamenoteIcon-iOS-Default-1024x1024@1x.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Gamenote/assets/gamenote/icons/GamenoteIcon-iOS-TintedDark-1024x1024@1x.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Gamenote/assets/gamenote/icons/GamenoteIcon-iOS-TintedLight-1024x1024@1x.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Gamenote/assets/gamenote/icons/GamenoteIcon.icon/Assets/Image.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Gamenote/assets/gamenote/icons/GamenoteIcon.icon/icon.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Gamenote/app.json" beforeDir="false" afterPath="$PROJECT_DIR$/Gamenote/app.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gamenote/app/(modals)/addGameModal.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/Gamenote/app/(modals)/addGameModal.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gamenote/app/(modals)/registerModal.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/Gamenote/app/(modals)/registerModal.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gamenote/app/settings.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/Gamenote/app/settings.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gamenote/translations/en.json" beforeDir="false" afterPath="$PROJECT_DIR$/Gamenote/translations/en.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gamenote/translations/hr.json" beforeDir="false" afterPath="$PROJECT_DIR$/Gamenote/translations/hr.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gamenote/assets/images/icon.png" beforeDir="false" afterPath="$PROJECT_DIR$/Gamenote/assets/images/icon.png" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -185,7 +190,7 @@
     "copilot.chat.legacySessionMetadata.migrated": "true",
     "git-widget-placeholder": "main",
     "javascript.preferred.runtime.type.id": "node",
-    "last_opened_file_path": "/Users/mariobarisa/Desktop/💻/Osobno/GamenoteMobile",
+    "last_opened_file_path": "/Volumes/MarioNAS/Završni/GamenoteMobile/Gamenote/assets/gamenote",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.standard": "true",
     "node.js.detected.package.tslint": "true",
@@ -255,14 +260,7 @@
       <workItem from="1781352561322" duration="2699000" />
       <workItem from="1781470346483" duration="1099000" />
       <workItem from="1781804335891" duration="1000" />
-      <workItem from="1781855827395" duration="3627000" />
-    </task>
-    <task id="LOCAL−00026" summary="Unaprijeđen geneic game info ( detalji ); dodane sve bitne ionformacije + serijali igara + ispravljen achivment text da ispiše kad korisnik nije još dodao niti jedan achv">
-      <option name="closed" value="true" />
-      <created>1777727781625</created>
-      <option name="number" value="LOCAL−00026" />
-      <option name="presentableId" value="LOCAL−00026" />
-      <updated>1777727781625</updated>
+      <workItem from="1781855827395" duration="5096000" />
     </task>
     <task id="LOCAL−00027" summary="popravak details.tsx ( krivi render zvjezdica )">
       <option name="closed" value="true" />
@@ -600,7 +598,14 @@
       <option name="presentableId" value="LOCAL−00074" />
       <updated>1781859242860</updated>
     </task>
-    <option name="localTasksCounter" value="75" />
+    <task id="LOCAL−00075" summary="AppStore pripreme: dodan link na politiku privatnosti unutar registracije računa, maknut sound switch iz postavki, popravljen info banner za placeholder data">
+      <option name="closed" value="true" />
+      <created>1781860540868</created>
+      <option name="number" value="LOCAL−00075" />
+      <option name="presentableId" value="LOCAL−00075" />
+      <updated>1781860540868</updated>
+    </task>
+    <option name="localTasksCounter" value="76" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -618,8 +623,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Povecana velicina slike &quot;Jump back in.&quot; sectiona" />
-    <MESSAGE value="dodan haptic feedback između promjene tabova." />
     <MESSAGE value="dodan async-storage za persisten spremanje postavki, povezan gumb za haptic feedback u postavkama sa tab switching-om" />
     <MESSAGE value="part 2 - dodan async-storage za persisten spremanje postavki, povezan gumb za haptic feedback u postavkama sa tab switching-om" />
     <MESSAGE value="manje izmjene" />
@@ -643,7 +646,9 @@
     <MESSAGE value="1.5/2 Supabase implementacije gotova. Ispravno implementirane grupe, igre se mogu dodati ili u editGroupModal ili tijekom dodavanja + tijekom editanja detalja već dodate igre." />
     <MESSAGE value="1.5/2 Supabase implementacije gotova. Pojednostavljen manageAccountModal.tsx; sada je samo jedan save gumb prisutan umjesto njih 3 ispod svakog sectiona. Dodana provjera iOS verzije za minimizeBehavior API kako bi se koristila na &quot;undefined&quot; jer isto nije bilo moguce na starijim verzijama iOS-a ( skrivanje tabova tokom scrollinga )" />
     <MESSAGE value="1.5/2 Supabase implementacije gotova. Prilikom registracije korisnika potrebno je prihavtiti TOS klikom na checkmark." />
-    <option name="LAST_COMMIT_MESSAGE" value="1.5/2 Supabase implementacije gotova. Prilikom registracije korisnika potrebno je prihavtiti TOS klikom na checkmark." />
+    <MESSAGE value="AppStore pripreme: dodan link na politiku privatnosti unutar registracije računa, maknut sound switch iz postavki, popravljen info banner za placeholder data" />
+    <MESSAGE value="AppStore pripreme: dodan link na politiku privatnosti unutar registracije računa, maknut sound switch iz postavki, popravljen info banner za placeholder data, dodane privilegije aplikacijue unuatar app.json i popravljen bundle identifier" />
+    <option name="LAST_COMMIT_MESSAGE" value="AppStore pripreme: dodan link na politiku privatnosti unutar registracije računa, maknut sound switch iz postavki, popravljen info banner za placeholder data, dodane privilegije aplikacijue unuatar app.json i popravljen bundle identifier" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
