@@ -65,7 +65,7 @@ export function GroupsProvider({children}: { children: ReactNode }) {
         setError(null);
         try {
             const data = await groupsApi.listGroups(session.user.id);
-            setGroups(data.length > 0 ? data : MOCK_GROUPS);
+            setGroups(data.length > 0 ? data : []);
             const gg = await loadGameGroups();
             if (gg) setGameGroups(gg);
         } catch (err) {
@@ -84,7 +84,7 @@ export function GroupsProvider({children}: { children: ReactNode }) {
         }
 
         groupsApi.listGroups(session.user.id).then(async (data) => {
-            setGroups(data.length > 0 ? data : MOCK_GROUPS);
+            setGroups(data.length > 0 ? data : []);
             const gg = await loadGameGroups();
             if (gg) setGameGroups(gg);
         }).catch(console.error);
