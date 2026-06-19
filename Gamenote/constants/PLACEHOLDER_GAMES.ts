@@ -14,7 +14,7 @@ export const PLACEHOLDER_GAMES: Game[] = [
         releaseDate: "21.07.2017",
         webPage: "http://splatoon.nintendo.com/",
         about: 'For the first time, take Turf War battles on-the-go with the Nintendo Switch™ system, and use any of the console\'s portable play styles for intense local multiplayer* action. Even team up for new 4-player co-op fun in Salmon Run! Two years have passed since the original Splatoon™ game was released, and two years have also passed in Inkopolis! So expect a fresh wave of fashion, not to mention new weapons and gear. Dual wield the new Splat Dualies or stick to mainstays like chargers and rollers, which have been remixed with new strategic possibilities. As always, Turf War is the favored sport among Inklings, but they also dig ranked battles, taking down Octarians in a robust single-player campaign, and battling enemy Salmonids in one dangerous part-time job!',
-        notes: '"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."',
+        notes: 'Really fun game!',
         series: [{
             "id": 558975,
             "name": "Splatoon 3",
@@ -26,12 +26,12 @@ export const PLACEHOLDER_GAMES: Game[] = [
             "released": "2015-05-29",
             "background_image": "https://media.rawg.io/media/games/c2f/c2f94f3fefa98453f33f2b6abb6ae103.jpg"
         }],
-        play_time: 10000,
-        progress_value: 98,
+        play_time: 141,
+        progress_value: 76,
         progress_total: 100,
         progress_mode: 'completion_nintendo',
         start_date: "2025-11-11",
-        end_date: "2025-11-12",
+        end_date: "2026-03-03",
         image_url: "https://media.rawg.io/media/games/24b/24b68f500fd138c3146d8856f0dd55b4.jpg",
         screenshot_urls: [
             "https://media.rawg.io/media/screenshots/3ea/3eadccae65f82027a0e0ddc1f4ea5d52.jpg",
@@ -49,13 +49,17 @@ export const PLACEHOLDER_GAMES: Game[] = [
         esrbRating: 'T',
         releaseDate: "21.07.2018",
         webPage: "http://zelda.nintendo.com/",
-        about: 'For the first time, take Turf War battles on-the-go with the Nintendo Switch™ system, and use any of the console\'s portable play styles for intense local multiplayer* action. Even team up for new 4-player co-op fun in Salmon Run! Two years have passed since the original Splatoon™ game was released, and two years have also passed in Inkopolis! So expect a fresh wave of fashion, not to mention new weapons and gear. Dual wield the new Splat Dualies or stick to mainstays like chargers and rollers, which have been remixed with new strategic possibilities. As always, Turf War is the favored sport among Inklings, but they also dig ranked battles, taking down Octarians in a robust single-player campaign, and battling enemy Salmonids in one dangerous part-time job!',
-        notes: '"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."',
+        about: 'An epic adventure across the land and skies of Hyrule awaits in The Legend of Zelda™: Tears of the Kingdom for Nintendo Switch™. The adventure is yours to create in a world fueled by your imagination. In this sequel to The Legend of Zelda: Breath of the Wild, you’ll decide your own path through the sprawling landscapes of Hyrule and the mysterious islands floating in the vast skies above. Can you harness the power of Link’s new abilities to fight back against the malevolent forces that threaten the kingdom?',
+        notes: 'Build mode on!',
         play_time: 120,
         progress_value: 106,
         progress_total: 152,
         progress_mode: 'completion_nintendo',
-        image_url: 'https://imgs.search.brave.com/2cSE4AyYrHjAAvueNp8XOOWOgsBWRCW-ZjnCKNcHXAI/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9zdGF0/aWMwLnBvbHlnb25p/bWFnZXMuY29tL3dv/cmRwcmVzcy93cC1j/b250ZW50L3VwbG9h/ZHMvY2hvcnVzL3Vw/bG9hZHMvY2hvcnVz/X2Fzc2V0L2ZpbGUv/MjQ1ODI5MDQvemVs/ZGFfbWFzdGVyX3N3/b3JkX3RvdGsuanBn/P3E9NDkmZml0PWNy/b3Amdz02NDImaD0z/OTMmZHByPTI'
+        image_url: 'https://imgs.search.brave.com/2cSE4AyYrHjAAvueNp8XOOWOgsBWRCW-ZjnCKNcHXAI/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9zdGF0/aWMwLnBvbHlnb25p/bWFnZXMuY29tL3dv/cmRwcmVzcy93cC1j/b250ZW50L3VwbG9h/ZHMvY2hvcnVzL3Vw/bG9hZHMvY2hvcnVz/X2Fzc2V0L2ZpbGUv/MjQ1ODI5MDQvemVs/ZGFfbWFzdGVyX3N3/b3JkX3RvdGsuanBn/P3E9NDkmZml0PWNy/b3Amdz02NDImaD0z/OTMmZHByPTI',
+         screenshot_urls: [
+            "https://media.rawg.io/media/screenshots/51f/51f7928a2630fc4bbb3dac59b8f31448.jpg",
+            "https://media.rawg.io/media/screenshots/104/10431d15726ed2593401cc70e2115a82.jpg",
+            "https://media.rawg.io/media/screenshots/c92/c92c2acf519b3dc613c0f0085cc34b34.jpg"]
     },
     {
         title: 'Horizon Forbidden West',
@@ -68,13 +72,17 @@ export const PLACEHOLDER_GAMES: Game[] = [
         esrbRating: 'M',
         releaseDate: "21.07.2023",
         webPage: "http://playstation.com",
-        about: 'For the first time, take Turf War battles on-the-go with the Nintendo Switch™ system, and use any of the console\'s portable play styles for intense local multiplayer* action. Even team up for new 4-player co-op fun in Salmon Run! Two years have passed since the original Splatoon™ game was released, and two years have also passed in Inkopolis! So expect a fresh wave of fashion, not to mention new weapons and gear. Dual wield the new Splat Dualies or stick to mainstays like chargers and rollers, which have been remixed with new strategic possibilities. As always, Turf War is the favored sport among Inklings, but they also dig ranked battles, taking down Octarians in a robust single-player campaign, and battling enemy Salmonids in one dangerous part-time job!',
-        notes: '"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."',
+        about: 'Explore distant lands, fight bigger and more awe-inspiring machines, and encounter astonishing new tribes as you return to the far-future, post-apocalyptic world of Horizon. The land is dying. Vicious storms and an unstoppable blight ravage the scattered remnants of humanity, while fearsome new machines prowl their borders. Life on Earth is hurtling towards another extinction, and no one knows why. It\'s up to Aloy to uncover the secrets behind these threats and restore order and balance to the world. Along the way, she must reunite with old friends, forge alliances with warring new factions and unravel the legacy of the ancient past – all the while trying to stay one step ahead of a seemingly undefeatable new enemy.',
+        notes: 'machines bzzz!',
         play_time: 98,
         progress_value: 78,
         progress_total: 112,
         progress_mode: 'trophies_psn',
-        image_url: 'https://media.rawg.io/media/games/bf7/bf73b105ccbba42107986bbcd96fcada.jpg'
+        image_url: 'https://media.rawg.io/media/games/bf7/bf73b105ccbba42107986bbcd96fcada.jpg',
+        screenshot_urls: [
+            "https://media.rawg.io/media/screenshots/fce/fce949e5f5900b54b245d5e2c1fb7020.jpg",
+            "https://media.rawg.io/media/screenshots/542/54203d80367d6f925adfae63deb117f3.jpg",
+            "https://media.rawg.io/media/screenshots/230/230471fafd4793bc569afe4a11643a31.jpg"]
     },
     {
         title: 'Kena: Bridge of Spirits',
@@ -87,31 +95,18 @@ export const PLACEHOLDER_GAMES: Game[] = [
         esrbRating: 'T',
         releaseDate: "22.03.2022",
         webPage: "http://kenagame.com/",
-        about: 'For the first time, take Turf War battles on-the-go with the Nintendo Switch™ system, and use any of the console\'s portable play styles for intense local multiplayer* action. Even team up for new 4-player co-op fun in Salmon Run! Two years have passed since the original Splatoon™ game was released, and two years have also passed in Inkopolis! So expect a fresh wave of fashion, not to mention new weapons and gear. Dual wield the new Splat Dualies or stick to mainstays like chargers and rollers, which have been remixed with new strategic possibilities. As always, Turf War is the favored sport among Inklings, but they also dig ranked battles, taking down Octarians in a robust single-player campaign, and battling enemy Salmonids in one dangerous part-time job!',
-        notes: '"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."',
+        about: 'Kena Bridge of Spirits is an upcoming game from Ember Lab, a small studio with a background in animation and film. Highly stylised and looking like something out of a Pixar movie, , drops its cute exterior to show a protagonist capable of magic. In gameplay to follow, the heroine seems to use a staff to command elements and guide a band of small creatures.',
+        notes: '"rots" are the cutest! :D',
         play_time: 114,
         progress_value: 100,
         progress_total: 100,
         progress_mode: 'trophies_psn',
-        image_url: 'https://media.rawg.io/media/games/91d/91ddeef8d5ebee7f21faa89efa0f2201.jpg'
-    },
-    {
-        title: 'Persona 5 Royal',
-        game_id: "4",
-        platform: 'PlayStation 5',
-        status: 'dropped',
-        rating: 1,
-        metacriticScore: 22,
-        esrbRating: 'T',
-        releaseDate: "21.07.2017",
-        webPage: "http://splatoon.nintendo.com/",
-        about: 'For the first time, take Turf War battles on-the-go with the Nintendo Switch™ system, and use any of the console\'s portable play styles for intense local multiplayer* action. Even team up for new 4-player co-op fun in Salmon Run! Two years have passed since the original Splatoon™ game was released, and two years have also passed in Inkopolis! So expect a fresh wave of fashion, not to mention new weapons and gear. Dual wield the new Splat Dualies or stick to mainstays like chargers and rollers, which have been remixed with new strategic possibilities. As always, Turf War is the favored sport among Inklings, but they also dig ranked battles, taking down Octarians in a robust single-player campaign, and battling enemy Salmonids in one dangerous part-time job!',
-        notes: '"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."',
-        play_time: 102,
-        progress_value: 0,
-        progress_total: 100,
-        progress_mode: 'achievements_xbox',
-        image_url: 'https://imgs.search.brave.com/zJWaU601KmF-GXFWqrVQau3ilaFBFSmJ6T49xtUDBjo/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93YWxs/cGFwZXJzLmNvbS9p/bWFnZXMvZmVhdHVy/ZWQvcGVyc29uYS01/LXBpY3R1cmVzLXZ4/eTNodTV5bzVjZWxo/bWIuanBn'
+        image_url: 'https://media.rawg.io/media/games/91d/91ddeef8d5ebee7f21faa89efa0f2201.jpg',
+        screenshot_urls: [
+            "https://media.rawg.io/media/screenshots/41e/41e7013306e33c1f1833157f85c1968d.jpg",
+            "https://media.rawg.io/media/screenshots/17a/17ad516978e832e6deae3de949526f9f.jpg",
+            "https://media.rawg.io/media/screenshots/c8b/c8b7b24ededdad7082b08bf3956e0009.jpg",
+            "https://media.rawg.io/media/screenshots/537/5378ae5aab4c1c4d4d7167fe3a7a1894.jpg"]
     },
     {
         title: 'Hollow Knight',
@@ -123,12 +118,17 @@ export const PLACEHOLDER_GAMES: Game[] = [
         esrbRating: 'T',
         releaseDate: "21.07.2017",
         webPage: "http://splatoon.nintendo.com/",
-        about: 'For the first time, take Turf War battles on-the-go with the Nintendo Switch™ system, and use any of the console\'s portable play styles for intense local multiplayer* action. Even team up for new 4-player co-op fun in Salmon Run! Two years have passed since the original Splatoon™ game was released, and two years have also passed in Inkopolis! So expect a fresh wave of fashion, not to mention new weapons and gear. Dual wield the new Splat Dualies or stick to mainstays like chargers and rollers, which have been remixed with new strategic possibilities. As always, Turf War is the favored sport among Inklings, but they also dig ranked battles, taking down Octarians in a robust single-player campaign, and battling enemy Salmonids in one dangerous part-time job!',
-        notes: '"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."',
-        play_time: 102,
+        about: 'Hollow Knight is a Metroidvania-type game developed by an indie studio named Team Cherry. Most of the game\'s story is told through the in-world items, tablets, and thoughts of other characters. Many plot aspects are told to the player indirectly or through the secret areas that provide a bit of lore in addition to an upgrade. At the beginning of the game, the player visits a town of Dirtmouth. A town built above the ruins of Hallownest.',
+        notes: 'I need to play this ASAP',
+        play_time: 0,
         progress_value: 0,
         progress_total: 100,
         progress_mode: 'achievements_steam',
-        image_url: 'https://imgs.search.brave.com/rGo8wNTrFG5myKCED8JEG-u_5X9FJ-L5JW9Pf_t5ENQ/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93YWxs/cGFwZXJjYXZlLmNv/bS93cC93cDcwOTc0/MDguanBn'
+        image_url: 'https://imgs.search.brave.com/rGo8wNTrFG5myKCED8JEG-u_5X9FJ-L5JW9Pf_t5ENQ/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93YWxs/cGFwZXJjYXZlLmNv/bS93cC93cDcwOTc0/MDguanBn',
+         screenshot_urls: [
+            "https://media.rawg.io/media/screenshots/6b3/6b309936c1fe07e9b7fa5e62a372790d.jpg",
+            "https://media.rawg.io/media/screenshots/1a7/1a7a69db58c19d323f1dfbcc340d3f1e.jpg",
+            "https://media.rawg.io/media/screenshots/723/7237d0c546b0d17a6a226f38823081d4.jpg"]
+
     },
 ]

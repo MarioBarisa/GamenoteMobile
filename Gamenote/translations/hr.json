@@ -130,6 +130,7 @@
     "typeLabel": "Tip grupe: ",
     "createdLabel": "Grupa napravljena: ",
     "gameCountLabel": "igara",
+    "gameCountFew": "igre",
     "gameCountSingle": "igra"
   },
   "onboarding": {

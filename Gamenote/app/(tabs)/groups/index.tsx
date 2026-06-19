@@ -9,17 +9,19 @@ import {router} from "expo-router";
 import {SymbolView} from "expo-symbols";
 import {useTranslation} from "react-i18next";
 
-const getGameCountLabel = (n: number) => {
-    if (n === 1) return '1 igra';
-    if (n === 2 || n === 3 || n === 4) return `${n} igre`;
-    return `${n} igara`;
-};
+
 
 export default function GroupsIndex() {
     const {t: tr} = useTranslation();
     const {theme} = useTheme();
     const t = colors[theme];
     const {groups, getGamesInGroup, refreshGroups, isLoading: isLoadingGroups} = useGroups();
+
+    const getGameCountLabel = (n: number) => {
+        if (n === 1) return `${n} ${tr("groups.gameCountSingle")}`;
+        if (n >= 2 && n <= 4) return `${n} ${tr("groups.gameCountFew")}`;
+        return `${n} ${tr("groups.gameCountLabel")}`;
+    };
     const {games, refresh: refreshGames, isLoading: isLoadingGames} = useUserGames();
     const gamesMap = useMemo(() => new Map(games.map(g => [g.db_id ?? g.game_id, g])), [games]);
 

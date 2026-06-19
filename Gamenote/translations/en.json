@@ -130,6 +130,7 @@
     "typeLabel": "Type of group: ",
     "createdLabel": "Group created: ",
     "gameCountLabel": "games",
+    "gameCountFew": "games",
     "gameCountSingle": "game"
   },
     "onboarding": {

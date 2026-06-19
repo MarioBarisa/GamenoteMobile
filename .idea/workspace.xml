@@ -4,10 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7b37eb79-ceff-44a4-81aa-7e12f61dfc1f" name="Changes" comment="onboardingModal.tsx sada korsiti isti bg color kao ostali modali.">
+    <list default="true" id="7b37eb79-ceff-44a4-81aa-7e12f61dfc1f" name="Changes" comment="splashscreen koristi banner ( zadnji pokušaj )">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gamenote/app.json" beforeDir="false" afterPath="$PROJECT_DIR$/Gamenote/app.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gamenote/context/theme.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/Gamenote/context/theme.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gamenote/app/(tabs)/groups/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/Gamenote/app/(tabs)/groups/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gamenote/constants/PLACEHOLDER_GAMES.ts" beforeDir="false" afterPath="$PROJECT_DIR$/Gamenote/constants/PLACEHOLDER_GAMES.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gamenote/constants/PLACEHOLDER_GROUPS.TSX.ts" beforeDir="false" afterPath="$PROJECT_DIR$/Gamenote/constants/PLACEHOLDER_GROUPS.TSX.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gamenote/translations/en.json" beforeDir="false" afterPath="$PROJECT_DIR$/Gamenote/translations/en.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gamenote/translations/hr.json" beforeDir="false" afterPath="$PROJECT_DIR$/Gamenote/translations/hr.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -252,14 +255,7 @@
       <workItem from="1781352561322" duration="2699000" />
       <workItem from="1781470346483" duration="1099000" />
       <workItem from="1781804335891" duration="1000" />
-      <workItem from="1781855827395" duration="11816000" />
-    </task>
-    <task id="LOCAL−00032" summary="Micanje nepotrebnih importova po cijelom projektu, dodavanje custom kategorija achvn ( % ) za sve podržane platforme -&gt; edit details.tsx i editModal.tsx">
-      <option name="closed" value="true" />
-      <created>1778097935719</created>
-      <option name="number" value="LOCAL−00032" />
-      <option name="presentableId" value="LOCAL−00032" />
-      <updated>1778097935719</updated>
+      <workItem from="1781855827395" duration="13571000" />
     </task>
     <task id="LOCAL−00033" summary="Dodana lagana vibracija kada se spremi igra putem modalEdit.tsx">
       <option name="closed" value="true" />
@@ -597,7 +593,14 @@
       <option name="presentableId" value="LOCAL−00080" />
       <updated>1781871319592</updated>
     </task>
-    <option name="localTasksCounter" value="81" />
+    <task id="LOCAL−00081" summary="splashscreen koristi banner ( zadnji pokušaj )">
+      <option name="closed" value="true" />
+      <created>1781872226866</created>
+      <option name="number" value="LOCAL−00081" />
+      <option name="presentableId" value="LOCAL−00081" />
+      <updated>1781872226866</updated>
+    </task>
+    <option name="localTasksCounter" value="82" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -615,7 +618,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Dodan wishlist game status u StatusCommons.tsx" />
     <MESSAGE value="Dodan minimizeBehavior=&quot;onScrollDown&quot; kako bi se TabBar smanjio tokom scrolla. Dodan details kao zasebni screen bez pushScreen kako bi se tab bar mogao i tamo prikazitavi + popravak ružnog title fade-ina od prije navedennog fixa." />
     <MESSAGE value="Dodan &lt;Badge&gt; indikator kada korisnik nije prijavljen + minimalna izmjena u Profile screenu" />
     <MESSAGE value="Dodan welcom modal." />
@@ -640,7 +642,8 @@
     <MESSAGE value="Banner / splashscreen se mijenja ovisno o tome koji je light  ili dark mode ukljucen." />
     <MESSAGE value="Splashscreen je sada default icon." />
     <MESSAGE value="onboardingModal.tsx sada korsiti isti bg color kao ostali modali." />
-    <option name="LAST_COMMIT_MESSAGE" value="onboardingModal.tsx sada korsiti isti bg color kao ostali modali." />
+    <MESSAGE value="splashscreen koristi banner ( zadnji pokušaj )" />
+    <option name="LAST_COMMIT_MESSAGE" value="splashscreen koristi banner ( zadnji pokušaj )" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
