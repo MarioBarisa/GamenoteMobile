@@ -4,10 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7b37eb79-ceff-44a4-81aa-7e12f61dfc1f" name="Changes" comment="Popravljen banner za demo podatke ( bio out of bounds za određene ekrane ) + implementiran ShareSheet za stvaranje poveznica na neku igru.">
+    <list default="true" id="7b37eb79-ceff-44a4-81aa-7e12f61dfc1f" name="Changes" comment="Banner / splashscreen se mijenja ovisno o tome koji je light  ili dark mode ukljucen.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gamenote/app/(modals)/onboardingModal.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/Gamenote/app/(modals)/onboardingModal.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gamenote/components/GameDetailsScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/Gamenote/components/GameDetailsScreen.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -252,14 +250,7 @@
       <workItem from="1781352561322" duration="2699000" />
       <workItem from="1781470346483" duration="1099000" />
       <workItem from="1781804335891" duration="1000" />
-      <workItem from="1781855827395" duration="8391000" />
-    </task>
-    <task id="LOCAL−00029" summary="U potpunosti implementiran modalEdit.tsx">
-      <option name="closed" value="true" />
-      <created>1777815192594</created>
-      <option name="number" value="LOCAL−00029" />
-      <option name="presentableId" value="LOCAL−00029" />
-      <updated>1777815192595</updated>
+      <workItem from="1781855827395" duration="9581000" />
     </task>
     <task id="LOCAL−00030" summary="Dodan picker za platformu">
       <option name="closed" value="true" />
@@ -597,7 +588,14 @@
       <option name="presentableId" value="LOCAL−00077" />
       <updated>1781866246781</updated>
     </task>
-    <option name="localTasksCounter" value="78" />
+    <task id="LOCAL−00078" summary="Banner / splashscreen se mijenja ovisno o tome koji je light  ili dark mode ukljucen.">
+      <option name="closed" value="true" />
+      <created>1781867471224</created>
+      <option name="number" value="LOCAL−00078" />
+      <option name="presentableId" value="LOCAL−00078" />
+      <updated>1781867471224</updated>
+    </task>
+    <option name="localTasksCounter" value="79" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -615,7 +613,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="manje izmjene" />
     <MESSAGE value="Veliki code cleanup: dodan privacyIdentifier ( za app store -&gt; TREBA GA POPUNITI ), brisanje starih datoteka, gumb za zvuk u postavkama je greyed-out, platinum uvjeti popravljeni, dodani accessibilityLabeli na svim touchable objektima, progressColor u jednoj datoteci umjesto copy paste posvuda, ErrorCatching wrapper" />
     <MESSAGE value="Popravljeni različiti omjeri i veličine dijelova aplikacije kako bi se aplikacija ispravno priakzivala na različitim rezolucijama / veličinama ekrana" />
     <MESSAGE value="Dodan wishlist game status u StatusCommons.tsx" />
@@ -640,7 +637,8 @@
     <MESSAGE value="AppStore pripreme: dodan link na politiku privatnosti unutar registracije računa, maknut sound switch iz postavki, popravljen info banner za placeholder data, dodane privilegije aplikacijue unuatar app.json i popravljen bundle identifier" />
     <MESSAGE value="Dodane ikone" />
     <MESSAGE value="Popravljen banner za demo podatke ( bio out of bounds za određene ekrane ) + implementiran ShareSheet za stvaranje poveznica na neku igru." />
-    <option name="LAST_COMMIT_MESSAGE" value="Popravljen banner za demo podatke ( bio out of bounds za određene ekrane ) + implementiran ShareSheet za stvaranje poveznica na neku igru." />
+    <MESSAGE value="Banner / splashscreen se mijenja ovisno o tome koji je light  ili dark mode ukljucen." />
+    <option name="LAST_COMMIT_MESSAGE" value="Banner / splashscreen se mijenja ovisno o tome koji je light  ili dark mode ukljucen." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
