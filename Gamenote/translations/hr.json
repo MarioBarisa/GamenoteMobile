@@ -52,9 +52,9 @@
     "filterA11y": "Filtriraj svoje igre",
     "filterTitle": "Tvoji Gamenote",
     "filterMessage": "Ovaj gumb prebacuje na pretraživanje cijele Gamenote baze. Inače pregledavaš svoje dodane igre.",
-    "rawgSectionTitle": "Gamenote Database",
+    "rawgSectionTitle": "Omogućio RAWG",
     "rawgNoResults": "Nema pronađenih igara",
-    "rawgPrompt": "Započni tipkati za pretragu Gamenote baze podataka",
+    "rawgPrompt": "Započni tipkati za pretragu igara",
     "rawgSearching": "Tražim...",
     "loginRequired": "Prijavi se da bi pretražio Gamenote bazu.",
     "inLibrary": "Igra dodana u Gamenote",
@@ -96,7 +96,7 @@
     "logoutA11y": "Odjavi se",
     "logout": "Odjavi se.",
     "logoutSuccess": "Uspješno si se odjavio.",
-    "demoBanner": "Trenutno gledaš demo podatke",
+    "demoBanner": "Prijavi se da spremiš svoje igre i pratiš napredak.",
     "demoPrompt": "Napravi Gamenote profil ili se prijavi",
     "loginA11y": "Prijavi se",
     "login": "Prijavi se",
@@ -169,7 +169,9 @@
     "termsPrefix": "Prihvaćam",
     "termsLink": "uvjete korištenja Gamenote-a",
     "tosRequired": "Morate prihvatiti uvjete korištenja.",
-    "tosA11y": "Prihvati uvjete korištenja"
+    "tosA11y": "Prihvati uvjete korištenja",
+    "privacyPrefix": "Pročitajte",
+    "privacyLink": "Pravila privatnosti"
   },
   "editGame": {
     "errorTitle": "Greška",

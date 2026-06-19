@@ -339,6 +339,16 @@ export default function RegisterModal() {
                         {errors.tos}
                     </Text>
                 )}
+                <Text style={{color: t.secondaryText, textAlign: 'center', fontSize: 13}}>
+                    {tr('register.privacyPrefix')}{" "}
+                    <Text
+                        style={{textDecorationLine: "underline", color: t.accent}}
+                        onPress={() => WebBrowser.openBrowserAsync("https://gamenote.eu/privacy")}
+                    >
+                        {tr('register.privacyLink')}
+                    </Text>
+                    .
+                </Text>
                 <Pressable
                     onPress={() => router.back()}
                     accessibilityLabel={tr("common.cancel")}

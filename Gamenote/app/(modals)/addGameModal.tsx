@@ -85,7 +85,7 @@ export default function AddGameModal() {
             releaseDate: ravgGame.releaseDate ?? '',
             metacriticScore: ravgGame.metacriticScore ?? 0,
             esrbRating: ravgGame.esrbRating,
-            about: includeDescription ? ravgGame.about ?? '' : undefined,
+            about: includeDescription ? (ravgGame.about ?? '') : '',
             webPage: ravgGame.webPage ?? '',
             series: ravgGame.series,
             platform: form.platform,

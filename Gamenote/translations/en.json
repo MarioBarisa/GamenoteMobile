@@ -52,9 +52,9 @@
     "filterA11y": "Filter your games",
     "filterTitle": "Your Gamenote",
     "filterMessage": "This button switches to searching the entire Gamenote database. Otherwise, you browse your added games.",
-    "rawgSectionTitle": "Gamenote Database",
+    "rawgSectionTitle": "Powered by RAWG",
     "rawgNoResults": "No games found",
-    "rawgPrompt": "Start typing to search the Gamenote database",
+    "rawgPrompt": "Start typing to search games",
     "rawgSearching": "Searching...",
     "loginRequired": "Please log in to search the Gamenote database.",
     "inLibrary": "Added to Gamenote",
@@ -96,7 +96,7 @@
     "logoutA11y": "Log out",
     "logout": "Log out.",
     "logoutSuccess": "You have been successfully logged out.",
-    "demoBanner": "You are currently looking at demo data.",
+    "demoBanner": "Log in to save your games and track your progress.",
     "demoPrompt": "Make a Gamenote account or log in.",
     "loginA11y": "Log in",
     "login": "Log in",
@@ -169,7 +169,9 @@
     "termsPrefix": "I agree to the",
     "termsLink": "Gamenote terms of service",
     "tosRequired": "You must accept the terms of service.",
-    "tosA11y": "Accept terms of service"
+    "tosA11y": "Accept terms of service",
+    "privacyPrefix": "Read our",
+    "privacyLink": "Privacy Policy"
   },
   "editGame": {
     "errorTitle": "Error",

@@ -145,22 +145,6 @@ export default function SettingsScreen() {
                         }}
                     />
                 </View>
-
-                <View style={styles.row}>
-                    <View style={{flex: 1, marginRight: 12}}>
-                    <Text style={[styles.title, {color: c.secondaryText}]}>{t("settings.sounds")}</Text>
-                        <Text style={[styles.subtitle, {color: c.secondaryText}]}>{t("settings.soundsDesc")}</Text>
-                    </View>
-                    <Switch
-                        value={false}
-                        onValueChange={() => {}}
-                        disabled
-                        trackColor={{
-                            false: "rgba(120,120,128,0.16)",
-                            true: "#34C759",
-                        }}
-                    />
-                </View>
             </View>
         </ScrollView>
     );
