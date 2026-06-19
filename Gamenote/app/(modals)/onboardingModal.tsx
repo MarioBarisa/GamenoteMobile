@@ -41,6 +41,8 @@ export default function OnboardingModal() {
     const t = colors[theme];
     const {scale} = useResponsive();
     const {width: screenWidth} = useWindowDimensions();
+    const bannerWidth = Math.min(screenWidth * 0.6, 260);
+    const bannerHeight = bannerWidth / (3697 / 722);
 
     const bannerSource = theme === 'dark'
         ? require("../../assets/gamenote/banners/GamenoteBannerDarkMode.png")
@@ -62,11 +64,7 @@ export default function OnboardingModal() {
             <View style={styles.topSection}>
                 <Image
                     source={bannerSource}
-                    style={{
-                        width: screenWidth - 32,
-                        maxHeight: 200,
-                        aspectRatio: 3697 / 722,
-                    }}
+                    style={{width: bannerWidth, height: bannerHeight}}
                     resizeMode="contain"
                 />
                 <Text style={[styles.title, {color: t.text, fontSize: scale(20)}]}>
@@ -123,13 +121,13 @@ export default function OnboardingModal() {
 
 const styles = StyleSheet.create({
     container: {
-        gap: 10,
-        padding: 8,
+        gap: 12,
+        padding: 32,
     },
     topSection: {
         alignItems: "center",
-        paddingVertical: 2,
-        gap: 2,
+        paddingVertical: 32,
+        gap: 12,
     },
 
     title: {
@@ -142,8 +140,8 @@ const styles = StyleSheet.create({
         lineHeight: 22,
     },
     featuresSection: {
-        gap: 16,
-        paddingVertical: 20,
+        gap: 20,
+        paddingVertical: 28,
         paddingHorizontal: 8,
     },
     featureRow: {
