@@ -4,10 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7b37eb79-ceff-44a4-81aa-7e12f61dfc1f" name="Changes" comment="1.5/2 Supabase implementacije gotova. Ispravno implementirane grupe, igre se mogu dodati ili u editGroupModal ili tijekom dodavanja + tijekom editanja detalja već dodate igre.">
-      <change beforePath="$PROJECT_DIR$/.idea/GamenoteMobile.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/GamenoteMobile.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gamenote/app/(modals)/manageAccountModal.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/Gamenote/app/(modals)/manageAccountModal.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gamenote/app/(tabs)/_layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/Gamenote/app/(tabs)/_layout.tsx" afterDir="false" />
+    <list default="true" id="7b37eb79-ceff-44a4-81aa-7e12f61dfc1f" name="Changes" comment="1.5/2 Supabase implementacije gotova. Pojednostavljen manageAccountModal.tsx; sada je samo jedan save gumb prisutan umjesto njih 3 ispod svakog sectiona. Dodana provjera iOS verzije za minimizeBehavior API kako bi se koristila na &quot;undefined&quot; jer isto nije bilo moguce na starijim verzijama iOS-a ( skrivanje tabova tokom scrollinga )">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gamenote/app/(modals)/registerModal.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/Gamenote/app/(modals)/registerModal.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Gamenote/translations/en.json" beforeDir="false" afterPath="$PROJECT_DIR$/Gamenote/translations/en.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Gamenote/translations/hr.json" beforeDir="false" afterPath="$PROJECT_DIR$/Gamenote/translations/hr.json" afterDir="false" />
     </list>
@@ -172,32 +171,32 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
-    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
-    &quot;copilot.chat.legacySessionMetadata.migrated&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;javascript.preferred.runtime.type.id&quot;: &quot;node&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/mariobarisa/Desktop/💻/Osobno/GamenoteMobile&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.standard&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.standard&quot;: &quot;&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;com.github.copilot.settings.general.GeneralConfigurable&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;/Users/mariobarisa/Desktop/💻/Osobno/GamenoteMobile/Gamenote/node_modules/typescript/lib&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "codeWithMe.voiceChat.enabledByDefault": "false",
+    "copilot.chat.legacySessionMetadata.migrated": "true",
+    "git-widget-placeholder": "main",
+    "javascript.preferred.runtime.type.id": "node",
+    "last_opened_file_path": "/Users/mariobarisa/Desktop/💻/Osobno/GamenoteMobile",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.standard": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.standard": "",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "run.code.analysis.last.selected.profile": "pProject Default",
+    "settings.editor.selected.configurable": "com.github.copilot.settings.general.GeneralConfigurable",
+    "ts.external.directory.path": "/Volumes/MarioNAS/Završni/GamenoteMobile/Gamenote/node_modules/typescript/lib",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/Gamenote/assets/gamenote" />
@@ -254,14 +253,7 @@
       <workItem from="1781352561322" duration="2699000" />
       <workItem from="1781470346483" duration="1099000" />
       <workItem from="1781804335891" duration="1000" />
-      <workItem from="1781855827395" duration="576000" />
-    </task>
-    <task id="LOCAL−00024" summary="Daljni razvoj details.tsx zaslona + dodana mogucnost klika na sliku za veci prikaz.">
-      <option name="closed" value="true" />
-      <created>1777557709526</created>
-      <option name="number" value="LOCAL−00024" />
-      <option name="presentableId" value="LOCAL−00024" />
-      <updated>1777557709526</updated>
+      <workItem from="1781855827395" duration="2637000" />
     </task>
     <task id="LOCAL−00025" summary="dodan user opis igre ( bilješke ), dodana mogucnost zoomina na slike ( pinch to zoom ), UI poboljšanja">
       <option name="closed" value="true" />
@@ -599,7 +591,14 @@
       <option name="presentableId" value="LOCAL−00072" />
       <updated>1781701445282</updated>
     </task>
-    <option name="localTasksCounter" value="73" />
+    <task id="LOCAL−00073" summary="1.5/2 Supabase implementacije gotova. Pojednostavljen manageAccountModal.tsx; sada je samo jedan save gumb prisutan umjesto njih 3 ispod svakog sectiona. Dodana provjera iOS verzije za minimizeBehavior API kako bi se koristila na &quot;undefined&quot; jer isto nije bilo moguce na starijim verzijama iOS-a ( skrivanje tabova tokom scrollinga )">
+      <option name="closed" value="true" />
+      <created>1781856635676</created>
+      <option name="number" value="LOCAL−00073" />
+      <option name="presentableId" value="LOCAL−00073" />
+      <updated>1781856635676</updated>
+    </task>
+    <option name="localTasksCounter" value="74" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -617,7 +616,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Zamijenjen FavoritesProvider s AuthProvider i integracija auth konteksta u FavoritesScreen, dodan redirect na Profile tab ako korisnik nije prijavljen" />
     <MESSAGE value="Dodan label da se korisniku kaže da gleda demo podatke ako nije prijavljen, ostale manje izmjene" />
     <MESSAGE value="Povecana velicina slike &quot;Jump back in.&quot; sectiona" />
     <MESSAGE value="dodan haptic feedback između promjene tabova." />
@@ -642,7 +640,8 @@
     <MESSAGE value="1/2 Supabase implementacije gotova. Porpavljena &quot;Jump back in!&quot; sekcija da se ispravno prikazuju njezine komponente. Dodan refrsh / fetch podataka kada korisnik doda ili izmjeni detalje igre." />
     <MESSAGE value="1.5/2 Supabase implementacije gotova. Ispravno implementirane grupe, igre se mogu dodati ili u editGroupModal ili tijekom dodavanja ili editanja detalja već dodate igre." />
     <MESSAGE value="1.5/2 Supabase implementacije gotova. Ispravno implementirane grupe, igre se mogu dodati ili u editGroupModal ili tijekom dodavanja + tijekom editanja detalja već dodate igre." />
-    <option name="LAST_COMMIT_MESSAGE" value="1.5/2 Supabase implementacije gotova. Ispravno implementirane grupe, igre se mogu dodati ili u editGroupModal ili tijekom dodavanja + tijekom editanja detalja već dodate igre." />
+    <MESSAGE value="1.5/2 Supabase implementacije gotova. Pojednostavljen manageAccountModal.tsx; sada je samo jedan save gumb prisutan umjesto njih 3 ispod svakog sectiona. Dodana provjera iOS verzije za minimizeBehavior API kako bi se koristila na &quot;undefined&quot; jer isto nije bilo moguce na starijim verzijama iOS-a ( skrivanje tabova tokom scrollinga )" />
+    <option name="LAST_COMMIT_MESSAGE" value="1.5/2 Supabase implementacije gotova. Pojednostavljen manageAccountModal.tsx; sada je samo jedan save gumb prisutan umjesto njih 3 ispod svakog sectiona. Dodana provjera iOS verzije za minimizeBehavior API kako bi se koristila na &quot;undefined&quot; jer isto nije bilo moguce na starijim verzijama iOS-a ( skrivanje tabova tokom scrollinga )" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

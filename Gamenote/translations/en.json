@@ -166,8 +166,10 @@
     "passwordHelper": "Must be at least 8 characters with numbers or a mix of uppercase/lowercase letters!",
     "confirmLabel": "Confirm password:",
     "confirmPlaceholder": "Repeat password",
-    "termsPrefix": "By creating an account you agree to the",
-    "termsLink": "Gamenote terms of service"
+    "termsPrefix": "I agree to the",
+    "termsLink": "Gamenote terms of service",
+    "tosRequired": "You must accept the terms of service.",
+    "tosA11y": "Accept terms of service"
   },
   "editGame": {
     "errorTitle": "Error",

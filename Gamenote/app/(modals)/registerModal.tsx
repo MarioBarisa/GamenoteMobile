@@ -21,6 +21,7 @@ interface ValidationErrors {
     email?: string;
     password?: string;
     confirmPassword?: string;
+    tos?: string;
 }
 
 export default function RegisterModal() {
@@ -39,6 +40,7 @@ export default function RegisterModal() {
     const [showPassword, setShowPassword] = useState(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
     const [errors, setErrors] = useState<ValidationErrors>({});
+    const [tosAccepted, setTosAccepted] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const {signUp} = useAuth();
 
@@ -98,6 +100,10 @@ export default function RegisterModal() {
             newErrors.confirmPassword = tr('register.confirmRequired');
         } else if (form.password !== form.confirmPassword) {
             newErrors.confirmPassword = tr('register.passwordsMismatch');
+        }
+
+        if (!tosAccepted) {
+            newErrors.tos = tr('register.tosRequired');
         }
 
         setErrors(newErrors);
@@ -302,23 +308,37 @@ export default function RegisterModal() {
                         {isLoading ? '...' : tr('register.registerButton')}
                     </Text>
                 </Pressable>
-                <View style={{flexDirection: "row", gap: 8, alignItems: "center"}}>
+                <Pressable
+                    onPress={() => {
+                        setTosAccepted(!tosAccepted);
+                        if (errors.tos) {
+                            setErrors(prev => ({...prev, tos: undefined}));
+                        }
+                    }}
+                    style={{flexDirection: "row", gap: 8, alignItems: "center"}}
+                    accessibilityLabel={tr('register.tosA11y')}
+                >
                     <SymbolView
-                        name={"info.circle.fill"}
-                        style={{width: 18, height: 18}}
-                        tintColor={"#ffffff"}
+                        name={tosAccepted ? "checkmark.square.fill" : "square"}
+                        style={{width: 22, height: 22}}
+                        tintColor={tosAccepted ? t.accent : t.secondaryText}
                     />
-                    <Text style={{color: t.secondaryText}}>
+                    <Text style={{color: t.secondaryText, flexShrink: 1}}>
                         {tr('register.termsPrefix')}{" "}
                         <Text
                             style={{textDecorationLine: "underline", color: t.accent}}
-                            onPress={() => WebBrowser.openBrowserAsync("http://gamenote.eu/tos")}
+                            onPress={() => WebBrowser.openBrowserAsync("https://gamenote.eu/tos")}
                         >
                             {tr('register.termsLink')}
                         </Text>
                         .
                     </Text>
-                </View>
+                </Pressable>
+                {errors.tos && (
+                    <Text style={[styles.errorText, {color: '#ff3b30'}]}>
+                        {errors.tos}
+                    </Text>
+                )}
                 <Pressable
                     onPress={() => router.back()}
                     accessibilityLabel={tr("common.cancel")}

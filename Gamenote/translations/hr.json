@@ -166,8 +166,10 @@
     "passwordHelper": "Mora sadržavati minimalno 8 znakova i brojeve ili miješanje velikih/malih slova!",
     "confirmLabel": "Potvrdi lozinku:",
     "confirmPlaceholder": "Ponovi lozinku",
-    "termsPrefix": "Izradom računa pristaješ na",
-    "termsLink": "uvjete korištenja Gamenote-a"
+    "termsPrefix": "Prihvaćam",
+    "termsLink": "uvjete korištenja Gamenote-a",
+    "tosRequired": "Morate prihvatiti uvjete korištenja.",
+    "tosA11y": "Prihvati uvjete korištenja"
   },
   "editGame": {
     "errorTitle": "Greška",
