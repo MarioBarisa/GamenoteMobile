@@ -117,7 +117,6 @@
     "manageAccountDeleteConfirmTitle": "Are you sure?",
     "manageAccountDeleteConfirmMsg": "This action is permanent and cannot be undone. All your data will be deleted.",
     "manageAccountDeleteSuccess": "Account deleted.",
-    "manageAccountAvatarUrlHint": "Help Gamenote save space — upload your profile picture to some image hosting platform (like imgBB) and enter the direct link here.",
     "manageAccountAvatarUrlPlaceholder": "Paste image URL here",
     "manageAccountAvatarSaved": "Profile picture updated!"
   },

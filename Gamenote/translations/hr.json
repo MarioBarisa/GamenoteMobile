@@ -117,7 +117,6 @@
     "manageAccountDeleteConfirmTitle": "Jesi li siguran?",
     "manageAccountDeleteConfirmMsg": "Ova radnja je trajna i ne može se poništiti. Svi tvoji podaci bit će izbrisani.",
     "manageAccountDeleteSuccess": "Račun izbrisan.",
-    "manageAccountAvatarUrlHint": "Pomogni Gamenote-u uštedjeti prostor — prenesi svoju profilnu sliku na neku image hosting platformu (poput imgBB) i ovdje unesi direktni link.",
     "manageAccountAvatarUrlPlaceholder": "Zalijepi URL slike ovdje",
     "manageAccountAvatarSaved": "Profilna slika ažurirana!"
   },

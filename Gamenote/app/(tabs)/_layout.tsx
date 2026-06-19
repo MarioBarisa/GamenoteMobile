@@ -1,5 +1,6 @@
 import {Icon, Label, NativeTabs, Badge} from "expo-router/unstable-native-tabs";
 import {router, useSegments} from "expo-router";
+import {Platform} from "react-native";
 import * as Haptics from "expo-haptics";
 import {useSettings} from "@/context/settings";
 import {useEffect, useRef} from "react";
@@ -40,8 +41,12 @@ export default function TabsLayout() {
         }
     }, [tabSegment, vibrationsEnabled]);
 
+    const minimizeBehavior = Platform.OS === 'ios' && Number(Platform.Version) >= 26 // PROVJERA ZA iOS <26 jer tamo nema ovog API
+        ? "onScrollDown"
+        : undefined;
+
     return (
-        <NativeTabs minimizeBehavior="onScrollDown">
+        <NativeTabs minimizeBehavior={minimizeBehavior}>
             <NativeTabs.Trigger name="home">
                 <Label>{t("tabs.home")}</Label>
                 <Icon

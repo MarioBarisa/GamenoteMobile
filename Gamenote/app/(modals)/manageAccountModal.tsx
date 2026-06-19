@@ -7,7 +7,6 @@ import * as Haptics from "expo-haptics";
 import {useState} from "react";
 import {useTranslation} from "react-i18next";
 import {useAuth} from "@/context/auth";
-import * as WebBrowser from "expo-web-browser";
 
 export default function ManageAccountModal() {
     const {t: tr} = useTranslation();
@@ -19,63 +18,46 @@ export default function ManageAccountModal() {
     const [newUsername, setNewUsername] = useState(username);
     const [newPassword, setNewPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
-    const [isUpdatingUsername, setIsUpdatingUsername] = useState(false);
-    const [isUpdatingPassword, setIsUpdatingPassword] = useState(false);
-    const [isDeleting, setIsDeleting] = useState(false);
     const [avatarInputUrl, setAvatarInputUrl] = useState('');
-    const [isSavingAvatar, setIsSavingAvatar] = useState(false);
+    const [isSaving, setIsSaving] = useState(false);
+    const [isDeleting, setIsDeleting] = useState(false);
 
-    const handleUpdateUsername = async () => {
-        if (!newUsername.trim()) {
-            Alert.alert('', tr('register.usernameEmpty'));
-            return;
-        }
-
+    const handleSave = async () => {
         if (Platform.OS === 'ios') {
             Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
         }
 
-        setIsUpdatingUsername(true);
-        const result = await updateUsername(newUsername.trim());
-        setIsUpdatingUsername(false);
+        setIsSaving(true);
+        const results: string[] = [];
 
-        if (result.success) {
-            Alert.alert('', tr('profile.manageAccountUsernameSaved'));
-        } else {
-            Alert.alert('', result.error || '');
-        }
-    };
-
-    const handleUpdatePassword = async () => {
-        if (!newPassword) {
-            Alert.alert('', tr('register.passwordRequired'));
-            return;
+        if (avatarInputUrl.trim()) {
+            const r = await updateAvatar(avatarInputUrl.trim());
+            if (r.success) {
+                results.push(tr('profile.manageAccountAvatarSaved'));
+                setAvatarInputUrl('');
+            }
         }
 
-        if (newPassword.length < 8) {
-            Alert.alert('', tr('register.passwordLength'));
-            return;
+        if (newUsername.trim() && newUsername.trim() !== username) {
+            const r = await updateUsername(newUsername.trim());
+            if (r.success) {
+                results.push(tr('profile.manageAccountUsernameSaved'));
+            }
         }
 
-        if (newPassword !== confirmPassword) {
-            Alert.alert('', tr('register.passwordsMismatch'));
-            return;
+        if (newPassword && newPassword === confirmPassword && newPassword.length >= 8) {
+            const r = await updatePassword(newPassword);
+            if (r.success) {
+                results.push(tr('profile.manageAccountPasswordSaved'));
+                setNewPassword('');
+                setConfirmPassword('');
+            }
         }
 
-        if (Platform.OS === 'ios') {
-            Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
-        }
+        setIsSaving(false);
 
-        setIsUpdatingPassword(true);
-        const result = await updatePassword(newPassword);
-        setIsUpdatingPassword(false);
-
-        if (result.success) {
-            setNewPassword('');
-            setConfirmPassword('');
-            Alert.alert('', tr('profile.manageAccountPasswordSaved'));
-        } else {
-            Alert.alert('', result.error || '');
+        if (results.length > 0) {
+            Alert.alert('', results.join('\n'));
         }
     };
 
@@ -108,25 +90,6 @@ export default function ManageAccountModal() {
         );
     };
 
-    const handleSaveAvatar = async () => {
-        if (!avatarInputUrl.trim()) return;
-
-        if (Platform.OS === 'ios') {
-            Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
-        }
-
-        setIsSavingAvatar(true);
-        const result = await updateAvatar(avatarInputUrl.trim());
-        setIsSavingAvatar(false);
-
-        if (result.success) {
-            setAvatarInputUrl('');
-            Alert.alert('', tr('profile.manageAccountAvatarSaved'));
-        } else {
-            Alert.alert('', result.error || '');
-        }
-    };
-
     const currentAvatar = avatarUrl || `https://i.pravatar.cc/300?u=${encodeURIComponent(user?.email || 'default')}`;
 
     return (
@@ -148,14 +111,6 @@ export default function ManageAccountModal() {
                         backgroundColor: theme === 'dark' ? '#2C2C2E' : '#E5E5EA',
                     }}
                 />
-                <Text style={{color: t.secondaryText, fontSize: 13, textAlign: 'center', lineHeight: 18}}>
-                    {tr('profile.manageAccountAvatarUrlHint')}
-                </Text>
-                <Pressable onPress={() => WebBrowser.openBrowserAsync('https://imgbb.com')}>
-                    <Text style={{color: t.accent, fontSize: 13, textDecorationLine: 'underline'}}>
-                        imgbb.com
-                    </Text>
-                </Pressable>
                 <TextInput
                     style={[
                         styles.input,
@@ -171,23 +126,6 @@ export default function ManageAccountModal() {
                     autoCapitalize="none"
                     autoCorrect={false}
                 />
-                <Pressable
-                    style={({pressed}) => [{
-                        backgroundColor: t.accent,
-                        padding: 12,
-                        borderRadius: 32,
-                        alignItems: "center",
-                        justifyContent: "center",
-                        width: '100%',
-                        opacity: pressed ? 0.6 : 1,
-                    }]}
-                    onPress={handleSaveAvatar}
-                    disabled={isSavingAvatar || !avatarInputUrl.trim()}
-                >
-                    <Text style={{color: '#fff', fontWeight: '600', fontSize: 16}}>
-                        {isSavingAvatar ? '...' : tr('common.save')}
-                    </Text>
-                </Pressable>
             </View>
 
             <View style={styles.section}>
@@ -209,22 +147,6 @@ export default function ManageAccountModal() {
                         placeholderTextColor={t.secondaryText}
                         autoCapitalize="none"
                     />
-                    <Pressable
-                        style={({pressed}) => [{
-                            backgroundColor: t.accent,
-                            padding: 12,
-                            borderRadius: 32,
-                            alignItems: "center",
-                            justifyContent: "center",
-                            opacity: pressed ? 0.6 : 1,
-                        }]}
-                        onPress={handleUpdateUsername}
-                        disabled={isUpdatingUsername}
-                    >
-                        <Text style={{color: '#fff', fontWeight: '600', fontSize: 16}}>
-                            {isUpdatingUsername ? '...' : tr('common.save')}
-                        </Text>
-                    </Pressable>
                 </View>
             </View>
 
@@ -261,24 +183,26 @@ export default function ManageAccountModal() {
                         placeholderTextColor={t.secondaryText}
                         secureTextEntry
                     />
-                    <Pressable
-                        style={({pressed}) => [{
-                            backgroundColor: t.accent,
-                            padding: 12,
-                            borderRadius: 32,
-                            alignItems: "center",
-                            justifyContent: "center",
-                            opacity: pressed ? 0.6 : 1,
-                        }]}
-                        onPress={handleUpdatePassword}
-                        disabled={isUpdatingPassword}
-                    >
-                        <Text style={{color: '#fff', fontWeight: '600', fontSize: 16}}>
-                            {isUpdatingPassword ? '...' : tr('common.save')}
-                        </Text>
-                    </Pressable>
                 </View>
             </View>
+
+            <Pressable
+                style={({pressed}) => [{
+                    backgroundColor: t.accent,
+                    marginHorizontal: 16,
+                    padding: 14,
+                    borderRadius: 32,
+                    alignItems: "center",
+                    justifyContent: "center",
+                    opacity: pressed ? 0.6 : 1,
+                }]}
+                onPress={handleSave}
+                disabled={isSaving}
+            >
+                <Text style={{color: '#fff', fontWeight: '700', fontSize: 16}}>
+                    {isSaving ? '...' : tr('common.saveChanges')}
+                </Text>
+            </Pressable>
 
             <View style={styles.section}>
                 <Text style={[styles.sectionTitle, {color: t.destructive}]}>
