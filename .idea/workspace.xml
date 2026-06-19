@@ -4,10 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7b37eb79-ceff-44a4-81aa-7e12f61dfc1f" name="Changes" comment="Splashscreen je sada default icon.">
+    <list default="true" id="7b37eb79-ceff-44a4-81aa-7e12f61dfc1f" name="Changes" comment="onboardingModal.tsx sada korsiti isti bg color kao ostali modali.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gamenote/app/(modals)/onboardingModal.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/Gamenote/app/(modals)/onboardingModal.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gamenote/constants/theme.ts" beforeDir="false" afterPath="$PROJECT_DIR$/Gamenote/constants/theme.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gamenote/app.json" beforeDir="false" afterPath="$PROJECT_DIR$/Gamenote/app.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gamenote/context/theme.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/Gamenote/context/theme.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -252,14 +252,7 @@
       <workItem from="1781352561322" duration="2699000" />
       <workItem from="1781470346483" duration="1099000" />
       <workItem from="1781804335891" duration="1000" />
-      <workItem from="1781855827395" duration="10914000" />
-    </task>
-    <task id="LOCAL−00031" summary="Veliki code clean-up, refactor game related importa kako bi svi imali single-point-of-refrence">
-      <option name="closed" value="true" />
-      <created>1778064067503</created>
-      <option name="number" value="LOCAL−00031" />
-      <option name="presentableId" value="LOCAL−00031" />
-      <updated>1778064067503</updated>
+      <workItem from="1781855827395" duration="11816000" />
     </task>
     <task id="LOCAL−00032" summary="Micanje nepotrebnih importova po cijelom projektu, dodavanje custom kategorija achvn ( % ) za sve podržane platforme -&gt; edit details.tsx i editModal.tsx">
       <option name="closed" value="true" />
@@ -597,7 +590,14 @@
       <option name="presentableId" value="LOCAL−00079" />
       <updated>1781870040872</updated>
     </task>
-    <option name="localTasksCounter" value="80" />
+    <task id="LOCAL−00080" summary="onboardingModal.tsx sada korsiti isti bg color kao ostali modali.">
+      <option name="closed" value="true" />
+      <created>1781871319592</created>
+      <option name="number" value="LOCAL−00080" />
+      <option name="presentableId" value="LOCAL−00080" />
+      <updated>1781871319592</updated>
+    </task>
+    <option name="localTasksCounter" value="81" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -615,7 +615,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Popravljeni različiti omjeri i veličine dijelova aplikacije kako bi se aplikacija ispravno priakzivala na različitim rezolucijama / veličinama ekrana" />
     <MESSAGE value="Dodan wishlist game status u StatusCommons.tsx" />
     <MESSAGE value="Dodan minimizeBehavior=&quot;onScrollDown&quot; kako bi se TabBar smanjio tokom scrolla. Dodan details kao zasebni screen bez pushScreen kako bi se tab bar mogao i tamo prikazitavi + popravak ružnog title fade-ina od prije navedennog fixa." />
     <MESSAGE value="Dodan &lt;Badge&gt; indikator kada korisnik nije prijavljen + minimalna izmjena u Profile screenu" />
@@ -640,7 +639,8 @@
     <MESSAGE value="Popravljen banner za demo podatke ( bio out of bounds za određene ekrane ) + implementiran ShareSheet za stvaranje poveznica na neku igru." />
     <MESSAGE value="Banner / splashscreen se mijenja ovisno o tome koji je light  ili dark mode ukljucen." />
     <MESSAGE value="Splashscreen je sada default icon." />
-    <option name="LAST_COMMIT_MESSAGE" value="Splashscreen je sada default icon." />
+    <MESSAGE value="onboardingModal.tsx sada korsiti isti bg color kao ostali modali." />
+    <option name="LAST_COMMIT_MESSAGE" value="onboardingModal.tsx sada korsiti isti bg color kao ostali modali." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

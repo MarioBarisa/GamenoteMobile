@@ -48,11 +48,12 @@
       [
         "expo-splash-screen",
         {
-          "image": "./assets/gamenote/icons/GamenoteIcon-iOS-Default-1024x1024@1x.png",
+          "image": "./assets/gamenote/banners/GamenoteBannerLightMode.png",
           "imageWidth": 200,
           "resizeMode": "contain",
           "backgroundColor": "#ffffff",
           "dark": {
+            "image": "./assets/gamenote/banners/GamenoteBannerDarkMode.png",
             "backgroundColor": "#000000"
           }
         }
