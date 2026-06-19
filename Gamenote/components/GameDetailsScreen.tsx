@@ -1,6 +1,6 @@
 import {useLocalSearchParams, Stack, Link, useRouter, useSegments} from "expo-router";
 import {useState} from "react";
-import {Image, ScrollView, StyleSheet, Text, View, Pressable, useWindowDimensions, Modal, Alert} from "react-native";
+import {Image, ScrollView, StyleSheet, Text, View, Pressable, useWindowDimensions, Modal, Share} from "react-native";
 import {useSafeAreaInsets} from "react-native-safe-area-context";
 import {Game} from "@/common/Game";
 import {SeriesGame} from "@/common/GameSeries";
@@ -141,8 +141,13 @@ export default function GameDetailsScreen() {
                             <Pressable
                                 accessibilityLabel={tr("gameDetails.shareA11y")}
                                 hitSlop={10}
-                                onPress={() => {Alert.alert('', tr("gameDetails.linkCopied"), [   {text: 'Ok', onPress: () => null}
-        ]);// ovdje netlify function za share gen
+                                onPress={() => {
+                                    const shareUrl = `https://gamenote.eu/shared?id=${game.game_id}`;
+                                    const message = tr('gameDetails.shareText', {
+                                        gameName: game.title,
+                                        shareUrl,
+                                    });
+                                    Share.share({ message });
                                 }}
                                 style={{marginRight: 6, marginLeft: 4}}
                             >

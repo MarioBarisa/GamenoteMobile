@@ -261,6 +261,7 @@
     "editA11y": "Uredi igru",
     "shareA11y": "Podijeli igru.",
     "linkCopied": "Link je kopiran.",
+    "shareText": "Pogledaj {{gameName}} na Gamenote-u\n{{shareUrl}}",
     "noProgress": "Još nema progressa",
     "startLabel": "Start: ",
     "endLabel": "End: ",

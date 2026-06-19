@@ -479,18 +479,20 @@ export default function FavoritesScreen() {
                 <View>
                     <View style={{
                         flexDirection: "row",
+                        flexWrap: "wrap",
                         alignItems: "center",
                         justifyContent: "center",
                         backgroundColor: t.accent,
                         borderRadius: 32,
                         margin: 12,
-                        padding: 6
+                        paddingHorizontal: 16,
+                        paddingVertical: 10,
                     }}>
                         <SymbolView
                             name={"info.circle.fill"}
                             style={{width: 20, height: 20, alignSelf: "center", margin: 5}} tintColor={'#FFFFFF'}
                         />
-                        <Text style={[styles.textBodyCenterHiglighted, {color: '#FFFFFF'}]}>
+                        <Text style={[styles.textBodyCenterHiglighted, {color: '#FFFFFF', flexShrink: 1}]}>
                             {tr("profile.demoBanner")}
                         </Text>
                     </View>

@@ -261,6 +261,7 @@
     "editA11y": "Edit game",
     "shareA11y": "Share game.",
     "linkCopied": "Link copied.",
+    "shareText": "Check out {{gameName}} on Gamenote\n{{shareUrl}}",
     "noProgress": "No progress yet",
     "startLabel": "Start: ",
     "endLabel": "End: ",

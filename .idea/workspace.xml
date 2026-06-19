@@ -4,18 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7b37eb79-ceff-44a4-81aa-7e12f61dfc1f" name="Changes" comment="AppStore pripreme: dodan link na politiku privatnosti unutar registracije računa, maknut sound switch iz postavki, popravljen info banner za placeholder data">
-      <change afterPath="$PROJECT_DIR$/Gamenote/assets/gamenote/icons/GamenoteIcon-iOS-ClearDark-1024x1024@1x.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Gamenote/assets/gamenote/icons/GamenoteIcon-iOS-ClearLight-1024x1024@1x.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Gamenote/assets/gamenote/icons/GamenoteIcon-iOS-Dark-1024x1024@1x.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Gamenote/assets/gamenote/icons/GamenoteIcon-iOS-Default-1024x1024@1x.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Gamenote/assets/gamenote/icons/GamenoteIcon-iOS-TintedDark-1024x1024@1x.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Gamenote/assets/gamenote/icons/GamenoteIcon-iOS-TintedLight-1024x1024@1x.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Gamenote/assets/gamenote/icons/GamenoteIcon.icon/Assets/Image.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Gamenote/assets/gamenote/icons/GamenoteIcon.icon/icon.json" afterDir="false" />
+    <list default="true" id="7b37eb79-ceff-44a4-81aa-7e12f61dfc1f" name="Changes" comment="Popravljen banner za demo podatke ( bio out of bounds za određene ekrane ) + implementiran ShareSheet za stvaranje poveznica na neku igru.">
+      <change afterPath="$PROJECT_DIR$/Gamenote/assets/gamenote/banners/GamenoteBannerDarkMode.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Gamenote/assets/gamenote/banners/GamenoteBannerLightMode.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gamenote/app.json" beforeDir="false" afterPath="$PROJECT_DIR$/Gamenote/app.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gamenote/assets/images/icon.png" beforeDir="false" afterPath="$PROJECT_DIR$/Gamenote/assets/images/icon.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gamenote/app/(tabs)/profile/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/Gamenote/app/(tabs)/profile/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gamenote/components/GameDetailsScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/Gamenote/components/GameDetailsScreen.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gamenote/translations/en.json" beforeDir="false" afterPath="$PROJECT_DIR$/Gamenote/translations/en.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gamenote/translations/hr.json" beforeDir="false" afterPath="$PROJECT_DIR$/Gamenote/translations/hr.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -260,14 +256,7 @@
       <workItem from="1781352561322" duration="2699000" />
       <workItem from="1781470346483" duration="1099000" />
       <workItem from="1781804335891" duration="1000" />
-      <workItem from="1781855827395" duration="5096000" />
-    </task>
-    <task id="LOCAL−00027" summary="popravak details.tsx ( krivi render zvjezdica )">
-      <option name="closed" value="true" />
-      <created>1777727998852</created>
-      <option name="number" value="LOCAL−00027" />
-      <option name="presentableId" value="LOCAL−00027" />
-      <updated>1777727998853</updated>
+      <workItem from="1781855827395" duration="7208000" />
     </task>
     <task id="LOCAL−00028" summary="Dodan modalEdit.tsx">
       <option name="closed" value="true" />
@@ -605,7 +594,14 @@
       <option name="presentableId" value="LOCAL−00075" />
       <updated>1781860540868</updated>
     </task>
-    <option name="localTasksCounter" value="76" />
+    <task id="LOCAL−00076" summary="Dodane ikone">
+      <option name="closed" value="true" />
+      <created>1781863653622</created>
+      <option name="number" value="LOCAL−00076" />
+      <option name="presentableId" value="LOCAL−00076" />
+      <updated>1781863653622</updated>
+    </task>
+    <option name="localTasksCounter" value="77" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -623,8 +619,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="dodan async-storage za persisten spremanje postavki, povezan gumb za haptic feedback u postavkama sa tab switching-om" />
-    <MESSAGE value="part 2 - dodan async-storage za persisten spremanje postavki, povezan gumb za haptic feedback u postavkama sa tab switching-om" />
     <MESSAGE value="manje izmjene" />
     <MESSAGE value="Veliki code cleanup: dodan privacyIdentifier ( za app store -&gt; TREBA GA POPUNITI ), brisanje starih datoteka, gumb za zvuk u postavkama je greyed-out, platinum uvjeti popravljeni, dodani accessibilityLabeli na svim touchable objektima, progressColor u jednoj datoteci umjesto copy paste posvuda, ErrorCatching wrapper" />
     <MESSAGE value="Popravljeni različiti omjeri i veličine dijelova aplikacije kako bi se aplikacija ispravno priakzivala na različitim rezolucijama / veličinama ekrana" />
@@ -648,7 +642,9 @@
     <MESSAGE value="1.5/2 Supabase implementacije gotova. Prilikom registracije korisnika potrebno je prihavtiti TOS klikom na checkmark." />
     <MESSAGE value="AppStore pripreme: dodan link na politiku privatnosti unutar registracije računa, maknut sound switch iz postavki, popravljen info banner za placeholder data" />
     <MESSAGE value="AppStore pripreme: dodan link na politiku privatnosti unutar registracije računa, maknut sound switch iz postavki, popravljen info banner za placeholder data, dodane privilegije aplikacijue unuatar app.json i popravljen bundle identifier" />
-    <option name="LAST_COMMIT_MESSAGE" value="AppStore pripreme: dodan link na politiku privatnosti unutar registracije računa, maknut sound switch iz postavki, popravljen info banner za placeholder data, dodane privilegije aplikacijue unuatar app.json i popravljen bundle identifier" />
+    <MESSAGE value="Dodane ikone" />
+    <MESSAGE value="Popravljen banner za demo podatke ( bio out of bounds za određene ekrane ) + implementiran ShareSheet za stvaranje poveznica na neku igru." />
+    <option name="LAST_COMMIT_MESSAGE" value="Popravljen banner za demo podatke ( bio out of bounds za određene ekrane ) + implementiran ShareSheet za stvaranje poveznica na neku igru." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
