@@ -16,7 +16,7 @@ import {useGroups} from "@/context/GroupsContext";
 function getPrequelAndSequel(series: SeriesGame[], currentReleaseDate: string): { prequel?: SeriesGame; sequel?: SeriesGame } {
   const sorted = [...series].sort((a, b) => {
     if (!a.released) return 1;
-    if (!b.released) return -1;
+    if (!b.released) return -1; // NE SVE IGRE SAMO IGRU PRIJE I IGRU POSLJE
     return new Date(a.released).getTime() - new Date(b.released).getTime();
   });
 

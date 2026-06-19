@@ -1,7 +1,7 @@
 import {useTheme} from "@/context/theme";
 import {colors} from "@/constants/theme";
 import {router} from "expo-router";
-import {Image, Pressable, ScrollView, StyleSheet, Text, View} from "react-native";
+import {Image, Pressable, ScrollView, StyleSheet, Text, View, useWindowDimensions} from "react-native";
 import {SymbolView} from "expo-symbols";
 import {useResponsive} from "@/utils/useResponsive";
 import {useTranslation} from "react-i18next";
@@ -40,6 +40,11 @@ export default function OnboardingModal() {
     const {theme} = useTheme();
     const t = colors[theme];
     const {scale} = useResponsive();
+    const {width: screenWidth} = useWindowDimensions();
+
+    const bannerSource = theme === 'dark'
+        ? require("../../assets/gamenote/banners/GamenoteBannerDarkMode.png")
+        : require("../../assets/gamenote/banners/GamenoteBannerLightMode.png");
 
     const handleContinue = () => {
         router.replace("/(tabs)/profile");
@@ -56,8 +61,12 @@ export default function OnboardingModal() {
         >
             <View style={styles.topSection}>
                 <Image
-                    source={require("../../assets/gamenote/gamenote.png")}
-                    style={[styles.logo, {width: scale(240), height: scale(240)}]}
+                    source={bannerSource}
+                    style={{
+                        width: screenWidth - 32,
+                        maxHeight: 200,
+                        aspectRatio: 3697 / 722,
+                    }}
                     resizeMode="contain"
                 />
                 <Text style={[styles.title, {color: t.text, fontSize: scale(20)}]}>
@@ -122,9 +131,7 @@ const styles = StyleSheet.create({
         paddingVertical: 2,
         gap: 2,
     },
-    logo: {
-        marginBottom: 0,
-    },
+
     title: {
         fontWeight: "700",
         textAlign: "center",
