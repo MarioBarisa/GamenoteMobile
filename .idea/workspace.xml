@@ -4,8 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7b37eb79-ceff-44a4-81aa-7e12f61dfc1f" name="Changes" comment="Update source 2">
-      <change beforePath="$PROJECT_DIR$/AltStoreSource.json" beforeDir="false" afterPath="$PROJECT_DIR$/AltStoreSource.json" afterDir="false" />
+    <list default="true" id="7b37eb79-ceff-44a4-81aa-7e12f61dfc1f" name="Changes" comment="Dodan build version">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -251,21 +251,7 @@
       <workItem from="1781352561322" duration="2699000" />
       <workItem from="1781470346483" duration="1099000" />
       <workItem from="1781804335891" duration="1000" />
-      <workItem from="1781855827395" duration="29082000" />
-    </task>
-    <task id="LOCAL−00043" summary="dodan modal addGroupModal.tsx putem kojeg se mogu dodati nove grupe, manje ispravke UI-a. Dodana &quot;Jump back in!&quot; section na home koja prikazuje igre koje su ili pazuirane ili u backlogu, TBI: gumb igraj danas otvara modal igre.">
-      <option name="closed" value="true" />
-      <created>1778944280012</created>
-      <option name="number" value="LOCAL−00043" />
-      <option name="presentableId" value="LOCAL−00043" />
-      <updated>1778944280012</updated>
-    </task>
-    <task id="LOCAL−00044" summary="Gumb&quot; Igraj danas!&quot; sada otvara editmodal.tsx">
-      <option name="closed" value="true" />
-      <created>1779022437763</created>
-      <option name="number" value="LOCAL−00044" />
-      <option name="presentableId" value="LOCAL−00044" />
-      <updated>1779022437763</updated>
+      <workItem from="1781855827395" duration="33387000" />
     </task>
     <task id="LOCAL−00045" summary="U potpunosti preuređen details screen -&gt; dodana detaljna statistika.">
       <option name="closed" value="true" />
@@ -596,7 +582,21 @@
       <option name="presentableId" value="LOCAL−00091" />
       <updated>1781963049137</updated>
     </task>
-    <option name="localTasksCounter" value="92" />
+    <task id="LOCAL−00092" summary="Update source 3">
+      <option name="closed" value="true" />
+      <created>1781963318983</created>
+      <option name="number" value="LOCAL−00092" />
+      <option name="presentableId" value="LOCAL−00092" />
+      <updated>1781963318983</updated>
+    </task>
+    <task id="LOCAL−00093" summary="Dodan build version">
+      <option name="closed" value="true" />
+      <created>1781963410919</created>
+      <option name="number" value="LOCAL−00093" />
+      <option name="presentableId" value="LOCAL−00093" />
+      <updated>1781963410919</updated>
+    </task>
+    <option name="localTasksCounter" value="94" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -614,8 +614,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="1/2 Supabase implementacije gotova. &#10;Dodan toggle za dodavanje opisa u Gamenote ( default off ). U search tabu dodan SF symbol i text kako bi &quot;swipe down to search&quot; radio na &lt;iOS 26. Ispravljen prikaz usernamea u profile screenu." />
-    <MESSAGE value="1/2 Supabase implementacije gotova. Final polish prije nastavka supabase implementacije." />
     <MESSAGE value="1/2 Supabase implementacije gotova. Porpavljena &quot;Jump back in!&quot; sekcija da se ispravno prikazuju njezine komponente. Dodan refrsh / fetch podataka kada korisnik doda ili izmjeni detalje igre." />
     <MESSAGE value="1.5/2 Supabase implementacije gotova. Ispravno implementirane grupe, igre se mogu dodati ili u editGroupModal ili tijekom dodavanja ili editanja detalja već dodate igre." />
     <MESSAGE value="1.5/2 Supabase implementacije gotova. Ispravno implementirane grupe, igre se mogu dodati ili u editGroupModal ili tijekom dodavanja + tijekom editanja detalja već dodate igre." />
@@ -639,7 +637,9 @@
     <MESSAGE value="Dodan AltStore source" />
     <MESSAGE value="Update source" />
     <MESSAGE value="Update source 2" />
-    <option name="LAST_COMMIT_MESSAGE" value="Update source 2" />
+    <MESSAGE value="Update source 3" />
+    <MESSAGE value="Dodan build version" />
+    <option name="LAST_COMMIT_MESSAGE" value="Dodan build version" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
