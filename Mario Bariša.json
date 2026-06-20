@@ -1,0 +1,52 @@
+{
+  "name": "Mario Bariša",
+  "subtitle": "I make cool apps for cool people",
+  "description": "Welcome to my source! Here you'll find all of my great apps. All my apps are open source and fully free to use-> https://github.com/MarioBarisa ",
+  "iconURL": "https://i.imgur.com/xS1RWMc.png",
+  "website": "https://barisa.me",
+  "patreonURL": "",
+  "tintColor": "#ff475d",
+  "featuredApps": [
+    "eu.gamenote.ios"
+  ],
+  "headerURL": "https://barisa.me/assets/images/barisa.me-colorsplash-S.jpeg",
+  "apps": [
+    {
+      "name": "Gamenote",
+      "bundleIdentifier": "eu.gamenote.ios",
+      "marketplaceID": "",
+      "developerName": "Example Developer",
+      "subtitle": "An awesome app.",
+      "localizedDescription": "This is an awesome app only available on AltStore.",
+      "iconURL": "https://i.imgur.com/lesYQn9.png",
+      "tintColor": "#ff475d",
+      "category": "other",
+      "screenshots": [
+        "https://i.imgur.com/PONV4je.jpeg",
+        "https://i.imgur.com/zJGOOWv.jpeg",
+        "https://i.imgur.com/G6xf06F.png",
+        "https://i.imgur.com/RRaFbIG.jpeg",
+        "https://i.imgur.com/ziwGy3Q.png",
+        "https://i.imgur.com/EmpaWlw.png",
+        "https://i.imgur.com/h5w36FG.png"
+      ],
+      "versions": [
+        {
+          "downloadURL": "https://github.com/MarioBarisa/GamenoteMobile/releases/download/v1.0.0/Gamenote.ipa",
+          "size": 16000000,
+          "version": "1.0.0",
+          "buildVersion": null,
+          "date": "2026-06-20T13:20:00+02:00",
+          "localizedDescription": "First version.",
+          "minOSVersion": null
+        }
+      ],
+      "appPermissions": {
+        "entitlements": [],
+        "privacy": {}
+      },
+      "patreon": {}
+    }
+  ],
+  "news": []
+}
