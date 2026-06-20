@@ -1,5 +1,5 @@
 // API ključ za RAWG Games Database
-// POSTAVITI -> EXPO_PUBLIC_RAWG_API_KEY u .env.local datoteci
+// POSTAVITI -> RAWG_API_KEY u .env.local datoteci
 import { RAWG_API_KEY } from '@/constants/env'
 
 const BASE_URL = 'https://api.rawg.io/api'

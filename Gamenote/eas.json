@@ -13,11 +13,13 @@
     "production": {
       "ios": {
         "enterpriseProvisioning": "adhoc"
-      },
-      "env": {
-        "EXPO_PUBLIC_SUPABASE_URL": "",
-        "EXPO_PUBLIC_SUPABASE_ANON_KEY": "",
-        "EXPO_PUBLIC_RAWG_API_KEY": ""
+      }
+    },
+    "altstore": {
+      "distribution": "internal",
+      "ios": {
+        "simulator": false,
+        "developmentClient": false
       }
     }
   },
