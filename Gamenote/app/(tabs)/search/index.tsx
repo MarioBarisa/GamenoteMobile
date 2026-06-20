@@ -1,5 +1,5 @@
 import {useEffect, useMemo, useState} from "react";
-import {ScrollView, StyleSheet, TouchableOpacity, Alert, View, Text, Image, Pressable} from "react-native";
+import {ScrollView, StyleSheet, TouchableOpacity, Alert, View, Text, Image, Pressable, Linking} from "react-native";
 import { Stack, useRouter } from "expo-router";
 import { useTheme } from "@/context/theme";
 import { useSettings } from "@/context/settings";
@@ -164,16 +164,20 @@ export default function SearchIndex() {
             )}
 
             {rawgResults.length > 0 && (
-              <Text style={{
-                color: t.secondaryText,
-                fontSize: 13,
-                fontWeight: '600',
-                textTransform: 'uppercase',
-                letterSpacing: 0.5,
-                marginBottom: 8,
-              }}>
-                {tr('search.rawgSectionTitle')}
-              </Text>
+              <Pressable
+                onPress={() => Linking.openURL('https://rawg.io')}
+                style={{marginBottom: 8, alignSelf: 'flex-start'}}
+              >
+                <Text style={{
+                  color: t.secondaryText,
+                  fontSize: 13,
+                  fontWeight: '600',
+                  textTransform: 'uppercase',
+                  letterSpacing: 0.5,
+                }}>
+                  {tr('search.rawgSectionTitle')}
+                </Text>
+              </Pressable>
             )}
 
             {rawgResults.map((rawg: any) => {
