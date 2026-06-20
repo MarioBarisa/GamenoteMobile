@@ -1,5 +1,5 @@
 import i18next from "i18next";
-import {I18nManager} from "react-native";
+import {getLocales} from "expo-localization";
 import {initReactI18next} from "react-i18next";
 import hr from "@/translations/hr.json";
 import en from "@/translations/en.json";
@@ -19,8 +19,8 @@ i18next.use(initReactI18next).init({
 });
 
 function detectLanguage(): string {
-    const locale = (I18nManager as any).localeIdentifier ?? "";
-    if (String(locale).startsWith("hr")) return "hr";
+    const localeCode = getLocales()?.[0]?.languageCode ?? "";
+    if (localeCode.startsWith("hr")) return "hr";
     return "en";
 }
 

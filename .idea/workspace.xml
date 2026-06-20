@@ -4,21 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7b37eb79-ceff-44a4-81aa-7e12f61dfc1f" name="Changes" comment="Dodan EAS.json za spremanje API kljuceva za potencijalno APP store subbmision.">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gamenote/app/(modals)/manageAccountModal.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/Gamenote/app/(modals)/manageAccountModal.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gamenote/app/(modals)/onboardingModal.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/Gamenote/app/(modals)/onboardingModal.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gamenote/app/(tabs)/groups/_layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/Gamenote/app/(tabs)/groups/_layout.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gamenote/app/(tabs)/groups/group-detail.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/Gamenote/app/(tabs)/groups/group-detail.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gamenote/app/(tabs)/groups/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/Gamenote/app/(tabs)/groups/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gamenote/app/(tabs)/home/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/Gamenote/app/(tabs)/home/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gamenote/app/(tabs)/profile/_layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/Gamenote/app/(tabs)/profile/_layout.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gamenote/app/(tabs)/profile/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/Gamenote/app/(tabs)/profile/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gamenote/app/(tabs)/search/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/Gamenote/app/(tabs)/search/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gamenote/app/(tabs)/search/rawg-details.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/Gamenote/app/(tabs)/search/rawg-details.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gamenote/components/GameCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/Gamenote/components/GameCard.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gamenote/components/GameCardCompact.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/Gamenote/components/GameCardCompact.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gamenote/components/GameDetailsScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/Gamenote/components/GameDetailsScreen.tsx" afterDir="false" />
+    <list default="true" id="7b37eb79-ceff-44a4-81aa-7e12f61dfc1f" name="Changes" comment="Prelazak sa Image iz ReactNative u Expo Images sa dodanim caching-om">
+      <change beforePath="$PROJECT_DIR$/Gamenote/app.json" beforeDir="false" afterPath="$PROJECT_DIR$/Gamenote/app.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gamenote/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/Gamenote/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gamenote/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/Gamenote/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gamenote/utils/i18n.ts" beforeDir="false" afterPath="$PROJECT_DIR$/Gamenote/utils/i18n.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -263,14 +253,7 @@
       <workItem from="1781352561322" duration="2699000" />
       <workItem from="1781470346483" duration="1099000" />
       <workItem from="1781804335891" duration="1000" />
-      <workItem from="1781855827395" duration="21349000" />
-    </task>
-    <task id="LOCAL−00036" summary="Dodan osnovni stats bar na početnu stranicu.">
-      <option name="closed" value="true" />
-      <created>1778230628544</created>
-      <option name="number" value="LOCAL−00036" />
-      <option name="presentableId" value="LOCAL−00036" />
-      <updated>1778230628544</updated>
+      <workItem from="1781855827395" duration="21754000" />
     </task>
     <task id="LOCAL−00037" summary="Dodan osnovni stats bar na početnu stranicu.">
       <option name="closed" value="true" />
@@ -608,7 +591,14 @@
       <option name="presentableId" value="LOCAL−00084" />
       <updated>1781953859694</updated>
     </task>
-    <option name="localTasksCounter" value="85" />
+    <task id="LOCAL−00085" summary="Prelazak sa Image iz ReactNative u Expo Images sa dodanim caching-om">
+      <option name="closed" value="true" />
+      <created>1781955455709</created>
+      <option name="number" value="LOCAL−00085" />
+      <option name="presentableId" value="LOCAL−00085" />
+      <updated>1781955455709</updated>
+    </task>
+    <option name="localTasksCounter" value="86" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -626,7 +616,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Dodan TOS u register formu" />
     <MESSAGE value="Dodan GameCardCompact.tsx za prikazivanje više igara u manjem prostoru za power usere" />
     <MESSAGE value="Dodana nova boja za onboarding da se vidi gamenote logo u light-mode" />
     <MESSAGE value="Dodano dodatno filtriranje unutar &quot;Tvoj Gamenote&quot; screena -&gt; filtriranje po platformi i ocjeni korisnika/playtime. Maknuto filtriranje po ocjeni korisnika/playtime iz search screena" />
@@ -651,7 +640,8 @@
     <MESSAGE value="Popravljeni PLACEHOLDER_GAMES.ts i PLACEHOLDER_GROUPS.TSX.ts + dodan pravilan translation" />
     <MESSAGE value="Popravljen bug kod registracije novih korisnika gdje se PLACEHOLDER_GROUPS ne bi očistile kako treba." />
     <MESSAGE value="Dodan EAS.json za spremanje API kljuceva za potencijalno APP store subbmision." />
-    <option name="LAST_COMMIT_MESSAGE" value="Dodan EAS.json za spremanje API kljuceva za potencijalno APP store subbmision." />
+    <MESSAGE value="Prelazak sa Image iz ReactNative u Expo Images sa dodanim caching-om" />
+    <option name="LAST_COMMIT_MESSAGE" value="Prelazak sa Image iz ReactNative u Expo Images sa dodanim caching-om" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
