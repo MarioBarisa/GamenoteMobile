@@ -4,8 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7b37eb79-ceff-44a4-81aa-7e12f61dfc1f" name="Changes" comment="Dodan build version">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="7b37eb79-ceff-44a4-81aa-7e12f61dfc1f" name="Changes" comment="Dodani screenshots.">
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -251,14 +251,7 @@
       <workItem from="1781352561322" duration="2699000" />
       <workItem from="1781470346483" duration="1099000" />
       <workItem from="1781804335891" duration="1000" />
-      <workItem from="1781855827395" duration="33387000" />
-    </task>
-    <task id="LOCAL−00045" summary="U potpunosti preuređen details screen -&gt; dodana detaljna statistika.">
-      <option name="closed" value="true" />
-      <created>1779466061308</created>
-      <option name="number" value="LOCAL−00045" />
-      <option name="presentableId" value="LOCAL−00045" />
-      <updated>1779466061308</updated>
+      <workItem from="1781855827395" duration="33796000" />
     </task>
     <task id="LOCAL−00046" summary="Minimalne izmjene profile zaslona">
       <option name="closed" value="true" />
@@ -596,7 +589,14 @@
       <option name="presentableId" value="LOCAL−00093" />
       <updated>1781963410919</updated>
     </task>
-    <option name="localTasksCounter" value="94" />
+    <task id="LOCAL−00094" summary="Dodani screenshots.">
+      <option name="closed" value="true" />
+      <created>1781973845497</created>
+      <option name="number" value="LOCAL−00094" />
+      <option name="presentableId" value="LOCAL−00094" />
+      <updated>1781973845497</updated>
+    </task>
+    <option name="localTasksCounter" value="95" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -614,7 +614,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="1/2 Supabase implementacije gotova. Porpavljena &quot;Jump back in!&quot; sekcija da se ispravno prikazuju njezine komponente. Dodan refrsh / fetch podataka kada korisnik doda ili izmjeni detalje igre." />
     <MESSAGE value="1.5/2 Supabase implementacije gotova. Ispravno implementirane grupe, igre se mogu dodati ili u editGroupModal ili tijekom dodavanja ili editanja detalja već dodate igre." />
     <MESSAGE value="1.5/2 Supabase implementacije gotova. Ispravno implementirane grupe, igre se mogu dodati ili u editGroupModal ili tijekom dodavanja + tijekom editanja detalja već dodate igre." />
     <MESSAGE value="1.5/2 Supabase implementacije gotova. Pojednostavljen manageAccountModal.tsx; sada je samo jedan save gumb prisutan umjesto njih 3 ispod svakog sectiona. Dodana provjera iOS verzije za minimizeBehavior API kako bi se koristila na &quot;undefined&quot; jer isto nije bilo moguce na starijim verzijama iOS-a ( skrivanje tabova tokom scrollinga )" />
@@ -639,7 +638,8 @@
     <MESSAGE value="Update source 2" />
     <MESSAGE value="Update source 3" />
     <MESSAGE value="Dodan build version" />
-    <option name="LAST_COMMIT_MESSAGE" value="Dodan build version" />
+    <MESSAGE value="Dodani screenshots." />
+    <option name="LAST_COMMIT_MESSAGE" value="Dodani screenshots." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
