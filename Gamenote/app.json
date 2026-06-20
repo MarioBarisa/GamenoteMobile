@@ -24,8 +24,21 @@
           },
           {
             "NSPrivacyAccessedAPICategorySystemBootTime": "Used for session timeouts"
+          },
+          {
+            "NSPrivacyAccessedAPICategoryDiskSpace": "Used to display available storage info"
+          },
+          {
+            "NSPrivacyAccessedAPICategoryFileTimestamp": "Used for game save timestamps"
+          },
+          {
+            "NSPrivacyAccessedAPICategoryUserDefaults": "Used to store user preferences (AsyncStorage)"
+          },
+          {
+            "NSPrivacyAccessedAPICategorySystemBootTime": "Used for session timeouts"
           }
-        ]
+        ],
+        "ITSAppUsesNonExemptEncryption": false
       }
     },
     "android": {
@@ -67,6 +80,15 @@
     "experiments": {
       "typedRoutes": true,
       "reactCompiler": true
+    },
+    "extra": {
+      "supabaseUrlObfuscated": [],
+      "supabaseAnonKeyObfuscated": [],
+      "rawgApiKeyObfuscated": [],
+      "router": {},
+      "eas": {
+        "projectId": "fe807e9b-eb34-4c95-8a92-5969b61a17a2"
+      }
     }
   }
 }
