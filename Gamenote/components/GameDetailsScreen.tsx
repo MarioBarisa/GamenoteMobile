@@ -1,6 +1,7 @@
 import {useLocalSearchParams, Stack, Link, useRouter, useSegments} from "expo-router";
 import {useState} from "react";
-import {Image, ScrollView, StyleSheet, Text, View, Pressable, useWindowDimensions, Modal, Share} from "react-native";
+import {Image} from "expo-image";
+import {ScrollView, StyleSheet, Text, View, Pressable, useWindowDimensions, Modal, Share} from "react-native";
 import {useSafeAreaInsets} from "react-native-safe-area-context";
 import {Game} from "@/common/Game";
 import {SeriesGame} from "@/common/GameSeries";
@@ -94,7 +95,7 @@ export default function GameDetailsScreen() {
 
     const {prequel, sequel} = getPrequelAndSequel(game?.series ?? [], game?.releaseDate ?? '');
 
-    const galleryImages = [game.image_url, ...(game.screenshot_urls ?? [])].filter(Boolean) as string[];
+    const galleryImages = [...new Set([game.image_url, ...(game.screenshot_urls ?? [])].filter(Boolean))] as string[];
     const prColor = progressColor(game.progress_value, game.progress_total)
 
     const mode = game.progress_mode && isProgressModeKey(game.progress_mode)
@@ -131,7 +132,6 @@ export default function GameDetailsScreen() {
                                 <Pressable accessibilityLabel={tr("gameDetails.editA11y")} hitSlop={10} style={{marginRight: 6, marginLeft: 4}}>
                                     <SymbolView
                                         name="square.and.pencil"
-                                        resizeMode="scaleAspectFit"
                                         style={{width: 32, height: 32}}
                                         tintColor={t.text}
                                     />
@@ -153,7 +153,6 @@ export default function GameDetailsScreen() {
                             >
                                 <SymbolView
                                     name="square.and.arrow.up"
-                                    resizeMode="scaleAspectFit"
                                     style={{width: 32, height: 32}}
                                     tintColor={t.text}
                                 />
@@ -186,11 +185,13 @@ export default function GameDetailsScreen() {
                                 paddingBottom: 8
                             }}>
                             {galleryImages.map((uri, index) => (
-                                <Pressable key={uri} onPress={() => setSelectedIndex(index)}>
+                                <Pressable key={`${uri}-${index}`} onPress={() => setSelectedIndex(index)}>
                                     <Image
                                         source={{uri}}
                                         style={[styles.coverImage, {width: SCREEN_WIDTH - 32}]}
-                                        resizeMode="cover"/>
+                                        contentFit="cover"
+                                        cachePolicy="memory-disk"
+                                        transition={{duration: 200, effect: "cross-dissolve"}}/>
                                 </Pressable>
                             ))}
                         </ScrollView>
@@ -449,7 +450,9 @@ export default function GameDetailsScreen() {
                                                 <Image
                                                     source={{uri: prequel.background_image}}
                                                     style={{width: 100, aspectRatio: 10 / 7, borderRadius: 4}}
-                                                    resizeMode="cover"
+                                                    contentFit="cover"
+                                                    cachePolicy="memory-disk"
+                                                    transition={{duration: 200, effect: "cross-dissolve"}}
                                                 />
                                                 <View style={{flex: 1}}>
                                                     <Text
@@ -489,7 +492,9 @@ export default function GameDetailsScreen() {
                                                 <Image
                                                     source={{uri: sequel.background_image}}
                                                     style={{width: 100, aspectRatio: 10 / 7, borderRadius: 4}}
-                                                    resizeMode="cover"
+                                                    contentFit="cover"
+                                                    cachePolicy="memory-disk"
+                                                    transition={{duration: 200, effect: "cross-dissolve"}}
                                                 />
                                                 <View style={{flex: 1}}>
                                                     <Text
@@ -564,7 +569,9 @@ export default function GameDetailsScreen() {
                                     <Image
                                         source={{uri}}
                                         style={{width: SCREEN_WIDTH, aspectRatio: 4 / 3}}
-                                        resizeMode="contain"
+                                        contentFit="contain"
+                                        cachePolicy="memory-disk"
+                                        transition={{duration: 200, effect: "cross-dissolve"}}
                                     />
                                 </ScrollView>
                             ))}

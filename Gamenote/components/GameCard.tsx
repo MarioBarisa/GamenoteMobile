@@ -1,4 +1,5 @@
-import {ActionSheetIOS, Alert, View, Text, StyleSheet, Image, Pressable, useWindowDimensions} from 'react-native'
+import {Image} from "expo-image";
+import {ActionSheetIOS, Alert, View, Text, StyleSheet, Pressable, useWindowDimensions} from 'react-native'
 import { colors } from '@/constants/theme'
 import { useTheme } from '@/context/theme'
 import {Ionicons} from "@expo/vector-icons";
@@ -81,7 +82,10 @@ export default function GameCard({ game, onDelete }: Props) {
                 {imageUri ? (
                   <Image
                   source={{ uri: imageUri }}
-                  style={[styles.image, { resizeMode: 'cover' }]}
+                  style={styles.image}
+                  contentFit="cover"
+                  cachePolicy="memory-disk"
+                  transition={{duration: 200, effect: "cross-dissolve"}}
                 />
                 ) : (
                   <View style={[styles.imagePlaceholder, { backgroundColor: t.background }]}>

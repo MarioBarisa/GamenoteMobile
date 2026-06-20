@@ -1,4 +1,5 @@
-import {Image, Platform, Pressable, RefreshControl, ScrollView, StyleSheet, Text, View} from "react-native";
+import {Image} from "expo-image";
+import {Platform, Pressable, RefreshControl, ScrollView, StyleSheet, Text, View} from "react-native";
 import {useTheme} from "@/context/theme";
 import {colors} from "@/constants/theme";
 import GameCard from "@/components/GameCard";
@@ -172,7 +173,9 @@ export default function HomeIndex() {
                         <Image
                             source={{uri: jumpBackGame.image_url}}
                             style={styles.image}
-                            resizeMode="cover"
+                            contentFit="cover"
+                            cachePolicy="memory-disk"
+                            transition={{duration: 200, effect: "cross-dissolve"}}
                         />
                     ) : null}
 

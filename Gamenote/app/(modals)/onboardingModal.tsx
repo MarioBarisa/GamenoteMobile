@@ -1,7 +1,8 @@
 import {useTheme} from "@/context/theme";
 import {colors} from "@/constants/theme";
 import {router} from "expo-router";
-import {Image, Pressable, ScrollView, StyleSheet, Text, View, useWindowDimensions} from "react-native";
+import {Image} from "expo-image";
+import {Pressable, ScrollView, StyleSheet, Text, View, useWindowDimensions} from "react-native";
 import {SymbolView} from "expo-symbols";
 import {useResponsive} from "@/utils/useResponsive";
 import {useTranslation} from "react-i18next";
@@ -65,7 +66,9 @@ export default function OnboardingModal() {
                 <Image
                     source={bannerSource}
                     style={{width: bannerWidth, height: bannerHeight}}
-                    resizeMode="contain"
+                    contentFit="contain"
+                    cachePolicy="memory-disk"
+                    transition={{duration: 200, effect: "cross-dissolve"}}
                 />
                 <Text style={[styles.title, {color: t.text, fontSize: scale(20)}]}>
                     {tr("onboarding.welcome")}

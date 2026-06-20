@@ -1,5 +1,6 @@
 import {useEffect, useMemo, useState} from "react";
-import {ScrollView, StyleSheet, TouchableOpacity, Alert, View, Text, Image, Pressable, Linking} from "react-native";
+import {Image} from "expo-image";
+import {ScrollView, StyleSheet, TouchableOpacity, Alert, View, Text, Pressable, Linking} from "react-native";
 import { Stack, useRouter } from "expo-router";
 import { useTheme } from "@/context/theme";
 import { useSettings } from "@/context/settings";
@@ -108,7 +109,7 @@ export default function SearchIndex() {
               <SymbolView
                 key={userGamenotesOnly ? "bookmark.fill" : "bookmark"}
                 name={userGamenotesOnly ? "bookmark.fill" : "bookmark"}
-                resizeMode="scaleAspectFit"
+
                  style={{ width: 36, height: 30 }}
                  tintColor={t.text}
               />
@@ -211,7 +212,9 @@ export default function SearchIndex() {
                     <Image
                       source={{uri: rawg.background_image}}
                       style={{width: 100, aspectRatio: 16 / 9}}
-                      resizeMode="cover"
+                      contentFit="cover"
+                      cachePolicy="memory-disk"
+                      transition={{duration: 200, effect: "cross-dissolve"}}
                     />
                   ) : (
                     <View style={{

@@ -23,7 +23,7 @@ export default function FavoritesLayout() {
             <Pressable onPress={() => router.push("/settings")} hitSlop={10}>
               <SymbolView
                 name={"gear"}
-                resizeMode="scaleAspectFit"
+
                 style={{width: 36, height: 30}}
                 tintColor={t.text}
               />

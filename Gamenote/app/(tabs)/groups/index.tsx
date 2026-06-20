@@ -1,4 +1,5 @@
-import {RefreshControl, ScrollView, Text, View, StyleSheet, Image, TouchableOpacity} from "react-native";
+import {Image} from "expo-image";
+import {RefreshControl, ScrollView, Text, View, StyleSheet, TouchableOpacity} from "react-native";
 import {useTheme} from "@/context/theme";
 import {colors} from "@/constants/theme";
 import {useGroups} from "@/context/GroupsContext";
@@ -98,7 +99,9 @@ export default function GroupsIndex() {
                                                 <Image
                                                     source={{uri: game.image_url}}
                                                     style={styles.gameImage}
-                                                    resizeMode="cover"
+                                                    contentFit="cover"
+                                                    cachePolicy="memory-disk"
+                                                    transition={{duration: 200, effect: "cross-dissolve"}}
                                                 />
                                             ) : (
                                                 <View style={[styles.gameImage, styles.gameImagePlaceholder, {backgroundColor: t.background}]}>

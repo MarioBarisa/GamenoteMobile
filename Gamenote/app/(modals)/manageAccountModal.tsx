@@ -1,7 +1,8 @@
 import {useTheme} from "@/context/theme";
 import {colors} from "@/constants/theme";
 import {useRouter} from "expo-router";
-import {Alert, Platform, Pressable, ScrollView, StyleSheet, Text, TextInput, View, Image} from "react-native";
+import {Image} from "expo-image";
+import {Alert, Platform, Pressable, ScrollView, StyleSheet, Text, TextInput, View} from "react-native";
 import {SymbolView} from "expo-symbols";
 import * as Haptics from "expo-haptics";
 import {useState} from "react";
@@ -110,6 +111,9 @@ export default function ManageAccountModal() {
                         borderRadius: 60,
                         backgroundColor: theme === 'dark' ? '#2C2C2E' : '#E5E5EA',
                     }}
+                    contentFit="cover"
+                    cachePolicy="memory-disk"
+                    transition={{duration: 200, effect: "cross-dissolve"}}
                 />
                 <TextInput
                     style={[

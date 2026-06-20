@@ -1,6 +1,7 @@
 import {useEffect, useState} from "react";
 import {useLocalSearchParams, Stack, useRouter, useSegments} from "expo-router";
-import {ActivityIndicator, Image, ScrollView, StyleSheet, Text, View, Pressable, useWindowDimensions, Modal} from "react-native";
+import {Image} from "expo-image";
+import {ActivityIndicator, ScrollView, StyleSheet, Text, View, Pressable, useWindowDimensions, Modal} from "react-native";
 import {useSafeAreaInsets} from "react-native-safe-area-context";
 import {useTheme} from "@/context/theme";
 import {colors} from "@/constants/theme";
@@ -161,20 +162,20 @@ export default function RAWGDetailsScreen() {
     series: seriesData,
   };
 
-  const galleryImages: string[] = [];
-
-  if (screenshots.length > 0) {
-    galleryImages.push(...screenshots);
-  } else if (rawgData.background_image) {
-    galleryImages.push(rawgData.background_image);
-    if (rawgData.short_screenshots && Array.isArray(rawgData.short_screenshots)) {
-      rawgData.short_screenshots.forEach((ss: any) => {
-        if (ss.image && !galleryImages.includes(ss.image)) {
-          galleryImages.push(ss.image);
-        }
-      });
+  const galleryImages: string[] = (() => {
+    const urls: string[] = [];
+    if (screenshots.length > 0) {
+      urls.push(...screenshots);
+    } else if (rawgData.background_image) {
+      urls.push(rawgData.background_image);
+      if (rawgData.short_screenshots && Array.isArray(rawgData.short_screenshots)) {
+        rawgData.short_screenshots.forEach((ss: any) => {
+          if (ss.image) urls.push(ss.image);
+        });
+      }
     }
-  }
+    return [...new Set(urls)];
+  })();
 
   const metacriticScore = data.metacritic ?? rawgData.metacritic ?? 0;
   const metacriticColor = (() => {
@@ -234,7 +235,9 @@ export default function RAWGDetailsScreen() {
                       <Image
                         source={{uri}}
                         style={[styles.coverImage, {width: SCREEN_WIDTH - 32}]}
-                        resizeMode="cover"/>
+                        contentFit="cover"
+                        cachePolicy="memory-disk"
+                        transition={{duration: 200, effect: "cross-dissolve"}}/>
                     </Pressable>
                   ))}
                 </ScrollView>
@@ -361,7 +364,9 @@ export default function RAWGDetailsScreen() {
                           <Image
                             source={{uri: prequel.background_image}}
                             style={{width: 100, aspectRatio: 10 / 7, borderRadius: 4}}
-                            resizeMode="cover"
+                            contentFit="cover"
+                            cachePolicy="memory-disk"
+                            transition={{duration: 200, effect: "cross-dissolve"}}
                           />
                           <View style={{flex: 1}}>
                             <Text
@@ -401,7 +406,9 @@ export default function RAWGDetailsScreen() {
                           <Image
                             source={{uri: sequel.background_image}}
                             style={{width: 100, aspectRatio: 10 / 7, borderRadius: 4}}
-                            resizeMode="cover"
+                            contentFit="cover"
+                            cachePolicy="memory-disk"
+                            transition={{duration: 200, effect: "cross-dissolve"}}
                           />
                           <View style={{flex: 1}}>
                             <Text
@@ -469,7 +476,9 @@ export default function RAWGDetailsScreen() {
                   <Image
                     source={{uri}}
                     style={{width: SCREEN_WIDTH, aspectRatio: 4 / 3}}
-                    resizeMode="contain"
+                    contentFit="contain"
+                    cachePolicy="memory-disk"
+                    transition={{duration: 200, effect: "cross-dissolve"}}
                   />
                 </ScrollView>
               ))}

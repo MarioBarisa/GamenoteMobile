@@ -2,7 +2,8 @@ import {useLocalSearchParams, Stack, Link, useRouter} from "expo-router";
 import {useTheme} from "@/context/theme";
 import {colors} from "@/constants/theme"
 import {useGroups} from "@/context/GroupsContext";
-import {Image, ScrollView, Text, View, StyleSheet, Pressable,} from "react-native";
+import {Image} from "expo-image";
+import {ScrollView, Text, View, StyleSheet, Pressable,} from "react-native";
 import {useUserGames} from "@/hooks/useUserGames";
 import {useMemo} from "react";
 import {SymbolView} from "expo-symbols";
@@ -51,7 +52,7 @@ export default function GroupDetail(){
                             <Pressable accessibilityLabel={tr("groups.editA11y")} hitSlop={10}>
                                 <SymbolView
                                     name="square.and.pencil"
-                                    resizeMode="scaleAspectFit"
+
                                     style={{width: 32, height: 32, justifyContent: 'center'}}
                                     tintColor={t.text}
                                 />
@@ -105,7 +106,7 @@ export default function GroupDetail(){
                     })}>
                         <View style={[styles.gameCard, {backgroundColor: t.card}]}>
                             {game?.image_url ? (
-                                <Image source={{uri: game.image_url}} style={styles.gameImage} resizeMode="cover"/>
+                                <Image source={{uri: game.image_url}} style={styles.gameImage} contentFit="cover" cachePolicy="memory-disk" transition={{duration: 200, effect: "cross-dissolve"}}/>
                             ) : (
                                 <View style={[styles.gameImage, {
                                     backgroundColor: t.background,

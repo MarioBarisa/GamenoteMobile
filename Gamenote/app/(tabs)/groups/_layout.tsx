@@ -22,7 +22,7 @@ export default function GroupsLayout() {
                         <Pressable accessibilityLabel={tr("groups.addA11y")} onPress={() => router.push("/(modals)/addGroupModal")} hitSlop={10}>
                             <SymbolView
                                 name={"rectangle.stack.badge.plus"}
-                                resizeMode="scaleAspectFit"
+
                                 style={{width: 32, height: 30}}
                                 tintColor={t.text}
                             />

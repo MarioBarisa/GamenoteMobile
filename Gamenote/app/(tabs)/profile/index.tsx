@@ -1,4 +1,5 @@
-import {Text, ScrollView, StyleSheet, TextInput, View, Alert, Image, Pressable, RefreshControl} from "react-native";
+import {Image} from "expo-image";
+import {Text, ScrollView, StyleSheet, TextInput, View, Alert, Pressable, RefreshControl} from "react-native";
 import {useLayoutEffect, useState} from "react";
 import {useTheme} from "@/context/theme";
 import {useAuth} from "@/context/auth";
@@ -146,11 +147,13 @@ export default function FavoritesScreen() {
                             style={{
                                 width: 150,
                                 height: 150,
-                                resizeMode: "cover",
                                 borderRadius: 360,
                                 margin: 5,
                                 alignSelf: "center",
                             }}
+                            contentFit="cover"
+                            cachePolicy="memory-disk"
+                            transition={{duration: 200, effect: "cross-dissolve"}}
                         />
                     ) : (
                         <View style={{
