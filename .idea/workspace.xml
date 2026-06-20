@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7b37eb79-ceff-44a4-81aa-7e12f61dfc1f" name="Changes" comment="Update source">
+    <list default="true" id="7b37eb79-ceff-44a4-81aa-7e12f61dfc1f" name="Changes" comment="Update source 2">
       <change beforePath="$PROJECT_DIR$/AltStoreSource.json" beforeDir="false" afterPath="$PROJECT_DIR$/AltStoreSource.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -251,14 +251,7 @@
       <workItem from="1781352561322" duration="2699000" />
       <workItem from="1781470346483" duration="1099000" />
       <workItem from="1781804335891" duration="1000" />
-      <workItem from="1781855827395" duration="28845000" />
-    </task>
-    <task id="LOCAL−00042" summary="U tab baru fill sf ikone se renderiraju samo kada korinsik je na tom tab-u, dodan selection igara za dodavanje / micanje istih unutar modalEditGroups.tsx">
-      <option name="closed" value="true" />
-      <created>1778845124255</created>
-      <option name="number" value="LOCAL−00042" />
-      <option name="presentableId" value="LOCAL−00042" />
-      <updated>1778845124255</updated>
+      <workItem from="1781855827395" duration="29082000" />
     </task>
     <task id="LOCAL−00043" summary="dodan modal addGroupModal.tsx putem kojeg se mogu dodati nove grupe, manje ispravke UI-a. Dodana &quot;Jump back in!&quot; section na home koja prikazuje igre koje su ili pazuirane ili u backlogu, TBI: gumb igraj danas otvara modal igre.">
       <option name="closed" value="true" />
@@ -596,7 +589,14 @@
       <option name="presentableId" value="LOCAL−00090" />
       <updated>1781962939590</updated>
     </task>
-    <option name="localTasksCounter" value="91" />
+    <task id="LOCAL−00091" summary="Update source 2">
+      <option name="closed" value="true" />
+      <created>1781963049137</created>
+      <option name="number" value="LOCAL−00091" />
+      <option name="presentableId" value="LOCAL−00091" />
+      <updated>1781963049137</updated>
+    </task>
+    <option name="localTasksCounter" value="92" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -614,7 +614,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="1/2 Supabase implementacije gotova. Napravljen profil login ( još broken neke stvari ), traženje igara RAWG api i dodavanje istih. Potrebnno još implementirati grupe i popraviti Profile sa ispravnim podacima." />
     <MESSAGE value="1/2 Supabase implementacije gotova. &#10;Dodan toggle za dodavanje opisa u Gamenote ( default off ). U search tabu dodan SF symbol i text kako bi &quot;swipe down to search&quot; radio na &lt;iOS 26. Ispravljen prikaz usernamea u profile screenu." />
     <MESSAGE value="1/2 Supabase implementacije gotova. Final polish prije nastavka supabase implementacije." />
     <MESSAGE value="1/2 Supabase implementacije gotova. Porpavljena &quot;Jump back in!&quot; sekcija da se ispravno prikazuju njezine komponente. Dodan refrsh / fetch podataka kada korisnik doda ili izmjeni detalje igre." />
@@ -639,7 +638,8 @@
     <MESSAGE value="EAS info dodan u App.json" />
     <MESSAGE value="Dodan AltStore source" />
     <MESSAGE value="Update source" />
-    <option name="LAST_COMMIT_MESSAGE" value="Update source" />
+    <MESSAGE value="Update source 2" />
+    <option name="LAST_COMMIT_MESSAGE" value="Update source 2" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

@@ -4,7 +4,7 @@
   "description": "Welcome to my source! Here you'll find all of my great apps. All my apps are open source and fully free to use-> https://github.com/MarioBarisa ",
   "iconURL": "https://i.imgur.com/xS1RWMc.png",
   "website": "https://barisa.me",
-  "patreonURL": "",
+  "patreonURL": "https://barisa.me",
   "tintColor": "#ff475d",
   "featuredApps": [
     "eu.gamenote.ios"
@@ -45,7 +45,7 @@
         "entitlements": [],
         "privacy": {}
       },
-      "patreonURL": {}
+      "patreon": {}
     }
   ],
   "news": []
