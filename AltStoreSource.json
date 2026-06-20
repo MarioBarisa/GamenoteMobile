@@ -35,10 +35,10 @@
           "downloadURL": "https://github.com/MarioBarisa/GamenoteMobile/releases/download/v1.0.0/Gamenote.ipa",
           "size": 16000000,
           "version": "1.0.0",
-          "buildVersion": null,
-          "date": "2026-06-20T13:20:00+02:00",
+          "buildVersion": "1",
+          "date": "2026-06-20T11:20:00+02:00",
           "localizedDescription": "First version.",
-          "minOSVersion": null
+          "minOSVersion": "18.0"
         }
       ],
       "appPermissions": {
