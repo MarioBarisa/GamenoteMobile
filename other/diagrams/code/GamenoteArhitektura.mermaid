@@ -1,0 +1,197 @@
+---
+title: Dijagram arhitekture - Gamenote
+---
+
+--- Arhitektura 1: Hijerarhija providera (React Component Tree)
+flowchart BT
+    subgraph Legend
+        L1["Context Provider"]
+        L2["Zaslon/Ekran"]
+        L3["Hook"]
+        L4["Servis"]
+    end
+
+    subgraph Providers["Razina Providera (app/_layout.tsx)"]
+        TP["ThemeProvider\n(context/theme.tsx)"]
+        SP["SettingsProvider\n(context/settings.tsx)"]
+        AP["AuthProvider\n(context/auth.tsx)"]
+        GP["GroupsProvider\n(context/GroupsContext.tsx)"]
+        EB["ErrorBoundary\n(components/ErrorBoundary.tsx)"]
+    end
+
+    subgraph RootStack["Root Stack Navigator"]
+        direction TB
+        TL["TabNavigator (NativeTabs)"]
+        S["SettingsScreen\n(app/settings.tsx)"]
+        AGM["addGameModal"]
+        ADM["addGroupModal"]
+        ME["modalEdit"]
+        MEG["modalEditGroups"]
+        RM["registerModal"]
+        MAM["manageAccountModal"]
+        OM["onboardingModal"]
+    end
+
+    subgraph Tabs["Tab Navigator (5 tabova)"]
+        direction TB
+        HOME["Home\n(trenutno igram + statistika)"]
+        FAVS["My Games\n(filtriranje + sortiranje)"]
+        SEARCH["Search\n(lokalno + RAWG)"]
+        GROUPS["Groups\n(grupe igara)"]
+        PROFILE["Profile\n(prijava/statistika)"]
+    end
+
+    subgraph Screens["Povezani zasloni"]
+        direction LR
+        GD["GameDetailsScreen\n(components/GameDetailsScreen.tsx)"]
+        RD["RAWGDetailsScreen\n(app/search/rawg-details.tsx)"]
+        GRD["GroupDetail\n(app/groups/group-detail.tsx)"]
+    end
+
+    subgraph DataLayer["Sloj podataka"]
+        direction TB
+        HKG["useUserGames\n(hooks/useUserGames.ts)"]
+        CTXG["GroupsContext\n(context/GroupsContext.tsx)"]
+        CTXA["AuthContext\n(context/auth.tsx)"]
+    end
+
+    subgraph Services["Servisni sloj"]
+        direction TB
+        RAWG["gamesApi.ts\n(RAWG API)"]
+        SA["supabaseAuth.ts\n(Supabase Auth)"]
+        S["supabase.ts\n(Supabase klijent)"]
+        GA["groupsApi.ts\n(Grupe CRUD)"]
+    end
+
+    subgraph External["Vanjski sustavi"]
+        RAWGE["RAWG Games Database\napi.rawg.io"]
+        SUPABASE["Supabase\n(auth + baza podataka)"]
+    end
+
+    TP --> SP
+    SP --> EB
+    EB --> AP
+    AP --> GP
+    GP --> RootStack
+
+    TL --> Tabs
+    Tabs --> HOME
+    Tabs --> FAVS
+    Tabs --> SEARCH
+    Tabs --> GROUPS
+    Tabs --> PROFILE
+
+    HOME --> GD
+    FAVS --> GD
+    SEARCH --> GD
+    SEARCH --> RD
+    GROUPS --> GD
+    GROUPS --> GRD
+
+    HOME --> HKG
+    FAVS --> HKG
+    SEARCH --> HKG
+    GROUPS --> HKG
+    PROFILE --> HKG
+
+    HOME --> CTXG
+    FAVS --> CTXG
+    SEARCH --> CTXG
+    GROUPS --> CTXG
+    PROFILE --> CTXG
+
+    PROFILE --> CTXA
+
+    HKG --> S
+    CTXG --> GA
+    CTXA --> SA
+    RD --> RAWG
+
+    SA --> SUPABASE
+    GA --> SUPABASE
+    S --> SUPABASE
+    RAWG --> RAWGE
+
+--- Arhitektura 2: Data Flow
+flowchart LR
+    subgraph UI["Korisnicko sucelje"]
+        SCREEN["Zaslon/Ekran"]
+        CARD["GameCard/GameCardCompact"]
+    end
+
+    subgraph State["State"]
+        CONTEXT["Context Provider\n(useState + useMemo)"]
+        HOOK["Prilagodeni Hook\n(useUserGames)"]
+    end
+
+    subgraph Service["Servisni sloj"]
+        API["API poziv\n(fetch / supabase klijent)"]
+        MAP["Mapiranje podataka\n(Game ↔ DB row)"]
+    end
+
+    subgraph External2["Vanjski API"]
+        SUP["Supabase\n(SQL upiti)"]
+        RAW["RAWG API\n(REST)"]
+    end
+
+    SCREEN -->|"1. Korisnicka akcija\n(tap, dugi klik, unos)"| HOOK
+    HOOK -->|"2. Poziv metode\n(addGame, updateGame, deleteGame)"| API
+    API -->|"3. MAPIranje\n(gameToSupabaseRow)"| MAP
+    MAP -->|"4. HTTP zahtjev"| External2
+    External2 -->|"5. Odgovor"| API
+    API -->|"6. Parsiranje\n(supabaseRowToGame)"| HOOK
+    HOOK -->|"7. Optimisticno azuriranje\n→ setGames(prev => ...)"| CONTEXT
+    CONTEXT -->|"8. fetchGames()\n→ ponovni dohvat"| API
+    CONTEXT -->|"9. Re-render\n(novi podaci)"| SCREEN
+
+    CARD -->|"Akcija (edit/delete)"| SCREEN
+
+    style SCREEN fill:#e1f5fe
+    style CARD fill:#e1f5fe
+    style CONTEXT fill:#fff3e0
+    style HOOK fill:#fff3e0
+    style API fill:#e8f5e9
+    style MAP fill:#e8f5e9
+    style SUP fill:#f3e5f5
+    style RAW fill:#f3e5f5
+
+--- Arhitektura 3: Route Map
+flowchart TD
+    ROOT["/ (index.tsx)\nredirect: loggedIn? home : profile"]
+
+    subgraph TABS["/(tabs) - NativeTabs"]
+        H["/home\nPocetni ekran"]
+        HD["/home/details\nGameDetailsScreen"]
+        F["/favorites\nMoje igre"]
+        FD["/favorites/details\nGameDetailsScreen"]
+        S["/search\nPretraga"]
+        SD["/search/details\nGameDetailsScreen"]
+        SRD["/search/rawg-details\nRAWG detalji"]
+        G["/groups\nGrupe"]
+        GGD["/groups/group-detail\nDetalji grupe"]
+        GD2["/groups/details\nGameDetailsScreen"]
+        P["/profile\nProfil"]
+    end
+
+    subgraph MODALS["/(modals) - Modalni zasloni"]
+        AGM["addGameModal\nDodaj igru"]
+        ADM["addGroupModal\nDodaj grupu"]
+        ME["modalEdit\nUredi igru"]
+        MEG["modalEditGroups\nUredi grupu"]
+        RM["registerModal\nRegistracija"]
+        MAM["manageAccountModal\nUpravljaj racunom"]
+        OM["onboardingModal\nUvodni zaslon"]
+    end
+
+    SET["/settings\nPostavke"]
+
+    ROOT --> TABS
+    ROOT --> SET
+    ROOT --> MODALS
+
+    H --> HD
+    F --> FD
+    S --> SD
+    S --> SRD
+    G --> GGD
+    GGD --> GD2

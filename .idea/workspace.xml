@@ -4,8 +4,23 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7b37eb79-ceff-44a4-81aa-7e12f61dfc1f" name="Changes" comment="Dodani screenshots.">
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+    <list default="true" id="7b37eb79-ceff-44a4-81aa-7e12f61dfc1f" name="Changes" comment="Ažuriran README.md da ima screenshots ( da nisu ogrmoni / OG rezolucija ).">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/screenshots/Fun Theme-screenshots.zip" beforeDir="false" afterPath="$PROJECT_DIR$/other/screenshots/Fun Theme-screenshots.zip" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/screenshots/Simulator Screenshot - iPhone 17 Pro Max - 2026-06-19 at 15.05.59.png" beforeDir="false" afterPath="$PROJECT_DIR$/other/screenshots/Simulator Screenshot - iPhone 17 Pro Max - 2026-06-19 at 15.05.59.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/screenshots/Simulator Screenshot - iPhone 17 Pro Max - 2026-06-19 at 15.06.18.png" beforeDir="false" afterPath="$PROJECT_DIR$/other/screenshots/Simulator Screenshot - iPhone 17 Pro Max - 2026-06-19 at 15.06.18.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/screenshots/Simulator Screenshot - iPhone 17 Pro Max - 2026-06-19 at 15.06.34.png" beforeDir="false" afterPath="$PROJECT_DIR$/other/screenshots/Simulator Screenshot - iPhone 17 Pro Max - 2026-06-19 at 15.06.34.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/screenshots/Simulator Screenshot - iPhone 17 Pro Max - 2026-06-19 at 15.06.41.png" beforeDir="false" afterPath="$PROJECT_DIR$/other/screenshots/Simulator Screenshot - iPhone 17 Pro Max - 2026-06-19 at 15.06.41.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/screenshots/Simulator Screenshot - iPhone 17 Pro Max - 2026-06-19 at 15.06.47.png" beforeDir="false" afterPath="$PROJECT_DIR$/other/screenshots/Simulator Screenshot - iPhone 17 Pro Max - 2026-06-19 at 15.06.47.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/screenshots/Simulator Screenshot - iPhone 17 Pro Max - 2026-06-19 at 15.11.57.png" beforeDir="false" afterPath="$PROJECT_DIR$/other/screenshots/Simulator Screenshot - iPhone 17 Pro Max - 2026-06-19 at 15.11.57.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/screenshots/Simulator Screenshot - iPhone 17 Pro Max - 2026-06-19 at 15.28.07.png" beforeDir="false" afterPath="$PROJECT_DIR$/other/screenshots/Simulator Screenshot - iPhone 17 Pro Max - 2026-06-19 at 15.28.07.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/screenshots/appStore assets/ios_1_1.png" beforeDir="false" afterPath="$PROJECT_DIR$/other/screenshots/appStore assets/ios_1_1.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/screenshots/appStore assets/ios_1_2.png" beforeDir="false" afterPath="$PROJECT_DIR$/other/screenshots/appStore assets/ios_1_2.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/screenshots/appStore assets/ios_1_3.png" beforeDir="false" afterPath="$PROJECT_DIR$/other/screenshots/appStore assets/ios_1_3.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/screenshots/appStore assets/ios_1_4.png" beforeDir="false" afterPath="$PROJECT_DIR$/other/screenshots/appStore assets/ios_1_4.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/screenshots/appStore assets/ios_1_5.png" beforeDir="false" afterPath="$PROJECT_DIR$/other/screenshots/appStore assets/ios_1_5.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/screenshots/appStore assets/ios_1_6.png" beforeDir="false" afterPath="$PROJECT_DIR$/other/screenshots/appStore assets/ios_1_6.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/screenshots/appStore assets/ios_1_7.png" beforeDir="false" afterPath="$PROJECT_DIR$/other/screenshots/appStore assets/ios_1_7.png" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -189,7 +204,7 @@
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
     "run.code.analysis.last.selected.profile": "pProject Default",
-    "settings.editor.selected.configurable": "com.github.copilot.settings.general.GeneralConfigurable",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
     "ts.external.directory.path": "/Volumes/MarioNAS/Završni/GamenoteMobile/Gamenote/node_modules/typescript/lib",
     "vue.rearranger.settings.migration": "true"
   }
@@ -202,11 +217,11 @@
       <recent name="$PROJECT_DIR$/Gamenote/app/(tabs)" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/other/diagrams/code" />
+      <recent name="$PROJECT_DIR$/other" />
+      <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/diagrams" />
       <recent name="$PROJECT_DIR$/Gamenote" />
-      <recent name="$PROJECT_DIR$/Gamenote/app/(modals)" />
-      <recent name="$PROJECT_DIR$/Gamenote/app" />
-      <recent name="$PROJECT_DIR$/Gamenote/app/Other" />
-      <recent name="$PROJECT_DIR$/Gamenote/app/(tabs)/modalEdit" />
     </key>
   </component>
   <component name="SharedIndexes">
@@ -251,21 +266,9 @@
       <workItem from="1781352561322" duration="2699000" />
       <workItem from="1781470346483" duration="1099000" />
       <workItem from="1781804335891" duration="1000" />
-      <workItem from="1781855827395" duration="33796000" />
-    </task>
-    <task id="LOCAL−00046" summary="Minimalne izmjene profile zaslona">
-      <option name="closed" value="true" />
-      <created>1779542058638</created>
-      <option name="number" value="LOCAL−00046" />
-      <option name="presentableId" value="LOCAL−00046" />
-      <updated>1779542058638</updated>
-    </task>
-    <task id="LOCAL−00047" summary="100% implemntiran profile zaslon">
-      <option name="closed" value="true" />
-      <created>1779545692498</created>
-      <option name="number" value="LOCAL−00047" />
-      <option name="presentableId" value="LOCAL−00047" />
-      <updated>1779545692498</updated>
+      <workItem from="1781855827395" duration="36600000" />
+      <workItem from="1782033366629" duration="15000" />
+      <workItem from="1782033388049" duration="802000" />
     </task>
     <task id="LOCAL−00048" summary="dodan gum za izradu profila, dodan registerModal.tsx za izradu prfila ( aktivira se klikom na &quot;Izadi račun&quot; ).">
       <option name="closed" value="true" />
@@ -596,11 +599,28 @@
       <option name="presentableId" value="LOCAL−00094" />
       <updated>1781973845497</updated>
     </task>
-    <option name="localTasksCounter" value="95" />
+    <task id="LOCAL−00095" summary="Ažuriran README.md da ima screenshots.">
+      <option name="closed" value="true" />
+      <created>1781974253969</created>
+      <option name="number" value="LOCAL−00095" />
+      <option name="presentableId" value="LOCAL−00095" />
+      <updated>1781974253969</updated>
+    </task>
+    <task id="LOCAL−00096" summary="Ažuriran README.md da ima screenshots ( da nisu ogrmoni / OG rezolucija ).">
+      <option name="closed" value="true" />
+      <created>1781974437826</created>
+      <option name="number" value="LOCAL−00096" />
+      <option name="presentableId" value="LOCAL−00096" />
+      <updated>1781974437827</updated>
+    </task>
+    <option name="localTasksCounter" value="97" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="UnknownFeatures">
+    <option featureType="com.intellij.fileTypeFactory" implementationName="*.mermaid" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -614,8 +634,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="1.5/2 Supabase implementacije gotova. Ispravno implementirane grupe, igre se mogu dodati ili u editGroupModal ili tijekom dodavanja ili editanja detalja već dodate igre." />
-    <MESSAGE value="1.5/2 Supabase implementacije gotova. Ispravno implementirane grupe, igre se mogu dodati ili u editGroupModal ili tijekom dodavanja + tijekom editanja detalja već dodate igre." />
     <MESSAGE value="1.5/2 Supabase implementacije gotova. Pojednostavljen manageAccountModal.tsx; sada je samo jedan save gumb prisutan umjesto njih 3 ispod svakog sectiona. Dodana provjera iOS verzije za minimizeBehavior API kako bi se koristila na &quot;undefined&quot; jer isto nije bilo moguce na starijim verzijama iOS-a ( skrivanje tabova tokom scrollinga )" />
     <MESSAGE value="1.5/2 Supabase implementacije gotova. Prilikom registracije korisnika potrebno je prihavtiti TOS klikom na checkmark." />
     <MESSAGE value="AppStore pripreme: dodan link na politiku privatnosti unutar registracije računa, maknut sound switch iz postavki, popravljen info banner za placeholder data" />
@@ -639,7 +657,9 @@
     <MESSAGE value="Update source 3" />
     <MESSAGE value="Dodan build version" />
     <MESSAGE value="Dodani screenshots." />
-    <option name="LAST_COMMIT_MESSAGE" value="Dodani screenshots." />
+    <MESSAGE value="Ažuriran README.md da ima screenshots." />
+    <MESSAGE value="Ažuriran README.md da ima screenshots ( da nisu ogrmoni / OG rezolucija )." />
+    <option name="LAST_COMMIT_MESSAGE" value="Ažuriran README.md da ima screenshots ( da nisu ogrmoni / OG rezolucija )." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

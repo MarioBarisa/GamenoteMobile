@@ -1,0 +1,157 @@
+---
+title: Dijagrami korisnickog toka ( User Joourney ) - Gamenote
+---
+
+--- Tok 1: Potpuni korisnicki put
+flowchart TD
+    A["Pokretanje aplikacije"] --> B{"Korisnik prijavljen?"}
+    B -->|Da| C["Pocetni ekran (Home Tab)"]
+    B -->|Ne| D["Profil ekran (Login)"]
+
+    D --> E{"Prvi put?"}
+    E -->|Da| F["Onboarding Modal"]
+    F --> G["Prijava/Registracija"]
+    E -->|Ne| G
+
+    G --> H["Email + Lozinka → Prijava"]
+    G --> I["Registracija → Register Modal"]
+    I --> J["Username, Email, Lozinka, TOS"]
+    J --> K["signUp() → Uspjeh → router.back()"]
+    K --> H
+
+    H -->|Uspjesna prijava| C
+
+    C --> L["Pregled statistikā:\n• Ukupno igara\n• Sati igranja\n• Završene igre"]
+    C --> M["Trenutno igram (status=playing)"]
+    M --> N{"Prikaz karata"}
+    N -->|Obican prikaz| O["GameCard (lista)"]
+    N -->|Kompaktni prikaz| P["GameCardCompact (grid)"]
+    O --> Q["Klik na karticu → Detalji Igre"]
+    P --> Q
+
+    C --> R["Jump Back In!"]
+    R --> S["Nasumicna igra (paused/backlog)"]
+    S --> T["Klik → modalEdit (uredi igru)"]
+
+    Q --> U["GameDetailsScreen"]
+    U --> V["Uredi → modalEdit"]
+    U --> W["Podijeli → Share sheet"]
+    U --> X["Galerija → Modal za pregled slika"]
+    U --> Y["Prikaz serijala (prequel/sequel)"]
+    U --> Z["Link na grupu → GroupDetail"]
+
+    V --> AA["Izmjena: status, platforma, ocjena,\nplaytime, datumi, napredak, grupe, biljeske"]
+    AA --> AB["Spremi → updateGame() → router.back()"]
+
+    O --> AC["Dugi klik → ActionSheet"]
+    AC --> AD["Uredi → modalEdit"]
+    AC --> AE["Obrisi → Alert potvrda → deleteGame()"]
+
+    C --> AF["My Games Tab"]
+    AF --> AG["Filter chipovi: top_rated, completed,\nplaying, paused, dropped, backlog, wishlist"]
+    AF --> AH["Sortiranje: ocjena / vrijeme"]
+    AF --> AI["Platform filter: ActionSheet"]
+    AG --> AJ["Filtrirane i sortirane igre"]
+    AH --> AJ
+    AI --> AJ
+    AJ --> Q
+
+    C --> AK["Search Tab"]
+    AK --> AL{"Nacin pretrage"}
+    AL -->|Lokalni| AM["Pretraga vlastitih igara"]
+    AL -->|RAWG baza| AN["Pretraga RAWG baze podataka"]
+    AM --> Q
+    AN --> AO["RAWG rezultati"]
+    AO --> AP["Klik → RAWGDetailsScreen"]
+    AP --> AQ["Prikaz: galerija, platforme, zanr,\nmetacritic, ESRB, opis, serijal"]
+    AP --> AR{"Igra vec u biblioteci?"}
+    AR -->|Da| AS["Gumb 'Pogledaj u biblioteci' → GameDetails"]
+    AR -->|Ne| AT["Gumb 'Dodaj igru' → addGameModal"]
+    AT --> AU["Formular: status, platforma, ocjena,\nplaytime, datumi, napredak, grupe, biljeske"]
+    AU --> AV["addGame() → supabase insert\n+ addGameToGroup() → router.back()"]
+
+    C --> AW["Groups Tab"]
+    AW --> AX["Lista grupa (ime, tip, ocjena, preview)"]
+    AX --> AY["Klik na grupu → GroupDetail"]
+    AY --> AZ["Pregled igara u grupi"]
+    AZ --> BA["Klik na igru → GameDetails"]
+    AY --> BB["Uredi → modalEditGroups"]
+    BB --> BC["Izmjena: ime, tip, ocjena igre,\ndodaj/ukloni igre, biljeske"]
+    BB --> BD["Obrisi grupu → Alert potvrda"]
+    BC --> BE["Spremi → updateGroup() + router.back()"]
+
+    AW --> BF["Gumb + → addGroupModal"]
+    BF --> BG["Ime (obavezno), Tip, Ocjena"]
+    BF --> BH["Odaberi igre za grupu"]
+    BF --> BI["Biljeske"]
+    BG --> BJ["addGroup() + addGameToGroup() → router.back()"]
+    BH --> BJ
+    BI --> BJ
+
+    C --> BK["Profile Tab"]
+    BK --> BL["Statistike: ukupno, sati, zavrseno,\nstopa zavrsenosti, prosjecno vrijeme,\nomiljena igra, omiljeni zanr"]
+    BK --> BM["Postignuca: 8 bedževa"]
+    BK --> BN["Upravljaj racunom → manageAccountModal"]
+    BN --> BO["Avatar URL, Username, Lozinka, Obrisi racun"]
+    BN --> BP["Spremi promjene ili obrisi"]
+    BK --> BQ["Odjavi se → signOut()"]
+
+--- Tok 2: Dodavanje igre iz RAWG baze
+flowchart TD
+    A["Search Tab"] --> B["Klik na bookmark ikonu"]
+    B --> C["Toggle: RAWG mode (userGamenotesOnly=false)"]
+    C --> D["Upiši naziv igre u search bar"]
+    D --> E["useEffect → debounce 400ms"]
+    E --> F["searchGames(query) → RAWG API"]
+    F --> G{"Rezultati?"}
+    G -->|Ne| H["Prikazi 'Nema rezultata'"]
+    G -->|Da| I["Prikazi listu RAWG rezultata"]
+    I --> J["Svaki rezultat: slika, naziv,\ngodina, metacritic, oznaka 'U biblioteci'"]
+
+    J --> K["Klik na RAWG rezultat"]
+    K --> L["RAWGDetailsScreen: isLoading=true"]
+
+    L --> M["Paralelni dohvat podataka:"]
+    M --> N["getGameDetails(id) → enrichedData"]
+    M --> O["getGameScreenshots(id) → screenshot URLovi"]
+    M --> P["getGameSeries(id) → seriesData"]
+
+    N --> Q["Prikaz obogacenih podataka"]
+    O --> Q
+    P --> Q
+
+    Q --> R{"Igra vec u korisnikovoj biblioteci?"}
+    R -->|Da| S["Prikazi gumb: 'Pogledaj u biblioteci'"]
+    S --> T["Klik → navigacija na GameDetails (postojeci unos)"]
+    R -->|Ne| U["Prikazi gumb: 'Dodaj igru'"]
+
+    U --> V["Klik → addGameModal"]
+    V --> W["Formular za dodavanje"]
+
+    W --> X["Status (obavezno) ← picker"]
+    W --> Y["Platforma (obavezno) ← picker"]
+    W --> Z["Ocjena 1-5 ← zvjezdice"]
+    W --> AA["Datum pocetka ← DateTimePicker"]
+    W --> AB["Datum zavrsetka ← DateTimePicker"]
+    W --> AC["Nacin napretka ← 9 opcija"]
+    W --> AD["Vrijednost napretka / Ukupno ← numeric"]
+    W --> AE["Sati igranja ← numeric"]
+    W --> AF["Ukljuci opis ← Switch"]
+    W --> AG["Grupe ← multi-select pillovi"]
+    W --> AH["Biljeske ← multiline text"]
+
+    X --> AI["Validacija → potrebno: status + platforma"]
+    AI --> AJ{"Validacija prolazi?"}
+    AJ -->|Ne| AK["Alert: 'Nedostaju obavezna polja'"]
+    AK --> W
+    AJ -->|Da| AL["addGame(completeGame)"]
+
+    AL --> AM["gameToSupabaseRow() → konverzija Game → DB"]
+    AM --> AN["supabase.from('games').insert(row)"]
+    AN --> AO["Za svaku odabranu grupu:"]
+    AO --> AP["addGameToGroup(game_id, groupId)"]
+
+    AP --> AQ["Alert: 'Igra dodana!'"]
+    AQ --> AR["router.back() → povratak na Search"]
+    AR --> AS["fetchGames() → ponovni dohvat"]
+    AS --> AT["Igra se pojavljuje u:\n• Home (ako je status=playing)\n• My Games\n• Grupama"]

@@ -1,0 +1,229 @@
+---
+title: Dijagrami slijeda - Gamenote
+---
+
+--- Slijed 1: Prijava korisnika (Login)
+sequenceDiagram
+    participant K as  Korisnik
+    participant PE as  ProfileScreen
+    participant AK as AuthContext
+    participant SA as supabaseAuth
+    participant SUP as Supabase
+    
+    K->>PE: Upisuje email i lozinku
+    K->>PE: Klik na "Prijava"
+    PE->>PE: Provjera: password !== ""
+    PE->>AK: signIn(email, password)
+    activate AK
+    AK->>SA: signIn(email, password)
+    activate SA
+    SA->>SA: translateError() mapiranje
+    
+    SA->>SUP: supabase.auth.signInWithPassword({email, password})
+    activate SUP
+    
+    SUP-->>SA: { data: { user }, error: null }
+    deactivate SUP
+    
+    alt Uspješna prijava
+        SA-->>AK: { success: true, user }
+        deactivate SA
+        AK-->>PE: { success: true }
+        deactivate AK
+        PE->>PE: Preusmjeravanje na Home
+        
+        Note over AK,SUP: onAuthStateChange dogadaj
+        SUP-->>AK: AuthStateChangeEvent (SIGNED_IN, session)
+        AK->>AK: setSession(s), setUser(s?.user)
+        AK->>AK: loggedIn = true
+        
+        Note over PE: Cijelo stablo se ponovno iscrtava
+        PE-->>K: Korisnik vidi Home ekran
+        
+    else Neuspjesna prijava
+        SUP-->>SA: { data: null, error: { message } }
+        deactivate SUP
+        SA-->>AK: { success: false, error: "Pogrešna e-mail adresa ili lozinka." }
+        deactivate SA
+        AK-->>PE: { success: false, error }
+        deactivate AK
+        PE-->>K: Alert: "Pogrešna e-mail adresa ili lozinka."
+    end
+
+--- Slijed 2: Dodavanje igre iz RAWG (Add Game)
+sequenceDiagram
+    participant K as Korisnik
+    participant AM as AddGameModal
+    participant UHG as useUserGames
+    participant CTXG as GroupsContext
+    participant S as supabase
+    participant PR as Prikaz (UI)
+    
+    K->>AM: Ispunjava formular
+    
+    Note over AM: Polja: status, platforma, ocjena,<br/>playtime, datumi, napredak, grupe, biljeske
+    
+    K->>AM: Klik "Dodaj igru"
+    
+    AM->>AM: validate()
+    Note over AM: Provjera: status !== undefined<br/>platforma !== undefined<br/>progress_value <= progress_total
+    
+    alt Validacija ne prolazi
+        AM-->>K: Alert: "Nedostaju obavezna polja"
+    end
+    
+    AM->>AM: Konstrukcija completeGame objekta
+    
+    AM->>UHG: addGame(completeGame)
+    activate UHG
+    
+    UHG->>UHG: gameToSupabaseRow(game)
+    Note over UHG: Mapiram Game interface →<br/>supabase snake_case stupce
+    
+    UHG->>S: supabase.from('games').insert(row)
+    activate S
+    
+    S-->>UHG: { error: null }
+    deactivate S
+    
+    UHG->>UHG: setGames(prev => [...prev, game])
+    Note over UHG: Optimistično ažuriranje lokalnog stanja
+    
+    UHG->>S: await fetchGames()
+    activate S
+    S-->>UHG: { data: [nova lista igara] }
+    deactivate S
+    
+    UHG->>UHG: setGames(data.map(supabaseRowToGame))
+    UHG-->>AM: void
+    deactivate UHG
+    
+    Note over AM,CTXG: Dodavanje u odabrane grupe
+    loop Za svaku odabranu grupu
+        AM->>CTXG: addGameToGroup(game_id, groupId)
+        activate CTXG
+        CTXG->>CTXG: resolveGameId(game_id)
+        Note over CTXG: Rješavanje game_api_id → db_id (UUID)<br/>pomocu supabase upita
+        
+        CTXG->>CTXG: Provjera postoji li vec
+        
+        CTXG->>S: supabase.from('game_groups').insert(...)
+        activate S
+        S-->>CTXG: { data, error: null }
+        deactivate S
+        
+        CTXG->>CTXG: setGameGroups(prev => [...prev, nova])
+        CTXG-->>AM: void
+        deactivate CTXG
+    end
+    
+    AM-->>K: Alert: "Igra dodana!\n{title}"
+    
+    K->>AM: Klik "OK"
+    AM->>AM: router.back()
+    AM-->>PR: Povratak na prethodni zaslon
+    
+    Note over PR: fetchGames() se ponovno pozvao pa se igra<br/>pojavljuje u Home, My Games i grupama
+
+--- Slijed 3: Uređivanje igre (Edit Game)
+sequenceDiagram
+    participant K as Korisnik
+    participant KAR as GameCard/Compact
+    participant ME as modalEdit
+    participant UHG as useUserGames
+    participant CTXG as GroupsContext
+    participant S as supabase
+
+    K->>KAR: Dugo pritisne na karticu igre ( gameCard ili gameCardCompact )
+    KAR->>KAR: haptics.impactAsync(.Medium) -> lagani haptic feedeback
+    KAR->>KAR: ActionSheetIOS.show()
+    KAR-->>K: Prikaz: [Uredi, Obriši, Odustani]
+
+    K->>KAR: Odabire "Uredi"
+    KAR->>ME: router.push('/(modals)/modalEdit', {game: JSON.stringify(game)})
+    
+    ME->>ME: Parsira original Game iz parametara
+    ME->>ME: Inicijalizira form sa originalnim vrijednostima
+    ME->>ME: getGroupsForGame(gameId) → postojece grupe
+    
+    K->>ME: Mijenja polja (status, platforma, ocjena, ...)
+    K->>ME: Mijenja odabrane grupe (dodaje/uklanja)
+    K->>ME: Klik "Spremi"
+    
+    ME->>ME: Provjera: progress_value <= progress_total
+    
+    ME->>UHG: updateGame(game_id, form)
+    activate UHG
+    
+    UHG->>UHG: partialGameToSupabaseRow(updates)
+    UHG->>S: supabase.from('games').update(row).eq('game_api_id', gameId)
+    activate S
+    S-->>UHG: { error: null }
+    deactivate S
+    
+    UHG->>UHG: setGames(prev => prev.map(...))
+    UHG->>S: await fetchGames()
+    deactivate UHG
+    
+    Note over ME,CTXG: Sinkronizacija grupa
+    ME->>ME: Izracun toAdd i toRemove
+    
+    loop Za svaki id u toRemove
+        ME->>CTXG: removeGameFromGroup(gameId, groupId)
+    end
+    loop Za svaki id u toAdd
+        ME->>CTXG: addGameToGroup(gameId, groupId)
+    end
+    
+    ME-->>K: Alert: "Spremljeno!"
+    
+    K->>ME: Klik "OK"
+    ME->>ME: router.back()
+
+--- Slijed 4: Dohvat podataka nakon prijave
+sequenceDiagram
+    participant PE as ProfileScreen
+    participant UHG as useUserGames
+    participant CTXG as GroupsContext
+    participant AK as AuthContext
+    participant S as supabase
+
+    Note over PE,S: Nakon prijave, cijelo stablo se ponovno iscrtava
+    
+    PE->>UHG: useUserGames() se inicijalizira
+    PE->>CTXG: useGroups() se inicijalizira
+    
+    activate UHG
+    UHG->>AK: loggedIn = true, session.user.id
+    
+    UHG->>S: supabase.from('games').select('*').eq('user_id', userId)
+    activate S
+    S-->>UHG: { data: [lista igara iz baze] }
+    deactivate S
+    
+    UHG->>UHG: data.map(supabaseRowToGame)
+    UHG->>UHG: setGames(mapped)
+    deactivate UHG
+    
+    activate CTXG
+    CTXG->>AK: loggedIn = true, session.user.id
+    
+    CTXG->>S: groupsApi.listGroups(userId)
+    activate S
+    S-->>CTXG: { data: [lista grupa] }
+    deactivate S
+    
+    CTXG->>CTXG: setGroups(data)
+    
+    loop Za svaku grupu
+        CTXG->>S: groupsApi.listGroupGames(groupId, userId)
+        activate S
+        S-->>CTXG: { data: [game_groups za grupu] }
+        deactivate S
+        CTXG->>CTXG: Dodaje u allGameGroups niz
+    end
+    
+    CTXG->>CTXG: setGameGroups(allGameGroups)
+    deactivate CTXG
+    
+    Note over PE: Svi podaci spremni → UI se iscrtava

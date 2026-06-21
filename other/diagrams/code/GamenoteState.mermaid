@@ -1,0 +1,168 @@
+---
+title: Dijagrami stanja - Gamenote
+---
+
+--- Stanje 1: Zivotni ciklus aplikacije
+stateDiagram-v2
+    [*] --> SplasZaslon : Pokretanje aplikacije
+    SplasZaslon --> AuthUcitavanje : SplashScreen.preventAutoHideAsync()
+
+    state AuthUcitavanje {
+        [*] --> DohvacanjeSesije
+        DohvacanjeSesije --> SesijaProvjerena : supabase.auth.getSession()
+        DohvacanjeSesije --> Greska : greska
+    }
+
+    SesijaProvjerena --> SplasSakriven : isLoading = false
+    SplasSakriven --> SplashScreen.hideAsync()
+
+    state OdabirPocetnogEkrana {
+        [*] --> ProvjeraPrijave
+        ProvjeraPrijave --> Prijavljen : loggedIn = true
+        ProvjeraPrijave --> Neprijavljen : loggedIn = false
+    }
+
+    SplashScreen.hideAsync() --> OdabirPocetnogEkrana
+
+    Prijavljen --> [*] : router.replace("/(tabs)/home")
+    Neprijavljen --> ProvjeraPrvogPokretanja
+    ProvjeraPrvogPokretanja --> Onboarding : prvi put (AsyncStorage)
+    ProvjeraPrvogPokretanja --> [*] : vec videno
+    Onboarding --> [*] : router.replace("/(tabs)/profile")
+
+--- Stanje 2: Autentifikacija
+stateDiagram-v2
+    [*] --> Neprijavljen
+
+    state Neprijavljen {
+        [*] --> FormaZaPrijavu
+        FormaZaPrijavu --> ValidacijaEmailLozinka
+        ValidacijaEmailLozinka --> SlanjePrijave : email + lozinka
+        SlanjePrijave --> UspjesnaPrijava : supabase.auth.signInWithPassword()
+        SlanjePrijave --> GreskaPrijave : error
+        GreskaPrijave --> FormaZaPrijavu : korisnik pokusava ponovno
+        UspjesnaPrijava --> [*] : loggedIn = true
+    }
+
+    Neprijavljen --> Registracija : korisnik klikne "Registracija"
+    state Registracija {
+        [*] --> FormaRegistracije
+        FormaRegistracije --> ValidacijaPolja : username, email, lozinka
+        ValidacijaPolja --> ProvjeraEmaila : supabase.rpc(check_email_exists)
+        ProvjeraEmaila --> SlanjeRegistracije : email ne postoji
+        ProvjeraEmaila --> GreskaRegistracije : email vec postoji
+        SlanjeRegistracije --> UspjesnaRegistracija : supabase.auth.signUp()
+        SlanjeRegistracije --> GreskaRegistracije : error
+        GreskaRegistracije --> FormaRegistracije
+        UspjesnaRegistracija --> [*] : router.back()
+    }
+
+    Registracija --> Neprijavljen : odustani ili natrag
+
+    state Prijavljen {
+        [*] --> AktivnaSesija
+        AktivnaSesija --> UpravljanjeRacunom : "Upravljaj racunom"
+        AktivnaSesija --> Odjava : "Odjavi se"
+        state UpravljanjeRacunom {
+            [*] --> AzuriranjeAvatara
+            [*] --> AzuriranjeKorisnickogImena
+            [*] --> PromjenaLozinke
+            [*] --> BrisanjeRacuna
+            AzuriranjeAvatara --> SupabaseAzuriranje : updateAvatar(url)
+            AzuriranjeKorisnickogImena --> SupabaseAzuriranje : updateUsername(name)
+            PromjenaLozinke --> SupabaseAzuriranje : updatePassword(pwd)
+            BrisanjeRacuna --> SupabaseBrisanje : deleteAccount() RPC
+            SupabaseAzuriranje --> [*] : success
+            SupabaseBrisanje --> [*] : signOut + router.back()
+        }
+        Odjava --> supabase.auth.signOut()
+        supabase.auth.signOut() --> Neprijavljen : loggedIn = false
+    }
+
+    Neprijavljen --> Prijavljen : uspjesna prijava/registracija
+    Prijavljen --> Neprijavljen : odjava ili sesija istekla
+
+    note right of Neprijavljen
+        onAuthStateChange dogadaj
+        automatski prati promjene
+        sesije (prijava/odjava)
+    end note
+
+--- Stanje 3: Status igre (prijelazi)
+stateDiagram-v2
+    [*] --> Wishlist
+    [*] --> Backlog
+
+    Wishlist --> Backlog : korisnik dodaje u backlog
+    Wishlist --> Playing : korisnik pocinje igrati
+
+    Backlog --> Playing : korisnik pocinje igrati
+    Backlog --> Wishlist : korisnik vraca u wishlist
+
+    Playing --> Paused : korisnik pauzira
+    Playing --> Completed : korisnik zavrsava
+    Playing --> Dropped : korisnik odustaje
+    Playing --> Backlog : korisnik vraca u backlog
+
+    Paused --> Playing : korisnik nastavlja
+    Paused --> Backlog : korisnik vraca u backlog
+
+    Completed --> Playing : ponovno igranje
+    Completed --> Backlog : vraceno u backlog
+
+    Dropped --> Backlog : korisnik daje drugu sansu
+
+    note right of Playing
+        "currently_playing" stupac u
+        bazi se automatski postavlja
+        na true kada je status 'playing'
+    end note
+
+--- Stanje 4: Favorites ekran (filteri i sortiranje)
+stateDiagram-v2
+    [*] --> PrikazSvihIgara
+
+    state PrikazSvihIgara {
+        [*] --> InicijalnoStanje
+        InicijalnoStanje --> FiltracijaStatusom : pritisak na filter chip
+        InicijalnoStanje --> FiltracijaPlatformom : pritisak na platform filter
+        InicijalnoStanje --> PromjenaSortiranja : pritisak na sort gumb
+    }
+
+    FiltracijaStatusom --> StatusAktivan
+    state StatusAktivan {
+        [*] --> FilterPostavljen
+        FilterPostavljen --> FilterUklonjen : ponovni pritisak
+        FilterUklonjen --> [*]
+    }
+    StatusAktivan --> PrikazSvihIgara : filter uklonjen
+
+    FiltracijaPlatformom --> PlatformaAktivna
+    state PlatformaAktivna {
+        [*] --> ActionSheetOtvoren
+        ActionSheetOtvoren --> OdabranaPlatforma : korisnik odabere
+        ActionSheetOtvoren --> SvePlatforme : "All Platforms"
+        ActionSheetOtvoren --> Ponisteno : "Cancel"
+        OdabranaPlatforma --> [*]
+        SvePlatforme --> [*]
+        Ponisteno --> [*]
+    }
+    PlatformaAktivna --> PrikazSvihIgara : nova platforma ili "All"
+
+    PromjenaSortiranja --> SortiranjePromijenjeno
+    SortiranjePromijenjeno --> PrikazSvihIgara : setSortBy(rating/playtime)
+
+    state PrikazRezultata {
+        [*] --> FilterIgre
+        FilterIgre --> SortirajIgre
+        SortirajIgre --> PrikaziKartice
+        PrikaziKartice --> [*]
+    }
+
+    note right of PrikazRezultata
+        Filter logika:
+        1. platformFilter (ako je postavljen)
+        2. statusFilter (top_rated = rating===5
+           ili specificni status)
+        3. sortBy rating || playtime
+    end note

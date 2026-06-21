@@ -1,0 +1,78 @@
+--
+title: Gamenote DB
+EntityDiagram
+    Game {
+        string title "Naslov igre"
+        string game_id "RAWG ID"
+        string db_id "Supabase UUID "
+        string platform "Platforma"
+        string genre "Zanr"
+        string status "playing|paused|completed|dropped|backlog|wishlist -> status igranja"
+        int rating "Ocjena 1-5"
+        int metacriticScore "Metacritic ocjena"
+        string esrbRating "ESRB oznaka"
+        string releaseDate "Datum izlaska"
+        string webPage "Web stranica"
+        string about "Opis"
+        string notes "Biljeske"
+        string publisher "Izdavac"
+        string image_url "URL slike"
+        string background_image "URL pozadinske slike"
+        int play_time "Sati igranja"
+        string start_date "Datum pocetka"
+        string end_date "Datum zavrsetka"
+        int progress_value "Napredak vrijednost"
+        int progress_total "Napredak ukupno"
+        string progress_mode "Nacin pracenja napretka"
+    }
+
+    Group {
+        string id "UUID grupe"
+        string user_id "FK prema auth.users"
+        string name "Naziv grupe"
+        string type "Collection|Trilogy|Franchise"
+        int rating "Ocjena grupe 1-5"
+        string created_at "Datum kreiranja"
+        string user_notes "Korisnicke biljeske"
+    }
+
+    GameGroup {
+        string id "UUID veze"
+        string user_id "FK prema auth.users"
+        string game_id "FK prema games.id"
+        string group_id "FK prema groups.id"
+        string created_at "Datum kreiranja"
+    }
+
+    SeriesGame {
+        int id "RAWG ID serije"
+        string name "Naziv igre u serijalu"
+        string released "Datum izlaska"
+        string background_image "URL slike"
+    }
+
+    ProgressMode {
+        string key "completion_standard|completion_nintendo|achievements_steam|achievements_xbox|achievements_gamecentre|trophies_psn|leaderboard_rank|pokedex -> vrsta achvn"
+        string kind "percent|ratio|count|rank"
+        string label "Labela za prikaz"
+        boolean requiresTotal "Zahtijeva ukupnu vrijednost"
+        string defaultUnit "Zadana jedinica"
+        string badgeSource "standard|nintendo|steam|xbox|apple|psn|rank -> gdje je korisnik igrao?"
+    }
+
+    StatusConfig {
+        string key "playing|paused|completed|dropped|backlog|wishlist -> trenutni status igre"
+        string label "Labela statusa"
+        string bg "Boja pozadine"
+        string text "Boja teksta"
+    }
+
+    PlatformConfig {
+        string key "PlayStation 5|PlayStation 4|Xbox Series X/S|Xbox One|Nintendo Switch|Nintendo Switch 2|PC|iOS|Android|Other"
+        string label "Labela platforme"
+        string text "Boja teksta"
+    }
+
+    Game ||--o{ GameGroup : "povezana je s"
+    Group ||--o{ GameGroup : "sadrzi"
+    Game ||--o{ SeriesGame : "ima serijal"
