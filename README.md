@@ -28,12 +28,12 @@ To run the app on your iOS device first download the latest .IPA file. Then use 
 
 ## Screenshots
 
-| | |
-|---|---|
+| |                                                                                                                                                                                                                            |
+|---|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | <img src="https://github.com/MarioBarisa/GamenoteMobile/blob/main/other/screenshots/Simulator%20Screenshot%20-%20iPhone%2017%20Pro%20Max%20-%202026-06-19%20at%2015.05.59.png?raw=true" width="260" alt="App Screenshot"/> | <img src="https://github.com/MarioBarisa/GamenoteMobile/blob/main/other/screenshots/Simulator%20Screenshot%20-%20iPhone%2017%20Pro%20Max%20-%202026-06-19%20at%2015.06.34.png?raw=true" width="260" alt="App Screenshot"/> |
 | <img src="https://github.com/MarioBarisa/GamenoteMobile/blob/main/other/screenshots/Simulator%20Screenshot%20-%20iPhone%2017%20Pro%20Max%20-%202026-06-19%20at%2015.06.18.png?raw=true" width="260" alt="App Screenshot"/> | <img src="https://github.com/MarioBarisa/GamenoteMobile/blob/main/other/screenshots/Simulator%20Screenshot%20-%20iPhone%2017%20Pro%20Max%20-%202026-06-19%20at%2015.06.41.png?raw=true" width="260" alt="App Screenshot"/> |
 | <img src="https://github.com/MarioBarisa/GamenoteMobile/blob/main/other/screenshots/Simulator%20Screenshot%20-%20iPhone%2017%20Pro%20Max%20-%202026-06-19%20at%2015.06.47.png?raw=true" width="260" alt="App Screenshot"/> | <img src="https://github.com/MarioBarisa/GamenoteMobile/blob/main/other/screenshots/Simulator%20Screenshot%20-%20iPhone%2017%20Pro%20Max%20-%202026-06-19%20at%2015.28.07.png?raw=true" width="260" alt="App Screenshot"/> |
-| <img src="https://github.com/MarioBarisa/GamenoteMobile/blob/main/other/screenshots/Simulator%20Screenshot%20-%20iPhone%2017%20Pro%20Max%20-%202026-06-19%20at%2015.11.57.png?raw=true" width="260" alt="App Screenshot"/> | |
+| <img src="https://github.com/MarioBarisa/GamenoteMobile/blob/main/other/screenshots/Simulator%20Screenshot%20-%20iPhone%2017%20Pro%20Max%20-%202026-06-19%20at%2015.11.57.png?raw=true" width="260" alt="App Screenshot"/> | <img src="https://github.com/MarioBarisa/GamenoteMobile/blob/main/other/screenshots/simulator_screenshot_F10169D3-3644-4418-887E-0169AAEAE70D.png?raw=true" width="260" alt="App Screenshot"/>                              |
 
 ## Feedback
 
