@@ -4,17 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7b37eb79-ceff-44a4-81aa-7e12f61dfc1f" name="Changes" comment="Ažuriran README.md da ima screenshots ( da nisu ogrmoni / OG rezolucija ).">
-      <change afterPath="$PROJECT_DIR$/other/diagrams/png/Arhitektura/DataFlow.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/other/diagrams/png/Arhitektura/MapaRuta.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/other/diagrams/png/Arhitektura/ReactComponentTree.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/other/diagrams/png/GamenoteEntity.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/other/diagrams/png/GamenoteSequence.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/other/diagrams/png/State/GamenoteAuth.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/other/diagrams/png/State/GamenoteSort.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/other/diagrams/png/State/GamenoteStatusIgre.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/other/diagrams/png/State/GamenoteŽivotniCiklus.png" afterDir="false" />
+    <list default="true" id="7b37eb79-ceff-44a4-81aa-7e12f61dfc1f" name="Changes" comment="Dodani svi potrebni dijagrami.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -264,13 +256,6 @@
       <workItem from="1781855827395" duration="36600000" />
       <workItem from="1782033366629" duration="15000" />
       <workItem from="1782033388049" duration="802000" />
-    </task>
-    <task id="LOCAL−00048" summary="dodan gum za izradu profila, dodan registerModal.tsx za izradu prfila ( aktivira se klikom na &quot;Izadi račun&quot; ).">
-      <option name="closed" value="true" />
-      <created>1779798685233</created>
-      <option name="number" value="LOCAL−00048" />
-      <option name="presentableId" value="LOCAL−00048" />
-      <updated>1779798685233</updated>
     </task>
     <task id="LOCAL−00049" summary="Update dependecy-a">
       <option name="closed" value="true" />
@@ -608,7 +593,14 @@
       <option name="presentableId" value="LOCAL−00096" />
       <updated>1781974437827</updated>
     </task>
-    <option name="localTasksCounter" value="97" />
+    <task id="LOCAL−00097" summary="Dodani svi potrebni dijagrami.">
+      <option name="closed" value="true" />
+      <created>1782037496865</created>
+      <option name="number" value="LOCAL−00097" />
+      <option name="presentableId" value="LOCAL−00097" />
+      <updated>1782037496865</updated>
+    </task>
+    <option name="localTasksCounter" value="98" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -629,7 +621,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="1.5/2 Supabase implementacije gotova. Pojednostavljen manageAccountModal.tsx; sada je samo jedan save gumb prisutan umjesto njih 3 ispod svakog sectiona. Dodana provjera iOS verzije za minimizeBehavior API kako bi se koristila na &quot;undefined&quot; jer isto nije bilo moguce na starijim verzijama iOS-a ( skrivanje tabova tokom scrollinga )" />
     <MESSAGE value="1.5/2 Supabase implementacije gotova. Prilikom registracije korisnika potrebno je prihavtiti TOS klikom na checkmark." />
     <MESSAGE value="AppStore pripreme: dodan link na politiku privatnosti unutar registracije računa, maknut sound switch iz postavki, popravljen info banner za placeholder data" />
     <MESSAGE value="AppStore pripreme: dodan link na politiku privatnosti unutar registracije računa, maknut sound switch iz postavki, popravljen info banner za placeholder data, dodane privilegije aplikacijue unuatar app.json i popravljen bundle identifier" />
@@ -654,7 +645,8 @@
     <MESSAGE value="Dodani screenshots." />
     <MESSAGE value="Ažuriran README.md da ima screenshots." />
     <MESSAGE value="Ažuriran README.md da ima screenshots ( da nisu ogrmoni / OG rezolucija )." />
-    <option name="LAST_COMMIT_MESSAGE" value="Ažuriran README.md da ima screenshots ( da nisu ogrmoni / OG rezolucija )." />
+    <MESSAGE value="Dodani svi potrebni dijagrami." />
+    <option name="LAST_COMMIT_MESSAGE" value="Dodani svi potrebni dijagrami." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
