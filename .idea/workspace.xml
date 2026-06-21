@@ -5,22 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7b37eb79-ceff-44a4-81aa-7e12f61dfc1f" name="Changes" comment="Ažuriran README.md da ima screenshots ( da nisu ogrmoni / OG rezolucija ).">
+      <change afterPath="$PROJECT_DIR$/other/diagrams/png/Arhitektura/DataFlow.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/other/diagrams/png/Arhitektura/MapaRuta.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/other/diagrams/png/Arhitektura/ReactComponentTree.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/other/diagrams/png/GamenoteEntity.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/other/diagrams/png/GamenoteSequence.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/other/diagrams/png/State/GamenoteAuth.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/other/diagrams/png/State/GamenoteSort.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/other/diagrams/png/State/GamenoteStatusIgre.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/other/diagrams/png/State/GamenoteŽivotniCiklus.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/screenshots/Fun Theme-screenshots.zip" beforeDir="false" afterPath="$PROJECT_DIR$/other/screenshots/Fun Theme-screenshots.zip" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/screenshots/Simulator Screenshot - iPhone 17 Pro Max - 2026-06-19 at 15.05.59.png" beforeDir="false" afterPath="$PROJECT_DIR$/other/screenshots/Simulator Screenshot - iPhone 17 Pro Max - 2026-06-19 at 15.05.59.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/screenshots/Simulator Screenshot - iPhone 17 Pro Max - 2026-06-19 at 15.06.18.png" beforeDir="false" afterPath="$PROJECT_DIR$/other/screenshots/Simulator Screenshot - iPhone 17 Pro Max - 2026-06-19 at 15.06.18.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/screenshots/Simulator Screenshot - iPhone 17 Pro Max - 2026-06-19 at 15.06.34.png" beforeDir="false" afterPath="$PROJECT_DIR$/other/screenshots/Simulator Screenshot - iPhone 17 Pro Max - 2026-06-19 at 15.06.34.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/screenshots/Simulator Screenshot - iPhone 17 Pro Max - 2026-06-19 at 15.06.41.png" beforeDir="false" afterPath="$PROJECT_DIR$/other/screenshots/Simulator Screenshot - iPhone 17 Pro Max - 2026-06-19 at 15.06.41.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/screenshots/Simulator Screenshot - iPhone 17 Pro Max - 2026-06-19 at 15.06.47.png" beforeDir="false" afterPath="$PROJECT_DIR$/other/screenshots/Simulator Screenshot - iPhone 17 Pro Max - 2026-06-19 at 15.06.47.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/screenshots/Simulator Screenshot - iPhone 17 Pro Max - 2026-06-19 at 15.11.57.png" beforeDir="false" afterPath="$PROJECT_DIR$/other/screenshots/Simulator Screenshot - iPhone 17 Pro Max - 2026-06-19 at 15.11.57.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/screenshots/Simulator Screenshot - iPhone 17 Pro Max - 2026-06-19 at 15.28.07.png" beforeDir="false" afterPath="$PROJECT_DIR$/other/screenshots/Simulator Screenshot - iPhone 17 Pro Max - 2026-06-19 at 15.28.07.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/screenshots/appStore assets/ios_1_1.png" beforeDir="false" afterPath="$PROJECT_DIR$/other/screenshots/appStore assets/ios_1_1.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/screenshots/appStore assets/ios_1_2.png" beforeDir="false" afterPath="$PROJECT_DIR$/other/screenshots/appStore assets/ios_1_2.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/screenshots/appStore assets/ios_1_3.png" beforeDir="false" afterPath="$PROJECT_DIR$/other/screenshots/appStore assets/ios_1_3.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/screenshots/appStore assets/ios_1_4.png" beforeDir="false" afterPath="$PROJECT_DIR$/other/screenshots/appStore assets/ios_1_4.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/screenshots/appStore assets/ios_1_5.png" beforeDir="false" afterPath="$PROJECT_DIR$/other/screenshots/appStore assets/ios_1_5.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/screenshots/appStore assets/ios_1_6.png" beforeDir="false" afterPath="$PROJECT_DIR$/other/screenshots/appStore assets/ios_1_6.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/screenshots/appStore assets/ios_1_7.png" beforeDir="false" afterPath="$PROJECT_DIR$/other/screenshots/appStore assets/ios_1_7.png" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -195,7 +189,7 @@
     "copilot.chat.legacySessionMetadata.migrated": "true",
     "git-widget-placeholder": "main",
     "javascript.preferred.runtime.type.id": "node",
-    "last_opened_file_path": "/Volumes/MarioNAS/Završni/GamenoteMobile",
+    "last_opened_file_path": "/Volumes/MarioNAS/Završni/GamenoteMobile/other/diagrams/png",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.standard": "true",
     "node.js.detected.package.tslint": "true",
@@ -211,10 +205,11 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/other/diagrams/png" />
+      <recent name="$PROJECT_DIR$/other/diagrams/png/State" />
+      <recent name="$PROJECT_DIR$/other/diagrams/png/Arhitektura" />
       <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/Gamenote/assets/gamenote" />
-      <recent name="$PROJECT_DIR$/Gamenote/app/(tabs)/groups" />
-      <recent name="$PROJECT_DIR$/Gamenote/app/(tabs)" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/other/diagrams/code" />
