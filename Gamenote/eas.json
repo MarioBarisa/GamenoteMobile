@@ -11,15 +11,9 @@
       }
     },
     "production": {
+      "autoIncrement": true,
       "ios": {
         "enterpriseProvisioning": "adhoc"
-      }
-    },
-    "altstore": {
-      "distribution": "internal",
-      "ios": {
-        "simulator": false,
-        "developmentClient": false
       }
     }
   },

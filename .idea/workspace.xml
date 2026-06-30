@@ -4,9 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7b37eb79-ceff-44a4-81aa-7e12f61dfc1f" name="Changes" comment="Dodani svi potrebni dijagrami.">
+    <list default="true" id="7b37eb79-ceff-44a4-81aa-7e12f61dfc1f" name="Changes" comment="Dodana još jedna slika u README.md">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gamenote/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/Gamenote/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gamenote/eas.json" beforeDir="false" afterPath="$PROJECT_DIR$/Gamenote/eas.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -169,39 +170,39 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
-    "codeWithMe.voiceChat.enabledByDefault": "false",
-    "copilot.chat.legacySessionMetadata.migrated": "true",
-    "git-widget-placeholder": "main",
-    "javascript.preferred.runtime.type.id": "node",
-    "last_opened_file_path": "/Volumes/MarioNAS/Završni/GamenoteMobile/other/diagrams/png",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.standard": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.standard": "",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "run.code.analysis.last.selected.profile": "pProject Default",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
-    "ts.external.directory.path": "/Volumes/MarioNAS/Završni/GamenoteMobile/Gamenote/node_modules/typescript/lib",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
+    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
+    &quot;copilot.chat.legacySessionMetadata.migrated&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;javascript.preferred.runtime.type.id&quot;: &quot;node&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Volumes/MarioNAS/Završni/GamenoteMobile/other/screenshots&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.standard&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.standard&quot;: &quot;&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;/Volumes/MarioNAS/Završni/GamenoteMobile/Gamenote/node_modules/typescript/lib&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/other/screenshots" />
       <recent name="$PROJECT_DIR$/other/diagrams/png" />
       <recent name="$PROJECT_DIR$/other/diagrams/png/State" />
       <recent name="$PROJECT_DIR$/other/diagrams/png/Arhitektura" />
       <recent name="$PROJECT_DIR$" />
-      <recent name="$PROJECT_DIR$/Gamenote/assets/gamenote" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/other/diagrams/code" />
@@ -256,20 +257,10 @@
       <workItem from="1781855827395" duration="36600000" />
       <workItem from="1782033366629" duration="15000" />
       <workItem from="1782033388049" duration="802000" />
-    </task>
-    <task id="LOCAL−00049" summary="Update dependecy-a">
-      <option name="closed" value="true" />
-      <created>1780051719465</created>
-      <option name="number" value="LOCAL−00049" />
-      <option name="presentableId" value="LOCAL−00049" />
-      <updated>1780051719465</updated>
-    </task>
-    <task id="LOCAL−00050" summary="Zamijenjen FavoritesProvider s AuthProvider i integracija auth konteksta u FavoritesScreen, dodan redirect na Profile tab ako korisnik nije prijavljen">
-      <option name="closed" value="true" />
-      <created>1780054935445</created>
-      <option name="number" value="LOCAL−00050" />
-      <option name="presentableId" value="LOCAL−00050" />
-      <updated>1780054935446</updated>
+      <workItem from="1782210409217" duration="624000" />
+      <workItem from="1782214651171" duration="2490000" />
+      <workItem from="1782301821921" duration="3902000" />
+      <workItem from="1782814900539" duration="1574000" />
     </task>
     <task id="LOCAL−00051" summary="Dodan label da se korisniku kaže da gleda demo podatke ako nije prijavljen, ostale manje izmjene">
       <option name="closed" value="true" />
@@ -600,7 +591,21 @@
       <option name="presentableId" value="LOCAL−00097" />
       <updated>1782037496865</updated>
     </task>
-    <option name="localTasksCounter" value="98" />
+    <task id="LOCAL−00098" summary="Popravljeni README.md linkovi.">
+      <option name="closed" value="true" />
+      <created>1782042027167</created>
+      <option name="number" value="LOCAL−00098" />
+      <option name="presentableId" value="LOCAL−00098" />
+      <updated>1782042027167</updated>
+    </task>
+    <task id="LOCAL−00099" summary="Dodana još jedna slika u README.md">
+      <option name="closed" value="true" />
+      <created>1782042159417</created>
+      <option name="number" value="LOCAL−00099" />
+      <option name="presentableId" value="LOCAL−00099" />
+      <updated>1782042159417</updated>
+    </task>
+    <option name="localTasksCounter" value="100" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -621,8 +626,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="1.5/2 Supabase implementacije gotova. Prilikom registracije korisnika potrebno je prihavtiti TOS klikom na checkmark." />
-    <MESSAGE value="AppStore pripreme: dodan link na politiku privatnosti unutar registracije računa, maknut sound switch iz postavki, popravljen info banner za placeholder data" />
     <MESSAGE value="AppStore pripreme: dodan link na politiku privatnosti unutar registracije računa, maknut sound switch iz postavki, popravljen info banner za placeholder data, dodane privilegije aplikacijue unuatar app.json i popravljen bundle identifier" />
     <MESSAGE value="Dodane ikone" />
     <MESSAGE value="Popravljen banner za demo podatke ( bio out of bounds za određene ekrane ) + implementiran ShareSheet za stvaranje poveznica na neku igru." />
@@ -646,7 +649,9 @@
     <MESSAGE value="Ažuriran README.md da ima screenshots." />
     <MESSAGE value="Ažuriran README.md da ima screenshots ( da nisu ogrmoni / OG rezolucija )." />
     <MESSAGE value="Dodani svi potrebni dijagrami." />
-    <option name="LAST_COMMIT_MESSAGE" value="Dodani svi potrebni dijagrami." />
+    <MESSAGE value="Popravljeni README.md linkovi." />
+    <MESSAGE value="Dodana još jedna slika u README.md" />
+    <option name="LAST_COMMIT_MESSAGE" value="Dodana još jedna slika u README.md" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
