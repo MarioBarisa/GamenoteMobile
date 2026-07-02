@@ -1,8 +1,10 @@
+<p align="center">
+  <img src="https://github.com/MarioBarisa/GamenoteMobile/blob/main/Gamenote/assets/gamenote/banners/GamenoteBannerDarkMode.png?raw=true" width="400" alt="Gamenote Banner"/>
+</p>
 
-![Logo](https://github.com/MarioBarisa/GamenoteMobile/blob/main/Gamenote/assets/gamenote/banners/GamenoteBannerDarkMode.png?raw=true)
+---
 
-
-# Gamenote mobile client ( for iOS )
+<h1 align="center">Gamenote mobile client (for iOS)</h1>
 
 Gamenote Mobile is a iOS mobile client for Gamenote web app designed to help users organize, track, and manage their gaming activities in a simple and intuitive way. It provides a clean interface for keeping notes, favorites, and other game-related information in one place. Built using React Native + Expo SDK54.
 
@@ -10,6 +12,12 @@ This project is developed as a final thesis project for the Faculty of Informati
 
 To fix any package version mismatch use npx expo install --fix in root of the project.
 
+<p align="center">
+  <img src="https://img.shields.io/badge/Expo-54-000020?style=flat&logo=expo" alt="Expo SDK 54"/>
+  <img src="https://img.shields.io/badge/platform-iOS-000000?style=flat&logo=apple" alt="Platform iOS"/>
+</p>
+
+---
 
 ## Features
 
@@ -19,12 +27,9 @@ To fix any package version mismatch use npx expo install --fix in root of the pr
 - Cross platform ( Web app [Gamenote.eu](https://gamenote.eu) and iOS)
 - Game library powered by RAWG
 
-
-
 ## Run Locally
 
 To run the app on your iOS device first download the latest .IPA file. Then use a tool like AltStore Classic or Sideloadly to install and sign the app via your Apple ID. The app may or may not come to the official AppStore.
-
 
 ## Screenshots
 
@@ -38,6 +43,3 @@ To run the app on your iOS device first download the latest .IPA file. Then use 
 ## Feedback
 
 If you have any feedback, please reach out to us at mario@barisa.me
-
-
-
