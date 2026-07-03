@@ -4,8 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7b37eb79-ceff-44a4-81aa-7e12f61dfc1f" name="Changes" comment="Dodan iOS build">
-      <change afterPath="$PROJECT_DIR$/other/Seminar/GamenoteMobileSeminar.pages" afterDir="false" />
+    <list default="true" id="7b37eb79-ceff-44a4-81aa-7e12f61dfc1f" name="Changes" comment="Dodan seminar te popravljen README.md.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
     </list>
@@ -262,14 +261,7 @@
       <workItem from="1782214651171" duration="2490000" />
       <workItem from="1782301821921" duration="3902000" />
       <workItem from="1782814900539" duration="7292000" />
-      <workItem from="1782997906108" duration="82000" />
-    </task>
-    <task id="LOCAL−00052" summary="Povecana velicina slike &quot;Jump back in.&quot; sectiona">
-      <option name="closed" value="true" />
-      <created>1780404460114</created>
-      <option name="number" value="LOCAL−00052" />
-      <option name="presentableId" value="LOCAL−00052" />
-      <updated>1780404460114</updated>
+      <workItem from="1782997906108" duration="1225000" />
     </task>
     <task id="LOCAL−00053" summary="dodan haptic feedback između promjene tabova.">
       <option name="closed" value="true" />
@@ -607,7 +599,14 @@
       <option name="presentableId" value="LOCAL−00100" />
       <updated>1782816498328</updated>
     </task>
-    <option name="localTasksCounter" value="101" />
+    <task id="LOCAL−00101" summary="Dodan seminar te popravljen README.md.">
+      <option name="closed" value="true" />
+      <created>1782998230032</created>
+      <option name="number" value="LOCAL−00101" />
+      <option name="presentableId" value="LOCAL−00101" />
+      <updated>1782998230032</updated>
+    </task>
+    <option name="localTasksCounter" value="102" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -628,7 +627,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Dodane ikone" />
     <MESSAGE value="Popravljen banner za demo podatke ( bio out of bounds za određene ekrane ) + implementiran ShareSheet za stvaranje poveznica na neku igru." />
     <MESSAGE value="Banner / splashscreen se mijenja ovisno o tome koji je light  ili dark mode ukljucen." />
     <MESSAGE value="Splashscreen je sada default icon." />
@@ -653,7 +651,8 @@
     <MESSAGE value="Popravljeni README.md linkovi." />
     <MESSAGE value="Dodana još jedna slika u README.md" />
     <MESSAGE value="Dodan iOS build" />
-    <option name="LAST_COMMIT_MESSAGE" value="Dodan iOS build" />
+    <MESSAGE value="Dodan seminar te popravljen README.md." />
+    <option name="LAST_COMMIT_MESSAGE" value="Dodan seminar te popravljen README.md." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

@@ -12,6 +12,17 @@ This project is developed as a final thesis project for the Faculty of Informati
 
 To fix any package version mismatch use npx expo install --fix in root of the project.
 
+
+<p align="center">
+  <img src="https://is1-ssl.mzstatic.com/image/thumb/PurpleSource211/v4/c8/a6/9a/c8a69aba-7f72-344a-95fb-10741be6a128/Placeholder.mill/400x400bb-75.webp" width="80" alt="Testflight icon"/>
+</p>
+
+<p align="center">
+  <a href="https://testflight.apple.com/join/ZuYBvfu8">Get on Apple TestFlight.</a>
+</p>
+
+
+
 <p align="center">
   <img src="https://img.shields.io/badge/Expo-54-000020?style=flat&logo=expo" alt="Expo SDK 54"/>
   <img src="https://img.shields.io/badge/platform-iOS-000000?style=flat&logo=apple" alt="Platform iOS"/>
