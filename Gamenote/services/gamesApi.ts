@@ -2,7 +2,7 @@
 // POSTAVITI -> RAWG_API_KEY u .env.local datoteci
 import { RAWG_API_KEY } from '@/constants/env'
 
-const BASE_URL = 'https://api.rawg.io/api'
+const BASE_URL = 'https://api.gamenote.eu/api/'
 
 export async function searchGames(query: string, page = 1) {
   try {
@@ -29,7 +29,8 @@ export async function getGameDetails(id: string) {
     )
 
     if (!response.ok) {
-      throw new Error('Greška pri dohvaćanju detalja igre')
+      console.error('Greška pri dohvaćanju detalja igre')
+      return null
     }
 
     return await response.json()

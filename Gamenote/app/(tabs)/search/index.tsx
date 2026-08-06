@@ -1,4 +1,5 @@
-import {useEffect, useMemo, useState} from "react";
+import {useCallback, useEffect, useMemo, useState} from "react";
+import {useFocusEffect} from "@react-navigation/native";
 import {Image} from "expo-image";
 import {ScrollView, StyleSheet, TouchableOpacity, Alert, View, Text, Pressable, Linking} from "react-native";
 import { Stack, useRouter } from "expo-router";
@@ -21,7 +22,13 @@ export default function SearchIndex() {
   const [sort] = useState(false);
   const [rawgResults, setRawgResults] = useState<any[]>([]);
   const [isSearching, setIsSearching] = useState(false);
-  const {games, deleteGame} = useUserGames();
+  const {games, deleteGame, refresh} = useUserGames();
+
+  useFocusEffect(
+    useCallback(() => {
+      refresh();
+    }, [refresh]),
+  );
   const {loggedIn} = useAuth();
   const router = useRouter();
 

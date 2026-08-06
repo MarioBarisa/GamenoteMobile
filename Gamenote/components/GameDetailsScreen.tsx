@@ -95,7 +95,7 @@ export default function GameDetailsScreen() {
 
     const {prequel, sequel} = getPrequelAndSequel(game?.series ?? [], game?.releaseDate ?? '');
 
-    const galleryImages = [...new Set([game.image_url, ...(game.screenshot_urls ?? [])].filter(Boolean))] as string[];
+    const galleryImages = [...new Set([undefined, ...(game.screenshot_urls ?? [])].filter(Boolean))] as string[]; // maknuo game.image_url, jer je to cover slika koja je dosta blurry zbog rezolucije.
     const prColor = progressColor(game.progress_value, game.progress_total)
 
     const mode = game.progress_mode && isProgressModeKey(game.progress_mode)

@@ -52,7 +52,7 @@
     "filterA11y": "Filter your games",
     "filterTitle": "Your Gamenote",
     "filterMessage": "This button switches to searching the entire Gamenote database. Otherwise, you browse your added games.",
-    "rawgSectionTitle": "Powered by RAWG",
+    "rawgSectionTitle": "Powered by IGDB",
     "rawgNoResults": "No games found",
     "rawgPrompt": "Start typing to search games",
     "rawgSearching": "Searching...",
