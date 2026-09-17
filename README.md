@@ -3,6 +3,14 @@
 </p>
 
 ---
+<h3>Implementacija mobilne aplikacije za napredni dnevnik igranja pomoću programskog okvira React Native</h3>
+
+- Mentor: izv. prof. dr. sc. Nikola Tanković
+- Završni rad Autor: Mario Bariša
+- Sveučilište Jurja Dobrile u Puli, Fakultet informatike
+- Akademska godina 2025./2026.
+
+- Test account: user: `api [at] barisa [dot] me`, pass: `isto kao user`
 
 <h1 align="center">Gamenote mobile client (for iOS)</h1>
 
