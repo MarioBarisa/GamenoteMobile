@@ -7,14 +7,8 @@
     <option name="selectedModelId" value="auto" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7b37eb79-ceff-44a4-81aa-7e12f61dfc1f" name="Changes" comment="Dodan TestFlight link.">
-      <change beforePath="$PROJECT_DIR$/.idea/copilotDiffState.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/copilotDiffState.xml" afterDir="false" />
+    <list default="true" id="7b37eb79-ceff-44a4-81aa-7e12f61dfc1f" name="Changes" comment="Promjena na novi custom built translation API ( api.gamenote.eu ) kao zamjena za napušteni RAWG API. Minimalne izmjene translation stringova + dodan refresh na search tab kada je on u fokusu kako bi radio check za vec dodane igre u search rezultatima.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gamenote/app/(tabs)/search/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/Gamenote/app/(tabs)/search/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gamenote/components/GameDetailsScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/Gamenote/components/GameDetailsScreen.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gamenote/services/gamesApi.ts" beforeDir="false" afterPath="$PROJECT_DIR$/Gamenote/services/gamesApi.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gamenote/translations/en.json" beforeDir="false" afterPath="$PROJECT_DIR$/Gamenote/translations/en.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gamenote/translations/hr.json" beforeDir="false" afterPath="$PROJECT_DIR$/Gamenote/translations/hr.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -178,32 +172,32 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
-    "codeWithMe.voiceChat.enabledByDefault": "false",
-    "copilot.chat.legacySessionMetadata.migrated": "true",
-    "git-widget-placeholder": "main",
-    "javascript.preferred.runtime.type.id": "node",
-    "last_opened_file_path": "/Users/mariobarisa/Desktop/Mac/Osobno/Osobni projekti/GamenoteMobile",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.standard": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.standard": "",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "run.code.analysis.last.selected.profile": "pProject Default",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
-    "ts.external.directory.path": "/Users/mariobarisa/Desktop/Mac/Osobno/Osobni projekti/GamenoteMobile/Gamenote/node_modules/typescript/lib",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
+    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
+    &quot;copilot.chat.legacySessionMetadata.migrated&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;javascript.preferred.runtime.type.id&quot;: &quot;node&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/mariobarisa/Desktop/Mac/Osobno/Osobni projekti/GamenoteMobile&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.standard&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.standard&quot;: &quot;&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;/Users/mariobarisa/Desktop/Mac/Osobno/Osobni projekti/GamenoteMobile/Gamenote/node_modules/typescript/lib&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/other/Seminar" />
@@ -270,14 +264,11 @@
       <workItem from="1782301821921" duration="3902000" />
       <workItem from="1782814900539" duration="7292000" />
       <workItem from="1782997906108" duration="1402000" />
-      <workItem from="1786021409448" duration="1380000" />
-    </task>
-    <task id="LOCAL−00054" summary="dodan async-storage za persisten spremanje postavki, povezan gumb za haptic feedback u postavkama sa tab switching-om">
-      <option name="closed" value="true" />
-      <created>1780405925153</created>
-      <option name="number" value="LOCAL−00054" />
-      <option name="presentableId" value="LOCAL−00054" />
-      <updated>1780405925154</updated>
+      <workItem from="1786021409448" duration="3398000" />
+      <workItem from="1786025352090" duration="2436000" />
+      <workItem from="1786027896137" duration="1000" />
+      <workItem from="1789638262226" duration="2801000" />
+      <workItem from="1789902882502" duration="32000" />
     </task>
     <task id="LOCAL−00055" summary="part 2 - dodan async-storage za persisten spremanje postavki, povezan gumb za haptic feedback u postavkama sa tab switching-om">
       <option name="closed" value="true" />
@@ -615,7 +606,14 @@
       <option name="presentableId" value="LOCAL−00102" />
       <updated>1783075887685</updated>
     </task>
-    <option name="localTasksCounter" value="103" />
+    <task id="LOCAL−00103" summary="Promjena na novi custom built translation API ( api.gamenote.eu ) kao zamjena za napušteni RAWG API. Minimalne izmjene translation stringova + dodan refresh na search tab kada je on u fokusu kako bi radio check za vec dodane igre u search rezultatima.">
+      <option name="closed" value="true" />
+      <created>1786023145005</created>
+      <option name="number" value="LOCAL−00103" />
+      <option name="presentableId" value="LOCAL−00103" />
+      <updated>1786023145007</updated>
+    </task>
+    <option name="localTasksCounter" value="104" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -636,7 +634,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Banner / splashscreen se mijenja ovisno o tome koji je light  ili dark mode ukljucen." />
     <MESSAGE value="Splashscreen je sada default icon." />
     <MESSAGE value="onboardingModal.tsx sada korsiti isti bg color kao ostali modali." />
     <MESSAGE value="splashscreen koristi banner ( zadnji pokušaj )" />
@@ -661,7 +658,8 @@
     <MESSAGE value="Dodan iOS build" />
     <MESSAGE value="Dodan seminar te popravljen README.md." />
     <MESSAGE value="Dodan TestFlight link." />
-    <option name="LAST_COMMIT_MESSAGE" value="Dodan TestFlight link." />
+    <MESSAGE value="Promjena na novi custom built translation API ( api.gamenote.eu ) kao zamjena za napušteni RAWG API. Minimalne izmjene translation stringova + dodan refresh na search tab kada je on u fokusu kako bi radio check za vec dodane igre u search rezultatima." />
+    <option name="LAST_COMMIT_MESSAGE" value="Promjena na novi custom built translation API ( api.gamenote.eu ) kao zamjena za napušteni RAWG API. Minimalne izmjene translation stringova + dodan refresh na search tab kada je on u fokusu kako bi radio check za vec dodane igre u search rezultatima." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
