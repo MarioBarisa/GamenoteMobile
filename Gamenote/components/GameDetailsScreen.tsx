@@ -102,7 +102,9 @@ export default function GameDetailsScreen() {
         ? PROGRESS_MODE_MAP[game.progress_mode]
         : null;
 
-    const label = progressLabel(game.progress_mode, game.progress_value, game.progress_total);
+    // nema progresa za nulu
+    const hasProgressValue = typeof game.progress_value === 'number' && game.progress_value > 0;
+    const label = hasProgressValue ? progressLabel(game.progress_mode, game.progress_value, game.progress_total) : null;
 
     const metacriticColor = (() => {
         let meta;
@@ -307,9 +309,19 @@ export default function GameDetailsScreen() {
                                 ) : <Text style={{color: t.secondaryText, fontSize: isLargeScreen ? 15 : 13}}>{tr("gameDetails.now")}</Text>}
                             </View>
                         )}
-                        <Text style={{color: t.text, fontSize: 20, fontWeight: '600'}}>{tr("gameDetails.notesLabel")}</Text>
+
                         {game.notes ? (
-                            <Text style={{fontStyle: 'italic', fontSize: 14, color: t.text}}>{game.notes}</Text>
+                            <View>
+                                <Text style={{
+                                    color: t.text,
+                                    fontSize: 20,
+                                    fontWeight: '600'
+                                }}>{tr("gameDetails.notesLabel")}</Text>
+                                <Text style={{
+                                    fontStyle: 'italic',
+                                    fontSize: 14,
+                                    color: t.text
+                                }}>{game.notes}</Text></View>
                         ) : null}
 
                         {(() => {

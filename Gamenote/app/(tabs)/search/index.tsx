@@ -1,5 +1,5 @@
 import {useCallback, useEffect, useMemo, useState} from "react";
-import {useFocusEffect} from "@react-navigation/native";
+import {useFocusEffect} from "expo-router/react-navigation";
 import {Image} from "expo-image";
 import {ScrollView, StyleSheet, TouchableOpacity, Alert, View, Text, Pressable, Linking} from "react-native";
 import { Stack, useRouter } from "expo-router";
@@ -32,6 +32,9 @@ export default function SearchIndex() {
   const {loggedIn} = useAuth();
   const router = useRouter();
 
+  // Prisili moje igre kad odjavljen
+  const showMyGamesOnly = !loggedIn ? true : userGamenotesOnly;
+
   const filteredGames = useMemo(() => {
     let results = [...games];
 
@@ -51,15 +54,18 @@ export default function SearchIndex() {
     return results;
   }, [games, search, sort]);
 
+  // Sakrij stare rezultate bez postavljanja stanja
+  const visibleRawgResults = !search || showMyGamesOnly ? [] : rawgResults;
+  const visibleIsSearching = !search || showMyGamesOnly ? false : isSearching;
+
   useEffect(() => {
-    if (!search || userGamenotesOnly) {
-      setRawgResults([]);
-      setIsSearching(false);
+    if (!search || showMyGamesOnly) {
       return;
     }
 
-    setIsSearching(true);
     const timer = setTimeout(async () => {
+      // Pokreni pretragu nakon odgode
+      setIsSearching(true);
       try {
         const data = await searchGames(search);
         setRawgResults(data.results ?? []);
@@ -71,13 +77,7 @@ export default function SearchIndex() {
     }, 400);
 
     return () => clearTimeout(timer);
-  }, [search, userGamenotesOnly]);
-
-    useEffect(() => {
-    if (!loggedIn) {
-      setUserGamenotesOnly(true);
-    }
-  }, [loggedIn]);
+  }, [search, showMyGamesOnly]);
 
   const {t: tr} = useTranslation();
 
@@ -114,8 +114,8 @@ export default function SearchIndex() {
               style={{ justifyContent: 'center', alignItems: 'center'}}>
 
               <SymbolView
-                key={userGamenotesOnly ? "bookmark.fill" : "bookmark"}
-                name={userGamenotesOnly ? "bookmark.fill" : "bookmark"}
+                key={showMyGamesOnly ? "bookmark.fill" : "bookmark"}
+                name={showMyGamesOnly ? "bookmark.fill" : "bookmark"}
 
                  style={{ width: 36, height: 30 }}
                  tintColor={t.text}
@@ -123,7 +123,7 @@ export default function SearchIndex() {
             </TouchableOpacity>
           ),
           headerSearchBarOptions: {
-            placeholder: searchBarText(userGamenotesOnly),
+            placeholder: searchBarText(showMyGamesOnly),
             onChangeText: (event) => setSearch(event.nativeEvent.text),
           },
         }}
@@ -133,7 +133,7 @@ export default function SearchIndex() {
       contentContainerStyle={{ padding: 16, gap: 0 }}
       contentInsetAdjustmentBehavior="automatic"
     >
-        {userGamenotesOnly ? (
+        {showMyGamesOnly ? (
           compactCards ? (
             <View style={{flexDirection: 'row', flexWrap: 'wrap', gap: 12}}>
               {filteredGames.map((game) => (
@@ -147,7 +147,7 @@ export default function SearchIndex() {
           )
         ) : (
           <>
-            {!isSearching && !search && rawgResults.length === 0 && (
+            {!visibleIsSearching && !search && visibleRawgResults.length === 0 && (
               <Pressable
                 onPress={() => {/* Native search bar is revealed via pull-down */}}
                 style={{alignItems: 'center', justifyContent: 'center', paddingVertical: 48, gap: 8}}
@@ -159,19 +159,19 @@ export default function SearchIndex() {
               </Pressable>
             )}
 
-            {isSearching && (
+            {visibleIsSearching && (
               <Text style={{color: t.secondaryText, textAlign: 'center', padding: 16}}>
                 {tr('search.rawgSearching')}
               </Text>
             )}
 
-            {!isSearching && search && rawgResults.length === 0 && (
+            {!visibleIsSearching && search && visibleRawgResults.length === 0 && (
               <Text style={{color: t.secondaryText, textAlign: 'center', padding: 16}}>
                 {tr('search.rawgNoResults')}
               </Text>
             )}
 
-            {rawgResults.length > 0 && (
+            {visibleRawgResults.length > 0 && (
               <Pressable
                 onPress={() => Linking.openURL('https://rawg.io')}
                 style={{marginBottom: 8, alignSelf: 'flex-start'}}
@@ -188,7 +188,7 @@ export default function SearchIndex() {
               </Pressable>
             )}
 
-            {rawgResults.map((rawg: any) => {
+            {visibleRawgResults.map((rawg: any) => {
               const inLibrary = games.find(g => g.game_id === String(rawg.id));
               return (
               <Pressable

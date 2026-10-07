@@ -1,4 +1,4 @@
-import {Icon, Label, NativeTabs, Badge} from "expo-router/unstable-native-tabs";
+import {NativeTabs} from "expo-router/unstable-native-tabs";
 import {router, useSegments} from "expo-router";
 import {Platform} from "react-native";
 import * as Haptics from "expo-haptics";
@@ -48,33 +48,33 @@ export default function TabsLayout() {
     return (
         <NativeTabs minimizeBehavior={minimizeBehavior}>
             <NativeTabs.Trigger name="home">
-                <Label>{t("tabs.home")}</Label>
-                <Icon
+                <NativeTabs.Trigger.Label>{t("tabs.home")}</NativeTabs.Trigger.Label>
+                <NativeTabs.Trigger.Icon
                     sf={{default: "house", selected: "house.fill"}}
                     drawable="ic_menu_view"
                 />
             </NativeTabs.Trigger>
 
             <NativeTabs.Trigger name="favorites">
-                <Label>{t("tabs.favorites")}</Label>
-                <Icon sf={{default: "bookmark", selected: "bookmark.fill"}} drawable="ic_menu_agenda"/>
+                <NativeTabs.Trigger.Label>{t("tabs.favorites")}</NativeTabs.Trigger.Label>
+                <NativeTabs.Trigger.Icon sf={{default: "bookmark", selected: "bookmark.fill"}} drawable="ic_menu_agenda"/>
             </NativeTabs.Trigger>
 
             <NativeTabs.Trigger name="search" role="search">
-                <Label>{t("tabs.search")}</Label>
-                <Icon sf="magnifyingglass" drawable="ic_menu_search"/>
+                <NativeTabs.Trigger.Label>{t("tabs.search")}</NativeTabs.Trigger.Label>
+                <NativeTabs.Trigger.Icon sf="magnifyingglass" drawable="ic_menu_search"/>
             </NativeTabs.Trigger>
 
 
             <NativeTabs.Trigger name="groups">
-                <Label>{t("tabs.groups")}</Label>
-                <Icon sf={{default: "rectangle.stack", selected: "rectangle.stack.fill"}} drawable="ic_menu_agenda"/>
+                <NativeTabs.Trigger.Label>{t("tabs.groups")}</NativeTabs.Trigger.Label>
+                <NativeTabs.Trigger.Icon sf={{default: "rectangle.stack", selected: "rectangle.stack.fill"}} drawable="ic_menu_agenda"/>
             </NativeTabs.Trigger>
 
             <NativeTabs.Trigger name="profile">
-                 {!loggedIn && <Badge>!</Badge>}
-                <Label>{t("tabs.profile")}</Label>
-                <Icon sf={{default: "person", selected: "person.fill"}} drawable="ic_menu_agenda"/>
+                 {!loggedIn && <NativeTabs.Trigger.Badge>!</NativeTabs.Trigger.Badge>}
+                <NativeTabs.Trigger.Label>{t("tabs.profile")}</NativeTabs.Trigger.Label>
+                <NativeTabs.Trigger.Icon sf={{default: "person", selected: "person.fill"}} drawable="ic_menu_agenda"/>
             </NativeTabs.Trigger>
 
         </NativeTabs>

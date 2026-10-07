@@ -35,6 +35,7 @@ export default function HomeIndex() {
         }
     }
 
+
     const jumpBackGame = useMemo(() => {
         const moguce = games.filter(
             (g) => g.status === "paused" || g.status === "backlog"
@@ -42,9 +43,19 @@ export default function HomeIndex() {
         if (!moguce.length) {
             return null;
         } else {
-            return moguce[Math.floor(Math.random() * moguce.length)];
+            // Stabilan odabir bez nasumičnosti
+            return moguce[games.length % moguce.length];
         }
     }, [games]);
+
+    const openDetails = () => {
+    if (!jumpBackGame) return;
+
+    router.push({
+        pathname: "/home/details",
+        params: {game: JSON.stringify(jumpBackGame)},
+    });
+};
 
       const handlePress = () => {
       if (Platform.OS === "ios") {
@@ -144,9 +155,11 @@ export default function HomeIndex() {
                 >
                     <Text style={[styles.title, {color: "#F43098"}]}>Jump back in!</Text>
 
-                    <Text style={[styles.gameTitle, {color: t.text}]}>
-                        {jumpBackGame.title}
-                    </Text>
+                    <Pressable onPress={openDetails}>
+                        <Text style={[styles.gameTitle, {color: t.text}]}>
+                            {jumpBackGame.title}
+                        </Text>
+                    </Pressable>
 
                     <View
                         style={{
@@ -176,6 +189,7 @@ export default function HomeIndex() {
                             contentFit="cover"
                             cachePolicy="memory-disk"
                             transition={{duration: 200, effect: "cross-dissolve"}}
+
                         />
                     ) : null}
 

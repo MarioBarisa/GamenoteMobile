@@ -66,6 +66,8 @@ export default function GameCard({ game, onDelete }: Props) {
 
   const pct = achievementPercent(game.progress_value, game.progress_total);
   const prColor = progressColor(game.progress_value, game.progress_total);
+  // ima pravi progres iznad nule
+  const hasProgress = typeof game.progress_value === 'number' && typeof game.progress_total === 'number' && game.progress_total > 0 && game.progress_value > 0;
 
   return (
       <Pressable onPress={handlePress} onLongPress={handleContextMenu} accessibilityLabel={tr('gameCard.openA11y', {title: game.title})} style={({pressed})=>[{opacity: pressed ? 0.8 : 1}]}>
@@ -149,22 +151,39 @@ export default function GameCard({ game, onDelete }: Props) {
                   </View>
 
                     {/*Progress bar*/}
-                    {typeof game.progress_value === 'number' && typeof game.progress_total === 'number' && game.progress_total > 0 ? (
-                        <View style={styles.progressSection}>
-                            <View style={[styles.progressTrack, {backgroundColor: theme === 'dark' ? '#2C2C2E' : '#E5E5EA' }]}>
+                    <View style={styles.progressSection}>
+                        <View style={[styles.progressTrack, {backgroundColor: theme === 'dark' ? '#2C2C2E' : '#E5E5EA' }]}>
+                            {hasProgress ? (
                                 <View style={[styles.progressFill, { width: `${pct}%`, backgroundColor: prColor }]} />
-                            </View>
-                            <View style={styles.progressLabels}>
+                            ) : (
+                                // pruge za nulti progres
+                                <View style={styles.stripedRow}>
+                                    {Array.from({length: 20}).map((_, i) => (
+                                        <View key={i} style={[styles.stripe, {backgroundColor: t.secondaryText}]} />
+                                    ))}
+                                </View>
+                            )}
+                        </View>
+                        <View style={styles.progressLabels}>
+                            {hasProgress ? (
                                 <Text style={[styles.progressLabel, {color: t.text, fontSize: isLargeScreen ? 12 : 10}]}>
-                                    {Math.min(game.progress_value, game.progress_total)}/{game.progress_total}
+                                    {Math.min(game.progress_value!, game.progress_total!)}/{game.progress_total}
                                 </Text>
+                            ) : (
+                                <Text style={[styles.progressLabel, {color: t.secondaryText, fontSize: isLargeScreen ? 12 : 10}]}>
+                                    {tr('gameDetails.noProgress')}
+                                </Text>
+                            )}
+                            {hasProgress ? (
                                 <Text style={[styles.progressPercent, {color: t.secondaryText, fontSize: isLargeScreen ? 12 : 10}]}>
                                     {pct}%
                                 </Text>
-
-                            </View>
+                            ) : (
+                                <Text style={[styles.progressPercent, {color: t.secondaryText, fontSize: isLargeScreen ? 12 : 10}]}>
+                                </Text>
+                            )}
                         </View>
-                    ) : null}
+                    </View>
               </View>
             </View>
       </Pressable>
@@ -252,6 +271,22 @@ const styles = StyleSheet.create({
     progressFill: {
       height: '100%',
       borderRadius: 2,
+    },
+    stripedRow: {
+      flex: 1,
+      width: '100%',
+      flexDirection: 'row',
+      alignItems: 'center',
+      gap: 4,
+      paddingHorizontal: 4,
+      height: '100%',
+      opacity: 0.5,
+    },
+    stripe: {
+      flex: 1,
+      height: '100%',
+      transform: [{skewX: '-20deg'}],
+      borderRadius: 1,
     },
     progressLabels: {
       flexDirection: 'row',

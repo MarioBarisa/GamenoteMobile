@@ -13,7 +13,7 @@ import {colors} from "@/constants/theme";
 import {Game} from "@/common/Game";
 import {useState} from "react";
 import {SymbolView} from "expo-symbols";
-import DateTimePicker, {DateTimePickerEvent} from "@react-native-community/datetimepicker";
+import DateTimePicker from "@react-native-community/datetimepicker";
 import {useUserGames} from "@/hooks/useUserGames";
 import {useGroups} from "@/context/GroupsContext";
 import {STATUS_CONFIG, GAME_STATUSES} from "@/common/StatusCommons";
@@ -115,8 +115,8 @@ export default function ModalEdit() {
                         value={parseDate(form.start_date)}
                         mode="date"
                         display="compact"
-                        onChange={(e: DateTimePickerEvent, date?: Date) => {
-                            if (date) patch('start_date', date.toISOString().split('T')[0]);
+                        onValueChange={(_e, date) => {
+                            patch('start_date', date.toISOString().split('T')[0]);
                         }}
                         maximumDate={new Date()}
                     />
@@ -127,8 +127,8 @@ export default function ModalEdit() {
                         value={parseDate(form.end_date)}
                         mode="date"
                         display="compact"
-                        onChange={(e: DateTimePickerEvent, date?: Date) => {
-                            if (date) patch('end_date', date.toISOString().split('T')[0]);
+                        onValueChange={(_e, date) => {
+                            patch('end_date', date.toISOString().split('T')[0]);
                         }}
                         maximumDate={new Date()}
                     />

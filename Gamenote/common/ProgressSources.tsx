@@ -56,5 +56,7 @@ export function progressColor(value?: number, total?: number): string {
   if (pct >= 70) return '#84CC16'
   if (pct >= 45) return '#FACC15'
   if (pct >= 20) return '#F97316'
+  if (pct >= 1) return '#EF4444'
+  if (pct <= 1) return '#9A9898'
   return '#EF4444'
 }

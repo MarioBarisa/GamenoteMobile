@@ -91,7 +91,7 @@ export default function FavoritesScreen() {
                         >
                             <SymbolView
                                 name={sortBy === 'rating' ? 'star.fill' : 'clock.fill'}
-                                style={{width: 28, height: 28, marginLeft: 4}}
+                                style={{width: 28, height: 28}}
                                 tintColor={sortBy === 'rating' ? '#FFD700' : t.accent}
                             />
                         </TouchableOpacity>
@@ -115,7 +115,7 @@ export default function FavoritesScreen() {
                             ) : (
                                 <SymbolView
                                     name="gamecontroller.fill"
-                                    style={{width: 28, height: 28, marginLeft: 4}}
+                                    style={{width: 28, height: 28}}
                                     tintColor={t.text}
                                 />
                             )}
