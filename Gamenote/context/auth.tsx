@@ -28,15 +28,26 @@ export function AuthProvider({children}: { children: ReactNode }) {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    supabase.auth.getSession().then(async ({data: {session: s}}) => {
-      setSession(s);
-      if (s) {
-        const {data: {user: freshUser}} = await supabase.auth.getUser();
-        setUser(freshUser ?? s.user);
-      } else {
-        setUser(null);
-      }
+    // Sigurnosni izlaz iz učitavanja
+    const timeout = setTimeout(() => setIsLoading(false), 8000);
+
+    const finish = () => {
+      clearTimeout(timeout);
       setIsLoading(false);
+    };
+
+    supabase.auth.getSession().then(({data: {session: s}}) => {
+      setSession(s);
+      setUser(s?.user ?? null);
+      finish();
+      if (s) {
+        // Svježi korisnik stiže naknadno
+        supabase.auth.getUser().then(({data}) => {
+          if (data.user) setUser(data.user);
+        }).catch(() => {});
+      }
+    }).catch(() => {
+      finish();
     });
 
     const {data: {subscription}} = supabase.auth.onAuthStateChange((_event, s) => {

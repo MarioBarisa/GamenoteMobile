@@ -66,7 +66,7 @@ export default function SettingsScreen() {
                             false: "rgba(120,120,128,0.32)",
                             true: "#34C759",
                         }}
-                        thumbColor={theme === "dark" ? "#FFFFFF" : "#000000"} //KAKO STAVVTITI DA GUM IMA DRUGACIJU BOJU!!! thumbColor={theme === "dark" ? "#000" : "#FFF"}
+                        thumbColor={theme === "dark" ? "#FFFFFF" : "#000000"} //KAKO STAVTITI DA GUM IMA DRUGACIJU BOJU!!! thumbColor={theme === "dark" ? "#000" : "#FFF"}
                     />
                 </View>
 

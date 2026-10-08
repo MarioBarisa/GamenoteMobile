@@ -23,7 +23,7 @@ function AppContent() {
 
     useEffect(() => {
         if (!isLoading) {
-            SplashScreen.hideAsync();
+            SplashScreen.hideAsync().catch(() => {});
         }
     }, [isLoading]);
 

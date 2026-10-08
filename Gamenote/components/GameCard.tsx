@@ -205,7 +205,7 @@ const styles = StyleSheet.create({
     imageContainer: {
         position: 'relative',
         width: '100%',
-        aspectRatio: 16 / 9,
+        aspectRatio: 3 / 4, // stari aspect ratio  aspectRatio: 16 / 9,
     },
     image: {
         width: '100%',

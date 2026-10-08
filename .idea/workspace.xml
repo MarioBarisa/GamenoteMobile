@@ -7,51 +7,8 @@
     <option name="selectedModelId" value="auto" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7b37eb79-ceff-44a4-81aa-7e12f61dfc1f" name="Changes" comment="Updated the app to Expo SDK v57 ( + other packages ). Improved the display of progress in both gamecards and details screens. Minor translation changes.">
-      <change afterPath="$PROJECT_DIR$/Gamenote/.npmrc" afterDir="false" />
+    <list default="true" id="7b37eb79-ceff-44a4-81aa-7e12f61dfc1f" name="Changes" comment="Promjena na novi custom built translation API ( api.gamenote.eu ) kao zamjena za napušteni RAWG API. Minimalne izmjene translation stringova + dodan refresh na search tab kada je on u fokusu kako bi radio check za vec dodane igre u search rezultatima.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gamenote/app.json" beforeDir="false" afterPath="$PROJECT_DIR$/Gamenote/app.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gamenote/app/(modals)/addGameModal.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/Gamenote/app/(modals)/addGameModal.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gamenote/app/(modals)/modalEdit.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/Gamenote/app/(modals)/modalEdit.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gamenote/app/(tabs)/_layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/Gamenote/app/(tabs)/_layout.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gamenote/app/(tabs)/favorites/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/Gamenote/app/(tabs)/favorites/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gamenote/app/(tabs)/home/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/Gamenote/app/(tabs)/home/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gamenote/app/(tabs)/search/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/Gamenote/app/(tabs)/search/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gamenote/common/ProgressSources.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/Gamenote/common/ProgressSources.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gamenote/components/GameCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/Gamenote/components/GameCard.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gamenote/components/GameCardCompact.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/Gamenote/components/GameCardCompact.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gamenote/components/GameDetailsScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/Gamenote/components/GameDetailsScreen.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gamenote/ios/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gamenote/ios/.xcode.env" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gamenote/ios/Gamenote.xcodeproj/project.pbxproj" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gamenote/ios/Gamenote.xcodeproj/xcshareddata/xcschemes/Gamenote.xcscheme" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gamenote/ios/Gamenote.xcworkspace/contents.xcworkspacedata" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gamenote/ios/Gamenote/AppDelegate.swift" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gamenote/ios/Gamenote/Gamenote-Bridging-Header.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gamenote/ios/Gamenote/Gamenote.entitlements" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gamenote/ios/Gamenote/Images.xcassets/AppIcon.appiconset/Contents.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gamenote/ios/Gamenote/Images.xcassets/AppIcon.appiconset/GamenoteIcon-iOS-ClearDark-1024x1024@1x.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gamenote/ios/Gamenote/Images.xcassets/AppIcon.appiconset/GamenoteIcon-iOS-ClearLight-1024x1024@1x.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gamenote/ios/Gamenote/Images.xcassets/AppIcon.appiconset/GamenoteIcon-iOS-Default-1024x1024@1x.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gamenote/ios/Gamenote/Images.xcassets/AppIcon.appiconset/GamenoteIcon-iOS-TintedLight-1024x1024@1x.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gamenote/ios/Gamenote/Images.xcassets/Contents.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gamenote/ios/Gamenote/Images.xcassets/SplashScreenBackground.colorset/Contents.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gamenote/ios/Gamenote/Images.xcassets/SplashScreenLogo.imageset/Contents.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gamenote/ios/Gamenote/Images.xcassets/SplashScreenLogo.imageset/dark_image.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gamenote/ios/Gamenote/Images.xcassets/SplashScreenLogo.imageset/dark_image@2x.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gamenote/ios/Gamenote/Images.xcassets/SplashScreenLogo.imageset/dark_image@3x.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gamenote/ios/Gamenote/Images.xcassets/SplashScreenLogo.imageset/image.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gamenote/ios/Gamenote/Images.xcassets/SplashScreenLogo.imageset/image@2x.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gamenote/ios/Gamenote/Images.xcassets/SplashScreenLogo.imageset/image@3x.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gamenote/ios/Gamenote/Info.plist" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gamenote/ios/Gamenote/PrivacyInfo.xcprivacy" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gamenote/ios/Gamenote/SplashScreen.storyboard" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gamenote/ios/Gamenote/Supporting/Expo.plist" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gamenote/ios/Podfile" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gamenote/ios/Podfile.lock" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gamenote/ios/Podfile.properties.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gamenote/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/Gamenote/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gamenote/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/Gamenote/package.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -195,8 +152,7 @@
             <option name="modelValue" value="auto" />
           </model>
         </option>
-        <option name="targetType" value="BACKGROUND" />
-        <option name="worktreeMode" value="WORKSPACE" />
+        <option name="targetType" value="LOCAL" />
       </template>
     </option>
     <option name="panelTemplate">
@@ -678,6 +634,7 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
+    <MESSAGE value="Splashscreen je sada default icon." />
     <MESSAGE value="onboardingModal.tsx sada korsiti isti bg color kao ostali modali." />
     <MESSAGE value="splashscreen koristi banner ( zadnji pokušaj )" />
     <MESSAGE value="Popravljeni PLACEHOLDER_GAMES.ts i PLACEHOLDER_GROUPS.TSX.ts + dodan pravilan translation" />
@@ -702,8 +659,7 @@
     <MESSAGE value="Dodan seminar te popravljen README.md." />
     <MESSAGE value="Dodan TestFlight link." />
     <MESSAGE value="Promjena na novi custom built translation API ( api.gamenote.eu ) kao zamjena za napušteni RAWG API. Minimalne izmjene translation stringova + dodan refresh na search tab kada je on u fokusu kako bi radio check za vec dodane igre u search rezultatima." />
-    <MESSAGE value="Updated the app to Expo SDK v57 ( + other packages ). Improved the display of progress in both gamecards and details screens. Minor translation changes." />
-    <option name="LAST_COMMIT_MESSAGE" value="Updated the app to Expo SDK v57 ( + other packages ). Improved the display of progress in both gamecards and details screens. Minor translation changes." />
+    <option name="LAST_COMMIT_MESSAGE" value="Promjena na novi custom built translation API ( api.gamenote.eu ) kao zamjena za napušteni RAWG API. Minimalne izmjene translation stringova + dodan refresh na search tab kada je on u fokusu kako bi radio check za vec dodane igre u search rezultatima." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

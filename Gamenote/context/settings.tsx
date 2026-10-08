@@ -19,7 +19,7 @@ const SettingsContext = createContext<SettingsContextValue | undefined>(undefine
 
 export function SettingsProvider({children}: { children: ReactNode }) {
     const [vibrationsEnabled, setVibrationsEnabled] = useState(true);
-    const [compactCards, setCompactCards] = useState(false);
+    const [compactCards, setCompactCards] = useState(true);
     const [language, setLanguageState] = useState(getCurrentLanguage());
 
     useEffect(() => {
