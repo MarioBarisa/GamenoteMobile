@@ -222,8 +222,6 @@
     "addGamesLabel": "Add games:",
     "showLess": "Show less",
     "showMore": "Show {{count}} more games",
-    "notesLabel": "Your notes:",
-    "notesPlaceholder": "Add notes...",
     "saveA11y": "Add group",
     "saveLabel": "Add group",
     "addedTitle": "",
@@ -239,8 +237,6 @@
     "gamesLabel": "Games in group:",
     "showLess": "Show less",
     "showMore": "Show {{count}} more games",
-    "notesLabel": "Your notes:",
-    "notesPlaceholder": "Add notes...",
     "saveA11y": "Save group changes",
     "saveLabel": "Save changes",
     "savedTitle": "Saved",
@@ -253,6 +249,8 @@
   "gameCard": {
     "deleteTitle": "Delete game",
     "deleteMessage": "Are you sure you want to delete \"{{title}}\"?",
+    "deleteErrorTitle": "Could not delete",
+    "deleteErrorMessage": "The game was not deleted. Try again.",
     "actionEdit": "Edit",
     "actionDelete": "Delete",
     "openA11y": "Open game details {{title}}"

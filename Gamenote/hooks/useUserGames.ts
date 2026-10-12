@@ -145,34 +145,35 @@ export function useUserGames() {
   const [error, setError] = useState<string | null>(null);
 
   const fetchGames = useCallback(async () => {
-    if (!loggedIn || !session?.user.id) {
-      setGames(PLACEHOLDER_GAMES);
-      setIsLoading(false);
-      setError(null);
-      return;
-    }
-
     setIsLoading(true);
     setError(null);
 
-    const {data, error: fetchError} = await supabase
-      .from('games')
-      .select('*')
-      .eq('user_id', session.user.id);
+    try {
+      if (!loggedIn || !session?.user.id) {
+        setGames(PLACEHOLDER_GAMES);
+        return;
+      }
 
-    if (fetchError) {
-      console.error('Failed to fetch user games:', fetchError);
-      setError(fetchError.message || 'Failed to load games');
-      setGames(PLACEHOLDER_GAMES);
+      const {data, error: fetchError} = await supabase
+        .from('games')
+        .select('*')
+        .eq('user_id', session.user.id);
+
+      if (fetchError) {
+        console.error('Failed to fetch user games:', fetchError);
+        setError(fetchError.message || 'Failed to load games');
+        setGames(PLACEHOLDER_GAMES);
+        return;
+      }
+
+      setGames((data ?? []).map(supabaseRowToGame));
+    } finally {
       setIsLoading(false);
-      return;
     }
-
-    setGames((data ?? []).map(supabaseRowToGame));
-    setIsLoading(false);
   }, [loggedIn, session?.user.id]);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- početno učitavanje igara
     fetchGames();
   }, [fetchGames]);
 
@@ -216,23 +217,42 @@ export function useUserGames() {
 
   const deleteGame = async (gameId: string): Promise<void> => {
     if (!loggedIn || !session?.user.id) {
-      setGames(prev => prev.filter(g => g.game_id !== gameId));
+      setGames(prev => prev.filter(g => g.db_id !== gameId && g.game_id !== gameId));
       return;
     }
 
-    const {error: deleteError} = await supabase
+    // Brisanje po primarnom ključu
+    const byId = await supabase
       .from('games')
       .delete()
       .eq('user_id', session.user.id)
-      .eq('game_api_id', gameId);
+      .eq('id', gameId)
+      .select();
 
-    if (deleteError) {
-      console.error('Failed to delete game:', deleteError);
-      throw deleteError;
+    if (!byId.error && byId.data && byId.data.length > 0) {
+      setGames(prev => prev.filter(g => g.db_id !== gameId && g.game_id !== gameId));
+      return;
     }
 
-    setGames(prev => prev.filter(g => g.game_id !== gameId));
-    await fetchGames();
+    // Stari način preko API id-a
+    const byApiId = await supabase
+      .from('games')
+      .delete()
+      .eq('user_id', session.user.id)
+      .eq('game_api_id', gameId)
+      .select();
+
+    if (byApiId.error) {
+      console.error('Failed to delete game:', byApiId.error);
+      throw byApiId.error;
+    }
+
+    if (!byApiId.data || byApiId.data.length === 0) {
+      console.error('Failed to delete game: no row deleted');
+      throw new Error('Game not deleted');
+    }
+
+    setGames(prev => prev.filter(g => g.db_id !== gameId && g.game_id !== gameId));
   };
 
   return {

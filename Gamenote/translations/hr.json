@@ -222,8 +222,6 @@
     "addGamesLabel": "Dodaj igre:",
     "showLess": "Prikaži manje",
     "showMore": "Prikaži još {{count}} igara",
-    "notesLabel": "Tvoje bilješke:",
-    "notesPlaceholder": "Dodaj bilješke...",
     "saveA11y": "Dodaj grupu",
     "saveLabel": "Dodaj grupu",
     "addedTitle": "",
@@ -239,8 +237,6 @@
     "gamesLabel": "Igre u grupi:",
     "showLess": "Prikaži manje",
     "showMore": "Prikaži još {{count}} igara",
-    "notesLabel": "Tvoje bilješke:",
-    "notesPlaceholder": "Dodaj bilješke...",
     "saveA11y": "Spremi izmjene grupe",
     "saveLabel": "Spremi izmjene",
     "savedTitle": "Spremljena",
@@ -253,6 +249,8 @@
   "gameCard": {
     "deleteTitle": "Izbriši igru",
     "deleteMessage": "Jesi li siguran da želiš izbrisati \"{{title}}\"?",
+    "deleteErrorTitle": "Brisanje nije uspjelo",
+    "deleteErrorMessage": "Igra nije izbrisana. Pokušaj ponovno.",
     "actionEdit": "Uredi",
     "actionDelete": "Izbriši",
     "openA11y": "Otvori detalje igre {{title}}"

@@ -28,7 +28,6 @@ export default function AddGroupModal() {
         type: typeGroups[0],
         rating: undefined,
         created_at: new Date().toISOString(),
-        user_notes: '',
     });
 
     const [selectedGameIds, setSelectedGameIds] = useState<string[]>([]);
@@ -46,7 +45,6 @@ export default function AddGroupModal() {
             name: form.name.trim(),
             type: form.type ?? null,
             rating: form.rating ?? null,
-            user_notes: form.user_notes ?? null,
             user_id: user?.id ?? '',
         } as any);
 
@@ -197,23 +195,6 @@ export default function AddGroupModal() {
                         )}
                 </View>
 
-                <View style={{flexDirection: 'column', gap: 8, paddingVertical: 8}}>
-                    <Text style={[styles.label, {color: t.text}]}>{tr('addGroup.notesLabel')}</Text>
-                    <TextInput
-                        style={[styles.notesInput, {
-                            color: t.text,
-                            backgroundColor: theme === 'dark' ? '#2C2C2E' : '#E5E5EA'
-                        }]}
-                        value={form.user_notes ?? ''}
-                        onChangeText={v => patch('user_notes', v)}
-                        multiline={true}
-                        numberOfLines={10}
-                        placeholder={tr('addGroup.notesPlaceholder')}
-                        placeholderTextColor={t.secondaryText}
-                        textAlignVertical="top"
-                    />
-                </View>
-
                 <Pressable
                     onPress={handleSave}
                     accessibilityLabel={tr('addGroup.saveA11y')}
@@ -254,12 +235,6 @@ const styles = StyleSheet.create({
         fontSize: 16,
         width: 80,
         textAlign: 'center',
-    },
-    notesInput: {
-        borderRadius: 10,
-        padding: 12,
-        fontSize: 15,
-        minHeight: 100,
     },
     titleInput: {
         borderRadius: 10,

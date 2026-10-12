@@ -12,7 +12,7 @@ import {useTranslation} from "react-i18next";
 
 interface Props {
   game: Game
-  onDelete?: (gameId: string) => void
+  onDelete?: (gameId: string) => void | Promise<void>
 }
 
 export default function GameCard({ game, onDelete }: Props) {
@@ -42,7 +42,18 @@ export default function GameCard({ game, onDelete }: Props) {
   const handleDelete = () => {
     Alert.alert(tr('gameCard.deleteTitle'), tr('gameCard.deleteMessage', {title: game.title}), [
       {text: tr('common.cancel'), style: 'cancel'},
-      {text: tr('common.delete'), style: 'destructive', onPress: () => onDelete?.(game.game_id)},
+      {
+        text: tr('common.delete'),
+        style: 'destructive',
+        onPress: async () => {
+          try {
+            await onDelete?.(game.db_id ?? game.game_id)
+          } catch {
+            // Poruka o neuspjelom brisanju
+            Alert.alert(tr('gameCard.deleteErrorTitle'), tr('gameCard.deleteErrorMessage'))
+          }
+        },
+      },
     ])
   }
 

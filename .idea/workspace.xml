@@ -7,15 +7,21 @@
     <option name="selectedModelId" value="auto" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7b37eb79-ceff-44a4-81aa-7e12f61dfc1f" name="Changes" comment="Promjena na novi custom built translation API ( api.gamenote.eu ) kao zamjena za napušteni RAWG API. Minimalne izmjene translation stringova + dodan refresh na search tab kada je on u fokusu kako bi radio check za vec dodane igre u search rezultatima.">
+    <list default="true" id="7b37eb79-ceff-44a4-81aa-7e12f61dfc1f" name="Changes" comment="Fixed icons by removing the alpha channel.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gamenote/assets/gamenote/icons/GamenoteIcon-iOS-ClearDark-1024x1024@1x.png" beforeDir="false" afterPath="$PROJECT_DIR$/Gamenote/assets/gamenote/icons/GamenoteIcon-iOS-ClearDark-1024x1024@1x.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gamenote/assets/gamenote/icons/GamenoteIcon-iOS-ClearLight-1024x1024@1x.png" beforeDir="false" afterPath="$PROJECT_DIR$/Gamenote/assets/gamenote/icons/GamenoteIcon-iOS-ClearLight-1024x1024@1x.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gamenote/assets/gamenote/icons/GamenoteIcon-iOS-Dark-1024x1024@1x.png" beforeDir="false" afterPath="$PROJECT_DIR$/Gamenote/assets/gamenote/icons/GamenoteIcon-iOS-Dark-1024x1024@1x.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gamenote/assets/gamenote/icons/GamenoteIcon-iOS-Default-1024x1024@1x.png" beforeDir="false" afterPath="$PROJECT_DIR$/Gamenote/assets/gamenote/icons/GamenoteIcon-iOS-Default-1024x1024@1x.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gamenote/assets/gamenote/icons/GamenoteIcon-iOS-TintedDark-1024x1024@1x.png" beforeDir="false" afterPath="$PROJECT_DIR$/Gamenote/assets/gamenote/icons/GamenoteIcon-iOS-TintedDark-1024x1024@1x.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gamenote/assets/gamenote/icons/GamenoteIcon-iOS-TintedLight-1024x1024@1x.png" beforeDir="false" afterPath="$PROJECT_DIR$/Gamenote/assets/gamenote/icons/GamenoteIcon-iOS-TintedLight-1024x1024@1x.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gamenote/assets/images/icon.png" beforeDir="false" afterPath="$PROJECT_DIR$/Gamenote/assets/images/icon.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gamenote/app/(modals)/addGroupModal.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/Gamenote/app/(modals)/addGroupModal.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gamenote/app/(modals)/modalEditGroups.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/Gamenote/app/(modals)/modalEditGroups.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gamenote/app/(tabs)/favorites/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/Gamenote/app/(tabs)/favorites/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gamenote/app/(tabs)/groups/group-detail.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/Gamenote/app/(tabs)/groups/group-detail.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gamenote/app/(tabs)/groups/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/Gamenote/app/(tabs)/groups/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gamenote/app/(tabs)/home/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/Gamenote/app/(tabs)/home/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gamenote/app/(tabs)/profile/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/Gamenote/app/(tabs)/profile/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gamenote/app/(tabs)/search/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/Gamenote/app/(tabs)/search/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gamenote/components/GameCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/Gamenote/components/GameCard.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gamenote/components/GameCardCompact.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/Gamenote/components/GameCardCompact.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gamenote/hooks/useUserGames.ts" beforeDir="false" afterPath="$PROJECT_DIR$/Gamenote/hooks/useUserGames.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gamenote/translations/en.json" beforeDir="false" afterPath="$PROJECT_DIR$/Gamenote/translations/en.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gamenote/translations/hr.json" beforeDir="false" afterPath="$PROJECT_DIR$/Gamenote/translations/hr.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -276,13 +282,7 @@
       <workItem from="1786027896137" duration="1000" />
       <workItem from="1789638262226" duration="2801000" />
       <workItem from="1789902882502" duration="32000" />
-    </task>
-    <task id="LOCAL−00055" summary="part 2 - dodan async-storage za persisten spremanje postavki, povezan gumb za haptic feedback u postavkama sa tab switching-om">
-      <option name="closed" value="true" />
-      <created>1780406095025</created>
-      <option name="number" value="LOCAL−00055" />
-      <option name="presentableId" value="LOCAL−00055" />
-      <updated>1780406095025</updated>
+      <workItem from="1791798706223" duration="4476000" />
     </task>
     <task id="LOCAL−00056" summary="manje izmjene">
       <option name="closed" value="true" />
@@ -620,7 +620,14 @@
       <option name="presentableId" value="LOCAL−00103" />
       <updated>1786023145007</updated>
     </task>
-    <option name="localTasksCounter" value="104" />
+    <task id="LOCAL−00104" summary="Fixed icons by removing the alpha channel.">
+      <option name="closed" value="true" />
+      <created>1791469895128</created>
+      <option name="number" value="LOCAL−00104" />
+      <option name="presentableId" value="LOCAL−00104" />
+      <updated>1791469895128</updated>
+    </task>
+    <option name="localTasksCounter" value="105" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -641,7 +648,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Splashscreen je sada default icon." />
     <MESSAGE value="onboardingModal.tsx sada korsiti isti bg color kao ostali modali." />
     <MESSAGE value="splashscreen koristi banner ( zadnji pokušaj )" />
     <MESSAGE value="Popravljeni PLACEHOLDER_GAMES.ts i PLACEHOLDER_GROUPS.TSX.ts + dodan pravilan translation" />
@@ -666,7 +672,8 @@
     <MESSAGE value="Dodan seminar te popravljen README.md." />
     <MESSAGE value="Dodan TestFlight link." />
     <MESSAGE value="Promjena na novi custom built translation API ( api.gamenote.eu ) kao zamjena za napušteni RAWG API. Minimalne izmjene translation stringova + dodan refresh na search tab kada je on u fokusu kako bi radio check za vec dodane igre u search rezultatima." />
-    <option name="LAST_COMMIT_MESSAGE" value="Promjena na novi custom built translation API ( api.gamenote.eu ) kao zamjena za napušteni RAWG API. Minimalne izmjene translation stringova + dodan refresh na search tab kada je on u fokusu kako bi radio check za vec dodane igre u search rezultatima." />
+    <MESSAGE value="Fixed icons by removing the alpha channel." />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed icons by removing the alpha channel." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

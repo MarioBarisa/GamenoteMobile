@@ -8,7 +8,16 @@ import {useUserGames} from "@/hooks/useUserGames";
 import {useMemo} from "react";
 import {SymbolView} from "expo-symbols";
 import {Ionicons} from "@expo/vector-icons";
+import {STATUS_PLATFORM} from "@/common/StatusCommons";
 import {useTranslation} from "react-i18next";
+
+// Boja metacritic bedža kao u searchu
+function metacriticColor(score: number) {
+    if (score >= 90) return '#00CE7A';
+    if (score >= 75) return '#66CC33';
+    if (score >= 50) return '#FFCC33';
+    return '#FF0000';
+}
 
 
 export default function GroupDetail(){
@@ -34,6 +43,19 @@ export default function GroupDetail(){
     const games = gameIds
         .map((gameId) => gamesMap.get(gameId))
         .filter((game): game is NonNullable<typeof game> => Boolean(game));
+
+    // Prosjek ocjena igara u grupi
+    let ratingSum = 0;
+    let ratingCount = 0;
+    let totalPlaytime = 0;
+    for (const game of games) {
+        if (typeof game.rating === 'number') {
+            ratingSum += game.rating;
+            ratingCount += 1;
+        }
+        totalPlaytime += game.play_time ?? 0;
+    }
+    const avgRating = ratingCount > 0 ? ratingSum / ratingCount : null;
 
     return (
         <>
@@ -79,20 +101,48 @@ export default function GroupDetail(){
                             fontWeight: "700"
                         }}><Text style={{color: t.secondaryText}}>{tr("groups.createdLabel")}</Text>{new Date(group.created_at).toLocaleDateString('en-GB').replace(/\//g, '.')}</Text>
                     )}
-                    {group.user_notes && (
+                    {group.user_notes && ( // NIJE TRENUTNO IMPLEMNTIRANO U BAZI PODATAKA
                         <Text style={{color: t.text, fontSize: 16, marginTop: 14, fontStyle: "italic"}}>{group.user_notes}</Text>
                     )}
                 </View>
-                {typeof group.rating === "number" && (
-                    <View style={styles.ratingRowStars}>
-                        {[1, 2, 3, 4, 5].map(star => (
-                            <SymbolView
-                                key={star}
-                                name={star <= group.rating! ? 'star.fill' : 'star'}
-                                style={{width: 34, height: 34}}
-                                tintColor={star <= group.rating! ? '#FF9F0A' : t.secondaryText}
-                            />
-                        ))}
+                {(typeof group.rating === "number" || avgRating !== null) && (
+                    <View style={styles.groupRatingRow}>
+                        {typeof group.rating === "number" && (
+                            <View style={styles.ratingRowStars}>
+                                {[1, 2, 3, 4, 5].map(star => (
+                                    <SymbolView
+                                        key={star}
+                                        name={star <= group.rating! ? 'star.fill' : 'star'}
+                                        style={{width: 34, height: 34}}
+                                        tintColor={star <= group.rating! ? '#FF9F0A' : t.secondaryText}
+                                    />
+                                ))}
+                            </View>
+                        )}
+                        {avgRating !== null && (
+                            <View style={styles.avgBadge}>
+                                <SymbolView
+                                    name="star.fill"
+                                    style={{width: 20, height: 20}}
+                                    tintColor="#FF9F0A"
+                                />
+                                <Text style={[styles.avgText, {color: t.secondaryText}]}>
+                                    {`Ø ${avgRating.toFixed(1)}`}
+                                </Text>
+                            </View>
+                        )}
+                        {games.length > 0 && (
+                            <View style={styles.avgBadge}>
+                                <SymbolView
+                                    name="clock.fill"
+                                    style={{width: 20, height: 20}}
+                                    tintColor={t.secondaryText}
+                                />
+                                <Text style={[styles.avgText, {color: t.secondaryText}]}>
+                                    {`${totalPlaytime}h`}
+                                </Text>
+                            </View>
+                        )}
                     </View>
                 )}
                 <Text style={{color: t.secondaryText, fontSize: 13, margin: 16, marginBottom: 8}}>
@@ -122,6 +172,34 @@ export default function GroupDetail(){
                                     <Text style={{color: t.secondaryText, fontSize: 12, marginTop: 2}}>{game.genre}</Text>
                                 )}
                             </View>
+                            <View style={styles.gameSecondaryInfo}>
+                                {typeof game?.rating === 'number' && (
+                                    <View style={styles.starsRow}>
+                                        {[1, 2, 3, 4, 5].map(star => (
+                                            <Ionicons
+                                                key={star}
+                                                name={star <= game.rating! ? 'star' : 'star-outline'}
+                                                size={14}
+                                                color={star <= game.rating! ? '#FF9F0A' : t.secondaryText}
+                                                style={{marginLeft: 2}} />
+                                        ))}
+                                    </View>
+                                )}
+                                {typeof game?.metacriticScore === 'number' && game.metacriticScore > 0 && (
+                                    <View style={[styles.metaBadge, {backgroundColor: metacriticColor(game.metacriticScore)}]}>
+                                        <Text style={styles.metaText}>{game.metacriticScore}</Text>
+                                    </View>
+                                )}
+                                {game?.platform && STATUS_PLATFORM[game.platform] && (
+                                    <View style={[styles.platformBadge, {backgroundColor: theme === 'dark' ? '#2C2C2E' : '#F2F2F7'}]}>
+                                        <Text style={[styles.platformText, {color: STATUS_PLATFORM[game.platform].text}]} numberOfLines={1} adjustsFontSizeToFit minimumFontScale={0.8}>
+                                            {typeof game.play_time === 'number'
+                                                ? `${game.play_time}h via ${STATUS_PLATFORM[game.platform].label}`
+                                                : `via ${STATUS_PLATFORM[game.platform].label}`}
+                                        </Text>
+                                    </View>
+                                )}
+                            </View>
                         </View>
                     </Pressable>
                 ))}
@@ -132,36 +210,80 @@ export default function GroupDetail(){
 
 
 const styles = StyleSheet.create({
-  header: {
-    padding: 20,
-    margin: 12,
-    borderRadius: 12,
-  },
-  ratingRow: {
-    flexDirection: "column",
-    //marginTop: 4,
-      padding: 4,
-  },
+    header: {
+        padding: 20,
+        margin: 12,
+        borderRadius: 12,
+    },
+    ratingRow: {
+        flexDirection: "column",
+        //marginTop: 4,
+        padding: 4,
+    },
     ratingRowStars: {
-    flexDirection: "row",
-    alignItems: "center",
+        flexDirection: "row",
+        alignItems: "center",
         padding: 8,
-    marginTop: 4,
-  },
-  gameCard: {
-    flexDirection: "row",
-    margin: 12,
-    marginTop: 0,
-    borderRadius: 10,
-    overflow: "hidden",
-  },
-  gameImage: {
-    width: 80,
-    aspectRatio: 1,
-  },
-  gameInfo: {
-    flex: 1,
-    padding: 12,
-    justifyContent: "center",
-  },
+    },
+    groupRatingRow: {
+        flexDirection: "row",
+        alignItems: "center",
+        gap: 8,
+    },
+    avgBadge: {
+        flexDirection: "row",
+        alignItems: "center",
+        gap: 4,
+    },
+    avgText: {
+        fontSize: 18,
+        fontWeight: "700",
+    },
+    gameCard: {
+        flexDirection: "row",
+        margin: 12,
+        marginTop: 0,
+        borderRadius: 10,
+        overflow: "hidden",
+    },
+    gameImage: {
+        width: 100,
+    },
+    gameInfo: {
+        flex: 1,
+        padding: 12,
+        justifyContent: "center",
+    },
+    gameSecondaryInfo: {
+        flex: 1,
+        padding: 10,
+        alignItems: "flex-end",
+        justifyContent: "space-between",
+    },
+    starsRow: {
+        flexDirection: "row",
+        alignItems: "center",
+    },
+    metaBadge: {
+        paddingHorizontal: 8,
+        paddingVertical: 2,
+        borderRadius: 4,
+        marginTop: 4,
+    },
+    metaText: {
+        color: "#fff",
+        fontSize: 13,
+        fontWeight: "700",
+    },
+    platformBadge: {
+        paddingHorizontal: 8,
+        paddingVertical: 4,
+        borderRadius: 16,
+        marginTop: 4,
+        maxWidth: "100%",
+    },
+    platformText: {
+        fontSize: 12,
+        fontWeight: "700",
+    },
 });

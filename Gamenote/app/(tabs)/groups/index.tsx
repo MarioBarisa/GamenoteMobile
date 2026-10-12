@@ -43,6 +43,7 @@ export default function GroupsIndex() {
               <RefreshControl
                 refreshing={isLoadingGroups || isLoadingGames}
                 onRefresh={() => { refreshGames(); refreshGroups(); }}
+                tintColor={t.accent}
               />
             }
         >

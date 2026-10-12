@@ -4,8 +4,9 @@ import {useTheme} from "@/context/theme";
 import {colors} from "@/constants/theme";
 import GameCard from "@/components/GameCard";
 import GameCardCompact from "@/components/GameCardCompact";
+import {GameCardSkeleton, GameCardCompactSkeleton} from "@/components/GameCardSkeleton";
 import {useSettings} from "@/context/settings";
-import {useMemo} from "react";
+import {useCallback, useMemo, useState} from "react";
 import {useUserGames} from "@/hooks/useUserGames";
 import * as Haptics from "expo-haptics";
 import {SymbolView} from "expo-symbols";
@@ -20,6 +21,21 @@ export default function HomeIndex() {
     const t = colors[theme];
     const {compactCards} = useSettings();
     const {games, deleteGame, refresh, isLoading} = useUserGames();
+    const [refreshing, setRefreshing] = useState(false);
+
+    // Odvojeno stanje za pull-to-refresh
+    const onRefresh = useCallback(async () => {
+        Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+        setRefreshing(true);
+        try {
+            await refresh();
+        } finally {
+            setRefreshing(false);
+        }
+    }, [refresh]);
+
+    // Duhovi samo na prvom učitavanju
+    const showGhost = isLoading && games.length === 0;
 
     let playtime = 0;
     for (const game of games) {
@@ -69,10 +85,10 @@ export default function HomeIndex() {
 
     return (
         <ScrollView
-            style={{backgroundColor: t.background}}
-            contentContainerStyle={{padding: 16, gap: 0}}
+            style={{flex: 1, backgroundColor: t.background}}
+            contentContainerStyle={{flexGrow: 1, padding: 16, gap: 0}}
             contentInsetAdjustmentBehavior="automatic"
-            refreshControl={<RefreshControl refreshing={isLoading} onRefresh={refresh} />}
+            refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} tintColor={t.accent} />}
         >
             <View
                 style={{
@@ -127,18 +143,32 @@ export default function HomeIndex() {
             </View>
 
             {(() => {
+                if (showGhost) {
+                    if (compactCards) {
+                        return (
+                            <View style={{flexDirection: 'row', flexWrap: 'wrap', gap: 12}}>
+                                {Array.from({length: 6}).map((_, i) => (
+                                    <GameCardCompactSkeleton key={i} />
+                                ))}
+                            </View>
+                        );
+                    }
+                    return Array.from({length: 4}).map((_, i) => (
+                        <GameCardSkeleton key={i} />
+                    ));
+                }
                 const igre = games.filter((g) => g.status === "playing");
                 if (compactCards) {
                     return (
                         <View style={{flexDirection: 'row', flexWrap: 'wrap', gap: 12}}>
                             {igre.map((game) => (
-                                <GameCardCompact key={game.db_id ?? game.game_id} game={game} onDelete={(id) => deleteGame(id)}/>
+                                <GameCardCompact key={game.db_id ?? game.game_id} game={game} onDelete={async (id) => { await deleteGame(id); }} />
                             ))}
                         </View>
                     );
                 }
                 return igre.map((game) => (
-                    <GameCard key={game.db_id ?? game.game_id} game={game} onDelete={(id) => deleteGame(id)}/>
+                    <GameCard key={game.db_id ?? game.game_id} game={game} onDelete={async (id) => { await deleteGame(id); }} />
                 ));
             })()}
 

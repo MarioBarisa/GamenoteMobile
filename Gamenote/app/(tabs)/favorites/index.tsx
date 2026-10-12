@@ -1,4 +1,4 @@
-import {useMemo, useState} from "react";
+import {useCallback, useMemo, useState} from "react";
 import {RefreshControl, ScrollView, View, Text, TouchableOpacity, ActionSheetIOS, Pressable} from "react-native";
 import {Stack} from "expo-router";
 import {useTheme} from "@/context/theme";
@@ -35,7 +35,19 @@ export default function FavoritesScreen() {
     const t = colors[theme];
     const {compactCards} = useSettings();
 
-    const {games, deleteGame, refresh, isLoading} = useUserGames();
+    const {games, deleteGame, refresh} = useUserGames();
+    const [refreshing, setRefreshing] = useState(false);
+
+    // Odvojeno stanje za pull-to-refresh
+    const onRefresh = useCallback(async () => {
+        Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+        setRefreshing(true);
+        try {
+            await refresh();
+        } finally {
+            setRefreshing(false);
+        }
+    }, [refresh]);
 
     const platforms = useMemo(
         () => [...new Set(games.map(g => g.platform).filter(Boolean))] as string[],
@@ -124,10 +136,10 @@ export default function FavoritesScreen() {
                 }}
             />
             <ScrollView
-                style={{backgroundColor: t.background}}
-                contentContainerStyle={{padding: 16, gap: 0}}
+                style={{flex: 1, backgroundColor: t.background}}
+                contentContainerStyle={{flexGrow: 1, padding: 16, gap: 0}}
                 contentInsetAdjustmentBehavior="automatic"
-                refreshControl={<RefreshControl refreshing={isLoading} onRefresh={refresh} />}
+                refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} tintColor={t.accent} />}
             >
                 <View style={{
                     flexDirection: "row", justifyContent: "space-evenly", alignItems: "center",
@@ -161,12 +173,12 @@ export default function FavoritesScreen() {
                 {compactCards ? (
                     <View style={{flexDirection: 'row', flexWrap: 'wrap', gap: 12}}>
                         {filteredGames.map((game) => (
-                            <GameCardCompact key={game.db_id ?? game.game_id} game={game} onDelete={(id) => deleteGame(id)}/>
+                            <GameCardCompact key={game.db_id ?? game.game_id} game={game} onDelete={async (id) => { await deleteGame(id); }} />
                         ))}
                     </View>
                 ) : (
                     filteredGames.map((game) => (
-                        <GameCard key={game.db_id ?? game.game_id} game={game} onDelete={(id) => deleteGame(id)}/>
+                        <GameCard key={game.db_id ?? game.game_id} game={game} onDelete={async (id) => { await deleteGame(id); }} />
                     ))
                 )}
             </ScrollView>

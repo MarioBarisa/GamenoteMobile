@@ -10,6 +10,38 @@ import {useNavigation, useRouter} from "expo-router";
 import {useTranslation} from "react-i18next";
 
 
+function StatCard({  // reusable za stats
+                        label,
+                        value,
+                        valueColor,
+                        symbolName,
+                        symbolColor,
+                        wide = false,
+                    }: {
+    label: string;
+    value: string;
+    valueColor: string;
+    symbolName: string;
+    symbolColor: string;
+    wide?: boolean;
+}) {
+    const {theme} = useTheme();
+    const t = colors[theme];
+    return (
+        <View style={[styles.statCard, {backgroundColor: t.backgroundModal}, wide && styles.statCardWide]}>
+            <SymbolView
+                name={symbolName as any}
+                style={styles.statIcon}
+                tintColor={symbolColor}
+            />
+            <Text style={[styles.statLabel, {color: t.secondaryText}]}>{label}</Text>
+            <Text style={[styles.statValue, {color: valueColor}]} numberOfLines={1} adjustsFontSizeToFit>
+                {value}
+            </Text>
+        </View>
+    );
+}
+
 // noinspection JSUnusedGlobalSymbols
 export default function FavoritesScreen() {
     const {t: tr} = useTranslation();
@@ -103,41 +135,11 @@ export default function FavoritesScreen() {
 
     const userInfo = userStats();
 
-    function StatCard({  // reusable za stats
-                          label,
-                          value,
-                          valueColor,
-                          symbolName,
-                          symbolColor,
-                          wide = false,
-                      }: {
-        label: string;
-        value: string;
-        valueColor: string;
-        symbolName: string;
-        symbolColor: string;
-        wide?: boolean;
-    }) {
-        return (
-            <View style={[styles.statCard, {backgroundColor: t.backgroundModal}, wide && styles.statCardWide]}>
-                <SymbolView
-                    name={symbolName as any}
-                    style={styles.statIcon}
-                    tintColor={symbolColor}
-                />
-                <Text style={[styles.statLabel, {color: t.secondaryText}]}>{label}</Text>
-                <Text style={[styles.statValue, {color: valueColor}]} numberOfLines={1} adjustsFontSizeToFit>
-                    {value}
-                </Text>
-            </View>
-        );
-    }
-
     return (
         <ScrollView
             style={{backgroundColor: t.background}}
             contentInsetAdjustmentBehavior="automatic"
-            refreshControl={<RefreshControl refreshing={isLoading} onRefresh={refresh} />}
+            refreshControl={<RefreshControl refreshing={isLoading} onRefresh={refresh} tintColor={t.accent} />}
         >
             {loggedIn && (
                 <View style={styles.container}>
