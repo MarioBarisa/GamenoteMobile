@@ -20,3 +20,27 @@ export const colors = {
     destructive: "#FF453A",
   },
 };
+
+// Unaprijed ponuđene boje naglaska
+export const ACCENT_PRESETS = [
+  "#AF52DE",
+  "#F32D3E",
+  "#FF9500",
+  "#FFCC00",
+  "#34C759",
+  "#00C7BE",
+];
+
+// Provjera hex boje oblika #RRGGBB
+export function isValidHexColor(value: string): boolean {
+  return /^#[0-9A-Fa-f]{6}$/.test(value.trim());
+}
+
+// Vrati uredan #RRGGBB ili null
+export function normalizeHexColor(value: string): string | null {
+  const trimmed = value.trim();
+  const withHash = trimmed.startsWith("#") ? trimmed : `#${trimmed}`;
+  if (isValidHexColor(withHash)) return withHash.toUpperCase();
+  if (/^#[0-9A-Fa-f]{8}$/.test(withHash)) return withHash.slice(0, 7).toUpperCase();
+  return null;
+}

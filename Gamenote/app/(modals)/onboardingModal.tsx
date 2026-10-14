@@ -1,5 +1,4 @@
 import {useTheme} from "@/context/theme";
-import {colors} from "@/constants/theme";
 import {router} from "expo-router";
 import {Image} from "expo-image";
 import {Pressable, ScrollView, StyleSheet, Text, View, useWindowDimensions} from "react-native";
@@ -38,8 +37,7 @@ const FEATURES: FeatureItem[] = [
 
 export default function OnboardingModal() {
     const {t: tr} = useTranslation();
-    const {theme} = useTheme();
-    const t = colors[theme];
+    const {theme, themeColors: t} = useTheme();
     const {scale} = useResponsive();
     const {width: screenWidth} = useWindowDimensions();
     const bannerWidth = Math.min(screenWidth * 0.6, 260);

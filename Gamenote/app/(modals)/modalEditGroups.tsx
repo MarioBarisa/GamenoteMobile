@@ -1,5 +1,4 @@
 import {useTheme} from "@/context/theme";
-import {colors} from "@/constants/theme";
 import {useLocalSearchParams, useRouter} from "expo-router";
 import {Alert, Platform, Pressable, ScrollView, StyleSheet, Text, TextInput, View} from "react-native";
 import {Group} from "@/common/groups";
@@ -13,8 +12,7 @@ import {useTranslation} from "react-i18next";
 
 export default function ModalEditGroups() {
     const {t: tr} = useTranslation();
-    const {theme} = useTheme()
-    const t = colors[theme]
+    const {theme, themeColors: t} = useTheme()
     const router = useRouter();
 
     const params = useLocalSearchParams<{ group?: string }>();

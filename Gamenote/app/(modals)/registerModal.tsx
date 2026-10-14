@@ -1,5 +1,4 @@
 import {useTheme} from "@/context/theme";
-import {colors} from "@/constants/theme";
 import {useRouter} from "expo-router";
 import {Alert, Platform, Pressable, ScrollView, StyleSheet, Text, TextInput, View} from "react-native";
 import {SymbolView} from "expo-symbols";
@@ -26,8 +25,7 @@ interface ValidationErrors {
 
 export default function RegisterModal() {
     const {t: tr} = useTranslation();
-    const {theme} = useTheme();
-    const t = colors[theme];
+    const {theme, themeColors: t} = useTheme();
     const router = useRouter();
 
     const [form, setForm] = useState<RegisterFormData>({

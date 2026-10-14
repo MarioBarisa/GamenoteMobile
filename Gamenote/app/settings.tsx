@@ -1,15 +1,15 @@
 import {ScrollView, View, Text, StyleSheet, Switch, ActionSheetIOS, Pressable} from "react-native";
 import {useTheme} from "@/context/theme";
 import {useSettings} from "@/context/settings";
-import {colors} from "@/constants/theme";
 import {useTranslation} from "react-i18next";
 import * as Haptics from "expo-haptics";
+import AccentColorPicker from "@/components/AccentColorPicker";
 
 export default function SettingsScreen() {
-    const {theme, preference, setPreference} = useTheme();
+    const {theme, preference, setPreference, themeColors} = useTheme();
     const {vibrationsEnabled, setVibrationsEnabled, compactCards, setCompactCards, language, setLanguage} = useSettings();
     const {t} = useTranslation();
-    const c = colors[theme];
+    const c = themeColors;
 
     const isDarkForced = preference === "dark";
     const isSystem = preference === "system";
@@ -84,7 +84,7 @@ export default function SettingsScreen() {
                         }
                         trackColor={{
                             false: "rgba(120,120,128,0.32)",
-                            true: "#0a58ff",
+                            true: c.accent,
                         }}
                         thumbColor={theme === "dark" ? "#FFFFFF" : "#000000"}
                     />
@@ -103,6 +103,13 @@ export default function SettingsScreen() {
                         }}
                     />
                 </View>
+                <View>
+                    <Text style={[styles.title, {color: c.text}]}>{t("settings.accentColor")}</Text>
+                    <Text style={[styles.subtitle, {color: c.secondaryText}]}>
+                        {t("settings.accentColorDesc")}
+                    </Text>
+                </View>
+                <AccentColorPicker />
             </View>
 
             <View

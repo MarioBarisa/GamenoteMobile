@@ -3,7 +3,6 @@ import {RefreshControl, ScrollView, View, Text, TouchableOpacity, ActionSheetIOS
 import {Stack} from "expo-router";
 import {useTheme} from "@/context/theme";
 import {useSettings} from "@/context/settings";
-import {colors} from "@/constants/theme";
 import {useUserGames} from "@/hooks/useUserGames";
 import {STATUS_PLATFORM} from "@/common/StatusCommons";
 import GameCard from "@/components/GameCard";
@@ -31,8 +30,7 @@ export default function FavoritesScreen() {
     const [platformFilter, setPlatformFilter] = useState<string | null>(null);
     const [statusFilter, setStatusFilter] = useState<FilterKey | null>(null);
 
-    const {theme} = useTheme();
-    const t = colors[theme];
+    const {themeColors: t} = useTheme();
     const {compactCards} = useSettings();
 
     const {games, deleteGame, refresh} = useUserGames();

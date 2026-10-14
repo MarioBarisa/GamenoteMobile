@@ -3,7 +3,6 @@ import {Text, ScrollView, StyleSheet, TextInput, View, Alert, Pressable, Refresh
 import {useLayoutEffect, useState} from "react";
 import {useTheme} from "@/context/theme";
 import {useAuth} from "@/context/auth";
-import {colors} from "@/constants/theme";
 import {SymbolView} from "expo-symbols";
 import {useUserGames} from "@/hooks/useUserGames";
 import {useNavigation, useRouter} from "expo-router";
@@ -25,8 +24,7 @@ function StatCard({  // reusable za stats
     symbolColor: string;
     wide?: boolean;
 }) {
-    const {theme} = useTheme();
-    const t = colors[theme];
+    const {themeColors: t} = useTheme();
     return (
         <View style={[styles.statCard, {backgroundColor: t.backgroundModal}, wide && styles.statCardWide]}>
             <SymbolView
@@ -49,8 +47,7 @@ export default function FavoritesScreen() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const {games, refresh, isLoading} = useUserGames();
-    const {theme} = useTheme();
-    const t = colors[theme];
+    const {themeColors: t} = useTheme();
     const navigation = useNavigation();
     const router = useRouter();
 

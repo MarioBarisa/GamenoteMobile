@@ -297,6 +297,10 @@
     "soundsDesc": "Dolazi uskoro.",
     "language": "Jezik / Language",
     "languageDesc": "Promijeni jezik aplikacije.",
-    "languageSystem": "Sustav / System"
+    "languageSystem": "Sustav / System",
+    "accentColor": "Boja naglaska",
+    "accentColorDesc": "Odaberi boju naglaska aplikacije.",
+    "accentDefault": "Zadano",
+    "accentCustom": "Prilagođena boja"
   }
 }

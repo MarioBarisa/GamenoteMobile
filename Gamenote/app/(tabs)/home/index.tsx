@@ -1,7 +1,6 @@
 import {Image} from "expo-image";
 import {Platform, Pressable, RefreshControl, ScrollView, StyleSheet, Text, View} from "react-native";
 import {useTheme} from "@/context/theme";
-import {colors} from "@/constants/theme";
 import GameCard from "@/components/GameCard";
 import GameCardCompact from "@/components/GameCardCompact";
 import {GameCardSkeleton, GameCardCompactSkeleton} from "@/components/GameCardSkeleton";
@@ -17,8 +16,7 @@ import {useTranslation} from "react-i18next";
 // noinspection JSUnusedGlobalSymbols
 export default function HomeIndex() {
     const {t: tr} = useTranslation();
-    const {theme} = useTheme();
-    const t = colors[theme];
+    const {themeColors: t} = useTheme();
     const {compactCards} = useSettings();
     const {games, deleteGame, refresh, isLoading} = useUserGames();
     const [refreshing, setRefreshing] = useState(false);

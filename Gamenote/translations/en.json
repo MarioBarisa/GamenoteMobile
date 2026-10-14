@@ -297,6 +297,10 @@
     "soundsDesc": "Coming soon.",
     "language": "Language / Jezik",
     "languageDesc": "Change the app language.",
-    "languageSystem": "System / Sustav"
+    "languageSystem": "System / Sustav",
+    "accentColor": "Accent color",
+    "accentColorDesc": "Choose the app highlight color.",
+    "accentDefault": "Default",
+    "accentCustom": "Custom color"
   }
 }

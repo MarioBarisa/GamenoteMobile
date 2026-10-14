@@ -4,7 +4,6 @@ import {Image} from "expo-image";
 import {ActivityIndicator, ScrollView, StyleSheet, Text, View, Pressable, useWindowDimensions, Modal} from "react-native";
 import {useSafeAreaInsets} from "react-native-safe-area-context";
 import {useTheme} from "@/context/theme";
-import {colors} from "@/constants/theme";
 import {SymbolView} from "expo-symbols";
 import {useTranslation} from "react-i18next";
 import {Game} from "@/common/Game";
@@ -61,8 +60,7 @@ function getPrequelAndSequel(series: SeriesGame[], currentReleaseDate: string): 
 
 export default function RAWGDetailsScreen() {
   const {t: tr} = useTranslation();
-  const {theme} = useTheme();
-  const t = colors[theme];
+  const {theme, themeColors: t} = useTheme();
   const insets = useSafeAreaInsets();
   const {width: SCREEN_WIDTH} = useWindowDimensions();
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);

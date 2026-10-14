@@ -1,7 +1,6 @@
 import {Image} from "expo-image";
 import {RefreshControl, ScrollView, Text, View, StyleSheet, TouchableOpacity} from "react-native";
 import {useTheme} from "@/context/theme";
-import {colors} from "@/constants/theme";
 import {useGroups} from "@/context/GroupsContext";
 import {Ionicons} from "@expo/vector-icons";
 import {useUserGames} from "@/hooks/useUserGames";
@@ -14,8 +13,7 @@ import {useTranslation} from "react-i18next";
 
 export default function GroupsIndex() {
     const {t: tr} = useTranslation();
-    const {theme} = useTheme();
-    const t = colors[theme];
+    const {themeColors: t} = useTheme();
     const {groups, getGamesInGroup, refreshGroups, isLoading: isLoadingGroups} = useGroups();
 
     const getGameCountLabel = (n: number) => {

@@ -8,7 +8,6 @@ import {ThemeProvider, useTheme} from "@/context/theme";
 import {SettingsProvider} from "@/context/settings";
 import {AuthProvider, useAuth} from "@/context/auth";
 import {useNavigationTheme} from "@/constants/navigationTheme";
-import {colors} from "@/constants/theme";
 import ErrorBoundary from "@/components/ErrorBoundary";
 import "@/utils/i18n";
 
@@ -18,8 +17,8 @@ function AppContent() {
     const {isLoading} = useAuth();
     const navTheme = useNavigationTheme();
     const {t} = useTranslation();
-    const {theme} = useTheme();
-    const tc = colors[theme];
+    const {themeColors} = useTheme();
+    const tc = themeColors;
 
     useEffect(() => {
         if (!isLoading) {

@@ -3,6 +3,7 @@ import {router, useSegments} from "expo-router";
 import {Platform} from "react-native";
 import * as Haptics from "expo-haptics";
 import {useSettings} from "@/context/settings";
+import {useTheme} from "@/context/theme";
 import {useEffect, useRef} from "react";
 import {useAuth} from "@/context/auth";
 import {useTranslation} from "react-i18next";
@@ -20,6 +21,7 @@ export default function TabsLayout() {
     const tabSegment = segments?.[1];
     const previousTabRef = useRef(tabSegment);
     const {vibrationsEnabled} = useSettings();
+    const {accent} = useTheme();
 
     useEffect(() => {
         if (loggedIn) return;
@@ -46,7 +48,7 @@ export default function TabsLayout() {
         : undefined;
 
     return (
-        <NativeTabs minimizeBehavior={minimizeBehavior}>
+        <NativeTabs minimizeBehavior={minimizeBehavior} tintColor={accent}>
             <NativeTabs.Trigger name="home">
                 <NativeTabs.Trigger.Label>{t("tabs.home")}</NativeTabs.Trigger.Label>
                 <NativeTabs.Trigger.Icon

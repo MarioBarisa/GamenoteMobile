@@ -7,19 +7,29 @@
     <option name="selectedModelId" value="auto" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7b37eb79-ceff-44a4-81aa-7e12f61dfc1f" name="Changes" comment="Fixed icons by removing the alpha channel.">
+    <list default="true" id="7b37eb79-ceff-44a4-81aa-7e12f61dfc1f" name="Changes" comment="Fixed: &#10;1. Pull to refresh&#10;2. Deleting the game via long press on either GameCard&#10;3. Removed the notes section from both group modals.&#10;Imporved: &#10;1. Games in groups now provide more info&#10;2. Next to group star rating there is not average rating of the games in a given group, also it now shows the total playtime.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gamenote/app/(modals)/addGameModal.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/Gamenote/app/(modals)/addGameModal.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Gamenote/app/(modals)/addGroupModal.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/Gamenote/app/(modals)/addGroupModal.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gamenote/app/(modals)/manageAccountModal.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/Gamenote/app/(modals)/manageAccountModal.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gamenote/app/(modals)/modalEdit.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/Gamenote/app/(modals)/modalEdit.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Gamenote/app/(modals)/modalEditGroups.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/Gamenote/app/(modals)/modalEditGroups.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gamenote/app/(modals)/onboardingModal.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/Gamenote/app/(modals)/onboardingModal.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gamenote/app/(modals)/registerModal.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/Gamenote/app/(modals)/registerModal.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gamenote/app/(tabs)/_layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/Gamenote/app/(tabs)/_layout.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Gamenote/app/(tabs)/favorites/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/Gamenote/app/(tabs)/favorites/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gamenote/app/(tabs)/groups/group-detail.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/Gamenote/app/(tabs)/groups/group-detail.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Gamenote/app/(tabs)/groups/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/Gamenote/app/(tabs)/groups/index.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Gamenote/app/(tabs)/home/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/Gamenote/app/(tabs)/home/index.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Gamenote/app/(tabs)/profile/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/Gamenote/app/(tabs)/profile/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gamenote/app/(tabs)/search/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/Gamenote/app/(tabs)/search/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gamenote/components/GameCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/Gamenote/components/GameCard.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gamenote/components/GameCardCompact.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/Gamenote/components/GameCardCompact.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gamenote/hooks/useUserGames.ts" beforeDir="false" afterPath="$PROJECT_DIR$/Gamenote/hooks/useUserGames.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gamenote/app/(tabs)/search/rawg-details.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/Gamenote/app/(tabs)/search/rawg-details.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gamenote/app/_layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/Gamenote/app/_layout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gamenote/app/settings.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/Gamenote/app/settings.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gamenote/assets/gamenote/icons/GamenoteIcon.icon/icon.json" beforeDir="false" afterPath="$PROJECT_DIR$/Gamenote/assets/gamenote/icons/GamenoteIcon.icon/icon.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gamenote/constants/navigationTheme.ts" beforeDir="false" afterPath="$PROJECT_DIR$/Gamenote/constants/navigationTheme.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gamenote/constants/theme.ts" beforeDir="false" afterPath="$PROJECT_DIR$/Gamenote/constants/theme.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gamenote/context/theme.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/Gamenote/context/theme.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gamenote/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/Gamenote/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gamenote/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/Gamenote/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Gamenote/translations/en.json" beforeDir="false" afterPath="$PROJECT_DIR$/Gamenote/translations/en.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Gamenote/translations/hr.json" beforeDir="false" afterPath="$PROJECT_DIR$/Gamenote/translations/hr.json" afterDir="false" />
     </list>
@@ -211,6 +221,15 @@
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
+  <component name="ReactDesignerToolWindowState">
+    <option name="myId2Visible">
+      <map>
+        <entry key="com.intellij.reactbuddy.reactComponents" value="false" />
+        <entry key="com.intellij.reactbuddy.reactInspector" value="false" />
+        <entry key="com.intellij.reactbuddy.storybook" value="false" />
+      </map>
+    </option>
+  </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/other/Seminar" />
@@ -230,7 +249,7 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-js-predefined-d6986cc7102b-31caf2ab9e3c-JavaScript-WS-261.25134.101" />
+        <option value="bundled-js-predefined-d6986cc7102b-4abd2a77f808-JavaScript-WS-262.10968.77" />
       </set>
     </attachedChunks>
   </component>
@@ -283,6 +302,7 @@
       <workItem from="1789638262226" duration="2801000" />
       <workItem from="1789902882502" duration="32000" />
       <workItem from="1791798706223" duration="4476000" />
+      <workItem from="1791981087626" duration="3257000" />
     </task>
     <task id="LOCAL−00056" summary="manje izmjene">
       <option name="closed" value="true" />
@@ -680,7 +700,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/Gamenote/app/(tabs)/profile/index.tsx</url>
-          <line>40</line>
+          <line>38</line>
           <option name="timeStamp" value="2" />
         </line-breakpoint>
       </breakpoints>

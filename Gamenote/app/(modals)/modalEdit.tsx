@@ -9,7 +9,6 @@ import {
 } from 'react-native';
 import {useLocalSearchParams, useRouter} from "expo-router";
 import {useTheme} from "@/context/theme";
-import {colors} from "@/constants/theme";
 import {Game} from "@/common/Game";
 import {useState} from "react";
 import {SymbolView} from "expo-symbols";
@@ -26,8 +25,7 @@ export default function ModalEdit() {
     const {t: tr} = useTranslation();
     const {game: gameParam} = useLocalSearchParams<{ game: string }>();
     const router = useRouter();
-    const {theme} = useTheme();
-    const t = colors[theme];
+    const {theme, themeColors: t} = useTheme();
     const {updateGame} = useUserGames();
     const {groups, addGameToGroup, removeGameFromGroup, getGroupsForGame} = useGroups();
 

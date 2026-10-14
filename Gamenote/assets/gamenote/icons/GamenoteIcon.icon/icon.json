@@ -19,6 +19,12 @@
     {
       "layers" : [
         {
+          "blend-mode-specializations" : [
+            {
+              "appearance" : "tinted",
+              "value" : "normal"
+            }
+          ],
           "fill" : "automatic",
           "glass" : true,
           "hidden" : false,

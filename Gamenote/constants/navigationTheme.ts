@@ -1,10 +1,9 @@
-import {colors} from "@/constants/theme";
 import {useTheme} from "@/context/theme";
 
 export function useNavigationTheme() {
 
-    const {theme} = useTheme();
-    const t = colors[theme];
+    const {themeColors} = useTheme();
+    const t = themeColors;
 
     return {
         headerLargeTitle: true,

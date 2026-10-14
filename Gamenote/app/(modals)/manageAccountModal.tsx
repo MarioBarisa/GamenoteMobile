@@ -1,5 +1,4 @@
 import {useTheme} from "@/context/theme";
-import {colors} from "@/constants/theme";
 import {useRouter} from "expo-router";
 import {Image} from "expo-image";
 import {Alert, Platform, Pressable, ScrollView, StyleSheet, Text, TextInput, View} from "react-native";
@@ -11,8 +10,7 @@ import {useAuth} from "@/context/auth";
 
 export default function ManageAccountModal() {
     const {t: tr} = useTranslation();
-    const {theme} = useTheme();
-    const t = colors[theme];
+    const {theme, themeColors: t} = useTheme();
     const router = useRouter();
     const {user, username, avatarUrl, updateUsername, updatePassword, updateAvatar, deleteAccount} = useAuth();
 
