@@ -154,7 +154,7 @@ const styles = StyleSheet.create({
     },
     gameImage: {
         width: '100%',
-        height: 72,
+        height: 90,
         borderRadius: 6,
     },
     gameImagePlaceholder: {
