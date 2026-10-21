@@ -40,6 +40,23 @@ export function isProgressModeKey(key: string): key is ProgressModeKey {
   return key in PROGRESS_MODE_MAP;
 }
 
+// Platforma -> zadani tip napretka
+export const PLATFORM_PROGRESS_MODE: Record<string, ProgressModeKey> = {
+  PlayStation: 'trophies_psn',
+  'PlayStation 5': 'trophies_psn',
+  'PlayStation 4': 'trophies_psn',
+  Xbox: 'achievements_xbox',
+  'Xbox Series X/S': 'achievements_xbox',
+  'Xbox One': 'achievements_xbox',
+  Nintendo: 'completion_nintendo',
+  'Nintendo Switch': 'completion_nintendo',
+  'Nintendo Switch 2': 'completion_nintendo',
+  PC: 'achievements_steam',
+  iOS: 'achievements_gamecentre',
+  Android: 'completion_standard',
+  Other: 'completion_standard',
+};
+
 export function achievementPercent(value?: number, total?: number): number {
   if (!value || !total || total <= 0) return 0
   const v = Math.min(value, total)

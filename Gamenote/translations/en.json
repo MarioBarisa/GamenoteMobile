@@ -40,10 +40,8 @@
   "favorites": {
     "filterPlaying": "Playing",
     "filterPaused": "Paused",
-    "selectPlatform": "Select platform:",
-    "allPlatforms": "All platforms",
-    "sortLabel": "Sort games",
-    "filterPlatformLabel": "Filter by platform"
+    "allGames": "All games",
+    "sortLabel": "Sort games"
   },
   "search": {
     "placeholderMyGames": "Search your Gamenote",
@@ -183,13 +181,10 @@
     "startDateLabel": "Start date:",
     "endDateLabel": "End date:",
     "platformLabel": "Platform: ",
-    "platformPickerTitle": "Select platform",
     "progressLabel": "Progress Type: ",
-    "progressPickerTitle": "Select progress type",
     "achievementsLabel": "Achievements: ",
     "playtimeLabel": "Playtime: ",
     "statusLabel": "Status: ",
-    "statusPickerTitle": "Select status",
     "statusDefault": "Select a status",
     "notesLabel": "Your notes:",
     "notesPlaceholder": "Add notes...",
@@ -217,7 +212,6 @@
     "nameLabel": "Group name: ",
     "namePlaceholder": "Group title",
     "typeLabel": "Group type: ",
-    "typePickerTitle": "Select group type",
     "ratingLabel": "Rating:",
     "addGamesLabel": "Add games:",
     "showLess": "Show less",
@@ -232,7 +226,6 @@
     "nameLabel": "Group name: ",
     "namePlaceholder": "Group title?...",
     "typeLabel": "Group type: ",
-    "typePickerTitle": "Select group type",
     "ratingLabel": "Rating:",
     "gamesLabel": "Games in group:",
     "showLess": "Show less",

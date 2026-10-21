@@ -63,11 +63,6 @@ export default function RAWGDetailsScreen() {
   const {theme, themeColors: t} = useTheme();
   const insets = useSafeAreaInsets();
   const {width: SCREEN_WIDTH} = useWindowDimensions();
-  const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
-  const [enrichedData, setEnrichedData] = useState<any>(null);
-  const [screenshots, setScreenshots] = useState<string[]>([]);
-  const [seriesData, setSeriesData] = useState<SeriesGame[] | undefined>(undefined);
-  const [isLoading, setIsLoading] = useState(true);
   const {game: rawgParam} = useLocalSearchParams<{ game: string }>();
   const router = useRouter();
   const {games: userGames} = useUserGames();
@@ -82,11 +77,14 @@ export default function RAWGDetailsScreen() {
     }
   })();
 
+  const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
+  const [enrichedData, setEnrichedData] = useState<any>(null);
+  const [screenshots, setScreenshots] = useState<string[]>([]);
+  const [seriesData, setSeriesData] = useState<SeriesGame[] | undefined>(undefined);
+  const [isLoading, setIsLoading] = useState(!!rawgData?.id);
+
   useEffect(() => {
-    if (!rawgData?.id) {
-      setIsLoading(false);
-      return;
-    }
+    if (!rawgData?.id) return;
 
     let cancelled = false;
 

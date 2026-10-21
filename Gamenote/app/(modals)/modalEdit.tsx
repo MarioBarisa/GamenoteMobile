@@ -19,6 +19,7 @@ import {STATUS_CONFIG, GAME_STATUSES} from "@/common/StatusCommons";
 import * as Haptics from 'expo-haptics';
 import {PROGRESS_MODES} from "@/common/ProgressSources";
 import {useTranslation} from "react-i18next";
+import SelectMenu from "@/components/SelectMenu";
 
 
 export default function ModalEdit() {
@@ -133,44 +134,21 @@ export default function ModalEdit() {
                 </View>
                 <View style={{flexDirection: "row", alignItems: "center", gap: 8}}>
                     <Text style={[styles.label, {color: t.text}]}>{tr('editGame.platformLabel')}</Text>
-                    <Pressable
-                        onPress={() => Alert.alert(
-                            tr('editGame.platformPickerTitle'),
-                            undefined,
-                            [
-                                ...PLATFORMS.map(p => ({
-                                    text: p,
-                                    onPress: () => patch('platform', p),
-                                })),
-                                {text: tr('common.cancel'), style: 'cancel'},
-                            ]
-                        )}
-                        style={{flexDirection: 'row', alignItems: 'center', gap: 6}}
-                    >
-                        <Text style={{color: t.text, fontSize: 15, fontWeight: '500'}}>
-                            {form.platform ?? tr('editGame.platformDefault')}
-                        </Text>
-                        <SymbolView name="chevron.up.chevron.down" style={{width: 14, height: 14}}
-                                    tintColor={t.accent}/>
-                    </Pressable>
+                    <SelectMenu
+                        label={form.platform ?? tr('editGame.platformDefault')}
+                        options={PLATFORMS.map(p => ({label: p, value: p}))}
+                        selected={form.platform}
+                        onSelect={value => patch('platform', value)}
+                    />
                 </View>
                 <View style={{flexDirection: "row", alignItems: "center", gap: 8}}>
                     <Text style={[styles.label, {color: t.text}]}>{tr('editGame.progressLabel')}</Text>
-                    <Pressable
-                        onPress={() =>
-                            Alert.alert(tr('editGame.progressPickerTitle'), undefined, [
-                                ...PROGRESS_MODES.map(m => ({
-                                    text: m.label,
-                                    onPress: () => patch('progress_mode', m.key),
-                                })),
-                                {text: tr('common.cancel'), style: "cancel"},
-                            ])} style={{flexDirection: "row", alignItems: "center", gap: 6}}>
-                        <Text style={{color: t.text, fontSize: 16, fontWeight: '500'}}>
-                            {form.progress_mode ? PROGRESS_MODES.find(m => m.key === form.progress_mode)?.label : tr('editGame.progressDefault')}
-                        </Text>
-                        <SymbolView name="chevron.up.chevron.down" style={{width: 14, height: 14}}
-                                    tintColor={t.accent}/>
-                    </Pressable>
+                    <SelectMenu
+                        label={form.progress_mode ? PROGRESS_MODES.find(m => m.key === form.progress_mode)?.label : tr('editGame.progressDefault')}
+                        options={PROGRESS_MODES.map(m => ({label: m.label, value: m.key}))}
+                        selected={form.progress_mode}
+                        onSelect={value => patch('progress_mode', value)}
+                    />
                 </View>
                 <View style={{flexDirection: "row", alignItems: "center", gap: 8}}>
                     <Text style={[styles.label, {color: t.text}]}>{tr('editGame.achievementsLabel')}</Text>
@@ -246,26 +224,12 @@ export default function ModalEdit() {
                 </View>
                 <View style={{flexDirection: "row", alignItems: "center", gap: 8}}>
                     <Text style={[styles.label, {color: t.text}]}>{tr('editGame.statusLabel')}</Text>
-                    <Pressable
-                        onPress={() => Alert.alert(
-                            tr('editGame.statusPickerTitle'),
-                            undefined,
-                            [
-                                ...GAME_STATUSES.map(status => ({
-                                    text: STATUS_CONFIG[status].label,
-                                    onPress: () => patch('status', status),
-                                })),
-                                {text: tr('common.cancel'), style: 'cancel'},
-                            ]
-                        )}
-                        style={{flexDirection: 'row', alignItems: 'center', gap: 6}}
-                    >
-                        <Text style={{color: t.text, fontSize: 15, fontWeight: '500'}}>
-                            {form.status ? STATUS_CONFIG[form.status].label : tr('editGame.statusDefault')}
-                        </Text>
-                        <SymbolView name="chevron.up.chevron.down" style={{width: 14, height: 14}}
-                                    tintColor={t.accent}/>
-                    </Pressable>
+                    <SelectMenu
+                        label={form.status ? STATUS_CONFIG[form.status].label : tr('editGame.statusDefault')}
+                        options={GAME_STATUSES.map(status => ({label: STATUS_CONFIG[status].label, value: status}))}
+                        selected={form.status}
+                        onSelect={value => patch('status', value)}
+                    />
                 </View>
                 <Text style={[styles.label, {color: t.text}]}>{tr('editGame.notesLabel')}</Text>
                 <TextInput style={[styles.notesInput, {

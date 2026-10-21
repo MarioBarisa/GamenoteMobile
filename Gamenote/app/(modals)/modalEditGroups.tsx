@@ -8,6 +8,7 @@ import {useState} from "react";
 import {useGroups} from "@/context/GroupsContext";
 import {useUserGames} from "@/hooks/useUserGames";
 import {useTranslation} from "react-i18next";
+import SelectMenu from "@/components/SelectMenu";
 
 
 export default function ModalEditGroups() {
@@ -103,26 +104,12 @@ export default function ModalEditGroups() {
                         </View>
                         <View style={{flexDirection: 'row', gap: 8, paddingVertical: 8}}>
                             <Text style={[styles.label, {color: t.text}]}>{tr('editGroup.typeLabel')}</Text>
-                            <Pressable
-                                onPress={() => Alert.alert(
-                                    tr('editGroup.typePickerTitle'),
-                                    undefined,
-                                    [
-                                        ...typeGroups.map(status => ({
-                                            text: status,
-                                            onPress: () => patch('type', status),
-                                        })),
-                                        {text: tr('common.cancel'), style: 'cancel'},
-                                    ]
-                                )}
-                                style={{flexDirection: 'row', alignItems: 'center', gap: 6}}
-                            >
-                                <Text style={{color: t.text, fontSize: 15, fontWeight: '500'}}>
-                                    {form.type}
-                                </Text>
-                                <SymbolView name="chevron.up.chevron.down" style={{width: 14, height: 14}}
-                                            tintColor={t.accent}/>
-                            </Pressable>
+                            <SelectMenu
+                                label={form.type}
+                                options={typeGroups.map(type => ({label: type, value: type}))}
+                                selected={form.type}
+                                onSelect={value => patch('type', value)}
+                            />
                         </View>
                         <View style={{flexDirection: 'row', gap: 8, paddingVertical: 8}}>
                             <Text style={[styles.label, {color: t.text, paddingTop: 6}]}>{tr('editGroup.ratingLabel')}</Text>

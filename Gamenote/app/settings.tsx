@@ -1,9 +1,9 @@
-import {ScrollView, View, Text, StyleSheet, Switch, ActionSheetIOS, Pressable} from "react-native";
+import {ScrollView, View, Text, StyleSheet, Switch} from "react-native";
 import {useTheme} from "@/context/theme";
 import {useSettings} from "@/context/settings";
 import {useTranslation} from "react-i18next";
-import * as Haptics from "expo-haptics";
 import AccentColorPicker from "@/components/AccentColorPicker";
+import SelectMenu from "@/components/SelectMenu";
 
 export default function SettingsScreen() {
     const {theme, preference, setPreference, themeColors} = useTheme();
@@ -13,21 +13,6 @@ export default function SettingsScreen() {
 
     const isDarkForced = preference === "dark";
     const isSystem = preference === "system";
-
-    const showLanguagePicker = () => {
-        Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
-        ActionSheetIOS.showActionSheetWithOptions(
-            {
-                title: t("settings.language"),
-                options: ["Hrvatski", "English", t("common.cancel")],
-                cancelButtonIndex: 2,
-            },
-            (index) => {
-                if (index === 0) setLanguage("hr");
-                if (index === 1) setLanguage("en");
-            }
-        );
-    };
 
     return (
         <ScrollView
@@ -128,15 +113,21 @@ export default function SettingsScreen() {
                     {t("settings.other")}
                 </Text>
 
-                <Pressable style={styles.row} onPress={showLanguagePicker}>
+                <View style={styles.row}>
                     <View style={{flex: 1, marginRight: 12}}>
                         <Text style={[styles.title, {color: c.text}]}>{t("settings.language")}</Text>
                         <Text style={[styles.subtitle, {color: c.secondaryText}]}>{t("settings.languageDesc")}</Text>
                     </View>
-                    <Text style={{color: c.accent, fontSize: 17, fontWeight: "500"}}>
-                        {language === "en" ? "English" : "Hrvatski"}
-                    </Text>
-                </Pressable>
+                    <SelectMenu
+                        label={language === "en" ? "English" : "Hrvatski"}
+                        options={[
+                            {label: "Hrvatski", value: "hr"},
+                            {label: "English", value: "en"},
+                        ]}
+                        selected={language}
+                        onSelect={value => setLanguage(value)}
+                    />
+                </View>
 
                 <View style={styles.row}>
                     <View style={{flex: 1, marginRight: 12}}>

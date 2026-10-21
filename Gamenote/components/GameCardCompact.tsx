@@ -1,5 +1,5 @@
 import {Image} from "expo-image";
-import {ActionSheetIOS, Alert, StyleSheet, View, Text, Pressable, useWindowDimensions} from 'react-native'
+import {Alert, StyleSheet, View, Text, Pressable, useWindowDimensions} from 'react-native'
 import { colors } from '@/constants/theme'
 import { useTheme } from '@/context/theme'
 import {Ionicons} from "@expo/vector-icons";
@@ -9,6 +9,8 @@ import {STATUS_CONFIG, STATUS_PLATFORM} from "@/common/StatusCommons";
 import {achievementPercent, progressColor} from "@/common/ProgressSources";
 import * as Haptics from 'expo-haptics';
 import {useTranslation} from "react-i18next";
+import {useRef, useState} from "react";
+import GameContextMenu, {MenuAnchor} from "@/components/GameContextMenu";
 
 interface Props {
   game: Game
@@ -24,6 +26,9 @@ export default function GameCardCompact({ game, onDelete }: Props) {
   const tab = segments[1] as 'home' | 'favorites' | 'search'; // GDJE SE MOŽE KORISTIT?
   const {width: SCREEN_WIDTH} = useWindowDimensions();
   const CARD_WIDTH = (SCREEN_WIDTH - 32 - 12) / 2;
+  const cardRef = useRef<View>(null);
+  const [menuAnchor, setMenuAnchor] = useState<MenuAnchor | null>(null);
+  const [menuVisible, setMenuVisible] = useState(false);
 
   const handlePress = () => {
     router.push({
@@ -59,18 +64,11 @@ export default function GameCardCompact({ game, onDelete }: Props) {
 
   const handleContextMenu = () => {
     Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium)
-    ActionSheetIOS.showActionSheetWithOptions(
-      {
-        title: game.title,
-        options: [tr('gameCard.actionEdit'), tr('gameCard.actionDelete'), tr('common.cancel')],  //ODUSTANI NEMA GUMB JER KLIK IZVAN ACTION SHEET-A GA DISSMISA, isto u GameCard.tsx!
-        cancelButtonIndex: 2,
-        destructiveButtonIndex: 1,
-      },
-      (index) => {
-        if (index === 0) handleEdit()
-        if (index === 1) handleDelete()
-      },
-    )
+    // Izmjeri karticu za podignuti pregled
+    cardRef.current?.measureInWindow((x, y, width, height) => {
+      setMenuAnchor({x, y, width, height})
+      setMenuVisible(true)
+    })
   }
 
   const imageUri = game.image_url || game.background_image || null;
@@ -81,7 +79,8 @@ export default function GameCardCompact({ game, onDelete }: Props) {
   const hasProgress = typeof game.progress_value === 'number' && typeof game.progress_total === 'number' && game.progress_total > 0 && game.progress_value > 0;
 
   return (
-      <Pressable onPress={handlePress} onLongPress={handleContextMenu} accessibilityLabel={tr('gameCard.openA11y', {title: game.title})} style={({pressed})=>[{opacity: pressed ? 0.8 : 1}]}>
+      <>
+      <Pressable ref={cardRef} onPress={handlePress} onLongPress={handleContextMenu} accessibilityLabel={tr('gameCard.openA11y', {title: game.title})} style={({pressed})=>[{opacity: pressed ? 0.8 : 1}]}>
             <View style={[
               styles.card,
               {width: CARD_WIDTH, backgroundColor: t.card, borderColor: theme === 'dark' ? '#2C2C2E' : '#E5E5EA'},
@@ -171,6 +170,16 @@ export default function GameCardCompact({ game, onDelete }: Props) {
               </View>
             </View>
       </Pressable>
+      <GameContextMenu
+          game={game}
+          anchor={menuAnchor}
+          visible={menuVisible}
+          onClose={() => setMenuVisible(false)}
+          onDismiss={() => setMenuAnchor(null)}
+          onEdit={handleEdit}
+          onDelete={handleDelete}
+      />
+      </>
   )
 }
 

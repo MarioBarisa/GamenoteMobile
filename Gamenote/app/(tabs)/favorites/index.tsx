@@ -1,5 +1,5 @@
 import {useCallback, useMemo, useState} from "react";
-import {RefreshControl, ScrollView, View, Text, TouchableOpacity, ActionSheetIOS, Pressable} from "react-native";
+import {RefreshControl, ScrollView, View, Text, TouchableOpacity, Pressable} from "react-native";
 import {Stack} from "expo-router";
 import {useTheme} from "@/context/theme";
 import {useSettings} from "@/context/settings";
@@ -10,6 +10,8 @@ import GameCardCompact from "@/components/GameCardCompact";
 import {SymbolView} from "expo-symbols";
 import * as Haptics from 'expo-haptics';
 import {useTranslation} from "react-i18next";
+import SelectMenu from "@/components/SelectMenu";
+import PlatformIcon from "@/components/PlatformIcon";
 
 type FilterKey = 'top_rated' | 'completed' | 'playing' | 'paused' | 'dropped' | 'backlog' | 'wishlist';
 
@@ -75,21 +77,6 @@ export default function FavoritesScreen() {
         setSortBy(prev => prev === 'rating' ? 'playtime' : 'rating');
     }
 
-    function showPlatformSheet() {
-        ActionSheetIOS.showActionSheetWithOptions(
-            {
-                title: tr("favorites.selectPlatform"),
-                options: [tr("common.cancel"), tr("favorites.allPlatforms"), ...platforms],
-                cancelButtonIndex: 0,
-            },
-            (i) => {
-                Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
-                if (i === 1) setPlatformFilter(null);
-                if (i > 1) setPlatformFilter(prev => prev === platforms[i - 2] ? null : platforms[i - 2]);
-            }
-        );
-    }
-
     return (
         <>
             <Stack.Screen
@@ -107,29 +94,22 @@ export default function FavoritesScreen() {
                         </TouchableOpacity>
                     ),
                     headerLeft: () => (
-                        <TouchableOpacity
-                            accessibilityLabel={tr("favorites.filterPlatformLabel")}
-                            onPress={showPlatformSheet}
-                        >
-                            {platformFilter ? (
-                                <Text
-                                    style={{
-                                        color: STATUS_PLATFORM[platformFilter]?.text ?? t.text,
-                                        fontSize: 17,
-                                        padding: 4,
-                                        fontWeight: "600"
-                                    }}
-                                >
-                                    {STATUS_PLATFORM[platformFilter]?.label ?? platformFilter}
-                                </Text>
-                            ) : (
-                                <SymbolView
-                                    name="gamecontroller.fill"
-                                    style={{width: 28, height: 28}}
-                                    tintColor={t.text}
-                                />
-                            )}
-                        </TouchableOpacity>
+                        <SelectMenu
+                            trigger={platformFilter ? <PlatformIcon platform={platformFilter} size={28}/> : undefined}
+                            systemImage="gamecontroller.fill"
+                            iconColor={t.text}
+                            options={[
+                                {label: tr("favorites.allGames"), value: "all", systemImage: "gamecontroller.fill"},
+                                ...platforms.map(p => ({label: STATUS_PLATFORM[p]?.label ?? p, value: p})),
+                            ]}
+                            selected={platformFilter ?? "all"}
+                            onSelect={(value) => {
+                                Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+                                // Isti odabir ponovno gasi filter
+                                if (value === "all") setPlatformFilter(null);
+                                else setPlatformFilter(prev => prev === value ? null : value);
+                            }}
+                        />
                     )
                 }}
             />

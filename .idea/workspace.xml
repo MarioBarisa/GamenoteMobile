@@ -7,9 +7,27 @@
     <option name="selectedModelId" value="auto" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7b37eb79-ceff-44a4-81aa-7e12f61dfc1f" name="Changes" comment="Implemented accent color selection.">
+    <list default="true" id="7b37eb79-ceff-44a4-81aa-7e12f61dfc1f" name="Changes" comment="Added:&#10; 1. Native liquid glass context menu on game card long press (Edit/Delete) &#10; 2. Native SelectMenu pickers across add/edit game, add/edit group, favorites and settings &#10; 3. Platform SVG logos in the favorites filter, including a new Nintendo Switch 2 logo &#10; 4. Automatic progress type selection based on the chosen platform. &#10; Fixed: &#10; 1. Remaining lint error in rawg-details.tsx (setState inside effect).">
+      <change afterPath="$PROJECT_DIR$/Gamenote/components/GameContextMenu.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Gamenote/components/PlatformIcon.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Gamenote/components/SelectMenu.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Gamenote/constants/platformIcons.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gamenote/app/(tabs)/groups/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/Gamenote/app/(tabs)/groups/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gamenote/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/Gamenote/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gamenote/app/(modals)/addGameModal.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/Gamenote/app/(modals)/addGameModal.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gamenote/app/(modals)/addGroupModal.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/Gamenote/app/(modals)/addGroupModal.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gamenote/app/(modals)/modalEdit.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/Gamenote/app/(modals)/modalEdit.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gamenote/app/(modals)/modalEditGroups.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/Gamenote/app/(modals)/modalEditGroups.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gamenote/app/(tabs)/favorites/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/Gamenote/app/(tabs)/favorites/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gamenote/app/(tabs)/search/rawg-details.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/Gamenote/app/(tabs)/search/rawg-details.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gamenote/app/settings.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/Gamenote/app/settings.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gamenote/common/ProgressSources.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/Gamenote/common/ProgressSources.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gamenote/components/GameCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/Gamenote/components/GameCard.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gamenote/components/GameCardCompact.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/Gamenote/components/GameCardCompact.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gamenote/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/Gamenote/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gamenote/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/Gamenote/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gamenote/translations/en.json" beforeDir="false" afterPath="$PROJECT_DIR$/Gamenote/translations/en.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gamenote/translations/hr.json" beforeDir="false" afterPath="$PROJECT_DIR$/Gamenote/translations/hr.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -173,32 +191,32 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
-    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
-    &quot;copilot.chat.legacySessionMetadata.migrated&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;javascript.preferred.runtime.type.id&quot;: &quot;node&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/mariobarisa/Desktop/Mac/Osobno/Osobni projekti/GamenoteMobile&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.standard&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.standard&quot;: &quot;&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;/Users/mariobarisa/Desktop/Mac/Osobno/Osobni projekti/GamenoteMobile/Gamenote/node_modules/typescript/lib&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "codeWithMe.voiceChat.enabledByDefault": "false",
+    "copilot.chat.legacySessionMetadata.migrated": "true",
+    "git-widget-placeholder": "main",
+    "javascript.preferred.runtime.type.id": "node",
+    "last_opened_file_path": "/Users/mariobarisa/Desktop/Mac/Osobno/Osobni projekti/GamenoteMobile/Gamenote",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.standard": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.standard": "",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "run.code.analysis.last.selected.profile": "pProject Default",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "ts.external.directory.path": "/Users/mariobarisa/Desktop/Mac/Osobno/Osobni projekti/GamenoteMobile/Gamenote/node_modules/typescript/lib",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="ReactDesignerToolWindowState">
     <option name="myId2Visible">
       <map>
@@ -210,11 +228,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/Gamenote" />
       <recent name="$PROJECT_DIR$/other/Seminar" />
       <recent name="$PROJECT_DIR$/other/screenshots" />
       <recent name="$PROJECT_DIR$/other/diagrams/png" />
       <recent name="$PROJECT_DIR$/other/diagrams/png/State" />
-      <recent name="$PROJECT_DIR$/other/diagrams/png/Arhitektura" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/other/diagrams/code" />
@@ -280,14 +298,9 @@
       <workItem from="1789638262226" duration="2801000" />
       <workItem from="1789902882502" duration="32000" />
       <workItem from="1791798706223" duration="4476000" />
-      <workItem from="1791981087626" duration="6408000" />
-    </task>
-    <task id="LOCAL−00057" summary="Veliki code cleanup: dodan privacyIdentifier ( za app store -&gt; TREBA GA POPUNITI ), brisanje starih datoteka, gumb za zvuk u postavkama je greyed-out, platinum uvjeti popravljeni, dodani accessibilityLabeli na svim touchable objektima, progressColor u jednoj datoteci umjesto copy paste posvuda, ErrorCatching wrapper">
-      <option name="closed" value="true" />
-      <created>1780486964359</created>
-      <option name="number" value="LOCAL−00057" />
-      <option name="presentableId" value="LOCAL−00057" />
-      <updated>1780486964359</updated>
+      <workItem from="1791981087626" duration="6472000" />
+      <workItem from="1792397059679" duration="20000" />
+      <workItem from="1792503965510" duration="8153000" />
     </task>
     <task id="LOCAL−00058" summary="Popravljeni različiti omjeri i veličine dijelova aplikacije kako bi se aplikacija ispravno priakzivala na različitim rezolucijama / veličinama ekrana">
       <option name="closed" value="true" />
@@ -625,7 +638,14 @@
       <option name="presentableId" value="LOCAL−00105" />
       <updated>1791987977597</updated>
     </task>
-    <option name="localTasksCounter" value="106" />
+    <task id="LOCAL−00106" summary="Changed size of pictures in Groups view.">
+      <option name="closed" value="true" />
+      <created>1792325634337</created>
+      <option name="number" value="LOCAL−00106" />
+      <option name="presentableId" value="LOCAL−00106" />
+      <updated>1792325634337</updated>
+    </task>
+    <option name="localTasksCounter" value="107" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -646,8 +666,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="splashscreen koristi banner ( zadnji pokušaj )" />
-    <MESSAGE value="Popravljeni PLACEHOLDER_GAMES.ts i PLACEHOLDER_GROUPS.TSX.ts + dodan pravilan translation" />
     <MESSAGE value="Popravljen bug kod registracije novih korisnika gdje se PLACEHOLDER_GROUPS ne bi očistile kako treba." />
     <MESSAGE value="Dodan EAS.json za spremanje API kljuceva za potencijalno APP store subbmision." />
     <MESSAGE value="Prelazak sa Image iz ReactNative u Expo Images sa dodanim caching-om" />
@@ -671,7 +689,9 @@
     <MESSAGE value="Promjena na novi custom built translation API ( api.gamenote.eu ) kao zamjena za napušteni RAWG API. Minimalne izmjene translation stringova + dodan refresh na search tab kada je on u fokusu kako bi radio check za vec dodane igre u search rezultatima." />
     <MESSAGE value="Fixed icons by removing the alpha channel." />
     <MESSAGE value="Implemented accent color selection." />
-    <option name="LAST_COMMIT_MESSAGE" value="Implemented accent color selection." />
+    <MESSAGE value="Changed size of pictures in Groups view." />
+    <MESSAGE value="Added:&#10; 1. Native liquid glass context menu on game card long press (Edit/Delete) &#10; 2. Native SelectMenu pickers across add/edit game, add/edit group, favorites and settings &#10; 3. Platform SVG logos in the favorites filter, including a new Nintendo Switch 2 logo &#10; 4. Automatic progress type selection based on the chosen platform. &#10; Fixed: &#10; 1. Remaining lint error in rawg-details.tsx (setState inside effect)." />
+    <option name="LAST_COMMIT_MESSAGE" value="Added:&#10; 1. Native liquid glass context menu on game card long press (Edit/Delete) &#10; 2. Native SelectMenu pickers across add/edit game, add/edit group, favorites and settings &#10; 3. Platform SVG logos in the favorites filter, including a new Nintendo Switch 2 logo &#10; 4. Automatic progress type selection based on the chosen platform. &#10; Fixed: &#10; 1. Remaining lint error in rawg-details.tsx (setState inside effect)." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

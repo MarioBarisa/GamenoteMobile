@@ -40,10 +40,8 @@
   "favorites": {
     "filterPlaying": "Igram",
     "filterPaused": "Pauza",
-    "selectPlatform": "Odaberi platformu:",
-    "allPlatforms": "Sve platforme",
-    "sortLabel": "Sortiraj igre",
-    "filterPlatformLabel": "Filtriraj po platformi"
+    "allGames": "Sve igre",
+    "sortLabel": "Sortiraj igre"
   },
   "search": {
     "placeholderMyGames": "Pretraži svoji Gamenote",
@@ -183,13 +181,10 @@
     "startDateLabel": "Početak igranja:",
     "endDateLabel": "Kraj igranja:",
     "platformLabel": "Platforma: ",
-    "platformPickerTitle": "Odaberi platformu",
     "progressLabel": "Vrsta Progresa: ",
-    "progressPickerTitle": "Odaberi vrstu progressa",
     "achievementsLabel": "Postignuća: ",
     "playtimeLabel": "Playtime: ",
     "statusLabel": "Status igranja: ",
-    "statusPickerTitle": "Odaberi status igranja",
     "statusDefault": "Odaberi status igranja",
     "notesLabel": "Tvoje bilješke:",
     "notesPlaceholder": "Dodaj bilješke...",
@@ -217,7 +212,6 @@
     "nameLabel": "Ime grupe: ",
     "namePlaceholder": "Naslov grupe",
     "typeLabel": "Vrsta grupe: ",
-    "typePickerTitle": "Odaberi vrstu grupe",
     "ratingLabel": "Ocjena:",
     "addGamesLabel": "Dodaj igre:",
     "showLess": "Prikaži manje",
@@ -232,7 +226,6 @@
     "nameLabel": "Ime grupe: ",
     "namePlaceholder": "Naslov grupe?...",
     "typeLabel": "Vrsta grupe: ",
-    "typePickerTitle": "Odaberi vrstu grupe",
     "ratingLabel": "Ocjena:",
     "gamesLabel": "Igre u grupi:",
     "showLess": "Prikaži manje",
