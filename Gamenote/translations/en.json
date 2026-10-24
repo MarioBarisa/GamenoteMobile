@@ -10,6 +10,12 @@
     "search": "Search",
     "noImage": "No Image"
   },
+  "gallery": {
+    "open": "Open image {{index}}",
+    "close": "Close gallery",
+    "position": "Image {{index}} of {{count}}",
+    "retry": "Image failed to load. Tap to retry."
+  },
   "tabs": {
     "home": "Home",
     "favorites": "My Games",

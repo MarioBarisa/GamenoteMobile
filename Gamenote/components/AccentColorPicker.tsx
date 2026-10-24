@@ -87,7 +87,7 @@ export default function AccentColorPicker() {
             )}
           </View>
           {/* Nevidljivi nativni picker hvata dodir */}
-          <Host style={styles.nativeOverlay}>
+          <Host alignment="center" style={styles.nativeOverlay}>
             <ColorPicker
               label=""
               selection={accentChoice ?? defaultAccent}

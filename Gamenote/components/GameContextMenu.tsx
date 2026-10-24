@@ -129,7 +129,7 @@ export default function GameContextMenu({game, anchor, visible, onClose, onDismi
             >
                 {SUPPORTS_GLASS ? (
                     // Liquid glass pozadina izbornika
-                    <Host pointerEvents="none" style={StyleSheet.absoluteFill}>
+                    <Host alignment="center" pointerEvents="none" style={StyleSheet.absoluteFill}>
                         <RoundedRectangle
                             cornerRadius={14}
                             modifiers={[glassEffect({

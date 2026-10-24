@@ -1,8 +1,8 @@
 import {useLocalSearchParams, Stack, Link, useRouter, useSegments} from "expo-router";
 import {useState} from "react";
 import {Image} from "expo-image";
-import {ScrollView, StyleSheet, Text, View, Pressable, useWindowDimensions, Modal, Share} from "react-native";
-import {useSafeAreaInsets} from "react-native-safe-area-context";
+import {ScrollView, StyleSheet, Text, View, Pressable, useWindowDimensions, Share} from "react-native";
+import ImageGallery from "@/components/ImageGallery";
 import {Game} from "@/common/Game";
 import {SeriesGame} from "@/common/GameSeries";
 import {useTheme} from "@/context/theme";
@@ -55,7 +55,6 @@ export default function GameDetailsScreen() {
     const {t: tr} = useTranslation();
     const {theme} = useTheme();
     const t = colors[theme];
-    const insets = useSafeAreaInsets();
     const {width: SCREEN_WIDTH} = useWindowDimensions();
     const isLargeScreen = SCREEN_WIDTH >= 400;
     const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
@@ -187,7 +186,7 @@ export default function GameDetailsScreen() {
                                 paddingBottom: 8
                             }}>
                             {galleryImages.map((uri, index) => (
-                                <Pressable key={`${uri}-${index}`} onPress={() => setSelectedIndex(index)}>
+                                <Pressable key={`${uri}-${index}`} accessibilityRole="button" accessibilityLabel={tr("gallery.open", {index: index + 1})} onPress={() => setSelectedIndex(index)}>
                                     <Image
                                         source={{uri}}
                                         style={[styles.coverImage, {width: SCREEN_WIDTH - 32}]}
@@ -543,54 +542,13 @@ export default function GameDetailsScreen() {
                 </View>
 
             </ScrollView>
-            <Modal
-                visible={selectedIndex !== null}
-                transparent
-                animationType="fade"
-                onRequestClose={() => setSelectedIndex(null)}>
-                <View style={styles.modalOverlay}>
-                    <View style={{paddingTop: insets.top}}>
-                        <Pressable style={styles.modalCloseArea} onPress={() => setSelectedIndex(null)}>
-                            <SymbolView
-                                name="xmark.circle.fill"
-                                style={{width: 40, height: 40}}
-                                tintColor="rgba(255,255,255,0.85)"
-                            />
-                        </Pressable>
-                    </View>
-                    {galleryImages.length > 0 && (
-                        <ScrollView
-                            horizontal
-                            pagingEnabled
-                            showsHorizontalScrollIndicator={false}
-                            contentOffset={{
-                                x: (selectedIndex ?? 0) * SCREEN_WIDTH,
-                                y: 0,
-                            }}
-                        >
-                            {galleryImages.map((uri) => (
-                                <ScrollView
-                                    key={uri}
-                                    style={{width: SCREEN_WIDTH, height: '100%'}}
-                                    minimumZoomScale={1}
-                                    maximumZoomScale={5}
-                                    showsHorizontalScrollIndicator={false}
-                                    showsVerticalScrollIndicator={false}
-                                    centerContent={true}
-                                >
-                                    <Image
-                                        source={{uri}}
-                                        style={{width: SCREEN_WIDTH, aspectRatio: 4 / 3}}
-                                        contentFit="contain"
-                                        cachePolicy="memory-disk"
-                                        transition={{duration: 200, effect: "cross-dissolve"}}
-                                    />
-                                </ScrollView>
-                            ))}
-                        </ScrollView>
-                    )}
-                </View>
-            </Modal>
+            {selectedIndex !== null && (
+                <ImageGallery
+                    images={galleryImages}
+                    initialIndex={selectedIndex}
+                    onClose={() => setSelectedIndex(null)}
+                />
+            )}
         </>
 
     );
@@ -638,19 +596,5 @@ const styles = StyleSheet.create({
     },
     boldFont: {
         fontWeight: '700'
-    },
-    modalOverlay: {
-        flex: 1,
-        backgroundColor: "rgba(0,0,0,0.95)",
-    },
-    modalCloseArea: {
-        paddingHorizontal: 16,
-        paddingBottom: 12,
-        zIndex: 1,
-    },
-    closeText: {
-        color: "#fff",
-        fontSize: 16,
-        fontWeight: "700",
     },
 })

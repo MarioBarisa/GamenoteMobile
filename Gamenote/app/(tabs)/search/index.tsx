@@ -123,6 +123,7 @@ export default function SearchIndex() {
             </TouchableOpacity>
           ),
           headerSearchBarOptions: {
+            hideNavigationBar: false,
             placeholder: searchBarText(showMyGamesOnly),
             onChangeText: (event) => setSearch(event.nativeEvent.text),
           },

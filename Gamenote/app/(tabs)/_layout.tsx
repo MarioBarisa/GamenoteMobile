@@ -1,4 +1,4 @@
-import {NativeTabs} from "expo-router/unstable-native-tabs";
+import {NativeTabs} from "expo-router/native-tabs";
 import {router, useSegments} from "expo-router";
 import {Platform} from "react-native";
 import * as Haptics from "expo-haptics";

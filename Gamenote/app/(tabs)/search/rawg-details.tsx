@@ -1,8 +1,8 @@
 import {useEffect, useState} from "react";
 import {useLocalSearchParams, Stack, useRouter, useSegments} from "expo-router";
 import {Image} from "expo-image";
-import {ActivityIndicator, ScrollView, StyleSheet, Text, View, Pressable, useWindowDimensions, Modal} from "react-native";
-import {useSafeAreaInsets} from "react-native-safe-area-context";
+import {ActivityIndicator, ScrollView, StyleSheet, Text, View, Pressable, useWindowDimensions} from "react-native";
+import ImageGallery from "@/components/ImageGallery";
 import {useTheme} from "@/context/theme";
 import {SymbolView} from "expo-symbols";
 import {useTranslation} from "react-i18next";
@@ -61,7 +61,6 @@ function getPrequelAndSequel(series: SeriesGame[], currentReleaseDate: string): 
 export default function RAWGDetailsScreen() {
   const {t: tr} = useTranslation();
   const {theme, themeColors: t} = useTheme();
-  const insets = useSafeAreaInsets();
   const {width: SCREEN_WIDTH} = useWindowDimensions();
   const {game: rawgParam} = useLocalSearchParams<{ game: string }>();
   const router = useRouter();
@@ -227,7 +226,7 @@ export default function RAWGDetailsScreen() {
                     paddingBottom: 8,
                   }}>
                   {galleryImages.map((uri, index) => (
-                    <Pressable key={uri} onPress={() => setSelectedIndex(index)}>
+                    <Pressable key={uri} accessibilityRole="button" accessibilityLabel={tr("gallery.open", {index: index + 1})} onPress={() => setSelectedIndex(index)}>
                       <Image
                         source={{uri}}
                         style={[styles.coverImage, {width: SCREEN_WIDTH - 32}]}
@@ -434,54 +433,13 @@ export default function RAWGDetailsScreen() {
         </View>
       </ScrollView>
 
-      <Modal
-        visible={selectedIndex !== null}
-        transparent
-        animationType="fade"
-        onRequestClose={() => setSelectedIndex(null)}>
-        <View style={styles.modalOverlay}>
-          <View style={{paddingTop: insets.top}}>
-            <Pressable style={styles.modalCloseArea} onPress={() => setSelectedIndex(null)}>
-              <SymbolView
-                name="xmark.circle.fill"
-                style={{width: 40, height: 40}}
-                tintColor="rgba(255,255,255,0.85)"
-              />
-            </Pressable>
-          </View>
-          {galleryImages.length > 0 && (
-            <ScrollView
-              horizontal
-              pagingEnabled
-              showsHorizontalScrollIndicator={false}
-              contentOffset={{
-                x: (selectedIndex ?? 0) * SCREEN_WIDTH,
-                y: 0,
-              }}
-            >
-              {galleryImages.map((uri) => (
-                <ScrollView
-                  key={uri}
-                  style={{width: SCREEN_WIDTH, height: '100%'}}
-                  minimumZoomScale={1}
-                  maximumZoomScale={5}
-                  showsHorizontalScrollIndicator={false}
-                  showsVerticalScrollIndicator={false}
-                  centerContent={true}
-                >
-                  <Image
-                    source={{uri}}
-                    style={{width: SCREEN_WIDTH, aspectRatio: 4 / 3}}
-                    contentFit="contain"
-                    cachePolicy="memory-disk"
-                    transition={{duration: 200, effect: "cross-dissolve"}}
-                  />
-                </ScrollView>
-              ))}
-            </ScrollView>
-          )}
-        </View>
-      </Modal>
+      {selectedIndex !== null && (
+          <ImageGallery
+              images={galleryImages}
+              initialIndex={selectedIndex}
+              onClose={() => setSelectedIndex(null)}
+          />
+      )}
     </>
   );
 }
@@ -510,14 +468,5 @@ const styles = StyleSheet.create({
     gap: 8,
     padding: 16,
     borderRadius: 24,
-  },
-  modalOverlay: {
-    flex: 1,
-    backgroundColor: "rgba(0,0,0,0.95)",
-  },
-  modalCloseArea: {
-    paddingHorizontal: 16,
-    paddingBottom: 12,
-    zIndex: 1,
   },
 });

@@ -10,6 +10,7 @@ import {achievementPercent, progressColor} from "@/common/ProgressSources";
 import * as Haptics from 'expo-haptics';
 import {useTranslation} from "react-i18next";
 import {useRef, useState} from "react";
+import type {ViewInstance} from "react-native";
 import GameContextMenu, {MenuAnchor} from "@/components/GameContextMenu";
 
 interface Props {
@@ -26,7 +27,7 @@ export default function GameCardCompact({ game, onDelete }: Props) {
   const tab = segments[1] as 'home' | 'favorites' | 'search'; // GDJE SE MOŽE KORISTIT?
   const {width: SCREEN_WIDTH} = useWindowDimensions();
   const CARD_WIDTH = (SCREEN_WIDTH - 32 - 12) / 2;
-  const cardRef = useRef<View>(null);
+  const cardRef = useRef<ViewInstance>(null);
   const [menuAnchor, setMenuAnchor] = useState<MenuAnchor | null>(null);
   const [menuVisible, setMenuVisible] = useState(false);
 

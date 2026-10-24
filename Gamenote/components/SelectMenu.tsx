@@ -28,7 +28,7 @@ export default function SelectMenu({label, systemImage, iconColor, trigger, opti
             <View style={styles.triggerWrap}>
                 <View pointerEvents="none">{trigger}</View>
                 {/* Nevidljivi nativni menu hvata dodir */}
-                <Host style={[StyleSheet.absoluteFill, styles.nativeOverlay]}>
+                <Host alignment="center" style={[StyleSheet.absoluteFill, styles.nativeOverlay]}>
                     <Menu
                         label={<Image systemName="circle" size={TRIGGER_SIZE} color="#000000"/>}
                         modifiers={[contentShape(shapes.rectangle())]}
@@ -65,7 +65,7 @@ export default function SelectMenu({label, systemImage, iconColor, trigger, opti
     );
 
     return (
-        <Host matchContents style={{alignSelf: "center"}}>
+        <Host alignment="center" matchContents style={{alignSelf: "center"}}>
             <Menu label={defaultTrigger}>
                 {options.map((option) => (
                     <Button

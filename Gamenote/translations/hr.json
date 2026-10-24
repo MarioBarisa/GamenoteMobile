@@ -10,6 +10,12 @@
     "search": "Pretraži",
     "noImage": "Nema slike"
   },
+  "gallery": {
+    "open": "Otvori sliku {{index}}",
+    "close": "Zatvori galeriju",
+    "position": "Slika {{index}} od {{count}}",
+    "retry": "Učitavanje slike nije uspjelo. Dodirni za ponovni pokušaj."
+  },
   "tabs": {
     "home": "Početna",
     "favorites": "Moje igre",
