@@ -8,6 +8,7 @@
     "scheme": "gamenote",
     "userInterfaceStyle": "automatic",
     "ios": {
+      "icon": "./assets/gamenote/icons/GamenoteIcon.icon",
       "supportsTablet": false,
       "bundleIdentifier": "eu.gamenote.ios",
       "infoPlist": {
@@ -74,8 +75,13 @@
       "expo-font",
       "expo-image",
       "expo-status-bar",
-      "./plugins/withAlternateAppIcons",
-      "expo-localization"
+      "expo-localization",
+      [
+        "expo-sensors",
+        {
+          "motionPermission": "Allow Gamenote to use your phone's tilt to move holographic card reflections."
+        }
+      ]
     ],
     "experiments": {
       "typedRoutes": true,

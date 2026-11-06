@@ -289,6 +289,8 @@
     "iosDefaultDesc": "Gamenote koristi iOS default temu.",
     "compactCards": "Compact GameCard prikaz",
     "compactCardsDesc": "Prikaži 2 igre po retku (manje kartice).",
+    "tcgFoil": "TCG Foil Effect",
+    "tcgFoilDesc": "Folija prati nagib telefona. Više efekata može usporiti aplikaciju.",
     "other": "Ostalo",
     "vibration": "Vibracije",
     "vibrationDesc": "Haptic feedback za promjene tabova.",

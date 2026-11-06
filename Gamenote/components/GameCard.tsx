@@ -12,6 +12,8 @@ import {useTranslation} from "react-i18next";
 import {useRef, useState} from "react";
 import type {ViewInstance} from "react-native";
 import GameContextMenu, {MenuAnchor} from "@/components/GameContextMenu";
+import TCGFoilOverlay from "@/components/TCGFoilOverlay";
+import {useTCGFoil} from "@/hooks/useTCGFoil";
 
 interface Props {
   game: Game
@@ -75,6 +77,7 @@ export default function GameCard({ game, onDelete }: Props) {
   const imageUri = game.image_url || game.background_image || null;
 
   const pct = achievementPercent(game.progress_value, game.progress_total);
+  const foilVariant = useTCGFoil(game.rating, pct);
   const prColor = progressColor(game.progress_value, game.progress_total);
   // ima pravi progres iznad nule
   const hasProgress = typeof game.progress_value === 'number' && typeof game.progress_total === 'number' && game.progress_total > 0 && game.progress_value > 0;
@@ -105,6 +108,7 @@ export default function GameCard({ game, onDelete }: Props) {
                     <Text style={{ color: t.secondaryText, fontSize: isLargeScreen ? 15 : 13 }}>{tr('common.noImage')}</Text>
                   </View>
                 )}
+                {foilVariant && <TCGFoilOverlay variant={foilVariant} surface="cover" />}
               </View>
 
               {/* body igre */}
@@ -196,6 +200,7 @@ export default function GameCard({ game, onDelete }: Props) {
                         </View>
                     </View>
               </View>
+              {foilVariant && <TCGFoilOverlay variant={foilVariant} surface="card" />}
             </View>
       </Pressable>
       <GameContextMenu
@@ -213,6 +218,7 @@ export default function GameCard({ game, onDelete }: Props) {
 
 const styles = StyleSheet.create({
     card: {
+        isolation: "isolate",
         borderRadius: 10,
         overflow: 'hidden',
         marginBottom: 12,
@@ -224,6 +230,8 @@ const styles = StyleSheet.create({
         elevation: 2,
     },
     imageContainer: {
+        isolation: "isolate",
+        overflow: "hidden",
         position: 'relative',
         width: '100%',
         aspectRatio: 3 / 4, // stari aspect ratio  aspectRatio: 16 / 9,

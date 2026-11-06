@@ -6,6 +6,7 @@ import {useTranslation} from "react-i18next";
 import {GroupsProvider} from "@/context/GroupsContext";
 import {ThemeProvider, useTheme} from "@/context/theme";
 import {SettingsProvider} from "@/context/settings";
+import {TCGMotionProvider} from "@/context/TCGMotion";
 import {AuthProvider, useAuth} from "@/context/auth";
 import {useNavigationTheme} from "@/constants/navigationTheme";
 import ErrorBoundary from "@/components/ErrorBoundary";
@@ -115,7 +116,9 @@ export default function RootLayout() {
     return (
         <ThemeProvider>
             <SettingsProvider>
-                <RootNavigator/>
+                <TCGMotionProvider>
+                    <RootNavigator/>
+                </TCGMotionProvider>
             </SettingsProvider>
         </ThemeProvider>
     );

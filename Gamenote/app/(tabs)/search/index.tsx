@@ -219,7 +219,7 @@ export default function SearchIndex() {
                   {rawg.background_image ? (
                     <Image
                       source={{uri: rawg.background_image}}
-                      style={{width: 100, aspectRatio: 16 / 9}}
+                      style={{width: 100, minHeight: 100 * 9 / 16, alignSelf: 'stretch'}}
                       contentFit="cover"
                       cachePolicy="memory-disk"
                       transition={{duration: 200, effect: "cross-dissolve"}}
@@ -227,7 +227,8 @@ export default function SearchIndex() {
                   ) : (
                     <View style={{
                       width: 100,
-                      aspectRatio: 16 / 9,
+                      minHeight: 100 * 9 / 16,
+                      alignSelf: 'stretch',
                       backgroundColor: t.background,
                       justifyContent: 'center',
                       alignItems: 'center',

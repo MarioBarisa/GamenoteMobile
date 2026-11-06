@@ -8,20 +8,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7b37eb79-ceff-44a4-81aa-7e12f61dfc1f" name="Changes" comment="App updated to ExpoSDK v58.0 &amp; added QOL changes to viewing images.">
-      <change afterPath="$PROJECT_DIR$/Gamenote/.nvmrc" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Gamenote/components/ImageGallery.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Gamenote/utils/gallerySwipe.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Gamenote/app.json" beforeDir="false" afterPath="$PROJECT_DIR$/Gamenote/app.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gamenote/app/(tabs)/_layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/Gamenote/app/(tabs)/_layout.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Gamenote/app/(tabs)/search/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/Gamenote/app/(tabs)/search/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gamenote/app/(tabs)/search/rawg-details.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/Gamenote/app/(tabs)/search/rawg-details.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gamenote/components/AccentColorPicker.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/Gamenote/components/AccentColorPicker.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gamenote/app/_layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/Gamenote/app/_layout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gamenote/app/settings.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/Gamenote/app/settings.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Gamenote/components/GameCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/Gamenote/components/GameCard.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Gamenote/components/GameCardCompact.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/Gamenote/components/GameCardCompact.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gamenote/components/GameContextMenu.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/Gamenote/components/GameContextMenu.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gamenote/components/GameDetailsScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/Gamenote/components/GameDetailsScreen.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gamenote/components/SelectMenu.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/Gamenote/components/SelectMenu.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gamenote/context/settings.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/Gamenote/context/settings.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Gamenote/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/Gamenote/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Gamenote/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/Gamenote/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Gamenote/translations/en.json" beforeDir="false" afterPath="$PROJECT_DIR$/Gamenote/translations/en.json" afterDir="false" />
@@ -174,6 +168,7 @@
     </option>
     <option name="panelTemplate">
       <template>
+        <option name="ensembleEnabled" value="false" />
         <option name="modeId" value="Agent" />
         <option name="model">
           <model>
@@ -181,9 +176,11 @@
             <option name="modelValue" value="auto" />
           </model>
         </option>
-        <option name="targetType" value="LOCAL" />
+        <option name="targetType" value="BACKGROUND" />
+        <option name="worktreeMode" value="WORKSPACE" />
       </template>
     </option>
+    <option name="version" value="1" />
   </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -300,14 +297,8 @@
       <workItem from="1792397059679" duration="20000" />
       <workItem from="1792503965510" duration="9484000" />
       <workItem from="1792673817085" duration="19000" />
-      <workItem from="1792851187009" duration="4022000" />
-    </task>
-    <task id="LOCAL−00059" summary="Dodan wishlist game status u StatusCommons.tsx">
-      <option name="closed" value="true" />
-      <created>1780657415665</created>
-      <option name="number" value="LOCAL−00059" />
-      <option name="presentableId" value="LOCAL−00059" />
-      <updated>1780657415666</updated>
+      <workItem from="1792851187009" duration="7121000" />
+      <workItem from="1793972586022" duration="1024000" />
     </task>
     <task id="LOCAL−00060" summary="Dodan minimizeBehavior=&quot;onScrollDown&quot; kako bi se TabBar smanjio tokom scrolla. Dodan details kao zasebni screen bez pushScreen kako bi se tab bar mogao i tamo prikazitavi + popravak ružnog title fade-ina od prije navedennog fixa.">
       <option name="closed" value="true" />
@@ -645,7 +636,14 @@
       <option name="presentableId" value="LOCAL−00107" />
       <updated>1792589235016</updated>
     </task>
-    <option name="localTasksCounter" value="108" />
+    <task id="LOCAL−00108" summary="App updated to ExpoSDK v58.0 &amp; added QOL changes to viewing images.">
+      <option name="closed" value="true" />
+      <created>1792857647551</created>
+      <option name="number" value="LOCAL−00108" />
+      <option name="presentableId" value="LOCAL−00108" />
+      <updated>1792857647551</updated>
+    </task>
+    <option name="localTasksCounter" value="109" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

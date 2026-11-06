@@ -289,6 +289,8 @@
     "iosDefaultDesc": "Gamenote uses the iOS default theme.",
     "compactCards": "Compact GameCard view",
     "compactCardsDesc": "Show 2 games per row (smaller cards).",
+    "tcgFoil": "TCG Foil Effect",
+    "tcgFoilDesc": "Foil follows your phone's tilt. Many effects may slow the app.",
     "other": "Other",
     "vibration": "Vibration",
     "vibrationDesc": "Haptic feedback for tab changes.",
