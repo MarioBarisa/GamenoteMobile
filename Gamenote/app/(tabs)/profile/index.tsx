@@ -1,12 +1,17 @@
+import {useLocalMode} from "@/context/localMode";
+import {localImageUrl} from "@/services/localData";
 import {Image} from "expo-image";
 import {Text, ScrollView, StyleSheet, TextInput, View, Alert, Pressable, RefreshControl} from "react-native";
-import {useLayoutEffect, useState} from "react";
+import {useCallback, useLayoutEffect, useState} from "react";
 import {useTheme} from "@/context/theme";
 import {useAuth} from "@/context/auth";
 import {SymbolView} from "expo-symbols";
 import {useUserGames} from "@/hooks/useUserGames";
-import {useNavigation, useRouter} from "expo-router";
+import {useFocusEffect, useNavigation, useRouter} from "expo-router";
 import {useTranslation} from "react-i18next";
+import {ACCOUNT_SECURED_COLOR} from "@/constants/theme";
+import {hasPlatinum} from "@/utils/profileAchievements";
+import PasswordInput from "@/components/PasswordInput";
 
 
 function StatCard({  // reusable za stats
@@ -43,19 +48,42 @@ function StatCard({  // reusable za stats
 // noinspection JSUnusedGlobalSymbols
 export default function FavoritesScreen() {
     const {t: tr} = useTranslation();
-    const {loggedIn, user, username, signIn, signOut} = useAuth();
+    const {loggedIn, user, username, signIn, signOut, totpFactors, refreshSecurity, openRecoveredProfile, openProfileAfterSignIn, acknowledgeProfile} = useAuth();
+    const {activeSource, document, storageError, returnToCloudProfile, setReturnToCloudProfile} = useLocalMode();
+    const isLocal = activeSource === "local";
+    const localName = document?.profile.name || tr("screens.localMode.localProfile");
+    const profileName = isLocal ? localName : user?.user_metadata?.name;
+    const profileLine = isLocal ? localName : user?.email ?? username;
+    const avatar = isLocal ? localImageUrl(document?.profile.profileUrl) : user?.user_metadata?.avatar_url;
+    const [failedAvatar, setFailedAvatar] = useState<string>();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [signingIn, setSigningIn] = useState(false);
     const {games, refresh, isLoading} = useUserGames();
     const {themeColors: t} = useTheme();
     const navigation = useNavigation();
     const router = useRouter();
 
+    useFocusEffect(useCallback(() => {
+        if (loggedIn && !isLocal) refreshSecurity().catch(() => {});
+    }, [isLocal, loggedIn, refreshSecurity]));
+
+    useFocusEffect(useCallback(() => {
+        if (!isLocal && returnToCloudProfile) setReturnToCloudProfile(false);
+    }, [isLocal, returnToCloudProfile, setReturnToCloudProfile]));
+
+    useFocusEffect(useCallback(() => {
+        if (openProfileAfterSignIn || openRecoveredProfile) acknowledgeProfile();
+        if (openRecoveredProfile) {
+            Alert.alert(tr("mfa.settings"), tr("mfa.recovered"));
+        }
+    }, [acknowledgeProfile, openProfileAfterSignIn, openRecoveredProfile, tr]));
+
     useLayoutEffect(() => { // CUSTOM POZDRAV TITLE ZA USERNAME
         navigation.setOptions({
-            title: loggedIn && user?.user_metadata?.name ? tr("profile.greetingLogged", {username: user.user_metadata.name}) : tr("profile.greetingGuest"),
+            title: profileName ? tr("profile.greetingLogged", {username: profileName}) : tr("profile.greetingGuest"),
         });
-    }, [navigation, loggedIn, user, tr]);
+    }, [navigation, profileName, tr]);
 
     function userStats() {
         const totalGames = games.length;
@@ -131,18 +159,21 @@ export default function FavoritesScreen() {
     }
 
     const userInfo = userStats();
+    const accountSecured = totpFactors.length > 0;
+    const platinum = hasPlatinum(userInfo, accountSecured);
 
     return (
         <ScrollView
             style={{backgroundColor: t.background}}
             contentInsetAdjustmentBehavior="automatic"
-            refreshControl={<RefreshControl refreshing={isLoading} onRefresh={refresh} tintColor={t.accent} />}
+            refreshControl={<RefreshControl refreshing={isLoading} onRefresh={() => { refresh(); if (!isLocal) refreshSecurity().catch(() => {}); }} tintColor={t.accent} />}
         >
-            {loggedIn && (
+            {(loggedIn || isLocal) && (
                 <View style={styles.container}>
-                    {user?.user_metadata?.avatar_url ? (
+                    {avatar && (!isLocal || avatar !== failedAvatar) ? (
                         <Image
-                            source={{uri: user.user_metadata.avatar_url}}
+                            source={{uri: avatar}}
+                            onError={isLocal ? () => setFailedAvatar(avatar) : undefined}
                             style={{
                                 width: 150,
                                 height: 150,
@@ -151,7 +182,7 @@ export default function FavoritesScreen() {
                                 alignSelf: "center",
                             }}
                             contentFit="cover"
-                            cachePolicy="memory-disk"
+                            cachePolicy={isLocal ? "memory" : "memory-disk"}
                             transition={{duration: 200, effect: "cross-dissolve"}}
                         />
                     ) : (
@@ -170,7 +201,7 @@ export default function FavoritesScreen() {
                                 fontSize: 56,
                                 fontWeight: "700",
                             }}>
-                                {(user?.email ?? username ?? '?').charAt(0).toUpperCase()}
+                                {(profileLine || '?').charAt(0).toUpperCase()}
                             </Text>
                         </View>
                     )}
@@ -179,7 +210,14 @@ export default function FavoritesScreen() {
                         fontWeight: "bold",
                         fontSize: 12,
                         alignSelf: "center"
-                    }}>{user?.email ?? username}</Text>
+                    }}>{profileLine}</Text>
+                    {isLocal && <View style={[styles.localBadge, {backgroundColor: t.backgroundModal}]}>
+                        <SymbolView name="iphone" size={13} tintColor={t.accent}/>
+                        <Text style={{color: t.accent, fontSize: 12, fontWeight: "600"}}>{tr("screens.localMode.badge")}</Text>
+                    </View>}
+                    {isLocal && storageError && <Text accessibilityRole="alert" style={{color: t.destructive}}>
+                        {tr("screens.localMode.storageError")}
+                    </Text>}
                     <Text style={{color: t.text, fontWeight: "bold", fontSize: 22, alignSelf: "center"}}>{tr("profile.statsTitle")}</Text>
                     <View style={styles.row}>
                         <StatCard
@@ -387,10 +425,10 @@ export default function FavoritesScreen() {
                             <SymbolView
                                 name="trophy.fill"
                                 style={{width: 24, height: 24}}
-                                tintColor={userInfo.totalGames >= 50 && userInfo.finishedGames >= 25 && userInfo.totalPlaytime >= 3000 && userInfo.bestGames >= 10 ? "#C0C0C0" : t.secondaryText}
+                                tintColor={platinum ? "#C0C0C0" : t.secondaryText}
                             />
                             <Text style={{
-                                color: userInfo.totalGames >= 50 && userInfo.finishedGames >= 25 && userInfo.totalPlaytime >= 3000 && userInfo.bestGames >= 10 ? "#C0C0C0" : t.secondaryText,
+                                color: platinum ? "#C0C0C0" : t.secondaryText,
                                 fontWeight: "bold",
                                 fontSize: 11,
                                 textAlign: "center"
@@ -398,8 +436,9 @@ export default function FavoritesScreen() {
                             numberOfLines={1}
                             adjustsFontSizeToFit
                             minimumFontScale={0.7}>{tr("profile.achPlatinum")}</Text>
-                            <Text style={{color: t.secondaryText, fontSize: 10, textAlign: "center"}}
-                            numberOfLines={2}>{tr("profile.achPlatinumDesc")}</Text>
+                            <Text style={{color: t.secondaryText, fontSize: 10, textAlign: "center"}}>
+                                {tr("profile.achPlatinumDesc")}
+                            </Text>
                         </View>
 
                         <View style={{alignItems: "center", gap: 4, padding: 4, width: "30%"}}>
@@ -421,8 +460,26 @@ export default function FavoritesScreen() {
                             numberOfLines={2}>{tr("profile.achGotyDesc")}</Text>
                         </View>
 
+                        {!isLocal && (
+                            <View style={{alignItems: "center", gap: 4, padding: 4, width: "30%"}}>
+                                <SymbolView name="checkmark.shield.fill" size={24}
+                                            tintColor={accountSecured ? ACCOUNT_SECURED_COLOR : t.secondaryText}/>
+                                <Text style={{color: accountSecured ? ACCOUNT_SECURED_COLOR : t.secondaryText,
+                                    fontWeight: "bold", fontSize: 11, textAlign: "center"}}
+                                      numberOfLines={1} adjustsFontSizeToFit minimumFontScale={0.7}>
+                                    {tr("mfa.achievement")}
+                                </Text>
+                                <Text style={{color: t.secondaryText, fontSize: 10, textAlign: "center"}}>
+                                    {tr("mfa.achievementDescription")}
+                                </Text>
+                            </View>
+                        )}
                     </View>
-                    <View style={{flexDirection: "row", gap: 12, justifyContent: "center", flexWrap: "wrap"}}>
+                    {isLocal ? <Pressable accessibilityRole="button" style={[styles.localBadge, {backgroundColor: t.backgroundModal, minHeight: 44}]}
+                        onPress={() => router.push("/settings/local-mode")}>
+                        <SymbolView name="person.crop.circle" size={18} tintColor={t.accent}/>
+                        <Text style={{color: t.accent, fontWeight: "600"}}>{tr("screens.localMode.editProfile")}</Text>
+                    </Pressable> : <View style={{flexDirection: "row", gap: 12, justifyContent: "center", flexWrap: "wrap"}}>
 
                         <Pressable
                             accessibilityLabel={tr("profile.manageAccountA11y")}
@@ -473,11 +530,11 @@ export default function FavoritesScreen() {
                             </Text>
                         </Pressable>
 
-                    </View>
+                    </View>}
                 </View>
             )}
 
-            {!loggedIn && (
+            {!loggedIn && !isLocal && (
                 <View>
                     <View style={{
                         flexDirection: "row",
@@ -511,14 +568,21 @@ export default function FavoritesScreen() {
                             placeholderTextColor={t.secondaryText}
                             clearButtonMode="unless-editing"
                             style={[styles.systemInput, {color: t.text}]}
+                            textContentType="username"
+                            autoCapitalize="none"
+                            autoCorrect={false}
+                            spellCheck={false}
                             onChangeText={setEmail}
                         />
-                        <TextInput
+                        <PasswordInput
                             placeholder={tr("profile.password")}
                             placeholderTextColor={t.secondaryText}
                             clearButtonMode="unless-editing"
-                            secureTextEntry
-                            style={[styles.systemInput, {color: t.text}]}
+                            containerStyle={{marginHorizontal: 16}}
+                            style={[styles.systemInput, {color: t.text, marginHorizontal: 0}]}
+                            textContentType="password"
+                            value={password}
+                            editable={!signingIn}
                             onChangeText={setPassword}
                         />
                         <View style={{
@@ -539,17 +603,26 @@ export default function FavoritesScreen() {
                                     gap: 6,
                                     opacity: pressed ? 0.6 : 1
                                 }]}
-                        accessibilityLabel={tr("profile.loginA11y")}
-                         onPress={async () => {
-                                     if (password === "") {
-                                         Alert.alert(tr("profile.missingPasswordTitle"), tr("profile.missingPasswordMsg"));
-                                     } else {
-                                         const {success, error} = await signIn(email, password);
-                                         if (!success) {
-                                             Alert.alert(tr("profile.login"), error || "Pogrešna e-mail adresa ili lozinka.");
-                                         }
-                                     }
-                                 }}
+                                accessibilityLabel={tr("profile.loginA11y")}
+                                disabled={signingIn}
+                                onPress={async () => {
+                                    if (!password) {
+                                        Alert.alert(tr("profile.missingPasswordTitle"), tr("profile.missingPasswordMsg"));
+                                        return;
+                                    }
+                                    setSigningIn(true);
+                                    try {
+                                        const result = await signIn(email, password);
+                                        if (!result.success) {
+                                            Alert.alert(tr("profile.login"), result.error || tr("mfa.unavailable"));
+                                        }
+                                    } catch {
+                                        Alert.alert(tr("profile.login"), tr("mfa.unavailable"));
+                                    } finally {
+                                        setPassword("");
+                                        setSigningIn(false);
+                                    }
+                                }}
                             >
                                 <SymbolView
                                     name={"arrow.right" as any}
@@ -594,6 +667,7 @@ export default function FavoritesScreen() {
 const CARD_GAP = 8;
 
 const styles = StyleSheet.create({
+    localBadge: {alignSelf: "center", borderRadius: 20, flexDirection: "row", alignItems: "center", gap: 5, paddingHorizontal: 10, paddingVertical: 4},
     container: {
         padding: 12,
         gap: 8,

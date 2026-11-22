@@ -1,18 +1,23 @@
 import {useTheme} from "@/context/theme";
-import {useRouter} from "expo-router";
+import {Stack, useRouter} from "expo-router";
 import {Image} from "expo-image";
-import {Alert, Platform, Pressable, ScrollView, StyleSheet, Text, TextInput, View} from "react-native";
+import {Alert, Keyboard, Pressable, ScrollView, StyleSheet, Text, TextInput, View} from "react-native";
 import {SymbolView} from "expo-symbols";
 import * as Haptics from "expo-haptics";
-import {useState} from "react";
+import {useEffect, useRef, useState} from "react";
 import {useTranslation} from "react-i18next";
 import {useAuth} from "@/context/auth";
+import {useSettings} from "@/context/settings";
+import PasswordInput from "@/components/PasswordInput";
+import {ModalText} from "@/components/AccountModal";
+import {ACCOUNT_SECURED_COLOR} from "@/constants/theme";
 
 export default function ManageAccountModal() {
     const {t: tr} = useTranslation();
     const {theme, themeColors: t} = useTheme();
     const router = useRouter();
-    const {user, username, avatarUrl, updateUsername, updatePassword, updateAvatar, deleteAccount} = useAuth();
+    const {vibrationsEnabled} = useSettings();
+    const {user, username, avatarUrl, updateUsername, updatePassword, updateAvatar, deleteAccount, totpFactors} = useAuth();
 
     const [newUsername, setNewUsername] = useState(username);
     const [newPassword, setNewPassword] = useState('');
@@ -20,42 +25,89 @@ export default function ManageAccountModal() {
     const [avatarInputUrl, setAvatarInputUrl] = useState('');
     const [isSaving, setIsSaving] = useState(false);
     const [isDeleting, setIsDeleting] = useState(false);
+    const [passwordError, setPasswordError] = useState("");
+    const passwordAttempt = useRef(0);
+    const activeTotp = totpFactors.length > 0;
+
+    useEffect(() => () => {
+        passwordAttempt.current++;
+    }, []);
+
+    const requestCurrentPassword = () => new Promise<string | undefined>(resolve => {
+        Keyboard.dismiss();
+        Alert.prompt(
+            tr("profile.confirmPasswordChangeTitle"),
+            tr("mfa.currentPassword"),
+            [
+                {text: tr("common.cancel"), style: "cancel", onPress: () => resolve(undefined)},
+                {text: tr("common.saveChanges"), isPreferred: true, onPress: value => resolve(value ?? "")},
+            ],
+            "plain-text",
+        );
+    });
+
+    const savePassword = async (attempt: number) => {
+        const cancelled = () => passwordAttempt.current !== attempt;
+        const currentPassword = await requestCurrentPassword();
+        if (cancelled() || currentPassword === undefined) return false;
+        if (!currentPassword) {
+            setPasswordError("mfa.currentPassword");
+            return false;
+        }
+
+        try {
+            const result = await updatePassword(newPassword, currentPassword, cancelled);
+            if (cancelled()) return false;
+            if (!result.success) {
+                setPasswordError("mfa.passwordSaveError");
+                return false;
+            }
+            setNewPassword("");
+            setConfirmPassword("");
+            return true;
+        } catch (error) {
+            if (!cancelled()) {
+                const wrongPassword = typeof error === "object" && error !== null && "code" in error
+                    && error.code === "invalid_credentials";
+                setPasswordError(wrongPassword ? "mfa.wrongPassword" : "mfa.passwordSaveError");
+            }
+            return false;
+        }
+    };
 
     const handleSave = async () => {
-        if (Platform.OS === 'ios') {
-            Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
-        }
-
+        if (isSaving || isDeleting) return;
         setIsSaving(true);
+        setPasswordError("");
+        const attempt = ++passwordAttempt.current;
         const results: string[] = [];
-
-        if (avatarInputUrl.trim()) {
-            const r = await updateAvatar(avatarInputUrl.trim());
-            if (r.success) {
-                results.push(tr('profile.manageAccountAvatarSaved'));
-                setAvatarInputUrl('');
+        try {
+            if (avatarInputUrl.trim()) {
+                const result = await updateAvatar(avatarInputUrl.trim());
+                if (result.success) {
+                    results.push(tr('profile.manageAccountAvatarSaved'));
+                    setAvatarInputUrl('');
+                }
             }
+            if (newUsername.trim() && newUsername.trim() !== username) {
+                const result = await updateUsername(newUsername.trim());
+                if (result.success) results.push(tr('profile.manageAccountUsernameSaved'));
+            }
+
+            if (passwordAttempt.current !== attempt) return;
+            if (newPassword || confirmPassword) {
+                if (newPassword !== confirmPassword || newPassword.length < 8) {
+                    setPasswordError("mfa.passwordRequirements");
+                } else if (await savePassword(attempt)) {
+                    results.push(tr('profile.manageAccountPasswordSaved'));
+                }
+            }
+        } finally {
+            if (passwordAttempt.current === attempt) setIsSaving(false);
         }
 
-        if (newUsername.trim() && newUsername.trim() !== username) {
-            const r = await updateUsername(newUsername.trim());
-            if (r.success) {
-                results.push(tr('profile.manageAccountUsernameSaved'));
-            }
-        }
-
-        if (newPassword && newPassword === confirmPassword && newPassword.length >= 8) {
-            const r = await updatePassword(newPassword);
-            if (r.success) {
-                results.push(tr('profile.manageAccountPasswordSaved'));
-                setNewPassword('');
-                setConfirmPassword('');
-            }
-        }
-
-        setIsSaving(false);
-
-        if (results.length > 0) {
+        if (passwordAttempt.current === attempt && results.length > 0) {
+            if (vibrationsEnabled) Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light).catch(() => {});
             Alert.alert('', results.join('\n'));
         }
     };
@@ -70,9 +122,6 @@ export default function ManageAccountModal() {
                     text: tr('profile.manageAccountDeleteLabel'),
                     style: 'destructive',
                     onPress: async () => {
-                        if (Platform.OS === 'ios') {
-                            Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Heavy);
-                        }
                         setIsDeleting(true);
                         const result = await deleteAccount();
                         setIsDeleting(false);
@@ -98,8 +147,9 @@ export default function ManageAccountModal() {
             contentInsetAdjustmentBehavior="automatic"
             automaticallyAdjustContentInsets={true}
             keyboardShouldPersistTaps="handled"
-            automaticallyAdjustKeyboardInsets={true}
+            automaticallyAdjustKeyboardInsets
         >
+            <Stack.Screen options={{gestureEnabled: !isSaving && !isDeleting, headerBackVisible: !isSaving && !isDeleting}}/>
             <View style={[styles.section, {alignItems: 'center'}]}>
                 <Image
                     source={{uri: currentAvatar}}
@@ -152,12 +202,29 @@ export default function ManageAccountModal() {
                 </View>
             </View>
 
+            <Pressable
+                accessibilityRole="button"
+                onPress={() => router.push('/(modals)/totpSettingsModal')}
+                disabled={isSaving || isDeleting}
+                style={({pressed}) => [styles.securityButton, {
+                    backgroundColor: theme === 'dark' ? '#2C2C2E' : '#E5E5EA',
+                    opacity: pressed ? 0.6 : 1,
+                }]}
+            >
+                <SymbolView name={activeTotp ? "checkmark.shield.fill" : "shield"} size={20}
+                            tintColor={activeTotp ? ACCOUNT_SECURED_COLOR : t.accent}/>
+                <Text style={{color: activeTotp ? ACCOUNT_SECURED_COLOR : t.text, fontWeight: "700", fontSize: 16}}>
+                    {tr("mfa.settings")}
+                </Text>
+                <SymbolView name="chevron.right" size={14} tintColor={t.secondaryText}/>
+            </Pressable>
+
             <View style={styles.section}>
                 <Text style={[styles.sectionTitle, {color: t.text}]}>
                     {tr('register.passwordLabel')}
                 </Text>
                 <View style={styles.formGroup}>
-                    <TextInput
+                    <PasswordInput
                         style={[
                             styles.input,
                             {
@@ -167,11 +234,12 @@ export default function ManageAccountModal() {
                         ]}
                         value={newPassword}
                         onChangeText={setNewPassword}
+                        editable={!isSaving && !isDeleting}
+                        textContentType="newPassword"
                         placeholder={tr('profile.manageAccountPasswordPlaceholder')}
                         placeholderTextColor={t.secondaryText}
-                        secureTextEntry
                     />
-                    <TextInput
+                    <PasswordInput
                         style={[
                             styles.input,
                             {
@@ -181,12 +249,19 @@ export default function ManageAccountModal() {
                         ]}
                         value={confirmPassword}
                         onChangeText={setConfirmPassword}
+                        editable={!isSaving && !isDeleting}
+                        textContentType="newPassword"
                         placeholder={tr('profile.manageAccountPasswordConfirmLabel')}
                         placeholderTextColor={t.secondaryText}
-                        secureTextEntry
                     />
                 </View>
             </View>
+
+            {passwordError && (
+                <View style={styles.section}>
+                    <ModalText error>{tr(passwordError)}</ModalText>
+                </View>
+            )}
 
             <Pressable
                 style={({pressed}) => [{
@@ -199,7 +274,7 @@ export default function ManageAccountModal() {
                     opacity: pressed ? 0.6 : 1,
                 }]}
                 onPress={handleSave}
-                disabled={isSaving}
+                disabled={isSaving || isDeleting}
             >
                 <Text style={{color: '#fff', fontWeight: '700', fontSize: 16}}>
                     {isSaving ? '...' : tr('common.saveChanges')}
@@ -222,7 +297,7 @@ export default function ManageAccountModal() {
                         opacity: pressed ? 0.6 : 1,
                     }]}
                     onPress={handleDeleteAccount}
-                    disabled={isDeleting}
+                    disabled={isDeleting || isSaving}
                 >
                     <SymbolView
                         name={"trash.fill"}
@@ -237,6 +312,7 @@ export default function ManageAccountModal() {
 
             <Pressable
                 onPress={() => router.back()}
+                disabled={isSaving || isDeleting}
                 accessibilityLabel={tr("common.cancel")}
                 style={[styles.cancelButton, {backgroundColor: theme === 'dark' ? '#2C2C2E' : '#E5E5EA'}]}
             >
@@ -256,6 +332,15 @@ const styles = StyleSheet.create({
     sectionTitle: {
         fontSize: 18,
         fontWeight: '700',
+    },
+    securityButton: {
+        marginHorizontal: 16,
+        padding: 14,
+        borderRadius: 24,
+        gap: 8,
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContent: "center",
     },
     formGroup: {
         gap: 8,

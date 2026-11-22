@@ -1,3 +1,4 @@
+import {useLocalMode} from "@/context/localMode";
 import {useTheme} from "@/context/theme";
 import {useRouter} from "expo-router";
 import {Alert, Platform, Pressable, ScrollView, StyleSheet, Text, TextInput, View} from "react-native";
@@ -19,6 +20,8 @@ export default function AddGroupModal() {
     const {addGroup, addGameToGroup} = useGroups();
     const {user} = useAuth();
     const {games} = useUserGames();
+    const {activeSource} = useLocalMode();
+    const isLocal = activeSource === "local";
 
     const typeGroups = ["Collection", "Trilogy", "Franchise"];
 
@@ -40,17 +43,22 @@ export default function AddGroupModal() {
             return;
         }
 
-        const created = await addGroup({
-            name: form.name.trim(),
-            type: form.type ?? null,
-            rating: form.rating ?? null,
-            user_id: user?.id ?? '',
-        } as any);
+        try {
+            const created = await addGroup({
+                name: form.name.trim(),
+                type: form.type ?? null,
+                rating: form.rating ?? null,
+                user_id: user?.id ?? '',
+            }, isLocal ? selectedGameIds : undefined);
 
-        const groupId = created?.id ?? Date.now().toString();
-
-        for (const gameId of selectedGameIds) {
-            await addGameToGroup(gameId, groupId);
+            if (!isLocal) {
+                const groupId = created?.id ?? Date.now().toString();
+                for (const gameId of selectedGameIds) await addGameToGroup(gameId, groupId);
+            }
+        } catch (error) {
+            if (!isLocal) throw error;
+            Alert.alert(tr("screens.localMode.storageError"));
+            return;
         }
 
         if (Platform.OS === 'ios') {

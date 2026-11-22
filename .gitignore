@@ -1,0 +1,13 @@
+# Local Netlify folder
+.netlify/
+
+.DS_Store
+.env
+.env.*
+!.env.example
+
+/.agents/
+/.codex/
+/.idea/workspace.xml
+/.idea/copilotDiffState.xml
+/.idea/dictionaries/

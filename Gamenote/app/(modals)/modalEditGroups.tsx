@@ -1,3 +1,4 @@
+import {useLocalMode} from "@/context/localMode";
 import {useTheme} from "@/context/theme";
 import {useLocalSearchParams, useRouter} from "expo-router";
 import {Alert, Platform, Pressable, ScrollView, StyleSheet, Text, TextInput, View} from "react-native";
@@ -40,6 +41,12 @@ export default function ModalEditGroups() {
     const {addGameToGroup, removeGameFromGroup, getGamesInGroup, updateGroup, removeGroup, refreshGroups} = useGroups();
     const gamesInGroup: string[] = group ? getGamesInGroup(group.id) : [];
     const {games: allGames} = useUserGames();
+    const {activeSource} = useLocalMode();
+
+    function storageError(error: unknown) {
+        if (activeSource === "cloud") throw error;
+        Alert.alert(tr("screens.localMode.storageError"));
+    }
 
     const [showAll, setShowAll] = useState(false);
     const visibleGames = showAll ? allGames : allGames.slice(0, 5);
@@ -47,8 +54,13 @@ export default function ModalEditGroups() {
     const handleSave = async () => {
         if (Platform.OS === 'ios') Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
         const updated = {...original, ...form};
-        await updateGroup(original.id, updated);
-        await refreshGroups();
+        try {
+            await updateGroup(original.id, updated);
+            await refreshGroups();
+        } catch (error) {
+            storageError(error);
+            return;
+        }
         Alert.alert(tr('editGroup.savedTitle'), tr('editGroup.savedMsg', {name: updated.name}), [
             {text: 'OK', onPress: () => router.back()}
         ]);
@@ -64,8 +76,12 @@ export default function ModalEditGroups() {
                     text: tr('common.delete'),
                     style: 'destructive',
                     onPress: async () => {
-                        await removeGroup(original.id);
-                        router.back();
+                        try {
+                            await removeGroup(original.id);
+                            router.back();
+                        } catch (error) {
+                            storageError(error);
+                        }
                     }
                 },
             ]
@@ -135,9 +151,9 @@ export default function ModalEditGroups() {
                                     key={game.db_id ?? game.game_id}
                                     onPress={() => {
                                         if (isInGroup) {
-                                            removeGameFromGroup(game.db_id ?? game.game_id, group.id);
+                                            removeGameFromGroup(game.db_id ?? game.game_id, group.id).catch(storageError);
                                         } else {
-                                            addGameToGroup(game.db_id ?? game.game_id, group.id);
+                                            addGameToGroup(game.db_id ?? game.game_id, group.id).catch(storageError);
                                         }
                                         if (Platform.OS === 'ios') {
                                             Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);

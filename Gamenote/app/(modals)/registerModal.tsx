@@ -7,6 +7,7 @@ import * as WebBrowser from "expo-web-browser";
 import {useState} from "react";
 import {useTranslation} from "react-i18next";
 import {useAuth} from "@/context/auth";
+import PasswordInput from "@/components/PasswordInput";
 
 interface RegisterFormData {
     username: string;
@@ -35,8 +36,6 @@ export default function RegisterModal() {
         confirmPassword: '',
     });
 
-    const [showPassword, setShowPassword] = useState(false);
-    const [showConfirmPassword, setShowConfirmPassword] = useState(false);
     const [errors, setErrors] = useState<ValidationErrors>({});
     const [tosAccepted, setTosAccepted] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
@@ -192,8 +191,10 @@ export default function RegisterModal() {
                         onChangeText={v => updateField('email', v)}
                         placeholder={tr('register.emailPlaceholder')}
                         placeholderTextColor={t.secondaryText}
-                        keyboardType="email-address"
+                        textContentType="username"
                         autoCapitalize="none"
+                        autoCorrect={false}
+                        spellCheck={false}
                     />
                     {errors.email && (
                         <Text style={[styles.errorText, {color: '#ff3b30'}]}>
@@ -205,35 +206,22 @@ export default function RegisterModal() {
                 {/* Lozinka */}
                 <View style={styles.formGroup}>
                     <Text style={[styles.label, {color: t.text}]}>{tr('register.passwordLabel')}</Text>
-                    <View style={{flexDirection: 'row', alignItems: 'center', gap: 8}}>
-                        <TextInput
-                            style={[
-                                styles.input,
-                                {
-                                    flex: 1,
-                                    color: t.text,
-                                    backgroundColor: theme === 'dark' ? '#2C2C2E' : '#E5E5EA',
-                                    borderColor: errors.password ? '#ff3b30' : 'transparent',
-                                    borderWidth: errors.password ? 1 : 0,
-                                },
-                            ]}
-                            value={form.password}
-                            onChangeText={v => updateField('password', v)}
-                            placeholder={tr('register.passwordPlaceholder')}
-                            placeholderTextColor={t.secondaryText}
-                            secureTextEntry={!showPassword}
-                        />
-                        <Pressable
-                            onPress={() => setShowPassword(!showPassword)}
-                            hitSlop={8}
-                        >
-                            <SymbolView
-                                name={showPassword ? 'eye.slash.fill' : 'eye.fill'}
-                                style={{width: 20, height: 20}}
-                                tintColor={t.accent}
-                            />
-                        </Pressable>
-                    </View>
+                    <PasswordInput
+                        style={[
+                            styles.input,
+                            {
+                                color: t.text,
+                                backgroundColor: theme === 'dark' ? '#2C2C2E' : '#E5E5EA',
+                                borderColor: errors.password ? '#ff3b30' : 'transparent',
+                                borderWidth: errors.password ? 1 : 0,
+                            },
+                        ]}
+                        value={form.password}
+                        onChangeText={v => updateField('password', v)}
+                        placeholder={tr('register.passwordPlaceholder')}
+                        placeholderTextColor={t.secondaryText}
+                        textContentType="newPassword"
+                    />
                     {errors.password && (
                         <Text style={[styles.errorText, {color: '#ff3b30'}]}>
                             {errors.password}
@@ -247,35 +235,22 @@ export default function RegisterModal() {
                 {/* Potvrda lozinke */}
                 <View style={styles.formGroup}>
                     <Text style={[styles.label, {color: t.text}]}>{tr('register.confirmLabel')}</Text>
-                    <View style={{flexDirection: 'row', alignItems: 'center', gap: 8}}>
-                        <TextInput
-                            style={[
-                                styles.input,
-                                {
-                                    flex: 1,
-                                    color: t.text,
-                                    backgroundColor: theme === 'dark' ? '#2C2C2E' : '#E5E5EA',
-                                    borderColor: errors.confirmPassword ? '#ff3b30' : 'transparent',
-                                    borderWidth: errors.confirmPassword ? 1 : 0,
-                                },
-                            ]}
-                            value={form.confirmPassword}
-                            onChangeText={v => updateField('confirmPassword', v)}
-                            placeholder={tr('register.confirmPlaceholder')}
-                            placeholderTextColor={t.secondaryText}
-                            secureTextEntry={!showConfirmPassword}
-                        />
-                        <Pressable
-                            onPress={() => setShowConfirmPassword(!showConfirmPassword)}
-                            hitSlop={8}
-                        >
-                            <SymbolView
-                                name={showConfirmPassword ? 'eye.slash.fill' : 'eye.fill'}
-                                style={{width: 20, height: 20}}
-                                tintColor={t.accent}
-                            />
-                        </Pressable>
-                    </View>
+                    <PasswordInput
+                        style={[
+                            styles.input,
+                            {
+                                color: t.text,
+                                backgroundColor: theme === 'dark' ? '#2C2C2E' : '#E5E5EA',
+                                borderColor: errors.confirmPassword ? '#ff3b30' : 'transparent',
+                                borderWidth: errors.confirmPassword ? 1 : 0,
+                            },
+                        ]}
+                        value={form.confirmPassword}
+                        onChangeText={v => updateField('confirmPassword', v)}
+                        placeholder={tr('register.confirmPlaceholder')}
+                        placeholderTextColor={t.secondaryText}
+                        textContentType="newPassword"
+                    />
                     {errors.confirmPassword && (
                         <Text style={[styles.errorText, {color: '#ff3b30'}]}>
                             {errors.confirmPassword}

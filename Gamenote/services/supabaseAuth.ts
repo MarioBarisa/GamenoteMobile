@@ -92,8 +92,8 @@ export async function resetPassword(email: string) {
   return { success: true as const, error: '' }
 }
 
-export async function updatePassword(newPassword: string) {
-  const { error } = await supabase.auth.updateUser({ password: newPassword })
+export async function updatePassword(newPassword: string, currentPassword: string) {
+  const { error } = await supabase.auth.updateUser({ password: newPassword, current_password: currentPassword })
   if (error) {
     return { success: false as const, error: translateError(error.message) }
   }

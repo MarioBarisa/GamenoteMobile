@@ -1,3 +1,4 @@
+import {useGamePresentation} from "@/context/localMode";
 import {Image} from "expo-image";
 import {RefreshControl, ScrollView, Text, View, StyleSheet, TouchableOpacity} from "react-native";
 import {useTheme} from "@/context/theme";
@@ -14,6 +15,7 @@ import {useTranslation} from "react-i18next";
 export default function GroupsIndex() {
     const {t: tr} = useTranslation();
     const {themeColors: t} = useTheme();
+    const {isLocal, imageUrl} = useGamePresentation();
     const {groups, getGamesInGroup, refreshGroups, isLoading: isLoadingGroups} = useGroups();
 
     const getGameCountLabel = (n: number) => {
@@ -94,12 +96,12 @@ export default function GroupsIndex() {
                                 <View style={styles.gameImagesRow}>
                                     {groupGames.map((game, index) => (
                                         <View key={index} style={styles.gameImageWrapper}>
-                                            {game?.image_url ? (
+                                            {imageUrl(game?.image_url) ? (
                                                 <Image
-                                                    source={{uri: game.image_url}}
+                                                    source={{uri: imageUrl(game?.image_url)}}
                                                     style={styles.gameImage}
                                                     contentFit="cover"
-                                                    cachePolicy="memory-disk"
+                                                    cachePolicy={isLocal ? "memory" : "memory-disk"}
                                                     transition={{duration: 200, effect: "cross-dissolve"}}
                                                 />
                                             ) : (

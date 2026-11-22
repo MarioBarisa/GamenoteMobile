@@ -11,6 +11,7 @@
       "icon": "./assets/gamenote/icons/GamenoteIcon.icon",
       "supportsTablet": false,
       "bundleIdentifier": "eu.gamenote.ios",
+      "associatedDomains": ["webcredentials:gamenote.eu"],
       "infoPlist": {
         "NSPrivacyAccessedAPITypes": [
           {
@@ -79,7 +80,7 @@
       [
         "expo-sensors",
         {
-          "motionPermission": "Allow Gamenote to use your phone's tilt to move holographic card reflections."
+          "motionPermission": "Allow Gamenote to use your phone's tilt to move holographic card reflections. Gamenote does not collect any data. "
         }
       ]
     ],

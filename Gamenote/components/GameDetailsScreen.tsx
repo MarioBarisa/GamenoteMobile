@@ -1,3 +1,4 @@
+import {useGamePresentation} from "@/context/localMode";
 import {useLocalSearchParams, Stack, Link, useRouter, useSegments} from "expo-router";
 import {useState} from "react";
 import {Image} from "expo-image";
@@ -8,7 +9,7 @@ import {SeriesGame} from "@/common/GameSeries";
 import {useTheme} from "@/context/theme";
 import {colors} from "@/constants/theme";
 import {SymbolView} from "expo-symbols";
-import {STATUS_CONFIG, STATUS_PLATFORM} from "@/common/StatusCommons";
+import {STATUS_CONFIG} from "@/common/StatusCommons";
 import {isProgressModeKey, PROGRESS_MODE_MAP, progressLabel, progressColor} from "@/common/ProgressSources";
 import {useTranslation} from "react-i18next";
 import {useUserGames} from "@/hooks/useUserGames";
@@ -61,24 +62,27 @@ export default function GameDetailsScreen() {
     const [showDetails, setShowDetails] = useState<boolean>(false);
     const {game: gameParam} = useLocalSearchParams<{ game: string }>()
     const {games: userGames} = useUserGames();
+    const {isLocal, imageUrl, platformStyle} = useGamePresentation();
     const {getGroupsForGame} = useGroups();
     const router = useRouter();
     const segments = useSegments();
     const tab = segments[1] as 'home' | 'favorites' | 'search';
 
-    const game: Game | null = (() => {
+    const parsed: Game | null = (() => {
         try {
             return gameParam ? JSON.parse(gameParam) : null
         } catch {
             return null;
         }
     })();
+    const game = isLocal ? userGames.find(entry => entry.db_id === parsed?.db_id) : parsed;
     if (!game) {
         return <Text style={{color: t.text, padding: 16}}>{tr('gameDetails.notFound')}</Text>
     }
 
     const navigateToReferencedGame = (seriesItem: SeriesGame) => {
-      const matched = userGames.find(g => g.game_id === String(seriesItem.id));
+      const id = isLocal && String(game.game_id).startsWith("igdb-") ? `igdb-${seriesItem.id}` : String(seriesItem.id);
+      const matched = userGames.find(g => g.game_id === id);
       if (matched) {
         router.push({
           pathname: `/(tabs)/${tab}/details`,
@@ -87,14 +91,15 @@ export default function GameDetailsScreen() {
       } else {
         router.push({
           pathname: '/(tabs)/search/rawg-details',
-          params: {game: JSON.stringify({id: seriesItem.id, name: seriesItem.name, background_image: seriesItem.background_image})},
+          params: {game: JSON.stringify({id, name: seriesItem.name, background_image: seriesItem.background_image})},
         });
       }
     };
 
     const {prequel, sequel} = getPrequelAndSequel(game?.series ?? [], game?.releaseDate ?? '');
 
-    const galleryImages = [...new Set([undefined, ...(game.screenshot_urls ?? [])].filter(Boolean))] as string[]; // maknuo game.image_url, jer je to cover slika koja je dosta blurry zbog rezolucije.
+    const galleryImages = [...new Set((game.screenshot_urls ?? []).flatMap(url => imageUrl(url) || []))]; // maknuo game.image_url, jer je to cover slika koja je dosta blurry zbog rezolucije.
+    const platform = platformStyle(game.platform);
     const prColor = progressColor(game.progress_value, game.progress_total)
 
     const mode = game.progress_mode && isProgressModeKey(game.progress_mode)
@@ -127,7 +132,7 @@ export default function GameDetailsScreen() {
                     headerBackTitle: tr("common.back"),
                     headerRight: () => (<View style={{flexDirection: 'row', alignItems: 'center', gap: 4}}>
                             <Link
-                                href={{pathname: "/(modals)/modalEdit", params: {game: gameParam}}}
+                                href={{pathname: "/(modals)/modalEdit", params: {game: isLocal ? JSON.stringify(game) : gameParam}}}
                                 asChild
                             >
                                 <Pressable accessibilityLabel={tr("gameDetails.editA11y")} hitSlop={10} style={{marginRight: 6, marginLeft: 4}}>
@@ -139,7 +144,7 @@ export default function GameDetailsScreen() {
                                 </Pressable>
                             </Link>
 
-                            <Pressable
+                            {!isLocal && <Pressable
                                 accessibilityLabel={tr("gameDetails.shareA11y")}
                                 hitSlop={10}
                                 onPress={() => {
@@ -157,7 +162,7 @@ export default function GameDetailsScreen() {
                                     style={{width: 32, height: 32}}
                                     tintColor={t.text}
                                 />
-                            </Pressable>
+                            </Pressable>}
                         </View>
                     ),
                 }}
@@ -191,7 +196,7 @@ export default function GameDetailsScreen() {
                                         source={{uri}}
                                         style={[styles.coverImage, {width: SCREEN_WIDTH - 32}]}
                                         contentFit="cover"
-                                        cachePolicy="memory-disk"
+                                        cachePolicy={isLocal ? "memory" : "memory-disk"}
                                         transition={{duration: 200, effect: "cross-dissolve"}}/>
                                 </Pressable>
                             ))}
@@ -220,20 +225,20 @@ export default function GameDetailsScreen() {
                             </View>
                         ) : null}
 
-                        {game.platform && STATUS_PLATFORM[game.platform] ? (
+                        {platform ? (
                             <View style={[
                                 styles.badge,
                                 {
                                     backgroundColor: theme === 'dark' ? '#2C2C2E' : '#F2F2F7',
                                 }
                             ]}>
-                                <Text style={[styles.boldFont, {color: STATUS_PLATFORM[game.platform].text, fontSize: isLargeScreen ? 15 : 13}]}
+                                <Text style={[styles.boldFont, {color: platform.text, fontSize: isLargeScreen ? 15 : 13}]}
                                       numberOfLines={1}
                                       adjustsFontSizeToFit
                                       minimumFontScale={0.8}>
                                     {typeof game.play_time === 'number'
-                                        ? `${game.play_time}h via ${STATUS_PLATFORM[game.platform].label}`
-                                        : `via ${STATUS_PLATFORM[game.platform].label}`}
+                                        ? `${game.play_time}h via ${platform.label}`
+                                        : `via ${platform.label}`}
                                 </Text>
                             </View>
                         ) : null}
@@ -417,7 +422,9 @@ export default function GameDetailsScreen() {
                                     justifyContent: 'space-between',
                                     alignItems: 'center'
                                 }}>
-                                    <Text style={{color: t.secondaryText, fontSize: 14}}>{tr("gameDetails.metacritic")}</Text>
+                                    <Text style={{color: t.secondaryText, fontSize: 14}}>
+                                        {tr(String(game.game_id).startsWith("igdb-") ? "gameDetails.igdbScore" : "gameDetails.metacritic")}
+                                    </Text>
                                     <View style={{
                                         backgroundColor: metacriticColor,
                                         width: 36,
@@ -459,10 +466,10 @@ export default function GameDetailsScreen() {
                                                 }}
                                             >
                                                 <Image
-                                                    source={{uri: prequel.background_image}}
+                                                    source={{uri: imageUrl(prequel.background_image)}}
                                                     style={{width: 100, aspectRatio: 10 / 7, borderRadius: 4}}
                                                     contentFit="cover"
-                                                    cachePolicy="memory-disk"
+                                                    cachePolicy={isLocal ? "memory" : "memory-disk"}
                                                     transition={{duration: 200, effect: "cross-dissolve"}}
                                                 />
                                                 <View style={{flex: 1}}>
@@ -501,10 +508,10 @@ export default function GameDetailsScreen() {
                                                 }}
                                             >
                                                 <Image
-                                                    source={{uri: sequel.background_image}}
+                                                    source={{uri: imageUrl(sequel.background_image)}}
                                                     style={{width: 100, aspectRatio: 10 / 7, borderRadius: 4}}
                                                     contentFit="cover"
-                                                    cachePolicy="memory-disk"
+                                                    cachePolicy={isLocal ? "memory" : "memory-disk"}
                                                     transition={{duration: 200, effect: "cross-dissolve"}}
                                                 />
                                                 <View style={{flex: 1}}>

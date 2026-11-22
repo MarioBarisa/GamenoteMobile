@@ -44,3 +44,5 @@ export function normalizeHexColor(value: string): string | null {
   if (/^#[0-9A-Fa-f]{8}$/.test(withHash)) return withHash.slice(0, 7).toUpperCase();
   return null;
 }
+
+export const ACCOUNT_SECURED_COLOR = "#34C759";

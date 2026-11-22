@@ -1,3 +1,5 @@
+import {ModalInput} from "@/components/AccountModal";
+import {useLocalMode} from "@/context/localMode";
 import {
     Alert, Platform,
     Pressable,
@@ -28,6 +30,10 @@ export default function AddGameModal() {
     const router = useRouter();
     const {theme, themeColors: t} = useTheme();
     const {addGame} = useUserGames();
+    const {activeSource, document} = useLocalMode();
+    const isLocal = activeSource === "local";
+    const manual = isLocal && !gameParam;
+    const [saving, setSaving] = useState(false);
     const {groups, addGameToGroup} = useGroups();
 
     const ravgGame: Partial<Game> = (() => {
@@ -53,12 +59,20 @@ export default function AddGameModal() {
     const [includeDescription, setIncludeDescription] = useState(false);
     const [selectedGroupIds, setSelectedGroupIds] = useState<string[]>([]);
 
+    const PLATFORMS = isLocal ? document?.platforms ?? [] : [
+        'PlayStation 5', 'PlayStation 4',
+        'Xbox Series X/S', 'Xbox One',
+        'Nintendo Switch', 'Nintendo Switch 2',
+        'PC', 'iOS', 'Android', 'Other'
+    ] as const;
+
     const patch = (key: keyof Game, value: any) => setForm(prev => ({...prev, [key]: value}));
 
     const validate = (): boolean => {
         const missing: string[] = [];
         if (!form.status) missing.push(tr('editGame.statusLabel'));
-        if (!form.platform) missing.push(tr('editGame.platformLabel'));
+        if (!form.platform && (!isLocal || PLATFORMS.length)) missing.push(tr('editGame.platformLabel'));
+        if (manual && !form.title?.trim()) missing.push(tr("screens.localMode.gameTitle"));
         if (missing.length > 0) {
             Alert.alert(tr('addGame.requiredAlert'), missing.join('\n'));
             return false;
@@ -71,10 +85,10 @@ export default function AddGameModal() {
     };
 
     const handleAdd = async () => {
-        if (!validate()) return;
+        if (saving || !validate()) return;
 
         const completeGame: Game = {
-            title: ravgGame.title ?? '',
+            title: manual ? form.title?.trim() ?? '' : ravgGame.title ?? '',
             game_id: ravgGame.game_id ?? '',
             image_url: ravgGame.image_url,
             background_image: ravgGame.background_image,
@@ -99,27 +113,25 @@ export default function AddGameModal() {
             progress_mode: form.progress_mode,
         };
 
+        if (isLocal) setSaving(true);
         try {
-            await addGame(completeGame);
-            for (const groupId of selectedGroupIds) {
-                await addGameToGroup(completeGame.game_id, groupId);
+            await addGame(completeGame, isLocal ? selectedGroupIds : undefined);
+            if (!isLocal) {
+                for (const groupId of selectedGroupIds) await addGameToGroup(completeGame.game_id, groupId);
             }
             Alert.alert(tr('addGame.addedTitle'), tr('addGame.addedMsg', {title: completeGame.title}), [
                 {text: 'OK', onPress: () => router.back()}
             ]);
         } catch {
-            Alert.alert(tr('editGame.errorTitle'), tr('editGame.achievementsError'));
+            Alert.alert(tr('editGame.errorTitle'), tr(isLocal ? 'screens.localMode.storageError' : 'editGame.achievementsError'));
+        } finally {
+            if (isLocal) setSaving(false);
         }
     };
 
     const parseDate = (iso?: string) => iso ? new Date(iso) : new Date();
 
-    const PLATFORMS = [
-        'PlayStation 5', 'PlayStation 4',
-        'Xbox Series X/S', 'Xbox One',
-        'Nintendo Switch', 'Nintendo Switch 2',
-        'PC', 'iOS', 'Android', 'Other'
-    ] as const;
+
 
     return (
         <ScrollView contentContainerStyle={{gap: 10, padding: 8}}
@@ -134,9 +146,9 @@ export default function AddGameModal() {
                 borderColor: theme === 'dark' ? '#2C2C2E' : '#E5E5EA',
             }]}>
                 <View style={{padding: 16}}>
-                    <Text style={{color: t.text, fontSize: 22, fontWeight: '800'}} numberOfLines={2}>
-                        {ravgGame.title}
-                    </Text>
+                    {manual ? <ModalInput value={form.title} onChangeText={value => patch("title", value)}
+                                                accessibilityLabel={tr("screens.localMode.gameTitle")} placeholder={tr("screens.localMode.gameTitle")} maxLength={160}/>
+                        : <Text style={{color: t.text, fontSize: 22, fontWeight: '800'}} numberOfLines={2}>{ravgGame.title}</Text>}
                     {ravgGame.releaseDate ? (
                         <Text style={{color: t.secondaryText, fontSize: 14, marginTop: 4}}>
                             {ravgGame.releaseDate}
@@ -191,7 +203,7 @@ export default function AddGameModal() {
                     <Text style={[styles.label, {color: t.text}]}>{tr('editGame.platformLabel')}</Text>
                     <SelectMenu
                         label={form.platform ?? tr('editGame.platformDefault')}
-                        options={PLATFORMS.map(p => ({label: p, value: p}))}
+                        options={PLATFORMS.map(p => ({label: isLocal && p === "Other" ? tr("screens.localMode.otherPlatform") : p, value: p}))}
                         selected={form.platform}
                         onSelect={value => {
                             // Platforma postavlja i tip napretka
@@ -328,6 +340,7 @@ export default function AddGameModal() {
                             Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
                         }
                     }}
+                    disabled={saving}
                     accessibilityLabel={tr('addGame.addButton')}
                     style={[styles.saveButton, {backgroundColor: t.accent}]}
                 >

@@ -1,3 +1,4 @@
+import {useGamePresentation} from "@/context/localMode";
 import {Image} from "expo-image";
 import {Platform, Pressable, RefreshControl, ScrollView, StyleSheet, Text, View} from "react-native";
 import {useTheme} from "@/context/theme";
@@ -17,6 +18,7 @@ import {useTranslation} from "react-i18next";
 export default function HomeIndex() {
     const {t: tr} = useTranslation();
     const {themeColors: t} = useTheme();
+    const {isLocal, imageUrl} = useGamePresentation();
     const {compactCards} = useSettings();
     const {games, deleteGame, refresh, isLoading} = useUserGames();
     const [refreshing, setRefreshing] = useState(false);
@@ -210,12 +212,12 @@ export default function HomeIndex() {
                         ) : null}
                     </View>
 
-                    {jumpBackGame.image_url ? (
+                    {imageUrl(jumpBackGame.image_url) ? (
                         <Image
-                            source={{uri: jumpBackGame.image_url}}
+                            source={{uri: imageUrl(jumpBackGame.image_url)}}
                             style={styles.image}
                             contentFit="cover"
-                            cachePolicy="memory-disk"
+                            cachePolicy={isLocal ? "memory" : "memory-disk"}
                             transition={{duration: 200, effect: "cross-dissolve"}}
 
                         />

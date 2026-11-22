@@ -1,3 +1,4 @@
+import {useGamePresentation} from "@/context/localMode";
 import {useLocalSearchParams, Stack, Link, useRouter} from "expo-router";
 import {useTheme} from "@/context/theme";
 import {colors} from "@/constants/theme"
@@ -8,7 +9,6 @@ import {useUserGames} from "@/hooks/useUserGames";
 import {useMemo} from "react";
 import {SymbolView} from "expo-symbols";
 import {Ionicons} from "@expo/vector-icons";
-import {STATUS_PLATFORM} from "@/common/StatusCommons";
 import {useTranslation} from "react-i18next";
 
 // Boja metacritic bedža kao u searchu
@@ -24,6 +24,7 @@ export default function GroupDetail(){
     const { t: tr } = useTranslation();
     const { id } = useLocalSearchParams<{ id: string }>();
     const { theme } = useTheme();
+    const {isLocal, imageUrl, platformStyle} = useGamePresentation();
     const t = colors[theme];
     const {groups, getGamesInGroup } = useGroups();
     const router = useRouter();
@@ -149,14 +150,17 @@ export default function GroupDetail(){
                     {games.length > 0 ? `${games.length} ${games.length === 1 ? tr("groups.gameCountSingle") : tr("groups.gameCountLabel", {count: games.length})}` : ""}
                 </Text>
 
-                {games.map((game, index) => (
+                {games.map((game, index) => {
+                    const platform = platformStyle(game.platform);
+                    const cover = imageUrl(game.image_url);
+                    return (
                     <Pressable key={index} onPress={() => router.push({ //KADA KORISNIK KLIKNE NA NEKU IGRU OTVORI DETALJE IGRE
                         pathname: "/(tabs)/groups/details",
                         params: { game: JSON.stringify(game) },
                     })}>
                         <View style={[styles.gameCard, {backgroundColor: t.card}]}>
-                            {game?.image_url ? (
-                                <Image source={{uri: game.image_url}} style={styles.gameImage} contentFit="cover" cachePolicy="memory-disk" transition={{duration: 200, effect: "cross-dissolve"}}/>
+                            {cover ? (
+                                <Image source={{uri: cover}} style={styles.gameImage} contentFit="cover" cachePolicy={isLocal ? "memory" : "memory-disk"} transition={{duration: 200, effect: "cross-dissolve"}}/>
                             ) : (
                                 <View style={[styles.gameImage, {
                                     backgroundColor: t.background,
@@ -190,19 +194,20 @@ export default function GroupDetail(){
                                         <Text style={styles.metaText}>{game.metacriticScore}</Text>
                                     </View>
                                 )}
-                                {game?.platform && STATUS_PLATFORM[game.platform] && (
+                                {platform && (
                                     <View style={[styles.platformBadge, {backgroundColor: theme === 'dark' ? '#2C2C2E' : '#F2F2F7'}]}>
-                                        <Text style={[styles.platformText, {color: STATUS_PLATFORM[game.platform].text}]} numberOfLines={1} adjustsFontSizeToFit minimumFontScale={0.8}>
+                                        <Text style={[styles.platformText, {color: platform.text}]} numberOfLines={1} adjustsFontSizeToFit minimumFontScale={0.8}>
                                             {typeof game.play_time === 'number'
-                                                ? `${game.play_time}h via ${STATUS_PLATFORM[game.platform].label}`
-                                                : `via ${STATUS_PLATFORM[game.platform].label}`}
+                                                ? `${game.play_time}h via ${platform.label}`
+                                                : `via ${platform.label}`}
                                         </Text>
                                     </View>
                                 )}
                             </View>
                         </View>
                     </Pressable>
-                ))}
+                    );
+                })}
             </ScrollView>
         </>
     );

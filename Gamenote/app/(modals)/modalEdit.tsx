@@ -1,3 +1,5 @@
+import {ModalInput} from "@/components/AccountModal";
+import {useLocalMode} from "@/context/localMode";
 import {
     Alert, Platform,
     Pressable,
@@ -28,6 +30,7 @@ export default function ModalEdit() {
     const router = useRouter();
     const {theme, themeColors: t} = useTheme();
     const {updateGame} = useUserGames();
+    const {activeSource, document} = useLocalMode();
     const {groups, addGameToGroup, removeGameFromGroup, getGroupsForGame} = useGroups();
 
     const original: Game = (() => {
@@ -39,6 +42,7 @@ export default function ModalEdit() {
     })();
 
     const [form, setForm] = useState<Partial<Game>>({
+        title: original.title,
         status: original.status,
         rating: original.rating,
         play_time: original.play_time,
@@ -59,16 +63,35 @@ export default function ModalEdit() {
     const [selectedGroupIds, setSelectedGroupIds] = useState<string[]>(initialGroupIds);
 
     const handleSave = async () => {
+        if (activeSource === "local" && !form.title?.trim()) {
+            Alert.alert(tr("addGame.requiredAlert"), tr("screens.localMode.gameTitle"));
+            return;
+        }
         if (form.progress_value !== undefined && form.progress_total !== undefined && form.progress_value > form.progress_total) {
             Alert.alert(tr('editGame.errorTitle'), tr('editGame.achievementsError'));
             return;
         }
-        if (original.game_id) {
-            await updateGame(original.game_id, form);
-
+        const toRemove = initialGroupIds.filter(id => !selectedGroupIds.includes(id));
+        const toAdd = selectedGroupIds.filter(id => !initialGroupIds.includes(id));
+        if (activeSource === "local") {
+            if (!original.db_id) {
+                Alert.alert(tr("gameDetails.notFound"));
+                return;
+            }
+            try {
+                await updateGame(original.db_id, {...form, title: form.title?.trim()}, {add: toAdd, remove: toRemove});
+            } catch {
+                Alert.alert(tr("screens.localMode.storageError"));
+                return;
+            }
+        } else {
+            if (!original.game_id) {
+                Alert.alert(tr("gameDetails.notFound"));
+                return;
+            }
             const gameId = original.db_id ?? original.game_id;
-            const toAdd = selectedGroupIds.filter(id => !initialGroupIds.includes(id));
-            const toRemove = initialGroupIds.filter(id => !selectedGroupIds.includes(id));
+            const {title: _title, ...changes} = form;
+            await updateGame(original.game_id, changes);
             for (const id of toRemove) await removeGameFromGroup(gameId, id);
             for (const id of toAdd) await addGameToGroup(gameId, id);
         }
@@ -77,7 +100,7 @@ export default function ModalEdit() {
         ]);
     }
 
-    const PLATFORMS = [
+    const PLATFORMS = activeSource === "local" ? [...new Set([...(document?.platforms ?? []), ...(original.platform ? [original.platform] : [])])] : [
         'PlayStation 5', 'PlayStation 4',
         'Xbox Series X/S', 'Xbox One',
         'Nintendo Switch', 'Nintendo Switch 2',
@@ -94,6 +117,8 @@ export default function ModalEdit() {
                     automaticallyAdjustKeyboardInsets={true}
         >
             <View style={styles.section}>
+                {activeSource === "local" && <ModalInput value={form.title} onChangeText={text => patch("title", text)}
+                    accessibilityLabel={tr("screens.localMode.gameTitle")} placeholder={tr("screens.localMode.gameTitle")} maxLength={160}/>}
                 <View style={{flexDirection: 'row', gap: 8, paddingVertical: 8}}>
                     <Text style={[styles.label, {color: t.text}]}>{tr('editGame.ratingLabel')}</Text>
                     {[1, 2, 3, 4, 5].map(star => (
@@ -136,7 +161,7 @@ export default function ModalEdit() {
                     <Text style={[styles.label, {color: t.text}]}>{tr('editGame.platformLabel')}</Text>
                     <SelectMenu
                         label={form.platform ?? tr('editGame.platformDefault')}
-                        options={PLATFORMS.map(p => ({label: p, value: p}))}
+                        options={PLATFORMS.map(p => ({label: activeSource === "local" && p === "Other" ? tr("screens.localMode.otherPlatform") : p, value: p}))}
                         selected={form.platform}
                         onSelect={value => patch('platform', value)}
                     />

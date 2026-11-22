@@ -1,3 +1,5 @@
+import {useLocalMode} from "@/context/localMode";
+import {searchIgdbGames} from "@/services/igdbApi";
 import {useCallback, useEffect, useMemo, useState} from "react";
 import {useFocusEffect} from "expo-router/react-navigation";
 import {Image} from "expo-image";
@@ -30,10 +32,14 @@ export default function SearchIndex() {
     }, [refresh]),
   );
   const {loggedIn} = useAuth();
+  const {activeSource, igdbConfigured} = useLocalMode();
+  const local = activeSource === "local";
+  const missingCredentials = local && igdbConfigured !== true;
+  const [searchError, setSearchError] = useState(false);
   const router = useRouter();
 
   // Prisili moje igre kad odjavljen
-  const showMyGamesOnly = !loggedIn ? true : userGamenotesOnly;
+  const showMyGamesOnly = !loggedIn && !local ? true : userGamenotesOnly;
 
   const filteredGames = useMemo(() => {
     let results = [...games];
@@ -59,25 +65,30 @@ export default function SearchIndex() {
   const visibleIsSearching = !search || showMyGamesOnly ? false : isSearching;
 
   useEffect(() => {
-    if (!search || showMyGamesOnly) {
+    if (!search || showMyGamesOnly || missingCredentials) {
       return;
     }
 
+    const controller = new AbortController();
     const timer = setTimeout(async () => {
       // Pokreni pretragu nakon odgode
       setIsSearching(true);
+      setSearchError(false);
       try {
-        const data = await searchGames(search);
-        setRawgResults(data.results ?? []);
+        const data = local ? await searchIgdbGames(search, controller.signal) : await searchGames(search);
+        if (!controller.signal.aborted) setRawgResults(data.results ?? []);
       } catch {
-        setRawgResults([]);
+        if (!controller.signal.aborted) {
+          setRawgResults([]);
+          if (local) setSearchError(true);
+        }
       } finally {
-        setIsSearching(false);
+        if (!controller.signal.aborted) setIsSearching(false);
       }
     }, 400);
 
-    return () => clearTimeout(timer);
-  }, [search, showMyGamesOnly]);
+    return () => { controller.abort(); clearTimeout(timer); };
+  }, [search, showMyGamesOnly, local, missingCredentials]);
 
   const {t: tr} = useTranslation();
 
@@ -85,7 +96,7 @@ export default function SearchIndex() {
         if(vrsta){
             return tr("search.placeholderMyGames")
         } else{
-            return tr("search.placeholderDB")
+            return tr(local ? "screens.localMode.igdbSearchPlaceholder" : "search.placeholderDB")
         }
     }
 
@@ -102,7 +113,7 @@ export default function SearchIndex() {
                 <TouchableOpacity
               accessibilityLabel={tr("search.filterA11y")}
               onPress={async () => { await Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light)
-                  if (!loggedIn) {
+                  if (!loggedIn && !local) {
                     Alert.alert(tr('search.loginRequired'));
                     return;
                   }
@@ -146,6 +157,14 @@ export default function SearchIndex() {
               <GameCard key={game.db_id ?? game.game_id} game={game} onDelete={async (id) => { await deleteGame(id); }} />
             ))
           )
+        ) : missingCredentials ? (
+          <View style={{alignItems: "center", paddingVertical: 36, gap: 8}}>
+            <Text style={{color: t.secondaryText, textAlign: "center"}}>{tr("screens.localMode.searchCredentialsHint")}</Text>
+            <Pressable accessibilityRole="button" style={{minHeight: 44, justifyContent: "center"}}
+                       onPress={() => router.push("/(modals)/localModeOnboarding")}>
+              <Text style={{color: t.accent, fontWeight: "600"}}>{tr("screens.localMode.addCredentials")}</Text>
+            </Pressable>
+          </View>
         ) : (
           <>
             {!visibleIsSearching && !search && visibleRawgResults.length === 0 && (
@@ -155,7 +174,7 @@ export default function SearchIndex() {
               >
                 <SymbolView name="magnifyingglass" style={{width: 32, height: 32}} tintColor={t.secondaryText} />
                 <Text style={{color: t.secondaryText, fontSize: 15, textAlign: 'center'}}>
-                  {tr('search.rawgPrompt')}
+                  {tr(local ? 'screens.localMode.igdbSearchPrompt' : 'search.rawgPrompt')}
                 </Text>
               </Pressable>
             )}
@@ -168,13 +187,13 @@ export default function SearchIndex() {
 
             {!visibleIsSearching && search && visibleRawgResults.length === 0 && (
               <Text style={{color: t.secondaryText, textAlign: 'center', padding: 16}}>
-                {tr('search.rawgNoResults')}
+                {tr(local && searchError ? 'screens.localMode.igdbSearchError' : 'search.rawgNoResults')}
               </Text>
             )}
 
             {visibleRawgResults.length > 0 && (
               <Pressable
-                onPress={() => Linking.openURL('https://rawg.io')}
+                onPress={() => Linking.openURL(local ? "https://www.igdb.com" : "https://rawg.io")}
                 style={{marginBottom: 8, alignSelf: 'flex-start'}}
               >
                 <Text style={{
@@ -184,13 +203,14 @@ export default function SearchIndex() {
                   textTransform: 'uppercase',
                   letterSpacing: 0.5,
                 }}>
-                  {tr('search.rawgSectionTitle')}
+                  {tr(local ? 'screens.localMode.igdb' : 'search.rawgSectionTitle')}
                 </Text>
               </Pressable>
             )}
 
             {visibleRawgResults.map((rawg: any) => {
               const inLibrary = games.find(g => g.game_id === String(rawg.id));
+              const score = local ? rawg.igdb_rating : rawg.metacritic;
               return (
               <Pressable
                 key={rawg.id}
@@ -221,7 +241,7 @@ export default function SearchIndex() {
                       source={{uri: rawg.background_image}}
                       style={{width: 100, minHeight: 100 * 9 / 16, alignSelf: 'stretch'}}
                       contentFit="cover"
-                      cachePolicy="memory-disk"
+                      cachePolicy={local ? "memory" : "memory-disk"}
                       transition={{duration: 200, effect: "cross-dissolve"}}
                     />
                   ) : (
@@ -254,13 +274,12 @@ export default function SearchIndex() {
                           {rawg.released.split('-')[0]}
                         </Text>
                       ) : null}
-                      {rawg.metacritic ? (
+                      {score != null ? (
                         <View style={{
                           backgroundColor: (() => {
-                            const m = rawg.metacritic;
-                            if (m >= 90) return '#00CE7A';
-                            if (m >= 75) return '#66CC33';
-                            if (m >= 50) return '#FFCC33';
+                            if (score >= 90) return '#00CE7A';
+                            if (score >= 75) return '#66CC33';
+                            if (score >= 50) return '#FFCC33';
                             return '#FF0000';
                           })(),
                           paddingHorizontal: 6,
@@ -268,7 +287,7 @@ export default function SearchIndex() {
                           borderRadius: 4,
                         }}>
                           <Text style={{color: '#fff', fontSize: 11, fontWeight: '700'}}>
-                            {rawg.metacritic}
+                            {local ? `${tr("screens.localMode.igdb")} ${score}` : score}
                           </Text>
                         </View>
                       ) : null}

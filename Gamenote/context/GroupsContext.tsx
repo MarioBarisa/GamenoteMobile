@@ -1,8 +1,11 @@
 import {GameGroup, Group} from "@/common/groups";
-import {createContext, ReactNode, useCallback, useContext, useEffect, useState} from "react";
+import {createContext, ReactNode, useCallback, useContext, useEffect, useState, type SetStateAction} from "react";
 import {MOCK_GAME_GROUPS, MOCK_GROUPS} from "@/constants/PLACEHOLDER_GROUPS.TSX";
 import {useAuth} from "@/context/auth";
 import {supabase} from "@/services/supabase";
+import {useLocalMode} from "@/context/localMode";
+import {addLocalGameToGroup, createLocalGroup, deleteLocalGroup, loadLocalData, LOCAL_USER_ID,
+    removeLocalGameFromGroup, updateLocalGroup} from "@/services/localData";
 import * as groupsApi from "@/services/groupsApi";
 
 
@@ -11,7 +14,7 @@ type GroupsContextType = {
     gameGroups: GameGroup[];
     isLoading: boolean;
     error: string | null;
-    addGroup: (group: Omit<Group, "id" | "created_at"> & Partial<Pick<Group, "id" | "created_at">>) => Promise<Group | undefined>;
+    addGroup: (group: Omit<Group, "id" | "created_at"> & Partial<Pick<Group, "id" | "created_at">>, gameIds?: string[]) => Promise<Group | undefined>;
     updateGroup: (groupId: string, payload: Partial<Group>) => Promise<void>;
     removeGroup: (groupId: string) => Promise<void>;
     addGameToGroup: (gameId: string, groupId: string) => Promise<void>;
@@ -23,12 +26,64 @@ type GroupsContextType = {
 
 const GroupsContext = createContext<GroupsContextType | null>(null);
 
+function initialGroupState(owner: string | null) {
+    return {
+        owner,
+        groups: owner ? [] as Group[] : MOCK_GROUPS,
+        gameGroups: owner ? [] as GameGroup[] : MOCK_GAME_GROUPS,
+        isLoading: false,
+        error: null as string | null,
+    };
+}
+
 export function GroupsProvider({children}: { children: ReactNode }) {
+    const {activeSource} = useLocalMode();
+    return activeSource === "local" ? <LocalGroupsProvider>{children}</LocalGroupsProvider> :
+        <CloudGroupsProvider>{children}</CloudGroupsProvider>;
+}
+
+function LocalGroupsProvider({children}: {children: ReactNode}) {
+    const {document, storageError} = useLocalMode();
+    const groups = document?.groups.map(group => ({...group, user_id: LOCAL_USER_ID})) ?? [];
+    const gameGroups = document?.game_groups.map(link => ({...link, user_id: LOCAL_USER_ID})) ?? [];
+    const refreshGroups = useCallback(async () => { await loadLocalData().catch(() => {}); }, []);
+    const value: GroupsContextType = {
+        groups, gameGroups, isLoading: !document && !storageError,
+        error: storageError ? "screens.localMode.storageError" : null,
+        addGroup: async (group, gameIds) => ({...await createLocalGroup({name: group.name, type: group.type, rating: group.rating}, gameIds), user_id: LOCAL_USER_ID}),
+        updateGroup: async (id, changes) => { await updateLocalGroup(id, changes); },
+        removeGroup: deleteLocalGroup,
+        addGameToGroup: addLocalGameToGroup,
+        removeGameFromGroup: removeLocalGameFromGroup,
+        getGroupsForGame: gameId => groups.filter(group => gameGroups.some(link => link.group_id === group.id && link.game_id === gameId)),
+        getGamesInGroup: groupId => gameGroups.filter(link => link.group_id === groupId).map(link => link.game_id),
+        refreshGroups,
+    };
+    return <GroupsContext.Provider value={value}>{children}</GroupsContext.Provider>;
+}
+
+function CloudGroupsProvider({children}: {children: ReactNode}) {
     const {loggedIn, session} = useAuth();
-    const [groups, setGroups] = useState<Group[]>(MOCK_GROUPS);
-    const [gameGroups, setGameGroups] = useState<GameGroup[]>(MOCK_GAME_GROUPS);
-    const [isLoading, setIsLoading] = useState(false);
-    const [error, setError] = useState<string | null>(null);
+    const {requestMirrorRefresh} = useLocalMode();
+    const owner = session?.user.id ?? null;
+    const [state, setState] = useState(() => initialGroupState(owner));
+    const current = state.owner === owner ? state : initialGroupState(owner);
+    if (current !== state) setState(current);
+    const {groups, gameGroups, isLoading, error} = current;
+
+    const setGroupState = useCallback(<Key extends keyof Omit<typeof state, "owner">>(
+        key: Key, action: SetStateAction<(typeof state)[Key]>,
+    ) => {
+        setState(previous => {
+            if (previous.owner !== owner) return previous;
+            const value = typeof action === "function" ? action(previous[key]) : action;
+            return {...previous, [key]: value};
+        });
+    }, [owner]);
+    const setGroups = useCallback((action: SetStateAction<Group[]>) => setGroupState("groups", action), [setGroupState]);
+    const setGameGroups = useCallback((action: SetStateAction<GameGroup[]>) => setGroupState("gameGroups", action), [setGroupState]);
+    const setIsLoading = useCallback((value: boolean) => setGroupState("isLoading", value), [setGroupState]);
+    const setError = useCallback((value: string | null) => setGroupState("error", value), [setGroupState]);
 
     const loadGameGroups = useCallback(async () => {
         if (!loggedIn || !session?.user.id) return;
@@ -68,13 +123,14 @@ export function GroupsProvider({children}: { children: ReactNode }) {
             setGroups(data.length > 0 ? data : []);
             const gg = await loadGameGroups();
             if (gg) setGameGroups(gg);
+            requestMirrorRefresh();
         } catch (err) {
             console.error('Failed to refresh groups:', err);
             setError('Failed to load groups');
         } finally {
             setIsLoading(false);
         }
-    }, [loggedIn, session?.user.id, loadGameGroups]);
+    }, [loggedIn, session?.user.id, loadGameGroups, requestMirrorRefresh, setGroups, setGameGroups, setIsLoading, setError]);
 
     useEffect(() => {
         if (!loggedIn || !session?.user.id) {
@@ -88,7 +144,7 @@ export function GroupsProvider({children}: { children: ReactNode }) {
             const gg = await loadGameGroups();
             if (gg) setGameGroups(gg);
         }).catch(console.error);
-    }, [loggedIn, session?.user.id, loadGameGroups]);
+    }, [loggedIn, session?.user.id, loadGameGroups, setGroups, setGameGroups]);
 
     const addGroup = async (data: Omit<Group, "id" | "created_at"> & Partial<Pick<Group, "id" | "created_at">>) => {
         if (!loggedIn || !session?.user.id) {
@@ -109,6 +165,7 @@ export function GroupsProvider({children}: { children: ReactNode }) {
                 rating: data.rating ?? null,
             });
             setGroups((prev) => [...prev, created]);
+            requestMirrorRefresh();
             return created;
         } catch (err) {
             console.error('Failed to create group:', err);
@@ -127,6 +184,7 @@ export function GroupsProvider({children}: { children: ReactNode }) {
 
         try {
             await groupsApi.updateGroup(groupId, session.user.id, normalized);
+            requestMirrorRefresh();
             setGroups((prev) => prev.map((g) => g.id === groupId ? {...g, ...normalized} : g));
         } catch (err) {
             console.error('Failed to update group:', err);
@@ -143,6 +201,7 @@ export function GroupsProvider({children}: { children: ReactNode }) {
 
         try {
             await groupsApi.deleteGroup(groupId, session.user.id);
+            requestMirrorRefresh();
         } catch (err) {
             console.error('Failed to delete group:', err);
             setError('Failed to delete group');
@@ -192,6 +251,7 @@ export function GroupsProvider({children}: { children: ReactNode }) {
                 group_id: groupId,
                 game_id: resolvedId,
             });
+            requestMirrorRefresh();
         } catch (err) {
             console.error('Failed to add game to group:', err);
             setError('Failed to add game to group');
@@ -213,6 +273,7 @@ export function GroupsProvider({children}: { children: ReactNode }) {
                 group_id: groupId,
                 game_id: resolvedId,
             });
+            requestMirrorRefresh();
         } catch (err) {
             console.error('Failed to remove game from group:', err);
             setError('Failed to remove game from group');

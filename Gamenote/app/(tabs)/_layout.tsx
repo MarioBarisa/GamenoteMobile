@@ -18,23 +18,24 @@ export default function TabsLayout() {
     // Apple SF icons online list https://hotpot.ai/free-icons
     const {loggedIn} = useAuth();
     const segments = useSegments();
-    const tabSegment = segments?.[1];
+    const tabSegment = segments[0] === "(tabs)" ? segments[1] : undefined;
     const previousTabRef = useRef(tabSegment);
-    const {vibrationsEnabled} = useSettings();
+    const {vibrationsEnabled, activeSource} = useSettings();
     const {accent} = useTheme();
 
     useEffect(() => {
-        if (loggedIn) return;
+        if (loggedIn || activeSource === "local") return;
+        let active = true;
+        let timer: ReturnType<typeof setTimeout> | undefined;
         AsyncStorage.getItem(ONBOARDING_KEY).then(seen => {
-            if (!seen) {
-                const timer = setTimeout(() => {
-                    router.push("/(modals)/onboardingModal");
-                    AsyncStorage.setItem(ONBOARDING_KEY, 'true');
-                }, 300);
-                return () => clearTimeout(timer);
-            }
+            if (!active || seen) return;
+            timer = setTimeout(() => {
+                router.push("/(modals)/onboardingModal");
+                AsyncStorage.setItem(ONBOARDING_KEY, 'true');
+            }, 300);
         });
-    }, [loggedIn]);
+        return () => { active = false; clearTimeout(timer); };
+    }, [loggedIn, activeSource]);
 
     useEffect(() => {
         if (vibrationsEnabled && tabSegment && tabSegment !== previousTabRef.current) {
@@ -74,7 +75,7 @@ export default function TabsLayout() {
             </NativeTabs.Trigger>
 
             <NativeTabs.Trigger name="profile">
-                 {!loggedIn && <NativeTabs.Trigger.Badge>!</NativeTabs.Trigger.Badge>}
+                 {!loggedIn && activeSource === "cloud" && <NativeTabs.Trigger.Badge>!</NativeTabs.Trigger.Badge>}
                 <NativeTabs.Trigger.Label>{t("tabs.profile")}</NativeTabs.Trigger.Label>
                 <NativeTabs.Trigger.Icon sf={{default: "person", selected: "person.fill"}} drawable="ic_menu_agenda"/>
             </NativeTabs.Trigger>

@@ -1,3 +1,4 @@
+import {useGamePresentation} from "@/context/localMode";
 import {Image} from "expo-image";
 import {Alert, StyleSheet, View, Text, Pressable, useWindowDimensions} from 'react-native'
 import { colors } from '@/constants/theme'
@@ -5,7 +6,7 @@ import { useTheme } from '@/context/theme'
 import {Ionicons} from "@expo/vector-icons";
 import {useRouter, useSegments} from "expo-router";
 import {Game} from "@/common/Game"
-import {STATUS_CONFIG, STATUS_PLATFORM} from "@/common/StatusCommons";
+import {STATUS_CONFIG} from "@/common/StatusCommons";
 import {achievementPercent, progressColor} from "@/common/ProgressSources";
 import * as Haptics from 'expo-haptics';
 import {useTranslation} from "react-i18next";
@@ -74,7 +75,9 @@ export default function GameCardCompact({ game, onDelete }: Props) {
     })
   }
 
-  const imageUri = game.image_url || game.background_image || null;
+  const {isLocal, imageUrl, platformStyle} = useGamePresentation();
+  const platform = platformStyle(game.platform);
+  const imageUri = imageUrl(game.image_url) || imageUrl(game.background_image);
 
   const pct = achievementPercent(game.progress_value, game.progress_total);
   const foilVariant = useTCGFoil(game.rating, pct);
@@ -91,7 +94,7 @@ export default function GameCardCompact({ game, onDelete }: Props) {
             ]}>
               <View style={styles.imageContainer}>
                 {imageUri ? (
-                  <Image source={{ uri: imageUri }} style={styles.image} contentFit="cover" cachePolicy="memory-disk" transition={{duration: 200, effect: "cross-dissolve"}} />
+                  <Image source={{ uri: imageUri }} style={styles.image} contentFit="cover" cachePolicy={isLocal ? "memory" : "memory-disk"} transition={{duration: 200, effect: "cross-dissolve"}} />
                 ) : (
                   <View style={[styles.imagePlaceholder, { backgroundColor: t.background }]}>
                     <Text style={{ color: t.secondaryText, fontSize: 12 }}>{tr('common.noImage')}</Text>
@@ -128,12 +131,12 @@ export default function GameCardCompact({ game, onDelete }: Props) {
                   ) : null}
                 </View>
 
-                {game.platform && STATUS_PLATFORM[game.platform] ? (
+                {platform ? (
                   <View style={[styles.platformBadge, {backgroundColor: theme === 'dark' ? '#2C2C2E' : '#F2F2F7'}]}>
-                    <Text style={[styles.platformText, {color: STATUS_PLATFORM[game.platform].text}]} numberOfLines={1} ellipsizeMode="tail">
+                    <Text style={[styles.platformText, {color: platform.text}]} numberOfLines={1} ellipsizeMode="tail">
                       {typeof game.play_time === 'number'
-                        ? `${game.play_time}h via ${STATUS_PLATFORM[game.platform].label}`
-                        : `via ${STATUS_PLATFORM[game.platform].label}`}
+                        ? `${game.play_time}h via ${platform.label}`
+                        : `via ${platform.label}`}
                     </Text>
                   </View>
                 ) : null}

@@ -1,117 +1,212 @@
-import {createContext, ReactNode, useContext, useEffect, useMemo, useState} from "react";
-import {supabase} from "@/services/supabase";
-import {User, Session} from "@supabase/supabase-js";
+import {createContext, ReactNode, useCallback, useContext, useEffect, useRef, useState} from "react";
+import {AppState} from "react-native";
+import {requireSession, supabase} from "@/services/supabase";
+import type {Session, User} from "@supabase/supabase-js";
 import * as supabaseAuth from "@/services/supabaseAuth";
+import {sameSession, sessionClaims, sessionPhase, verifiedTotp} from "@/services/authSession";
+import {isCloudSourceAvailable, useSettings} from "@/context/settings";
+import {checkCurrentPassword, inspectSession, recoveryCodes, verifyTotp} from "@/services/mfa";
 
-type AuthContextValue = {
-  loggedIn: boolean;
-  user: User | null;
-  session: Session | null;
-  username: string;
-  avatarUrl: string;
-  isLoading: boolean;
-  signIn: (email: string, password: string) => Promise<{ success: boolean; error?: string; user?: any }>;
-  signUp: (email: string, password: string, name: string) => Promise<{ success: boolean; error?: string; user?: any }>;
-  signOut: () => Promise<void>;
-  resetPassword: (email: string) => Promise<{ success: boolean; error: string }>;
-  updatePassword: (newPassword: string) => Promise<{ success: boolean; error: string }>;
-  updateUsername: (name: string) => Promise<{ success: boolean; error?: string }>;
-  updateAvatar: (url: string) => Promise<{ success: boolean; error?: string }>;
-  deleteAccount: () => Promise<{ success: boolean; error?: string }>;
-};
+type Phase = "starting" | "checking" | "guest" | "mfa" | "ready" | "error";
+type Snapshot = {phase: Phase; session: Session | null; user: User | null};
+type PasswordResult = {success: boolean; error?: string};
 
-const AuthContext = createContext<AuthContextValue | undefined>(undefined);
+function useAuthState() {
+  const {activeSource, localSettingsLoaded} = useSettings();
+  const cloudActive = localSettingsLoaded && activeSource === "cloud";
+  const [source, setSource] = useState(activeSource);
+  const [knownCloudUserId, setKnownCloudUserId] = useState<string | null>(null);
+  const [snapshot, setSnapshot] = useState<Snapshot>({phase: "starting", session: null, user: null});
+  const current = useRef(snapshot);
+  if (source !== activeSource) {
+    setSource(activeSource);
+    setSnapshot({phase: "starting", session: null, user: null});
+  }
+  const revision = useRef(0);
+  const timer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
+  const recoveredSession = useRef<Session | null>(null);
+  const signingIn = useRef(false);
+  const profileSession = useRef<Session | null>(null);
 
-export function AuthProvider({children}: { children: ReactNode }) {
-  const [user, setUser] = useState<User | null>(null);
-  const [session, setSession] = useState<Session | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    // Sigurnosni izlaz iz učitavanja
-    const timeout = setTimeout(() => setIsLoading(false), 8000);
-
-    const finish = () => {
-      clearTimeout(timeout);
-      setIsLoading(false);
-    };
-
-    supabase.auth.getSession().then(({data: {session: s}}) => {
-      setSession(s);
-      setUser(s?.user ?? null);
-      finish();
-      if (s) {
-        // Svježi korisnik stiže naknadno
-        supabase.auth.getUser().then(({data}) => {
-          if (data.user) setUser(data.user);
-        }).catch(() => {});
-      }
-    }).catch(() => {
-      finish();
-    });
-
-    const {data: {subscription}} = supabase.auth.onAuthStateChange((_event, s) => {
-      setSession(s);
-      setUser(s?.user ?? null);
-    });
-
-    return () => subscription.unsubscribe();
+  const publish = useCallback((next: Snapshot) => {
+    if (!isCloudSourceAvailable()) return;
+    current.current = next;
+    if (next.phase === "ready" || next.phase === "guest") setKnownCloudUserId(next.user?.id ?? null);
+    setSnapshot(next);
   }, []);
 
-  const username = user?.user_metadata?.name ?? user?.email?.split('@')[0] ?? '';
-  const avatarUrl = user?.user_metadata?.avatar_url ?? '';
+  const checkSession = useCallback((session: Session | null) => {
+    if (!isCloudSourceAvailable()) return;
+    clearTimeout(timer.current);
+    const check = ++revision.current;
+    if (!session) {
+      recoveredSession.current = null;
+      profileSession.current = null;
+      publish({phase: "guest", session: null, user: null});
+      return;
+    }
 
-  const loggedIn = !!session;
+    const previous = current.current;
+    const same = sameSession(previous.session, session);
+    if (!same) {
+      recoveredSession.current = null;
+      profileSession.current = signingIn.current ? session : null;
+    }
+    const nextAal = sessionClaims(session).aal;
+    const hasPendingTotp = nextAal === "aal1" && verifiedTotp(session.user).length > 0;
+    const keepReady = same && previous.phase === "ready" && previous.session && !hasPendingTotp
+        && (sessionClaims(previous.session).aal === nextAal || nextAal === "aal2");
+    const keepMfa = same && previous.phase === "mfa";
+    if (keepReady || keepMfa) {
+      publish({...previous, session});
+    } else {
+      publish({phase: previous.phase === "starting" ? "starting" : "checking", session, user: null});
+    }
+
+    // Supabase pozivi izvan auth callbacka.
+    timer.current = setTimeout(async () => {
+      const timeout = setTimeout(() => {
+        if (check !== revision.current) return;
+        revision.current++;
+        if (!keepReady) publish({phase: "error", session, user: null});
+      }, 10000);
+      try {
+        const user = await inspectSession(session);
+        if (check !== revision.current) return;
+        publish({phase: sessionPhase(session, user), session, user});
+      } catch {
+        if (check === revision.current && !keepReady) publish({phase: "error", session, user: null});
+      } finally {
+        clearTimeout(timeout);
+      }
+    }, 0);
+  }, [publish]);
+
+  useEffect(() => {
+    if (!cloudActive) return;
+    current.current = {phase: "starting", session: null, user: null};
+    let active = true;
+    const initializing = supabase.auth.initialize();
+    const {data: {subscription}} = supabase.auth.onAuthStateChange((_event, session) => {
+      checkSession(session);
+    });
+    initializing.then(() => {
+      if (active && isCloudSourceAvailable()) return supabase.auth.startAutoRefresh();
+    }).catch(() => {});
+    const watchdog = setTimeout(() => {
+      if (current.current.phase === "starting" && !current.current.session) checkSession(null);
+    }, 10000);
+    const appState = AppState.addEventListener("change", state => {
+      if (state === "active" && current.current.session) checkSession(current.current.session);
+    });
+    return () => {
+      active = false;
+      revision.current++;
+      void supabase.auth.stopAutoRefresh();
+      clearTimeout(watchdog);
+      clearTimeout(timer.current);
+      appState.remove();
+      subscription.unsubscribe();
+    };
+  }, [checkSession, cloudActive]);
+
+  const refreshSecurity = useCallback(async () => {
+    if (!isCloudSourceAvailable()) return;
+    const expected = current.current.session;
+    if (!expected) return;
+    checkSession(await requireSession(expected));
+  }, [checkSession]);
+
+  const pendingSession = cloudActive && snapshot.phase === "mfa" ? snapshot.session : null;
+  const session = cloudActive && snapshot.phase === "ready" ? snapshot.session : null;
+  const user = session ? snapshot.user : null;
+  const totpFactors = cloudActive && snapshot.user ? verifiedTotp(snapshot.user) : [];
+
+  const verifySignIn = async (factorId: string, code: string) => {
+    if (!pendingSession || !totpFactors.some(factor => factor.id === factorId)) throw new Error("session");
+    await verifyTotp(pendingSession, factorId, code);
+  };
+
+  const recoverSignIn = async (code: string) => {
+    if (!pendingSession) throw new Error("session");
+    if (!sameSession(recoveredSession.current, pendingSession)) {
+      const result = await recoveryCodes(pendingSession, {action: "recover", code});
+      if (!result.recovered) throw new Error("unavailable");
+      await requireSession(pendingSession);
+      recoveredSession.current = pendingSession;
+    }
+    const {data, error} = await supabase.auth.refreshSession();
+    if (error || !data.session || !sameSession(pendingSession, data.session)) throw new Error("recoveryRefresh");
+  };
+
+  const cancelSignIn = async () => {
+    if (!snapshot.session) return;
+    await requireSession(snapshot.session);
+    const {error} = await supabase.auth.signOut({scope: "local"});
+    if (error) throw error;
+  };
+
+  const updatePassword = async (
+    password: string, currentPassword: string, cancelled: () => boolean = () => false,
+  ): Promise<PasswordResult> => {
+    if (!session || !currentPassword || cancelled()) return {success: false};
+    await requireSession(session);
+    await checkCurrentPassword(session, currentPassword);
+    if (cancelled()) return {success: false};
+    return supabaseAuth.updatePassword(password, currentPassword);
+  };
 
   const signIn = async (email: string, password: string) => {
-    return await supabaseAuth.signIn(email, password);
+    if (signingIn.current) return {success: false, error: undefined};
+    signingIn.current = true;
+    try {
+      return await supabaseAuth.signIn(email, password);
+    } finally {
+      signingIn.current = false;
+    }
   };
 
-  const signUp = async (email: string, password: string, name: string) => {
-    return await supabaseAuth.signUp(email, password, name);
+  const acknowledgeProfile = useCallback(() => {
+    recoveredSession.current = null;
+    profileSession.current = null;
+  }, []);
+
+  return {
+    loggedIn: Boolean(session),
+    user,
+    session,
+    username: user?.user_metadata?.name ?? user?.email?.split("@")[0] ?? "",
+    avatarUrl: user?.user_metadata?.avatar_url ?? "",
+    phase: activeSource === "local" ? "guest" as const : snapshot.phase,
+    knownCloudUserId,
+    totpFactors,
+    refreshSecurity,
+    verifySignIn,
+    recoverSignIn,
+    cancelSignIn,
+    updatePassword,
+    openRecoveredProfile: sameSession(recoveredSession.current, session),
+    openProfileAfterSignIn: sameSession(profileSession.current, session),
+    acknowledgeProfile,
+    signIn,
+    signUp: supabaseAuth.signUp,
+    signOut: supabaseAuth.signOut,
+    resetPassword: supabaseAuth.resetPassword,
+    updateUsername: supabaseAuth.updateUsername,
+    updateAvatar: supabaseAuth.updateAvatar,
+    deleteAccount: supabaseAuth.deleteAccount,
   };
+}
 
-  const signOut = async () => {
-    await supabaseAuth.signOut();
-  };
+const AuthContext = createContext<ReturnType<typeof useAuthState> | undefined>(undefined);
 
-  const updateUsername = async (name: string) => {
-    return await supabaseAuth.updateUsername(name);
-  };
-
-  const updateAvatar = async (url: string) => {
-    return await supabaseAuth.updateAvatar(url);
-  };
-
-  const deleteAccount = async () => {
-    return await supabaseAuth.deleteAccount();
-  };
-
-  const value = useMemo(
-    () => ({
-      loggedIn,
-      user,
-      session,
-      username,
-      avatarUrl,
-      isLoading,
-      signIn,
-      signUp,
-      signOut,
-      resetPassword: supabaseAuth.resetPassword,
-      updatePassword: supabaseAuth.updatePassword,
-      updateUsername,
-      updateAvatar,
-      deleteAccount,
-    }),
-    [loggedIn, user, session, username, avatarUrl, isLoading]
-  );
-
+export function AuthProvider({children}: {children: ReactNode}) {
+  const value = useAuthState();
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }
 
 export function useAuth() {
-  const ctx = useContext(AuthContext);
-  if (!ctx) throw new Error("useAuth must be used within AuthProvider");
-  return ctx;
+  const context = useContext(AuthContext);
+  if (!context) throw new Error("useAuth must be used within AuthProvider");
+  return context;
 }

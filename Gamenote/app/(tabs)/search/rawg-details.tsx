@@ -1,3 +1,5 @@
+import {useGamePresentation} from "@/context/localMode";
+import {getIgdbGame, getIgdbSeries} from "@/services/igdbApi";
 import {useEffect, useState} from "react";
 import {useLocalSearchParams, Stack, useRouter, useSegments} from "expo-router";
 import {Image} from "expo-image";
@@ -65,6 +67,7 @@ export default function RAWGDetailsScreen() {
   const {game: rawgParam} = useLocalSearchParams<{ game: string }>();
   const router = useRouter();
   const {games: userGames} = useUserGames();
+  const {isLocal, imageUrl} = useGamePresentation();
   const segments = useSegments();
   const tab = segments[1] as 'home' | 'favorites' | 'search';
 
@@ -80,18 +83,46 @@ export default function RAWGDetailsScreen() {
   const [enrichedData, setEnrichedData] = useState<any>(null);
   const [screenshots, setScreenshots] = useState<string[]>([]);
   const [seriesData, setSeriesData] = useState<SeriesGame[] | undefined>(undefined);
-  const [isLoading, setIsLoading] = useState(!!rawgData?.id);
+  const [isLoading, setIsLoading] = useState(!isLocal && !!rawgData?.id);
+  const [detailAttempt, setDetailAttempt] = useState(0);
+  const [igdbDetails, setIgdbDetails] = useState<{
+    id: string; attempt: number; game: Awaited<ReturnType<typeof getIgdbGame>>;
+  }>();
+  const id = String(rawgData?.id ?? "");
+  const hasDetails = typeof rawgData?.description_raw === "string";
+  const fromIgdb = id.startsWith("igdb-");
+  const needsLocalDetails = isLocal && !hasDetails;
+  const detailResult = igdbDetails?.id === id && igdbDetails.attempt === detailAttempt ? igdbDetails : undefined;
+  const loadingLocalDetails = needsLocalDetails && fromIgdb && !detailResult;
+  const unavailableLocalDetails = needsLocalDetails && !loadingLocalDetails && !detailResult?.game;
 
   useEffect(() => {
-    if (!rawgData?.id) return;
+    if (!needsLocalDetails || !fromIgdb) return;
+    const controller = new AbortController();
+    const complete = (game: Awaited<ReturnType<typeof getIgdbGame>>) => {
+      if (!controller.signal.aborted) setIgdbDetails({id, attempt: detailAttempt, game});
+    };
+    getIgdbGame(id, controller.signal).then(complete, () => complete(null));
+    return () => controller.abort();
+  }, [detailAttempt, fromIgdb, id, needsLocalDetails]);
+
+  useEffect(() => {
+    if (!id) return;
+    if (isLocal) {
+      const controller = new AbortController();
+      getIgdbSeries(id, controller.signal).then(series => {
+        if (!controller.signal.aborted) setSeriesData(series);
+      }).catch(() => {});
+      return () => controller.abort();
+    }
 
     let cancelled = false;
 
     const fetchAll = async () => {
       const [details, shots, series] = await Promise.all([
-        getGameDetails(rawgData.id),
-        getGameScreenshots(rawgData.id),
-        getGameSeries(rawgData.id),
+        getGameDetails(id),
+        getGameScreenshots(id),
+        getGameSeries(id),
       ]);
 
       if (cancelled) return;
@@ -115,17 +146,18 @@ export default function RAWGDetailsScreen() {
 
     fetchAll();
     return () => { cancelled = true; };
-  }, [rawgData?.id]);
+  }, [id, isLocal]);
 
   if (!rawgData) {
     return <Text style={{color: t.text, padding: 16}}>{tr('gameDetails.notFound')}</Text>;
   }
 
-  const data = enrichedData ?? rawgData;
+  const data = (isLocal ? detailResult?.game : enrichedData) ?? rawgData;
   const ownedGame = userGames.find(g => g.game_id === String(rawgData.id));
 
   const navigateToReferencedGame = (seriesItem: SeriesGame) => {
-    const matched = userGames.find(g => g.game_id === String(seriesItem.id));
+    const seriesId = isLocal && id.startsWith("igdb-") ? `igdb-${seriesItem.id}` : String(seriesItem.id);
+    const matched = userGames.find(g => g.game_id === seriesId);
     if (matched) {
       router.push({
         pathname: `/(tabs)/${tab}/details`,
@@ -134,23 +166,26 @@ export default function RAWGDetailsScreen() {
     } else {
       router.push({
         pathname: '/(tabs)/search/rawg-details',
-        params: {game: JSON.stringify({id: seriesItem.id, name: seriesItem.name, background_image: seriesItem.background_image})},
+        params: {game: JSON.stringify({id: seriesId, name: seriesItem.name, background_image: seriesItem.background_image})},
       });
     }
   };
 
+  const localScreenshots = isLocal ? (data.short_screenshots ?? []).flatMap((shot: {image: string}) => imageUrl(shot.image) || []) as string[] : [];
+  const gameScreenshots = isLocal ? localScreenshots : screenshots;
   const {prequel, sequel} = getPrequelAndSequel(seriesData ?? [], data.released ?? '');
+  const score = fromIgdb ? data.igdb_rating ?? 0 : data.metacritic ?? rawgData.metacritic ?? 0;
 
   const game: Partial<Game> = {
     title: data.name ?? rawgData.name ?? '',
     game_id: String(rawgData.id ?? ''),
     image_url: data.background_image ?? rawgData.background_image ?? undefined,
     background_image: data.background_image_additional ?? rawgData.background_image_additional ?? undefined,
-    screenshot_urls: screenshots.length > 0 ? screenshots : undefined,
+    screenshot_urls: gameScreenshots.length > 0 ? gameScreenshots : undefined,
     genre: data.genres?.map((g: any) => g.name).join(', ') ?? rawgData.genres?.map((g: any) => g.name).join(', ') ?? undefined,
     publisher: data.publishers?.[0]?.name ?? rawgData.publishers?.[0]?.name ?? undefined,
     releaseDate: data.released ?? rawgData.released ?? '',
-    metacriticScore: data.metacritic ?? rawgData.metacritic ?? 0,
+    metacriticScore: score,
     about: data.description_raw ?? data.description ?? '',
     webPage: data.website ?? '',
     esrbRating: data.esrb_rating?.name ?? rawgData.esrb_rating?.name ?? undefined,
@@ -159,8 +194,8 @@ export default function RAWGDetailsScreen() {
 
   const galleryImages: string[] = (() => {
     const urls: string[] = [];
-    if (screenshots.length > 0) {
-      urls.push(...screenshots);
+    if (gameScreenshots.length > 0) {
+      urls.push(...gameScreenshots);
     } else if (rawgData.background_image) {
       urls.push(rawgData.background_image);
       if (rawgData.short_screenshots && Array.isArray(rawgData.short_screenshots)) {
@@ -169,12 +204,11 @@ export default function RAWGDetailsScreen() {
         });
       }
     }
-    return [...new Set(urls)];
+    return [...new Set(urls.flatMap(url => imageUrl(url) || []))];
   })();
 
-  const metacriticScore = data.metacritic ?? rawgData.metacritic ?? 0;
-  const metacriticColor = (() => {
-    const clamped = Math.max(0, Math.min(metacriticScore, 100));
+  const scoreColor = (() => {
+    const clamped = Math.max(0, Math.min(score, 100));
     if (clamped >= 90) return '#00CE7A';
     if (clamped >= 75) return '#66CC33';
     if (clamped >= 50) return '#FFCC33';
@@ -207,7 +241,7 @@ export default function RAWGDetailsScreen() {
           backgroundColor: t.card,
           borderColor: theme === 'dark' ? '#2C2C2E' : '#E5E5EA',
         }]}>
-          {isLoading ? (
+          {isLoading || loadingLocalDetails ? (
             <View style={{padding: 32, alignItems: 'center'}}>
               <ActivityIndicator size="large" color={t.accent}/>
             </View>
@@ -231,7 +265,7 @@ export default function RAWGDetailsScreen() {
                         source={{uri}}
                         style={[styles.coverImage, {width: SCREEN_WIDTH - 32}]}
                         contentFit="cover"
-                        cachePolicy="memory-disk"
+                        cachePolicy={isLocal ? "memory" : "memory-disk"}
                         transition={{duration: 200, effect: "cross-dissolve"}}/>
                     </Pressable>
                   ))}
@@ -251,6 +285,17 @@ export default function RAWGDetailsScreen() {
                     {tr('search.viewInLibrary')}
                   </Text>
                 </Pressable>
+              ) : unavailableLocalDetails ? (
+                <View style={{padding: 16, gap: 8}}>
+                  <Text accessibilityRole="alert" style={{color: t.secondaryText}}>
+                    {tr(fromIgdb ? "screens.localMode.igdbDetailsError" : "gameDetails.notFound")}
+                  </Text>
+                  {fromIgdb && <Pressable accessibilityRole="button"
+                    onPress={() => setDetailAttempt(attempt => attempt + 1)}
+                    style={[styles.addButton, {backgroundColor: t.accent}]}>
+                    <Text style={{color: "#fff", fontWeight: "700"}}>{tr("screens.localMode.retry")}</Text>
+                  </Pressable>}
+                </View>
               ) : (
                 <Pressable
                   onPress={() => router.push({
@@ -304,10 +349,12 @@ export default function RAWGDetailsScreen() {
                 ) : null}
 
                 <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
-                  <Text style={{color: t.secondaryText, fontSize: 14}}>{tr("gameDetails.metacritic")}</Text>
-                  {metacriticScore ? (
+                  <Text style={{color: t.secondaryText, fontSize: 14}}>
+                    {tr(fromIgdb ? "gameDetails.igdbScore" : "gameDetails.metacritic")}
+                  </Text>
+                  {score ? (
                     <View style={{
-                      backgroundColor: metacriticColor,
+                      backgroundColor: scoreColor,
                       width: 36,
                       height: 36,
                       borderRadius: 4,
@@ -316,7 +363,7 @@ export default function RAWGDetailsScreen() {
                       borderColor: 'rgba(0,0,0,0.1)',
                     }}>
                       <Text style={{color: '#FFFFFF', fontSize: 16, fontWeight: 'bold'}}>
-                        {metacriticScore}
+                        {score}
                       </Text>
                     </View>
                   ) : (
@@ -357,10 +404,10 @@ export default function RAWGDetailsScreen() {
                           }}
                         >
                           <Image
-                            source={{uri: prequel.background_image}}
+                            source={{uri: imageUrl(prequel.background_image)}}
                             style={{width: 100, aspectRatio: 10 / 7, borderRadius: 4}}
                             contentFit="cover"
-                            cachePolicy="memory-disk"
+                            cachePolicy={isLocal ? "memory" : "memory-disk"}
                             transition={{duration: 200, effect: "cross-dissolve"}}
                           />
                           <View style={{flex: 1}}>
@@ -399,10 +446,10 @@ export default function RAWGDetailsScreen() {
                           }}
                         >
                           <Image
-                            source={{uri: sequel.background_image}}
+                            source={{uri: imageUrl(sequel.background_image)}}
                             style={{width: 100, aspectRatio: 10 / 7, borderRadius: 4}}
                             contentFit="cover"
-                            cachePolicy="memory-disk"
+                            cachePolicy={isLocal ? "memory" : "memory-disk"}
                             transition={{duration: 200, effect: "cross-dissolve"}}
                           />
                           <View style={{flex: 1}}>

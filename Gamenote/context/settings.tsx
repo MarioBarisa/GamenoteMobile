@@ -6,6 +6,17 @@ const VIBRATIONS_KEY = "vibrationsEnabled";
 const COMPACT_KEY = "compactCards";
 const LANGUAGE_KEY = "appLanguage";
 const TCG_KEY = "tcgMode";
+const LOCAL_MODE_KEY = "localModeEnabled";
+const SOURCE_KEY = "activeSource";
+const LOCAL_ONBOARDING_KEY = "localModeOnboardingSeen";
+
+export type AccountSource = "cloud" | "local";
+type SourceSettings = {enabled: boolean; source: AccountSource; onboardingSeen: boolean};
+let cloudAvailable = false;
+
+export function isCloudSourceAvailable() {
+    return cloudAvailable;
+}
 
 type SettingsContextValue = {
     vibrationsEnabled: boolean;
@@ -15,6 +26,11 @@ type SettingsContextValue = {
     tcgMode: boolean;
     tcgSettingsLoaded: boolean;
     setTCGMode: (value: boolean) => void;
+    localModeEnabled: boolean;
+    localSettingsLoaded: boolean;
+    activeSource: AccountSource;
+    setLocalModeEnabled: (value: boolean) => Promise<boolean>;
+    setActiveSource: (source: AccountSource) => Promise<void>;
     language: string;
     setLanguage: (value: string) => void;
 };
@@ -27,6 +43,8 @@ export function SettingsProvider({children}: { children: ReactNode }) {
     const [tcgMode, setTCGMode] = useState(false);
     const [tcgSettingsLoaded, setTCGSettingsLoaded] = useState(false);
     const tcgChanged = useRef(false);
+    const [sourceSettings, setSourceSettings] = useState<SourceSettings | null>(null);
+    const currentSource = useRef<SourceSettings | null>(null);
     const [language, setLanguageState] = useState(getCurrentLanguage());
 
     useEffect(() => {
@@ -62,6 +80,50 @@ export function SettingsProvider({children}: { children: ReactNode }) {
         });
     }, []);
 
+    const applySourceSettings = useCallback((next: SourceSettings) => {
+        currentSource.current = next;
+        cloudAvailable = next.source === "cloud";
+        setSourceSettings(next);
+    }, []);
+
+    useEffect(() => {
+        let active = true;
+        AsyncStorage.multiGet([LOCAL_MODE_KEY, SOURCE_KEY, LOCAL_ONBOARDING_KEY]).then(rows => {
+            if (!active) return;
+            const settings = Object.fromEntries(rows);
+            const enabled = settings[LOCAL_MODE_KEY] === "true";
+            applySourceSettings({
+                enabled,
+                source: enabled && settings[SOURCE_KEY] === "local" ? "local" : "cloud",
+                onboardingSeen: settings[LOCAL_ONBOARDING_KEY] === "true",
+            });
+        }).catch(() => {
+            if (active) applySourceSettings({enabled: false, source: "cloud", onboardingSeen: false});
+        });
+        return () => { active = false; };
+    }, [applySourceSettings]);
+
+    const setLocalModeEnabled = useCallback(async (enabled: boolean) => {
+        const previous = currentSource.current;
+        if (!previous || previous.enabled === enabled) return false;
+        const next: SourceSettings = {
+            enabled, source: enabled ? previous.source : "cloud", onboardingSeen: previous.onboardingSeen || enabled,
+        };
+        await AsyncStorage.multiSet([
+            [LOCAL_MODE_KEY, String(next.enabled)], [SOURCE_KEY, next.source],
+            [LOCAL_ONBOARDING_KEY, String(next.onboardingSeen)],
+        ]);
+        applySourceSettings(next);
+        return enabled && !previous.onboardingSeen;
+    }, [applySourceSettings]);
+
+    const setActiveSource = useCallback(async (source: AccountSource) => {
+        const previous = currentSource.current;
+        if (!previous?.enabled || previous.source === source) return;
+        await AsyncStorage.setItem(SOURCE_KEY, source);
+        applySourceSettings({...previous, source});
+    }, [applySourceSettings]);
+
     const setAndPersistVibrations = (value: boolean) => {
         setVibrationsEnabled(value);
         AsyncStorage.setItem(VIBRATIONS_KEY, String(value));
@@ -93,10 +155,15 @@ export function SettingsProvider({children}: { children: ReactNode }) {
             tcgMode,
             tcgSettingsLoaded,
             setTCGMode: setAndPersistTCG,
+            localModeEnabled: sourceSettings?.enabled ?? false,
+            localSettingsLoaded: sourceSettings !== null,
+            activeSource: sourceSettings?.source ?? "cloud",
+            setLocalModeEnabled,
+            setActiveSource,
             language,
             setLanguage: setAndPersistLanguage,
         }),
-        [vibrationsEnabled, compactCards, tcgMode, tcgSettingsLoaded, setAndPersistTCG, language, setAndPersistLanguage]
+        [vibrationsEnabled, compactCards, tcgMode, tcgSettingsLoaded, setAndPersistTCG, sourceSettings, setLocalModeEnabled, setActiveSource, language, setAndPersistLanguage]
     );
 
     return <SettingsContext.Provider value={value}>{children}</SettingsContext.Provider>;

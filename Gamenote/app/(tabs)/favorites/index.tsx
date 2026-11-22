@@ -100,14 +100,17 @@ export default function FavoritesScreen() {
                             iconColor={t.text}
                             options={[
                                 {label: tr("favorites.allGames"), value: "all", systemImage: "gamecontroller.fill"},
-                                ...platforms.map(p => ({label: STATUS_PLATFORM[p]?.label ?? p, value: p})),
+                                ...platforms.map(p => ({label: STATUS_PLATFORM[p]?.label ?? p, value: `platform:${p}`})),
                             ]}
-                            selected={platformFilter ?? "all"}
+                            selected={platformFilter === null ? "all" : `platform:${platformFilter}`}
                             onSelect={(value) => {
                                 Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
                                 // Isti odabir ponovno gasi filter
                                 if (value === "all") setPlatformFilter(null);
-                                else setPlatformFilter(prev => prev === value ? null : value);
+                                else {
+                                    const platform = value.slice("platform:".length);
+                                    setPlatformFilter(prev => prev === platform ? null : platform);
+                                }
                             }}
                         />
                     )

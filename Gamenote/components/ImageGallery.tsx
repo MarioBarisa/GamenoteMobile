@@ -1,3 +1,4 @@
+import {useGamePresentation} from "@/context/localMode";
 import {useCallback, useEffect, useLayoutEffect, useRef, useState} from "react";
 import {
     ActivityIndicator, Animated, Easing, Modal, Pressable, ScrollView, StyleSheet, Text,
@@ -23,6 +24,7 @@ function clamp(value: number, limit: number) {
 }
 
 function GalleryImage({uri, label, onLoad}: {uri: string; label: string; onLoad: (size: ImageSize) => void}) {
+    const {isLocal} = useGamePresentation();
     const {t: tr} = useTranslation();
     const [loading, setLoading] = useState(true);
     const [failed, setFailed] = useState(false);
@@ -34,7 +36,7 @@ function GalleryImage({uri, label, onLoad}: {uri: string; label: string; onLoad:
                 source={{uri}}
                 style={styles.image}
                 contentFit="contain"
-                cachePolicy="memory-disk"
+                cachePolicy={isLocal ? "memory" : "memory-disk"}
                 accessibilityLabel={label}
                 onLoad={({source}) => {
                     onLoad(source);
@@ -60,6 +62,7 @@ function GalleryImage({uri, label, onLoad}: {uri: string; label: string; onLoad:
 }
 
 export default function ImageGallery({images: initialImages, initialIndex, onClose}: Props) {
+    const {isLocal} = useGamePresentation();
     const {t: tr} = useTranslation();
     const {accent} = useTheme();
     const insets = useSafeAreaInsets();
@@ -375,7 +378,7 @@ export default function ImageGallery({images: initialImages, initialIndex, onClo
                                 onPress={() => selectThumbnail(thumbnailIndex)}
                                 style={[styles.thumbnail, {borderColor: thumbnailIndex === index ? accent : "transparent"}]}
                             >
-                                <Image source={{uri}} style={styles.thumbnailImage} contentFit="cover" cachePolicy="memory-disk" accessible={false}/>
+                                <Image source={{uri}} style={styles.thumbnailImage} contentFit="cover" cachePolicy={isLocal ? "memory" : "memory-disk"} accessible={false}/>
                             </Pressable>
                         ))}
                     </ScrollView>
