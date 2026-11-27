@@ -19,14 +19,13 @@ reviews:
   fail_commit_status: false
   auto_review:
     enabled: true
-    drafts: false
-    base_branches: ['^main$']
-    ignore_usernames:
-      - 'dependabot[bot]'
+    auto_incremental_review: true
+    auto_pause_after_reviewed_commits: 0
+    drafts: true
+    base_branches: ['.*']
+    ignore_usernames: []
   path_filters:
-    - 'Gamenote/**'
-    - '.github/**'
-    - '.coderabbit.yaml'
+    - '**'
     - '!Gamenote/.expo/**'
     - '!Gamenote/node_modules/**'
     - '!Gamenote/build/**'
@@ -35,7 +34,6 @@ reviews:
     - '!Gamenote/android/**'
     - '!Gamenote/ios/**'
     - '!Gamenote/coverage/**'
-    - '!Gamenote/package-lock.json'
     - '!**/*.tsbuildinfo'
     - '!**/.DS_Store'
   path_instructions:
@@ -45,7 +43,8 @@ reviews:
         failures, security, then behavioral regressions and state bugs. Check
         lint, TypeScript, all Node tests, and Expo/EAS compatibility. Use the
         diff and repository evidence to explain credible failures and avoid
-        duplicating CI diagnostics. Skip generated files and lockfile comments.
+        duplicating CI diagnostics. Skip generated files. Summarize dependency
+        changes and risks from lockfiles in the walkthrough.
     - path: 'Gamenote/app.config.js'
       instructions: |
         Keep service configuration environment-backed. Flag committed secrets

@@ -28,6 +28,8 @@ jobs:
           cache: npm
           cache-dependency-path: Gamenote/package-lock.json
       - run: npm ci
+      - name: Provjeri verzije Expo SDK-a
+        run: npx --no-install expo install --check
       - run: npx --no-install expo customize tsconfig.json
       - run: npm run lint
       - run: npx --no-install tsc --noEmit
