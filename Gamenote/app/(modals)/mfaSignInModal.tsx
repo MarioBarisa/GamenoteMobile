@@ -102,7 +102,7 @@ export default function MfaSignInModal() {
                 )}
                 {useRecovery ? !retryRecovery && (
                     <ModalInput accessibilityLabel={t("mfa.recoveryCode")} placeholder={t("mfa.recoveryCode")}
-                                value={code} onChangeText={setCode} autoCapitalize="none"
+                                value={code} onChangeText={setCode} textContentType="none" autoComplete="off" autoCapitalize="none"
                                 autoCorrect={false} spellCheck={false} editable={!busy}/>
                 ) : <TotpCodeInput {...fieldProps} autoFocus value={code} onChange={setCode} disabled={busy}/>}
                 <ModalButton label={t(retryRecovery ? "mfa.retry" : "mfa.verify")}

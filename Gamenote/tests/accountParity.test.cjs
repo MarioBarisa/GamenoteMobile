@@ -175,7 +175,7 @@ test("The router blocks private deep links and tab mounts until the pending sess
     const local = {localModeEnabled: false, activeSource: "cloud"};
     const style = {background: "white", accent: "blue"};
     const {default: RootLayout, unstable_settings} = load("app/_layout.tsx", {
-        react: {useEffect() {}},
+        react: {useEffect() {}, useRef: value => ({current: value})},
         "react/jsx-runtime": {jsx: element, jsxs: element},
         "react-native": {ActivityIndicator: "activity", View: "view"},
         "expo-splash-screen": {preventAutoHideAsync() {}},
@@ -183,7 +183,9 @@ test("The router blocks private deep links and tab mounts until the pending sess
         "react-i18next": {useTranslation: () => ({t: key => key})},
         "@/context/GroupsContext": {GroupsProvider: "groups"},
         "@/context/theme": {ThemeProvider: "theme", useTheme: () => ({themeColors: style})},
-        "@/context/settings": {SettingsProvider: "settings"},
+        "@/context/settings": {SettingsProvider: "settings", useSettings: () => ({tcgMode: false, tcgSettingsLoaded: true})},
+        "@/context/UserGamesContext": {UserGamesProvider: "games"},
+        "@/services/foilTextures": {},
         "@/context/localMode": {LocalModeProvider: "local", useLocalMode: () => local},
         "@/context/TCGMotion": {TCGMotionProvider: "motion"},
         "@/context/auth": {AuthProvider: "auth", useAuth: () => auth},
@@ -192,7 +194,9 @@ test("The router blocks private deep links and tab mounts until the pending sess
         "@/utils/i18n": {},
     });
     const rootNavigator = RootLayout().props.children.props.children.props.children.type;
-    const appContent = rootNavigator().props.children.props.children.props.children.type;
+    const gamesProvider = rootNavigator().props.children.props.children.props.children;
+    assert.equal(gamesProvider.type, "games");
+    const appContent = gamesProvider.props.children.type;
     assert.equal(appContent().type, "view");
 
     assert.equal(unstable_settings.anchor, "index");
@@ -226,6 +230,82 @@ test("The router blocks private deep links and tab mounts until the pending sess
     assert.ok(localRoutes.includes("(modals)/localModeOnboarding"));
     assert.ok(!localRoutes.includes("(modals)/shareProfileModal"));
     assert.ok(!localRoutes.includes("(modals)/registerModal"));
+});
+
+test("Profile switching keeps the same groups provider around navigation", () => {
+    let activeSource = "cloud";
+    const Provider = Symbol("groups context");
+    const stack = Symbol("stack");
+    const {GroupsProvider} = load("context/GroupsContext.tsx", {
+        react: {
+            createContext: () => ({Provider}),
+            useCallback: callback => callback,
+            useState: initial => [initial(), () => {}],
+            useEffect() {},
+        },
+        "react/jsx-runtime": {jsx: (type, props) => ({type, props})},
+        "@/context/localMode": {useLocalMode: () => ({activeSource, document: {groups: [{id: "offline"}], game_groups: []}})},
+        "@/context/auth": {useAuth: () => ({loggedIn: false})},
+        "@/constants/PLACEHOLDER_GROUPS.TSX": {MOCK_GROUPS: [{id: "demo"}], MOCK_GAME_GROUPS: []},
+        "@/services/localData": {LOCAL_USER_ID: "local"},
+        "@/services/supabase": {},
+        "@/services/groupsApi": {},
+    });
+
+    for (const [source, id] of [["cloud", "demo"], ["local", "offline"], ["cloud", "demo"]]) {
+        activeSource = source;
+        const result = GroupsProvider({children: stack});
+        assert.equal(result.type, Provider);
+        assert.equal(result.props.children, stack);
+        assert.equal(result.props.value.groups[0].id, id);
+    }
+});
+
+test("Native tabs wait for a measured iOS 27 host and clear prior profile details", () => {
+    let activeSource = "cloud";
+    let hasLayout = false;
+    const refs = [];
+    let refIndex = 0;
+    const actions = [];
+    const navigation = {
+        getRootState: () => ({routes: [{name: "(tabs)", state: {routes: [
+            {state: {key: "home", routes: [{name: "index"}, {name: "details"}], index: 1}},
+            {state: {key: "profile", routes: [{name: "index"}], index: 0}},
+        ]}}]}),
+        dispatch: action => actions.push(action),
+    };
+    const NativeTabs = {Trigger: {Label: "label", Icon: "icon", Badge: "badge"}};
+    const jsx = (type, props) => ({type, props});
+    const {default: TabsLayout} = load("app/(tabs)/_layout.tsx", {
+        react: {
+            useState: () => [hasLayout, value => { hasLayout = value; }],
+            useRef: value => {
+                const index = refIndex++;
+                return refs[index] ?? (refs[index] = {current: value});
+            },
+            useLayoutEffect: effect => effect(),
+            useEffect() {},
+        },
+        "react/jsx-runtime": {jsx, jsxs: jsx},
+        "expo-router": {useSegments: () => ["(tabs)", "profile"], useNavigationContainerRef: () => navigation},
+        "expo-router/native-tabs": {NativeTabs},
+        "expo-router/react-navigation": {StackActions: {popTo: name => ({type: "POP_TO", name})}},
+        "react-native": {Platform: {OS: "ios", Version: "27.1.2"}, View: "view"},
+        "expo-haptics": {},
+        "@/context/settings": {useSettings: () => ({activeSource, vibrationsEnabled: false})},
+        "@/context/theme": {useTheme: () => ({})},
+        "@/context/auth": {useAuth: () => ({loggedIn: false})},
+        "react-i18next": {useTranslation: () => ({t: key => key})},
+        "@react-native-async-storage/async-storage": {},
+    });
+    const render = () => { refIndex = 0; return TabsLayout().props; };
+    render().onLayout({nativeEvent: {layout: {width: 0, height: 0}}});
+    assert.equal(render().children, false);
+    render().onLayout({nativeEvent: {layout: {width: 951, height: 669}}});
+    assert.equal(render().children.props.minimizeBehavior, "onScrollDown");
+    activeSource = "local";
+    assert.equal(render().children.type, NativeTabs);
+    assert.deepEqual(actions, [{type: "POP_TO", name: "index", target: "home"}]);
 });
 
 test("Returning to the cloud profile stays targeted while the router is still on the index", () => {
@@ -425,11 +505,11 @@ test("The cloud auth error screen opens the local library without signing out", 
     assert.equal(signOuts, 0);
 });
 
-test("A password starts with the chosen keyboard and can be masked on request", () => {
-    let masked = false;
+test("A password starts masked and its visibility can be toggled", () => {
+    let masked;
     const element = (type, props) => ({type, props});
     const {default: PasswordInput} = load("components/PasswordInput.tsx", {
-        react: {useState: () => [masked, update => { masked = typeof update === "function" ? update(masked) : update; }]},
+        react: {useState: initial => [masked ?? (masked = initial), update => { masked = typeof update === "function" ? update(masked) : update; }]},
         "react/jsx-runtime": {jsx: element, jsxs: element},
         "react-native": {Pressable: "button", StyleSheet: {create: value => value}, TextInput: "input", View: "view"},
         "expo-symbols": {SymbolView: "symbol"},
@@ -437,15 +517,15 @@ test("A password starts with the chosen keyboard and can be masked on request", 
         "@/context/theme": {useTheme: () => ({themeColors: {accent: "blue"}})},
     });
     const render = () => PasswordInput({value: "fixture", textContentType: "password"}).props.children;
-    const [visible, toggle] = render();
-    assert.equal(visible.props.secureTextEntry, false);
-    assert.equal(visible.props.keyboardType, undefined);
-    assert.equal(visible.props.textContentType, "password");
-    toggle.props.onPress();
-    assert.equal(render()[0].props.secureTextEntry, true);
-    assert.equal(render()[0].props.value, "fixture");
+    const [input, toggle] = render();
+    assert.equal(input.props.secureTextEntry, true);
+    assert.equal(input.props.keyboardType, undefined);
+    assert.equal(input.props.textContentType, "password");
     toggle.props.onPress();
     assert.equal(render()[0].props.secureTextEntry, false);
+    assert.equal(render()[0].props.value, "fixture");
+    toggle.props.onPress();
+    assert.equal(render()[0].props.secureTextEntry, true);
 });
 
 test("TOTP scrolls only by the overlap with the keyboard", context => {
@@ -501,7 +581,7 @@ test("TOTP input preserves leading zeros and strips pasted whitespace, and Plati
     assert.equal(input.match(/<TextInput\b/g)?.length, 1);
     assert.match(input, /textContentType="oneTimeCode"/);
     assert.match(input, /keyboardType="number-pad"/);
-    assert.match(input, /contextMenuHidden=\{false\}/);
+    assert.match(input, /contextMenuHidden=\{false}/);
     assert.match(input, /ClipboardPasteButton/);
     assert.doesNotMatch(input, /caretHidden/);
     assert.equal(totpQrMarkup('data:image/svg+xml;utf-8,<svg width="192" height="192"></svg>'),

@@ -1,0 +1,97 @@
+language: en-US
+tone_instructions: >-
+  Write precise, actionable reviews in English. For each finding, state its
+  severity, impact, and concrete fix. Include a focused example when useful.
+
+reviews:
+  profile: assertive
+  request_changes_workflow: false
+  high_level_summary: true
+  high_level_summary_instructions: >-
+    Summarize the user-visible and operational changes. Explicitly name any
+    checks or release safeguards that were removed, weakened, or made optional.
+  high_level_summary_in_walkthrough: true
+  sequence_diagrams: false
+  poem: false
+  collapse_walkthrough: false
+  review_status: true
+  commit_status: true
+  fail_commit_status: false
+  auto_review:
+    enabled: true
+    drafts: false
+    base_branches: ['^main$']
+    ignore_usernames:
+      - 'dependabot[bot]'
+  path_filters:
+    - 'Gamenote/**'
+    - '.github/**'
+    - '.coderabbit.yaml'
+    - '!Gamenote/.expo/**'
+    - '!Gamenote/node_modules/**'
+    - '!Gamenote/build/**'
+    - '!Gamenote/dist/**'
+    - '!Gamenote/web-build/**'
+    - '!Gamenote/android/**'
+    - '!Gamenote/ios/**'
+    - '!Gamenote/coverage/**'
+    - '!Gamenote/package-lock.json'
+    - '!**/*.tsbuildinfo'
+    - '!**/.DS_Store'
+  path_instructions:
+    - path: '**'
+      instructions: |
+        Review the changed source and configuration. Prioritize build or type
+        failures, security, then behavioral regressions and state bugs. Check
+        lint, TypeScript, all Node tests, and Expo/EAS compatibility. Use the
+        diff and repository evidence to explain credible failures and avoid
+        duplicating CI diagnostics. Skip generated files and lockfile comments.
+    - path: 'Gamenote/app.config.js'
+      instructions: |
+        Keep service configuration environment-backed. Flag committed secrets
+        and privileged Supabase keys. Obfuscation is not a secrecy boundary
+        for values shipped in a client bundle.
+    - path: 'Gamenote/app.json'
+      instructions: |
+        Flag unjustified permissions, privacy manifest changes, and unexpected
+        edits to the scheme, associated domains, or bundle identifier.
+    - path: 'Gamenote/eas.json'
+      instructions: |
+        Check build and submit profiles, production environment selection,
+        signing, build-number incrementing, and credential exposure.
+    - path: 'Gamenote/services/**'
+      instructions: |
+        Check credential sources, HTTPS and URL validation, secret leakage in
+        logs, error handling, and changes to exported contracts. Flag SSRF
+        when user-controlled URLs are fetched by a service with server access.
+    - path: 'Gamenote/context/**'
+      instructions: |
+        Check auth gates, session expiry and storage, TOTP and recovery codes,
+        account isolation, and races during sign-out or profile changes.
+    - path: 'Gamenote/app/**'
+      instructions: |
+        Check that Expo Router destinations exist and route params are narrowed
+        before use. Flag casts that conceal invalid params or segment access,
+        removed exports, and incompatible prop changes.
+    - path: 'Gamenote/package.json'
+      instructions: |
+        For dependency changes, check the reason, package identity, licenses,
+        lifecycle scripts, known advisories, and Expo SDK peer compatibility.
+        Mark anything needing registry or audit verification as unverified.
+    - path: '.github/workflows/**'
+      instructions: |
+        Require pinned Actions, read-only permissions unless justified, and
+        secrets scoped to the release step. Flag a release on a PR, untrusted
+        checkout under pull_request_target, or bypassed checks and ref gates.
+        Verify production releases use the checked revision on main.
+  tools:
+    eslint:
+      enabled: true
+    yamllint:
+      enabled: true
+    markdownlint:
+      enabled: true
+    actionlint:
+      enabled: true
+    zizmor:
+      enabled: true

@@ -76,13 +76,13 @@ export default function TotpSettingsModal() {
     };
 
     const copyText = async (value: string) => {
-        try {
-            if (!await setStringAsync(value)) throw new Error("clipboard");
-            setError("");
-            setNotice("mfa.copied");
-        } catch {
+        const copied = await setStringAsync(value).catch(() => false);
+        if (!copied) {
             setError("mfa.copyError");
+            return;
         }
+        setError("");
+        setNotice("mfa.copied");
     };
 
     const start = (nextAction: Action, id = "") => {
@@ -187,7 +187,7 @@ export default function TotpSettingsModal() {
             </>}
             {step === "password" && <>
                 <ModalText>{t("mfa.currentPassword")}</ModalText>
-                <ModalInput autoFocus secureTextEntry textContentType="password"
+                <ModalInput autoFocus secureTextEntry textContentType="password" autoComplete="password"
                             accessibilityLabel={t("mfa.currentPassword")} placeholder={t("profile.password")}
                             value={password} onChangeText={setPassword} editable={!busy}/>
                 <ModalButton label={t("mfa.continue")} onPress={confirmPassword} disabled={!password && !busy} busy={busy}/>

@@ -1,8 +1,10 @@
 import {useEffect, useState} from "react";
+import {screenContent} from "@/constants/layout";
+import {ScreenScrollView} from "@/components/ScreenViewport";
 import {useRouter} from "expo-router";
 import {SymbolView} from "expo-symbols";
 import {loadLocalData} from "@/services/localData";
-import {Alert, Pressable, ScrollView, View, Text, StyleSheet, Switch} from "react-native";
+import {Alert, Pressable, View, Text, StyleSheet, Switch} from "react-native";
 import {useTheme} from "@/context/theme";
 import {useSettings} from "@/context/settings";
 import {useTranslation} from "react-i18next";
@@ -40,10 +42,9 @@ export default function SettingsScreen() {
     const isSystem = preference === "system";
 
     return (
-        <ScrollView
-            contentInsetAdjustmentBehavior="automatic"
-            style={{backgroundColor: c.background}}
-            contentContainerStyle={styles.container}
+        <ScreenScrollView
+            backgroundColor={c.background}
+            contentContainerStyle={[screenContent.form, styles.container]}
         >
             <View
                 style={[
@@ -201,7 +202,7 @@ export default function SettingsScreen() {
                     <SymbolView name="chevron.right" size={14} tintColor={c.accent}/>
                 </Pressable>}
             </View>
-        </ScrollView>
+        </ScreenScrollView>
     );
 }
 

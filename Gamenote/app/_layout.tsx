@@ -1,12 +1,14 @@
-import {useEffect} from "react";
+import {useEffect, useRef} from "react";
 import {ActivityIndicator, View} from "react-native";
 import * as SplashScreen from "expo-splash-screen";
 import {Stack} from "expo-router";
 import {useTranslation} from "react-i18next";
+import {UserGamesProvider} from "@/context/UserGamesContext";
+import {preloadFoilTextures} from "@/services/foilTextures";
 import {GroupsProvider} from "@/context/GroupsContext";
 import {ThemeProvider, useTheme} from "@/context/theme";
 import {LocalModeProvider, useLocalMode} from "@/context/localMode";
-import {SettingsProvider} from "@/context/settings";
+import {SettingsProvider, useSettings} from "@/context/settings";
 import {TCGMotionProvider} from "@/context/TCGMotion";
 import {AuthProvider, useAuth} from "@/context/auth";
 import {useNavigationTheme} from "@/constants/navigationTheme";
@@ -35,12 +37,34 @@ function AppContent() {
     const {t} = useTranslation();
     const {themeColors} = useTheme();
     const tc = themeColors;
+    const {tcgMode, tcgSettingsLoaded} = useSettings();
+    const splash = useRef({deadline: 0, hidden: false});
 
     useEffect(() => {
-        if (!isLoading) {
-            SplashScreen.hideAsync().catch(() => {});
+        const preload = tcgMode && tcgSettingsLoaded ? preloadFoilTextures() : undefined;
+        const startup = splash.current;
+        if (isLoading || startup.hidden) return;
+
+        function hideSplash() {
+            if (startup.hidden) return;
+            startup.hidden = true;
+            void SplashScreen.hideAsync().catch(() => {});
         }
-    }, [isLoading]);
+
+        if (tcgSettingsLoaded && !preload) {
+            hideSplash();
+            return;
+        }
+
+        startup.deadline ||= Date.now() + 400;
+        const timer = setTimeout(hideSplash, Math.max(0, startup.deadline - Date.now()));
+        let active = true;
+        void preload?.then(() => { if (active) hideSplash(); });
+        return () => {
+            active = false;
+            clearTimeout(timer);
+        };
+    }, [isLoading, tcgMode, tcgSettingsLoaded]);
 
     if (isLoading) {
         return (
@@ -147,7 +171,9 @@ function RootNavigator() {
         <ErrorBoundary>
             <AuthProvider>
                 <LocalModeProvider>
-                    <AppContent/>
+                    <UserGamesProvider>
+                        <AppContent/>
+                    </UserGamesProvider>
                 </LocalModeProvider>
             </AuthProvider>
         </ErrorBoundary>

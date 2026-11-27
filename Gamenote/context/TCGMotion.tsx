@@ -32,7 +32,6 @@ export function TCGMotionProvider({children}: {children: ReactNode}) {
     const [hasCards, setHasCards] = useState(false);
     const [appState, setAppState] = useState(AppState.currentState);
     const [reduceMotion, setReduceMotion] = useState<boolean | null>(null);
-    const permissionRequest = useRef<ReturnType<typeof DeviceMotion.requestPermissionsAsync> | null>(null);
 
     // Jedan izračun za sve kartice
     const coverStyle = useAnimatedStyle(() => ({
@@ -94,21 +93,7 @@ export function TCGMotionProvider({children}: {children: ReactNode}) {
 
         async function start() {
             try {
-                if (!await DeviceMotion.isAvailableAsync() || cancelled) return;
-                let permission = await DeviceMotion.getPermissionsAsync();
-                if (cancelled) return;
-                if (permission.status === "undetermined" && permission.canAskAgain) {
-                    // Jedan zahtjev preživljava promjene lifecyclea
-                    if (!permissionRequest.current) {
-                        permissionRequest.current = DeviceMotion.requestPermissionsAsync();
-                    }
-                    try {
-                        permission = await permissionRequest.current;
-                    } finally {
-                        permissionRequest.current = null;
-                    }
-                }
-                if (!permission.granted || cancelled || AppState.currentState !== "active") return;
+                if (!await DeviceMotion.isAvailableAsync() || cancelled || AppState.currentState !== "active") return;
 
                 let origin: {beta: number; gamma: number} | null = null;
                 let filteredX = 0;

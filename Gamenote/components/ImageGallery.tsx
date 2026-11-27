@@ -1,3 +1,4 @@
+import {modalOrientations} from "@/constants/layout";
 import {useGamePresentation} from "@/context/localMode";
 import {useCallback, useEffect, useLayoutEffect, useRef, useState} from "react";
 import {
@@ -321,7 +322,8 @@ export default function ImageGallery({images: initialImages, initialIndex, onClo
     const dragScale = motion.dismiss.interpolate({inputRange: [-height, 0, height], outputRange: [0.88, 1, 0.88], extrapolate: "clamp"});
     const transitionScale = motion.visibility.interpolate({inputRange: [0, 1], outputRange: [0.96, 1]});
     return (
-        <Modal visible transparent animationType="none" presentationStyle="overFullScreen" onRequestClose={() => closeGallery()}>
+        <Modal visible transparent animationType="none" presentationStyle="overFullScreen"
+               supportedOrientations={modalOrientations} onRequestClose={() => closeGallery()}>
             <GestureHandlerRootView style={styles.root}>
                 <StatusBar style="light"/>
                 <Animated.View pointerEvents="none" style={[StyleSheet.absoluteFill, styles.backdrop, {opacity}]}/>
@@ -357,7 +359,7 @@ export default function ImageGallery({images: initialImages, initialIndex, onClo
                         </Animated.View>
                     </View>
                 </GestureDetector>
-                <Animated.View pointerEvents="box-none" testID="image-gallery-footer" style={[styles.footer, {paddingBottom: Math.max(8, insets.bottom), opacity: footerOpacity}]}>
+                <Animated.View pointerEvents="box-none" testID="image-gallery-footer" style={[styles.footer, {left: insets.left, right: insets.right, paddingBottom: Math.max(8, insets.bottom), opacity: footerOpacity}]}>
                     <ScrollView
                         ref={thumbnailsRef}
                         testID="image-gallery-thumbnails"
@@ -386,7 +388,7 @@ export default function ImageGallery({images: initialImages, initialIndex, onClo
                         {index + 1} / {images.length}
                     </Text>
                 </Animated.View>
-                <Animated.View style={[styles.controls, {top: insets.top + 8, opacity}]}>
+                <Animated.View style={[styles.controls, {top: insets.top + 8, left: insets.left + 20, right: insets.right + 16, opacity}]}>
                     <Pressable accessibilityRole="button" accessibilityLabel={tr("gallery.close")} onPress={() => closeGallery()} style={styles.close}>
                         <SymbolView name="xmark" tintColor="#FFFFFF" style={styles.icon}/>
                     </Pressable>
@@ -401,11 +403,11 @@ const styles = StyleSheet.create({
     stage: {flex: 1, overflow: "hidden"},
     backdrop: {backgroundColor: "#000000"},
     image: {width: "100%", height: "100%"},
-    controls: {position: "absolute", left: 20, right: 16, flexDirection: "row", alignItems: "center", justifyContent: "space-between"},
+    controls: {position: "absolute", flexDirection: "row", alignItems: "center", justifyContent: "space-between"},
     close: {width: 48, height: 48, borderRadius: 24, backgroundColor: "rgba(40,40,40,0.85)", alignItems: "center", justifyContent: "center"},
     icon: {width: 22, height: 22},
     text: {color: "#FFFFFF", fontSize: 16, fontWeight: "600"},
-    footer: {position: "absolute", bottom: 0, left: 0, right: 0, paddingTop: 8, gap: 8, backgroundColor: "transparent"},
+    footer: {position: "absolute", bottom: 0, paddingTop: 8, gap: 8, backgroundColor: "transparent"},
     thumbnailScroll: {flexGrow: 0, height: 48},
     thumbnails: {flexGrow: 1, justifyContent: "center", alignItems: "center", gap: THUMBNAIL_GAP, paddingHorizontal: 16},
     thumbnail: {width: THUMBNAIL_WIDTH, height: 48, borderWidth: 2, borderRadius: 8, padding: 2},

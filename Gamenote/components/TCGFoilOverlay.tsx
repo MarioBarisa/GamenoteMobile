@@ -1,9 +1,12 @@
-import {memo, useEffect, useId, useState} from "react";
-import {Image, LayoutChangeEvent, StyleSheet} from "react-native";
+import {memo, useEffect, useId, useState, useSyncExternalStore, type ComponentProps} from "react";
+import {LayoutChangeEvent, StyleSheet, View} from "react-native";
+import {Image} from "expo-image";
+import {useIsFocused} from "expo-router";
 import Animated, {useAnimatedStyle} from "react-native-reanimated";
 import Svg, {Defs, LinearGradient, RadialGradient, Rect, Stop} from "react-native-svg";
 import {useTCGMotion} from "@/context/TCGMotion";
-import {FoilVariant} from "@/hooks/useTCGFoil";
+import type {FoilVariant} from "@/hooks/useTCGFoil";
+import {foilTextures, getFoilTexture, onFoilTexturesChanged, type FoilTexture} from "@/services/foilTextures";
 
 const coverStops = {
     gold: [
@@ -17,11 +20,39 @@ const coverStops = {
         ["76%", "#000"], ["86%", "#2dd4bf"], ["100%", "#000"],
     ],
 };
-const exTextures = {
-    gold: require("@/assets/tcg/foil-gold.png"),
-    holo: require("@/assets/tcg/foil-spectrum.png"),
-    prism: require("@/assets/tcg/foil-prism.png"),
+const fallbackGradients = {
+    gold: "linear-gradient(115deg, transparent 12%, #f7e08b66 32%, transparent 55%, #ffe98a55 80%, transparent)",
+    holo: "linear-gradient(115deg, transparent 10%, #7c3aed55 27%, #22d3ee55 42%, transparent 57%, #f472b655 80%, transparent)",
+    prism: "linear-gradient(115deg, transparent 10%, #8b5cf655 26%, #22d3ee55 43%, #f7e08b55 62%, #f472b655 79%, transparent)",
 };
+const coverWidth = 3;
+const coverHeight = 4;
+const coverDx = Math.sin(115 * Math.PI / 180);
+const coverDy = -Math.cos(115 * Math.PI / 180);
+const coverLength = coverWidth * coverDx + coverHeight * coverDy;
+
+function TextureLayer({texture, variant, style}: {texture: FoilTexture; variant: FoilVariant; style: ComponentProps<typeof Animated.View>["style"]}) {
+    const image = useSyncExternalStore(onFoilTexturesChanged, () => getFoilTexture(texture));
+    const [displayed, setDisplayed] = useState(false);
+
+    return (
+        <>
+            {!image && !displayed && <View style={[StyleSheet.absoluteFill, {backgroundImage: fallbackGradients[variant]}]}/>}
+            {image !== undefined && (
+                <Animated.View style={style}>
+                    <Image
+                        source={image ?? foilTextures[texture]}
+                        style={styles.fill}
+                        contentFit="cover"
+                        transition={0}
+                        onDisplay={image === null ? () => setDisplayed(true) : undefined}
+                    />
+                </Animated.View>
+            )}
+        </>
+    );
+}
+
 const lightColors = {
     gold: ["#f6efed", "#e7dad5", "#160f0c"],
     holo: ["#eff1f6", "#d9dde7", "#0f1116"],
@@ -52,52 +83,42 @@ const FoilLight = memo(function FoilLight({variant, diameter, darkEdge = false}:
 
 function CoverFoil({variant}: {variant: FoilVariant}) {
     const {coverStyle, registerCard} = useTCGMotion();
-    const [size, setSize] = useState({width: 0, height: 0});
+    const isFocused = useIsFocused();
     const gradientId = useId();
-    useEffect(() => registerCard(), [registerCard]);
+    useEffect(() => {
+        if (isFocused) return registerCard();
+    }, [isFocused, registerCard]);
 
-    const width = size.width * 2.2;
-    const height = size.height * 2.2;
-    // CSS kut od 115 stupnjeva
-    const dx = Math.sin(115 * Math.PI / 180);
-    const dy = -Math.cos(115 * Math.PI / 180);
-    const length = width * dx + height * dy;
-    const measure = ({nativeEvent: {layout}}: LayoutChangeEvent) => {
-        setSize(current => current.width === layout.width && current.height === layout.height
-            ? current : {width: layout.width, height: layout.height});
-    };
     return (
         <Animated.View
             pointerEvents="none"
             accessibilityElementsHidden
             importantForAccessibility="no-hide-descendants"
-            onLayout={measure}
             style={[styles.overlay, styles.coverBlend, {opacity: variant === "prism" ? 0.55 : 0.45}]}
         >
-            {/* Blending neposredno s posterom */}
-            <Animated.View style={[styles.coverFoil, coverStyle]}>
-                {variant === "prism" ? (
-                    <Image source={require("@/assets/tcg/cover-prism.png")} style={styles.fill} resizeMode="cover" />
-                ) : size.width > 0 && (
-                    <Svg width="100%" height="100%">
+            {variant === "prism" ? (
+                <TextureLayer key={variant} texture="prismCover" variant={variant} style={[styles.coverFoil, coverStyle]}/>
+            ) : (
+                <Animated.View style={[styles.coverFoil, coverStyle]}>
+                    <Svg width="100%" height="100%" viewBox={`0 0 ${coverWidth} ${coverHeight}`} preserveAspectRatio="none">
                         <Defs>
                             <LinearGradient
                                 id={gradientId}
                                 gradientUnits="userSpaceOnUse"
-                                x1={(width - dx * length) / 2}
-                                y1={(height - dy * length) / 2}
-                                x2={(width + dx * length) / 2}
-                                y2={(height + dy * length) / 2}
+                                x1={(coverWidth - coverDx * coverLength) / 2}
+                                y1={(coverHeight - coverDy * coverLength) / 2}
+                                x2={(coverWidth + coverDx * coverLength) / 2}
+                                y2={(coverHeight + coverDy * coverLength) / 2}
                             >
                                 {coverStops[variant].map(([offset, stopColor]) => (
                                     <Stop key={offset} offset={offset} stopColor={stopColor} />
                                 ))}
                             </LinearGradient>
                         </Defs>
-                        <Rect width="100%" height="100%" fill={`url(#${gradientId})`} />
+                        <Rect width={coverWidth} height={coverHeight} fill={`url(#${gradientId})`} />
                     </Svg>
-                )}
-            </Animated.View>
+                </Animated.View>
+            )}
         </Animated.View>
     );
 }
@@ -140,10 +161,7 @@ function EXHolo({variant}: {variant: FoilVariant}) {
                         <FoilLight variant={variant} diameter={diameter} darkEdge />
                     </Animated.View>
                 )}
-                {/* Izvorna tekstura preko refleksije */}
-                <Animated.View style={[styles.exTexture, textureStyle]}>
-                    <Image source={exTextures[variant]} style={styles.fill} resizeMode="cover" />
-                </Animated.View>
+                <TextureLayer key={variant} texture={variant} variant={variant} style={[styles.exTexture, textureStyle]}/>
             </Animated.View>
             <Animated.View pointerEvents="none" accessibilityElementsHidden importantForAccessibility="no-hide-descendants" style={[styles.overlay, styles.glare, glareStyle]}>
                 {width > 0 && (

@@ -51,7 +51,8 @@ function reconcile<T extends object>(
 }
 
 export async function syncLocalMirror(userId: string, isCurrent: () => boolean, initialProfile?: LocalProfile) {
-    const {resetRevision} = getLocalState();
+    const {document, resetRevision} = getLocalState();
+    if (!isCurrent() || (!initialProfile && !document?.mirrors?.[userId]?.enabled)) return;
     const library = await readCloudLibrary(userId);
     if (!isCurrent()) return;
     await editLocalDocument(document => {

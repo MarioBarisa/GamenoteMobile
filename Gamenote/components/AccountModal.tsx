@@ -1,4 +1,5 @@
 import type {ComponentPropsWithRef, ReactNode} from "react";
+import {screenContent} from "@/constants/layout";
 import {ActivityIndicator, Pressable, ScrollView, StyleSheet, Text, TextInput, type TextInputProps} from "react-native";
 import {useTheme} from "@/context/theme";
 import PasswordInput from "@/components/PasswordInput";
@@ -11,7 +12,7 @@ export function AccountModal({children, adjustForKeyboard = true, scrollProps}: 
     const {themeColors} = useTheme();
     return (
         <ScrollView style={{backgroundColor: themeColors.backgroundModal}}
-                    contentContainerStyle={styles.content}
+                    contentContainerStyle={[screenContent.form, styles.content]}
                     contentInsetAdjustmentBehavior="automatic"
                     keyboardShouldPersistTaps={adjustForKeyboard ? "handled" : "always"}
                     keyboardDismissMode={adjustForKeyboard ? "none" : "on-drag"}

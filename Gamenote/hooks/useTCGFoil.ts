@@ -1,4 +1,3 @@
-import {useIsFocused} from "expo-router";
 import {useSettings} from "@/context/settings";
 
 export type FoilVariant = "gold" | "holo" | "prism";
@@ -13,7 +12,6 @@ export function getFoilVariant(rating: number | undefined, achievementPercent: n
 
 export function useTCGFoil(rating: number | undefined, achievementPercent: number) {
     const {tcgMode, tcgSettingsLoaded} = useSettings();
-    const isFocused = useIsFocused();
-    if (!tcgMode || !tcgSettingsLoaded || !isFocused) return null;
+    if (!tcgMode || !tcgSettingsLoaded) return null;
     return getFoilVariant(rating, achievementPercent);
 }

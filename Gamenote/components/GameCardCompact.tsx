@@ -1,6 +1,6 @@
 import {useGamePresentation} from "@/context/localMode";
 import {Image} from "expo-image";
-import {Alert, StyleSheet, View, Text, Pressable, useWindowDimensions} from 'react-native'
+import {Alert, StyleSheet, View, Text, Pressable} from 'react-native'
 import { colors } from '@/constants/theme'
 import { useTheme } from '@/context/theme'
 import {Ionicons} from "@expo/vector-icons";
@@ -10,7 +10,7 @@ import {STATUS_CONFIG} from "@/common/StatusCommons";
 import {achievementPercent, progressColor} from "@/common/ProgressSources";
 import * as Haptics from 'expo-haptics';
 import {useTranslation} from "react-i18next";
-import {useRef, useState} from "react";
+import {memo, useRef, useState} from "react";
 import type {ViewInstance} from "react-native";
 import GameContextMenu, {MenuAnchor} from "@/components/GameContextMenu";
 import TCGFoilOverlay from "@/components/TCGFoilOverlay";
@@ -18,18 +18,17 @@ import {useTCGFoil} from "@/hooks/useTCGFoil";
 
 interface Props {
   game: Game
+  width: number
   onDelete?: (gameId: string) => void | Promise<void>
 }
 
-export default function GameCardCompact({ game, onDelete }: Props) {
+export default memo(function GameCardCompact({ game, width, onDelete }: Props) {
   const {t: tr} = useTranslation();
   const { theme } = useTheme()
   const t = colors[theme]
   const router = useRouter();
   const segments = useSegments();
   const tab = segments[1] as 'home' | 'favorites' | 'search'; // GDJE SE MOŽE KORISTIT?
-  const {width: SCREEN_WIDTH} = useWindowDimensions();
-  const CARD_WIDTH = (SCREEN_WIDTH - 32 - 12) / 2;
   const cardRef = useRef<ViewInstance>(null);
   const [menuAnchor, setMenuAnchor] = useState<MenuAnchor | null>(null);
   const [menuVisible, setMenuVisible] = useState(false);
@@ -90,7 +89,7 @@ export default function GameCardCompact({ game, onDelete }: Props) {
       <Pressable ref={cardRef} onPress={handlePress} onLongPress={handleContextMenu} accessibilityLabel={tr('gameCard.openA11y', {title: game.title})} style={({pressed})=>[{opacity: pressed ? 0.8 : 1}]}>
             <View style={[
               styles.card,
-              {width: CARD_WIDTH, backgroundColor: t.card, borderColor: theme === 'dark' ? '#2C2C2E' : '#E5E5EA'},
+              {width, backgroundColor: t.card, borderColor: theme === 'dark' ? '#2C2C2E' : '#E5E5EA'},
             ]}>
               <View style={styles.imageContainer}>
                 {imageUri ? (
@@ -190,7 +189,7 @@ export default function GameCardCompact({ game, onDelete }: Props) {
       />
       </>
   )
-}
+});
 
 const styles = StyleSheet.create({
   card: {

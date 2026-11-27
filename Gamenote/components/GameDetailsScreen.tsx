@@ -1,8 +1,11 @@
+import {screenContent} from "@/constants/layout";
+import {ScreenScrollView, ScreenViewport} from "@/components/ScreenViewport";
+import ScreenshotCarousel from "@/components/ScreenshotCarousel";
 import {useGamePresentation} from "@/context/localMode";
 import {useLocalSearchParams, Stack, Link, useRouter, useSegments} from "expo-router";
 import {useState} from "react";
 import {Image} from "expo-image";
-import {ScrollView, StyleSheet, Text, View, Pressable, useWindowDimensions, Share} from "react-native";
+import {StyleSheet, Text, View, Pressable, Share} from "react-native";
 import ImageGallery from "@/components/ImageGallery";
 import {Game} from "@/common/Game";
 import {SeriesGame} from "@/common/GameSeries";
@@ -56,8 +59,8 @@ export default function GameDetailsScreen() {
     const {t: tr} = useTranslation();
     const {theme} = useTheme();
     const t = colors[theme];
-    const {width: SCREEN_WIDTH} = useWindowDimensions();
-    const isLargeScreen = SCREEN_WIDTH >= 400;
+    const [contentWidth, setContentWidth] = useState(0);
+    const isLargeScreen = contentWidth >= 400;
     const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
     const [showDetails, setShowDetails] = useState<boolean>(false);
     const {game: gameParam} = useLocalSearchParams<{ game: string }>()
@@ -77,7 +80,11 @@ export default function GameDetailsScreen() {
     })();
     const game = isLocal ? userGames.find(entry => entry.db_id === parsed?.db_id) : parsed;
     if (!game) {
-        return <Text style={{color: t.text, padding: 16}}>{tr('gameDetails.notFound')}</Text>
+        return (
+            <ScreenViewport backgroundColor={t.background}>
+                <Text style={{color: t.text, padding: 16}}>{tr('gameDetails.notFound')}</Text>
+            </ScreenViewport>
+        )
     }
 
     const navigateToReferencedGame = (seriesItem: SeriesGame) => {
@@ -167,44 +174,21 @@ export default function GameDetailsScreen() {
                     ),
                 }}
             />
-            <ScrollView contentContainerStyle={{gap: 10, padding: 8}}
-                        style={{backgroundColor: t.background}}
-                        contentInsetAdjustmentBehavior="automatic"
+            <ScreenScrollView contentContainerStyle={[screenContent.detail, {gap: 10, padding: 8}]}
+                        backgroundColor={t.background}
                         automaticallyAdjustContentInsets={true}>
-                <View style={[styles.card,
+                <View onLayout={event => setContentWidth(event.nativeEvent.layout.width)} style={[styles.card,
                     {
                         backgroundColor: t.card,
                         borderColor: theme === 'dark' ? '#2C2C2E' : '#E5E5EA',
                     },
                 ]}>
 
-                    {galleryImages.length > 0 && (
-                        <ScrollView
-                            horizontal
-                            decelerationRate="fast"
-                            snapToInterval={(SCREEN_WIDTH - 32) + 8}
-                            showsHorizontalScrollIndicator={false}
-                            contentContainerStyle={{
-                                gap: 8,
-                                paddingHorizontal: 8,
-                                paddingTop: 8,
-                                paddingBottom: 8
-                            }}>
-                            {galleryImages.map((uri, index) => (
-                                <Pressable key={`${uri}-${index}`} accessibilityRole="button" accessibilityLabel={tr("gallery.open", {index: index + 1})} onPress={() => setSelectedIndex(index)}>
-                                    <Image
-                                        source={{uri}}
-                                        style={[styles.coverImage, {width: SCREEN_WIDTH - 32}]}
-                                        contentFit="cover"
-                                        cachePolicy={isLocal ? "memory" : "memory-disk"}
-                                        transition={{duration: 200, effect: "cross-dissolve"}}/>
-                                </Pressable>
-                            ))}
-                        </ScrollView>
-                    )}
+                    <ScreenshotCarousel images={galleryImages} isLocal={isLocal} onOpen={setSelectedIndex}/>
                     <View style={{
                         padding: 8,
                         flexDirection: 'row',
+                        flexWrap: 'wrap',
                         alignItems: 'center',
                         justifyContent: 'center',
                         gap: 8,
@@ -548,7 +532,7 @@ export default function GameDetailsScreen() {
                     )}
                 </View>
 
-            </ScrollView>
+            </ScreenScrollView>
             {selectedIndex !== null && (
                 <ImageGallery
                     images={galleryImages}
@@ -563,16 +547,11 @@ export default function GameDetailsScreen() {
 
 
 const styles = StyleSheet.create({
-    coverImage: {
-        width: '100%',
-        aspectRatio: 16 / 9,
-        borderRadius: 12,
-    },
     title: {
         fontSize: 24, fontWeight: '800', marginBottom: 8
     },
     badge: {
-        alignSelf: 'flex-start', paddingHorizontal: 10, paddingVertical: 4, borderRadius: 20, marginBottom: 8
+        alignSelf: 'flex-start', maxWidth: "100%", paddingHorizontal: 10, paddingVertical: 4, borderRadius: 20, marginBottom: 8
     },
     meta: {
         fontSize: 13, marginTop: 4

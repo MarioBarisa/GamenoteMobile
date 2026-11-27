@@ -1,9 +1,12 @@
+import {screenContent} from "@/constants/layout";
+import {ScreenScrollView, ScreenViewport} from "@/components/ScreenViewport";
+import ScreenshotCarousel from "@/components/ScreenshotCarousel";
 import {useGamePresentation} from "@/context/localMode";
 import {getIgdbGame, getIgdbSeries} from "@/services/igdbApi";
 import {useEffect, useState} from "react";
 import {useLocalSearchParams, Stack, useRouter, useSegments} from "expo-router";
 import {Image} from "expo-image";
-import {ActivityIndicator, ScrollView, StyleSheet, Text, View, Pressable, useWindowDimensions} from "react-native";
+import {ActivityIndicator, StyleSheet, Text, View, Pressable} from "react-native";
 import ImageGallery from "@/components/ImageGallery";
 import {useTheme} from "@/context/theme";
 import {SymbolView} from "expo-symbols";
@@ -63,7 +66,6 @@ function getPrequelAndSequel(series: SeriesGame[], currentReleaseDate: string): 
 export default function RAWGDetailsScreen() {
   const {t: tr} = useTranslation();
   const {theme, themeColors: t} = useTheme();
-  const {width: SCREEN_WIDTH} = useWindowDimensions();
   const {game: rawgParam} = useLocalSearchParams<{ game: string }>();
   const router = useRouter();
   const {games: userGames} = useUserGames();
@@ -149,7 +151,11 @@ export default function RAWGDetailsScreen() {
   }, [id, isLocal]);
 
   if (!rawgData) {
-    return <Text style={{color: t.text, padding: 16}}>{tr('gameDetails.notFound')}</Text>;
+    return (
+        <ScreenViewport backgroundColor={t.background}>
+            <Text style={{color: t.text, padding: 16}}>{tr('gameDetails.notFound')}</Text>
+        </ScreenViewport>
+    );
   }
 
   const data = (isLocal ? detailResult?.game : enrichedData) ?? rawgData;
@@ -233,9 +239,8 @@ export default function RAWGDetailsScreen() {
           headerBackTitle: tr("common.back"),
         }}
       />
-      <ScrollView contentContainerStyle={{gap: 10, padding: 8}}
-                  style={{backgroundColor: t.background}}
-                  contentInsetAdjustmentBehavior="automatic"
+      <ScreenScrollView contentContainerStyle={[screenContent.detail, {gap: 10, padding: 8}]}
+                  backgroundColor={t.background}
                   automaticallyAdjustContentInsets={true}>
         <View style={[styles.card, {
           backgroundColor: t.card,
@@ -247,30 +252,7 @@ export default function RAWGDetailsScreen() {
             </View>
           ) : (
             <>
-              {galleryImages.length > 0 && (
-                <ScrollView
-                  horizontal
-                  decelerationRate="fast"
-                  snapToInterval={(SCREEN_WIDTH - 32) + 8}
-                  showsHorizontalScrollIndicator={false}
-                  contentContainerStyle={{
-                    gap: 8,
-                    paddingHorizontal: 8,
-                    paddingTop: 8,
-                    paddingBottom: 8,
-                  }}>
-                  {galleryImages.map((uri, index) => (
-                    <Pressable key={uri} accessibilityRole="button" accessibilityLabel={tr("gallery.open", {index: index + 1})} onPress={() => setSelectedIndex(index)}>
-                      <Image
-                        source={{uri}}
-                        style={[styles.coverImage, {width: SCREEN_WIDTH - 32}]}
-                        contentFit="cover"
-                        cachePolicy={isLocal ? "memory" : "memory-disk"}
-                        transition={{duration: 200, effect: "cross-dissolve"}}/>
-                    </Pressable>
-                  ))}
-                </ScrollView>
-              )}
+              <ScreenshotCarousel images={galleryImages} isLocal={isLocal} onOpen={setSelectedIndex}/>
 
               {ownedGame ? (
                 <Pressable
@@ -478,7 +460,7 @@ export default function RAWGDetailsScreen() {
             </>
           )}
         </View>
-      </ScrollView>
+      </ScreenScrollView>
 
       {selectedIndex !== null && (
           <ImageGallery
@@ -492,11 +474,6 @@ export default function RAWGDetailsScreen() {
 }
 
 const styles = StyleSheet.create({
-  coverImage: {
-    width: '100%',
-    aspectRatio: 16 / 9,
-    borderRadius: 12,
-  },
   card: {
     borderRadius: 12,
     overflow: 'hidden',

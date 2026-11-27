@@ -1,5 +1,7 @@
 import {useState, type ReactNode} from "react";
-import {ActivityIndicator, Alert, Pressable, ScrollView, StyleSheet, Switch, Text, View} from "react-native";
+import {screenContent} from "@/constants/layout";
+import {ScreenScrollView, ScreenViewport} from "@/components/ScreenViewport";
+import {ActivityIndicator, Alert, Pressable, StyleSheet, Switch, Text, View} from "react-native";
 import {Image} from "expo-image";
 import {SymbolView} from "expo-symbols";
 import {useTranslation} from "react-i18next";
@@ -119,17 +121,16 @@ export default function LocalModeSettings() {
     const deleteButton = <ModalButton label={t("screens.localMode.deleteProfile")} secondary destructive
                                       busy={deleting} disabled={mirrorBusy} onPress={confirmDelete}/>;
 
-    if (!document) return <View style={[styles.center, {backgroundColor: c.background}]}>
+    if (!document) return <ScreenViewport style={styles.center} backgroundColor={c.background}>
         {storageError ? <>
             <ModalText error>{t("screens.localMode.storageError")}</ModalText>
             <ModalButton label={t("screens.localMode.retry")} onPress={() => { loadLocalData().catch(() => {}); }}/>
             {deleteButton}
         </> : <ActivityIndicator color={c.accent}/>}
-    </View>;
+    </ScreenViewport>;
 
     const size = new Intl.NumberFormat(i18n.language, {maximumFractionDigits: 1}).format(storageSize / 1024);
-    return <ScrollView style={{backgroundColor: c.background}} contentContainerStyle={styles.container}
-                       contentInsetAdjustmentBehavior="automatic" automaticallyAdjustKeyboardInsets keyboardShouldPersistTaps="handled">
+    return <ScreenScrollView backgroundColor={c.background} contentContainerStyle={[screenContent.form, styles.container]} automaticallyAdjustKeyboardInsets keyboardShouldPersistTaps="handled">
         <Section title={t("screens.localMode.profile")}>
             <ProfileFields key={JSON.stringify([resetRevision, document.profile])} profile={document.profile}/>
         </Section>
@@ -189,7 +190,7 @@ export default function LocalModeSettings() {
             )}/>
             {deleteButton}
         </Section>
-    </ScrollView>;
+    </ScreenScrollView>;
 }
 
 const styles = StyleSheet.create({

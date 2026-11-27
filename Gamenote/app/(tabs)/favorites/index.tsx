@@ -1,12 +1,11 @@
 import {useCallback, useMemo, useState} from "react";
-import {RefreshControl, ScrollView, View, Text, TouchableOpacity, Pressable} from "react-native";
+import {RefreshControl, View, Text, TouchableOpacity, Pressable} from "react-native";
 import {Stack} from "expo-router";
 import {useTheme} from "@/context/theme";
 import {useSettings} from "@/context/settings";
 import {useUserGames} from "@/hooks/useUserGames";
 import {STATUS_PLATFORM} from "@/common/StatusCommons";
-import GameCard from "@/components/GameCard";
-import GameCardCompact from "@/components/GameCardCompact";
+import GameLibraryList from "@/components/GameLibraryList";
 import {SymbolView} from "expo-symbols";
 import * as Haptics from 'expo-haptics';
 import {useTranslation} from "react-i18next";
@@ -72,6 +71,8 @@ export default function FavoritesScreen() {
         return results;
     }, [games, sortBy, platformFilter, statusFilter]);
 
+    const onDelete = useCallback((id: string) => deleteGame(id), [deleteGame]);
+
     function toggleSort() {
         Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light); // nije potrbeno jace, samo light tap da korisnik dobije feedback
         setSortBy(prev => prev === 'rating' ? 'playtime' : 'rating');
@@ -116,53 +117,43 @@ export default function FavoritesScreen() {
                     )
                 }}
             />
-            <ScrollView
-                style={{flex: 1, backgroundColor: t.background}}
-                contentContainerStyle={{flexGrow: 1, padding: 16, gap: 0}}
-                contentInsetAdjustmentBehavior="automatic"
+            <GameLibraryList
+                compact={compactCards}
+                games={filteredGames}
+                onDelete={onDelete}
                 refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} tintColor={t.accent} />}
-            >
-                <View style={{
-                    flexDirection: "row", justifyContent: "space-evenly", alignItems: "center",
-                    backgroundColor: t.card, borderRadius: 12, marginBottom: 10, paddingVertical: 10,
-                    overflow: 'hidden'
-                }}>
-                    {FILTER_ITEMS.map(item => {
-                        const active = statusFilter === item.key;
-                        return (
-                            <Pressable
-                                key={item.key}
-                                onPress={() => {
-                                    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Soft);
-                                    setStatusFilter(prev => prev === item.key ? null : item.key);
-                                }}
-                                style={{
-                                    alignItems: 'center', padding: 4, borderRadius: 10,
-                                    backgroundColor: active ? `${item.color}30` : 'transparent',
-                                    opacity: statusFilter && !active ? 0.35 : 1
-                                }}
-                            >
-                                <SymbolView name={item.icon as any} style={{width: 28, height: 28}}
-                                            tintColor={item.color} />
-                                <Text style={{fontSize: 10, color: t.secondaryText, marginTop: 4, fontWeight: "bold"}}>
-                                    {item.label}
-                                </Text>
-                            </Pressable>
-                        );
-                    })}
-                </View>
-                {compactCards ? (
-                    <View style={{flexDirection: 'row', flexWrap: 'wrap', gap: 12}}>
-                        {filteredGames.map((game) => (
-                            <GameCardCompact key={game.db_id ?? game.game_id} game={game} onDelete={async (id) => { await deleteGame(id); }} />
-                        ))}
+                ListHeaderComponent={
+                    <View style={{
+                        flexDirection: "row", justifyContent: "space-evenly", alignItems: "center",
+                        backgroundColor: t.card, borderRadius: 12, marginBottom: 10, paddingVertical: 10,
+                        overflow: 'hidden'
+                    }}>
+                        {FILTER_ITEMS.map(item => {
+                            const active = statusFilter === item.key;
+                            return (
+                                <Pressable
+                                    key={item.key}
+                                    onPress={() => {
+                                        Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Soft);
+                                        setStatusFilter(prev => prev === item.key ? null : item.key);
+                                    }}
+                                    style={{
+                                        alignItems: 'center', padding: 4, borderRadius: 10,
+                                        backgroundColor: active ? `${item.color}30` : 'transparent',
+                                        opacity: statusFilter && !active ? 0.35 : 1
+                                    }}
+                                >
+                                    <SymbolView name={item.icon as any} style={{width: 28, height: 28}}
+                                                tintColor={item.color} />
+                                    <Text style={{fontSize: 10, color: t.secondaryText, marginTop: 4, fontWeight: "bold"}}>
+                                        {item.label}
+                                    </Text>
+                                </Pressable>
+                            );
+                        })}
                     </View>
-                ) : (
-                    filteredGames.map((game) => (
-                        <GameCard key={game.db_id ?? game.game_id} game={game} onDelete={async (id) => { await deleteGame(id); }} />
-                    ))
-                )}
-            </ScrollView>
+                }
+            />
         </>
     );
 }

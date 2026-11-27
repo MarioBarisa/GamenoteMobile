@@ -9,7 +9,7 @@ export default function PasswordInput({containerStyle, editable = true, style, .
 }) {
     const {t} = useTranslation();
     const {themeColors} = useTheme();
-    const [masked, setMasked] = useState(false);
+    const [masked, setMasked] = useState(true);
     const showPassword = !masked && editable;
 
     return (

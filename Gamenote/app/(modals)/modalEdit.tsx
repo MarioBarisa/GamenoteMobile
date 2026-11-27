@@ -1,4 +1,5 @@
 import {ModalInput} from "@/components/AccountModal";
+import {screenContent} from "@/constants/layout";
 import {useLocalMode} from "@/context/localMode";
 import {
     Alert, Platform,
@@ -15,7 +16,7 @@ import {Game} from "@/common/Game";
 import {useState} from "react";
 import {SymbolView} from "expo-symbols";
 import DateTimePicker from "@react-native-community/datetimepicker";
-import {useUserGames} from "@/hooks/useUserGames";
+import {GameNotFoundError, useUserGames} from "@/hooks/useUserGames";
 import {useGroups} from "@/context/GroupsContext";
 import {STATUS_CONFIG, GAME_STATUSES} from "@/common/StatusCommons";
 import * as Haptics from 'expo-haptics';
@@ -91,9 +92,18 @@ export default function ModalEdit() {
             }
             const gameId = original.db_id ?? original.game_id;
             const {title: _title, ...changes} = form;
-            await updateGame(original.game_id, changes);
-            for (const id of toRemove) await removeGameFromGroup(gameId, id);
-            for (const id of toAdd) await addGameToGroup(gameId, id);
+            try {
+                await updateGame(original.game_id, changes);
+                for (const id of toRemove) await removeGameFromGroup(gameId, id);
+                for (const id of toAdd) await addGameToGroup(gameId, id);
+            } catch (error) {
+                if (error instanceof GameNotFoundError) {
+                    Alert.alert(tr("gameDetails.notFound"), tr("editGame.gameRemoved"), [{text: "OK", onPress: () => router.back()}]);
+                } else {
+                    Alert.alert(tr("editGame.errorTitle"), tr("editGame.saveError"));
+                }
+                return;
+            }
         }
         Alert.alert(tr('editGame.savedTitle'), tr('editGame.savedMsg', {title: original.title}), [
             {text: 'OK', onPress: () => router.back()}
@@ -109,7 +119,7 @@ export default function ModalEdit() {
 
     return (
 
-        <ScrollView contentContainerStyle={{gap: 10, padding: 8}}
+        <ScrollView contentContainerStyle={[screenContent.form, {gap: 10, padding: 8}]}
                     style={{backgroundColor: t.backgroundModal}}
                     contentInsetAdjustmentBehavior="automatic"
                     automaticallyAdjustContentInsets={true}

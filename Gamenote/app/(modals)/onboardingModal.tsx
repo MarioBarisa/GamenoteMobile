@@ -1,9 +1,9 @@
 import {useTheme} from "@/context/theme";
+import {screenContent} from "@/constants/layout";
 import {router} from "expo-router";
 import {Image} from "expo-image";
 import {Pressable, ScrollView, StyleSheet, Text, View, useWindowDimensions} from "react-native";
 import {SymbolView} from "expo-symbols";
-import {useResponsive} from "@/utils/useResponsive";
 import {useTranslation} from "react-i18next";
 
 interface FeatureItem {
@@ -38,7 +38,6 @@ const FEATURES: FeatureItem[] = [
 export default function OnboardingModal() {
     const {t: tr} = useTranslation();
     const {theme, themeColors: t} = useTheme();
-    const {scale} = useResponsive();
     const {width: screenWidth} = useWindowDimensions();
     const bannerWidth = Math.min(screenWidth * 0.6, 260);
     const bannerHeight = bannerWidth / (3697 / 722);
@@ -53,7 +52,7 @@ export default function OnboardingModal() {
 
     return (
         <ScrollView
-            contentContainerStyle={styles.container}
+            contentContainerStyle={[screenContent.form, styles.container]}
             style={{backgroundColor: t.onboarding}} //#b8c1c1
             contentInsetAdjustmentBehavior="automatic"
             automaticallyAdjustContentInsets={true}
@@ -68,10 +67,10 @@ export default function OnboardingModal() {
                     cachePolicy="memory-disk"
                     transition={{duration: 200, effect: "cross-dissolve"}}
                 />
-                <Text style={[styles.title, {color: t.text, fontSize: scale(20)}]}>
+                <Text style={[styles.title, {color: t.text, fontSize: 20}]}>
                     {tr("onboarding.welcome")}
                 </Text>
-                <Text style={[styles.subtitle, {color: t.secondaryText, fontSize: scale(15)}]}>
+                <Text style={[styles.subtitle, {color: t.secondaryText, fontSize: 15}]}>
                     {tr("onboarding.subtitle")}
                 </Text>
             </View>
@@ -82,15 +81,15 @@ export default function OnboardingModal() {
                         <View style={[styles.iconContainer, {backgroundColor: theme === 'dark' ? '#2C2C2E' : '#E5E5EA'}]}>
                             <SymbolView
                                 name={item.icon as any}
-                                style={{width: scale(24), height: scale(24)}}
+                                style={{width: 24, height: 24}}
                                 tintColor={t.accent}
                             />
                         </View>
                         <View style={styles.featureTextContainer}>
-                            <Text style={[styles.featureTitle, {color: t.text, fontSize: scale(16)}]}>
+                            <Text style={[styles.featureTitle, {color: t.text, fontSize: 16}]}>
                                 {tr(item.titleKey)}
                             </Text>
-                            <Text style={[styles.featureDescription, {color: t.secondaryText, fontSize: scale(14)}]}>
+                            <Text style={[styles.featureDescription, {color: t.secondaryText, fontSize: 14}]}>
                                 {tr(item.descKey)}
                             </Text>
                         </View>
@@ -106,13 +105,13 @@ export default function OnboardingModal() {
                     }]}
                     onPress={handleContinue}
                 >
-                    <Text style={[styles.continueText, {fontSize: scale(17)}]}>
+                    <Text style={[styles.continueText, {fontSize: 17}]}>
                         {tr("common.continue")}
                     </Text>
                 </Pressable>
 
 
-                <Text style={[styles.footer, {color: t.secondaryText, fontSize: scale(12)}]}>
+                <Text style={[styles.footer, {color: t.secondaryText, fontSize: 12}]}>
                     {`Gamenote Mobile v1.0 - gamenote.eu\n©Mario Bariša 2026 - barisa.me`}
                 </Text>
             </View>

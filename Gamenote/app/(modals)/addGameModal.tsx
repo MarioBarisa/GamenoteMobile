@@ -1,5 +1,8 @@
+import LocalImageLinkInput from "@/components/LocalImageLinkInput";
 import {ModalInput} from "@/components/AccountModal";
+import {screenContent} from "@/constants/layout";
 import {useLocalMode} from "@/context/localMode";
+import {localImageUrl} from "@/services/localData";
 import {
     Alert, Platform,
     Pressable,
@@ -13,7 +16,8 @@ import {
 import {useLocalSearchParams, useRouter} from "expo-router";
 import {useTheme} from "@/context/theme";
 import {Game} from "@/common/Game";
-import {useState} from "react";
+import {useRef, useState} from "react";
+import {ClipboardPasteButton, isPasteButtonAvailable} from "expo-clipboard";
 import {SymbolView} from "expo-symbols";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import {useUserGames} from "@/hooks/useUserGames";
@@ -56,6 +60,9 @@ export default function AddGameModal() {
         platform: undefined,
         progress_mode: undefined,
     });
+    const [posterLink, setPosterLink] = useState("");
+    const [screenshotLinks, setScreenshotLinks] = useState<{id: number; value: string; autoFocus?: boolean}[]>([{id: 0, value: ""}]);
+    const nextScreenshotId = useRef(1);
     const [includeDescription, setIncludeDescription] = useState(false);
     const [selectedGroupIds, setSelectedGroupIds] = useState<string[]>([]);
 
@@ -67,6 +74,19 @@ export default function AddGameModal() {
     ] as const;
 
     const patch = (key: keyof Game, value: any) => setForm(prev => ({...prev, [key]: value}));
+
+    function addScreenshot() {
+        const id = nextScreenshotId.current++;
+        setScreenshotLinks(links => [...links, {id, value: "", autoFocus: true}]);
+    }
+
+    function pasteScreenshots(text: string) {
+        const pasted = text.split(/\r?\n/).map(link => link.trim()).filter(Boolean);
+        if (!pasted.length) return;
+
+        const entries = pasted.map(value => ({id: nextScreenshotId.current++, value}));
+        setScreenshotLinks(links => [...links.filter(link => link.value.trim()), ...entries]);
+    }
 
     const validate = (): boolean => {
         const missing: string[] = [];
@@ -87,18 +107,32 @@ export default function AddGameModal() {
     const handleAdd = async () => {
         if (saving || !validate()) return;
 
+        const poster = manual ? localImageUrl(posterLink.trim()) : undefined;
+        const screenshots: string[] = [];
+        if (manual) {
+            const links = screenshotLinks.map(link => link.value.trim()).filter(Boolean);
+            for (const link of links) {
+                const url = localImageUrl(link);
+                if (url) screenshots.push(url);
+            }
+            if ((posterLink.trim() && !poster) || screenshots.length !== links.length) {
+                Alert.alert(tr("editGame.errorTitle"), tr("screens.localMode.invalidGameImageUrl"));
+                return;
+            }
+        }
+
         const completeGame: Game = {
             title: manual ? form.title?.trim() ?? '' : ravgGame.title ?? '',
             game_id: ravgGame.game_id ?? '',
-            image_url: ravgGame.image_url,
+            image_url: manual ? poster : ravgGame.image_url,
             background_image: ravgGame.background_image,
-            screenshot_urls: ravgGame.screenshot_urls,
+            screenshot_urls: manual ? [...new Set(screenshots)] : ravgGame.screenshot_urls,
             genre: ravgGame.genre,
             publisher: ravgGame.publisher,
             releaseDate: ravgGame.releaseDate ?? '',
             metacriticScore: ravgGame.metacriticScore ?? 0,
             esrbRating: ravgGame.esrbRating,
-            about: includeDescription ? (ravgGame.about ?? '') : '',
+            about: !manual && includeDescription ? (ravgGame.about ?? '') : '',
             webPage: ravgGame.webPage ?? '',
             series: ravgGame.series,
             platform: form.platform,
@@ -134,7 +168,7 @@ export default function AddGameModal() {
 
 
     return (
-        <ScrollView contentContainerStyle={{gap: 10, padding: 8}}
+        <ScrollView contentContainerStyle={[screenContent.form, {gap: 10, padding: 8}]}
                     style={{backgroundColor: t.backgroundModal}}
                     contentInsetAdjustmentBehavior="automatic"
                     automaticallyAdjustContentInsets={true}
@@ -274,14 +308,48 @@ export default function AddGameModal() {
                     />
                 </View>
 
-                <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between'}}>
-                    <Text style={[styles.label, {color: t.text}]}>{tr('addGame.includeDescription')}</Text>
-                    <Switch
-                        value={includeDescription}
-                        onValueChange={setIncludeDescription}
-                        trackColor={{false: t.secondaryText, true: t.accent}}
-                    />
-                </View>
+                {manual && (
+                    <View style={styles.imageFields}>
+                        <LocalImageLinkInput label={tr("screens.localMode.posterUrl")}
+                                             value={posterLink} onChangeText={setPosterLink} poster/>
+                        <View style={styles.screenshotFields}>
+                            <Text style={[styles.label, {color: t.text}]}>{tr("screens.localMode.screenshotUrls")}</Text>
+                            {screenshotLinks.map(({id, value, autoFocus}, index) => (
+                                <LocalImageLinkInput key={id} label={tr("screens.localMode.screenshotUrl", {number: index + 1})}
+                                                     value={value} autoFocus={autoFocus}
+                                                     onChangeText={url => setScreenshotLinks(links =>
+                                                         links.map(link => link.id === id ? {...link, value: url} : link))}
+                                                     onRemove={() => setScreenshotLinks(links => links.filter(link => link.id !== id))}
+                                                     removeLabel={tr("screens.localMode.removeScreenshot", {number: index + 1})}/>
+                            ))}
+                            <View style={styles.screenshotActions}>
+                                <Pressable accessibilityRole="button" accessibilityLabel={tr("screens.localMode.addScreenshot")}
+                                           onPress={addScreenshot} style={styles.addScreenshot}>
+                                    <SymbolView name="plus.circle" size={20} tintColor={t.accent}/>
+                                    <Text style={{color: t.accent, fontWeight: "600"}}>{tr("screens.localMode.addScreenshot")}</Text>
+                                </Pressable>
+                                {isPasteButtonAvailable && (
+                                    <ClipboardPasteButton accessibilityLabel={tr("screens.localMode.pasteScreenshots")}
+                                                          acceptedContentTypes={["plain-text", "url"]} displayMode="labelOnly"
+                                                          style={styles.pasteScreenshots} onPress={data => {
+                                                              if (data.type === "text") pasteScreenshots(data.text);
+                                                          }}/>
+                                )}
+                            </View>
+                        </View>
+                    </View>
+                )}
+
+                {!manual && (
+                    <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between'}}>
+                        <Text style={[styles.label, {color: t.text}]}>{tr('addGame.includeDescription')}</Text>
+                        <Switch
+                            value={includeDescription}
+                            onValueChange={setIncludeDescription}
+                            trackColor={{false: t.secondaryText, true: t.accent}}
+                        />
+                    </View>
+                )}
 
                 <View style={{flexDirection: 'column', gap: 6, paddingVertical: 8}}>
                     <Text style={[styles.label, {color: t.text}]}>{tr('addGame.groupsSection')}</Text>
@@ -386,6 +454,11 @@ const styles = StyleSheet.create({
         maxWidth: 80,
         textAlign: 'center',
     },
+    imageFields: {gap: 16, marginVertical: 8},
+    screenshotFields: {gap: 10},
+    screenshotActions: {flexDirection: "row", flexWrap: "wrap", alignItems: "center", gap: 12},
+    pasteScreenshots: {width: 96, height: 44},
+    addScreenshot: {flexDirection: "row", alignItems: "center", alignSelf: "flex-start", gap: 8, minHeight: 44},
     notesInput: {
         borderRadius: 10,
         padding: 12,

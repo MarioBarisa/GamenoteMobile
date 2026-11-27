@@ -9,10 +9,15 @@
     "userInterfaceStyle": "automatic",
     "ios": {
       "icon": "./assets/gamenote/icons/GamenoteIcon.icon",
-      "supportsTablet": false,
+      "supportsTablet": true,
       "bundleIdentifier": "eu.gamenote.ios",
       "associatedDomains": ["webcredentials:gamenote.eu"],
       "infoPlist": {
+        "UISupportedInterfaceOrientations": [
+          "UIInterfaceOrientationPortrait",
+          "UIInterfaceOrientationLandscapeLeft",
+          "UIInterfaceOrientationLandscapeRight"
+        ],
         "NSPrivacyAccessedAPITypes": [
           {
             "NSPrivacyAccessedAPICategoryDiskSpace": "Used to display available storage info"
@@ -80,7 +85,7 @@
       [
         "expo-sensors",
         {
-          "motionPermission": "Allow Gamenote to use your phone's tilt to move holographic card reflections. Gamenote does not collect any data. "
+          "motionPermission": false
         }
       ]
     ],

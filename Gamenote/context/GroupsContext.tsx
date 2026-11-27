@@ -26,9 +26,11 @@ type GroupsContextType = {
 
 const GroupsContext = createContext<GroupsContextType | null>(null);
 
-function initialGroupState(owner: string | null) {
+function initialGroupState(owner: string | null, isCloud: boolean, revision = 0) {
     return {
         owner,
+        isCloud,
+        revision,
         groups: owner ? [] as Group[] : MOCK_GROUPS,
         gameGroups: owner ? [] as GameGroup[] : MOCK_GAME_GROUPS,
         isLoading: false,
@@ -38,16 +40,17 @@ function initialGroupState(owner: string | null) {
 
 export function GroupsProvider({children}: { children: ReactNode }) {
     const {activeSource} = useLocalMode();
-    return activeSource === "local" ? <LocalGroupsProvider>{children}</LocalGroupsProvider> :
-        <CloudGroupsProvider>{children}</CloudGroupsProvider>;
+    const local = useLocalGroups();
+    const cloud = useCloudGroups(activeSource === "cloud");
+    return <GroupsContext.Provider value={activeSource === "local" ? local : cloud}>{children}</GroupsContext.Provider>;
 }
 
-function LocalGroupsProvider({children}: {children: ReactNode}) {
+function useLocalGroups(): GroupsContextType {
     const {document, storageError} = useLocalMode();
     const groups = document?.groups.map(group => ({...group, user_id: LOCAL_USER_ID})) ?? [];
     const gameGroups = document?.game_groups.map(link => ({...link, user_id: LOCAL_USER_ID})) ?? [];
     const refreshGroups = useCallback(async () => { await loadLocalData().catch(() => {}); }, []);
-    const value: GroupsContextType = {
+    return {
         groups, gameGroups, isLoading: !document && !storageError,
         error: storageError ? "screens.localMode.storageError" : null,
         addGroup: async (group, gameIds) => ({...await createLocalGroup({name: group.name, type: group.type, rating: group.rating}, gameIds), user_id: LOCAL_USER_ID}),
@@ -59,27 +62,27 @@ function LocalGroupsProvider({children}: {children: ReactNode}) {
         getGamesInGroup: groupId => gameGroups.filter(link => link.group_id === groupId).map(link => link.game_id),
         refreshGroups,
     };
-    return <GroupsContext.Provider value={value}>{children}</GroupsContext.Provider>;
 }
 
-function CloudGroupsProvider({children}: {children: ReactNode}) {
+function useCloudGroups(isCloud: boolean): GroupsContextType {
     const {loggedIn, session} = useAuth();
     const {requestMirrorRefresh} = useLocalMode();
-    const owner = session?.user.id ?? null;
-    const [state, setState] = useState(() => initialGroupState(owner));
-    const current = state.owner === owner ? state : initialGroupState(owner);
+    const owner = isCloud ? session?.user.id ?? null : null;
+    const [state, setState] = useState(() => initialGroupState(owner, isCloud));
+    const current = state.owner === owner && state.isCloud === isCloud
+        ? state : initialGroupState(owner, isCloud, state.revision + 1);
     if (current !== state) setState(current);
-    const {groups, gameGroups, isLoading, error} = current;
+    const {groups, gameGroups, isLoading, error, revision} = current;
 
-    const setGroupState = useCallback(<Key extends keyof Omit<typeof state, "owner">>(
+    const setGroupState = useCallback(<Key extends keyof Omit<typeof state, "owner" | "isCloud" | "revision">>(
         key: Key, action: SetStateAction<(typeof state)[Key]>,
     ) => {
         setState(previous => {
-            if (previous.owner !== owner) return previous;
+            if (previous.revision !== revision) return previous;
             const value = typeof action === "function" ? action(previous[key]) : action;
             return {...previous, [key]: value};
         });
-    }, [owner]);
+    }, [revision]);
     const setGroups = useCallback((action: SetStateAction<Group[]>) => setGroupState("groups", action), [setGroupState]);
     const setGameGroups = useCallback((action: SetStateAction<GameGroup[]>) => setGroupState("gameGroups", action), [setGroupState]);
     const setIsLoading = useCallback((value: boolean) => setGroupState("isLoading", value), [setGroupState]);
@@ -133,18 +136,22 @@ function CloudGroupsProvider({children}: {children: ReactNode}) {
     }, [loggedIn, session?.user.id, loadGameGroups, requestMirrorRefresh, setGroups, setGameGroups, setIsLoading, setError]);
 
     useEffect(() => {
+        if (!isCloud) return;
         if (!loggedIn || !session?.user.id) {
             setGroups(MOCK_GROUPS);
             setGameGroups(MOCK_GAME_GROUPS);
             return;
         }
 
+        let active = true;
         groupsApi.listGroups(session.user.id).then(async (data) => {
+            if (!active) return;
             setGroups(data.length > 0 ? data : []);
             const gg = await loadGameGroups();
-            if (gg) setGameGroups(gg);
-        }).catch(console.error);
-    }, [loggedIn, session?.user.id, loadGameGroups, setGroups, setGameGroups]);
+            if (active && gg) setGameGroups(gg);
+        }).catch(error => { if (active) console.error(error); });
+        return () => { active = false; };
+    }, [isCloud, loggedIn, session?.user.id, loadGameGroups, setGroups, setGameGroups]);
 
     const addGroup = async (data: Omit<Group, "id" | "created_at"> & Partial<Pick<Group, "id" | "created_at">>) => {
         if (!loggedIn || !session?.user.id) {
@@ -291,14 +298,12 @@ function CloudGroupsProvider({children}: {children: ReactNode}) {
         gameGroups.filter((g) => g.group_id === groupId).map((g) => g.game_id);
 
 
-    const value = {
-            groups, gameGroups, isLoading, error,
-            addGroup, updateGroup, removeGroup,
-            addGameToGroup, removeGameFromGroup,
-            getGroupsForGame, getGamesInGroup, refreshGroups,
-        };
-
-    return <GroupsContext.Provider value={value}>{children}</GroupsContext.Provider>
+    return {
+        groups, gameGroups, isLoading, error,
+        addGroup, updateGroup, removeGroup,
+        addGameToGroup, removeGameFromGroup,
+        getGroupsForGame, getGamesInGroup, refreshGroups,
+    };
 }
 
 //GRUPE MOPGU IMATI TYPE KOJI JE SAMO collection, trilogy ili frnachise!!!

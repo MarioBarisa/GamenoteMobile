@@ -1,7 +1,8 @@
 import {useLocalMode} from "@/context/localMode";
+import {screenContent} from "@/constants/layout";
 import {useTheme} from "@/context/theme";
 import {useRouter} from "expo-router";
-import {Alert, Platform, Pressable, ScrollView, StyleSheet, Text, TextInput, View} from "react-native";
+import {Alert, Platform, Pressable, FlatList, StyleSheet, Text, TextInput, View} from "react-native";
 import {Group} from "@/common/groups";
 import {SymbolView} from "expo-symbols";
 import * as Haptics from "expo-haptics";
@@ -83,121 +84,128 @@ export default function AddGroupModal() {
     };
 
     return (
-        <ScrollView
-            contentContainerStyle={{gap: 10, padding: 8}}
+        <FlatList
+            contentContainerStyle={[screenContent.form, {padding: 8}]}
             style={{backgroundColor: t.backgroundModal}}
             contentInsetAdjustmentBehavior="automatic"
             automaticallyAdjustContentInsets={true}
             keyboardShouldPersistTaps="handled"
             automaticallyAdjustKeyboardInsets={true}
-        >
-            <View style={styles.section}>
-                <View style={{flexDirection: 'column', gap: 8, paddingVertical: 8}}>
-                    <View style={{flexDirection: 'row', gap: 8, paddingVertical: 8}}>
-                        <Text style={[styles.label, {color: t.text, paddingTop: 8}]}>{tr('addGroup.nameLabel')}</Text>
-                        <TextInput
-                            style={[styles.titleInput, {
-                                flex: 1,
-                                color: t.text,
-                                backgroundColor: theme === 'dark' ? '#2C2C2E' : '#E5E5EA'
-                            }]}
-                            value={form.name ?? ''}
-                            onChangeText={v => patch('name', v)}
-                            placeholder={tr('addGroup.namePlaceholder')}
-                            placeholderTextColor={t.secondaryText}
-                            textAlignVertical="top"
-                        />
-                    </View>
-                    <View style={{flexDirection: 'row', gap: 8, paddingVertical: 8}}>
-                        <Text style={[styles.label, {color: t.text}]}>{tr('addGroup.typeLabel')}</Text>
-                        <SelectMenu
-                            label={form.type}
-                            options={typeGroups.map(type => ({label: type, value: type}))}
-                            selected={form.type}
-                            onSelect={value => patch('type', value)}
-                        />
-                    </View>
-                    <View style={{flexDirection: 'row', gap: 8, paddingVertical: 8}}>
-                        <Text style={[styles.label, {color: t.text, paddingTop: 6}]}>{tr('addGroup.ratingLabel')}</Text>
-                        {[1, 2, 3, 4, 5].map(star => (
-                            <Pressable
-                                key={star}
-                                onPress={() => patch('rating', star === form.rating ? undefined : star)}
-                                hitSlop={8}
-                            >
-                                <SymbolView
-                                    name={star <= (form.rating ?? 0) ? 'star.fill' : 'star'}
-                                    style={{width: 32, height: 32}}
-                                    tintColor={star <= (form.rating ?? 0) ? '#FF9F0A' : t.secondaryText}
-                                />
-                            </Pressable>
-                        ))}
-                    </View>
-                </View>
-
-                <View style={{flexDirection: 'column', gap: 8, paddingVertical: 8}}>
-                    <Text style={[styles.label, {color: t.text}]}>{tr('addGroup.addGamesLabel')}</Text>
-                    {visibleGames.map((game) => {
-                        const isSelected = isGameSelected(game.db_id ?? game.game_id);
-
-                        return (
-                            <Pressable
-                                key={game.db_id ?? game.game_id}
-                                onPress={() => {
-                                    toggleGame(game.db_id ?? game.game_id);
-                                    if (Platform.OS === 'ios') {
-                                        Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
-                                    }
-                                }}
-                                style={{
-                                    flexDirection: 'row',
-                                    alignItems: 'center',
-                                    justifyContent: 'space-between',
-                                    paddingVertical: 10,
-                                    paddingHorizontal: 12,
-                                    borderRadius: 10,
-                                    backgroundColor: isSelected
-                                        ? (theme === 'dark' ? '#1C3A2F' : '#D1FAE5')
-                                        : (theme === 'dark' ? '#2C2C2E' : '#E5E5EA'),
-                                    marginBottom: 4,
-                                }}
-                            >
-                                <Text style={{fontSize: 14, fontWeight: '700', color: t.text}}>{game.title} </Text>
-                                {isSelected && (
+            data={visibleGames}
+            keyExtractor={game => game.db_id ?? game.game_id}
+            ListHeaderComponent={
+                <View style={styles.section}>
+                    <View style={{flexDirection: 'column', gap: 8, paddingVertical: 8}}>
+                        <View style={{flexDirection: 'row', gap: 8, paddingVertical: 8}}>
+                            <Text style={[styles.label, {color: t.text, paddingTop: 8}]}>{tr('addGroup.nameLabel')}</Text>
+                            <TextInput
+                                style={[styles.titleInput, {
+                                    flex: 1,
+                                    color: t.text,
+                                    backgroundColor: theme === 'dark' ? '#2C2C2E' : '#E5E5EA'
+                                }]}
+                                value={form.name ?? ''}
+                                onChangeText={v => patch('name', v)}
+                                placeholder={tr('addGroup.namePlaceholder')}
+                                placeholderTextColor={t.secondaryText}
+                                textAlignVertical="top"
+                            />
+                        </View>
+                        <View style={{flexDirection: 'row', gap: 8, paddingVertical: 8}}>
+                            <Text style={[styles.label, {color: t.text}]}>{tr('addGroup.typeLabel')}</Text>
+                            <SelectMenu
+                                label={form.type}
+                                options={typeGroups.map(type => ({label: type, value: type}))}
+                                selected={form.type}
+                                onSelect={value => patch('type', value)}
+                            />
+                        </View>
+                        <View style={{flexDirection: 'row', gap: 8, paddingVertical: 8}}>
+                            <Text style={[styles.label, {color: t.text, paddingTop: 6}]}>{tr('addGroup.ratingLabel')}</Text>
+                            {[1, 2, 3, 4, 5].map(star => (
+                                <Pressable
+                                    key={star}
+                                    onPress={() => patch('rating', star === form.rating ? undefined : star)}
+                                    hitSlop={8}
+                                >
                                     <SymbolView
-                                        name="checkmark"
-                                        style={{width: 20, height: 20}}
-                                        tintColor={t.accent}
+                                        name={star <= (form.rating ?? 0) ? 'star.fill' : 'star'}
+                                        style={{width: 32, height: 32}}
+                                        tintColor={star <= (form.rating ?? 0) ? '#FF9F0A' : t.secondaryText}
                                     />
-                                )}
-                            </Pressable>
-                        );
-                    })}
-                    {games.length > 5 && (
-                            <Pressable
-                                onPress={() => setShowAll(prev => !prev)}
-                                style={{paddingVertical: 10, alignItems: 'center'}}
-                            >
-                                <Text style={{color: t.accent, fontSize: 14, fontWeight: '600'}}>
-                                    {showAll ? tr('addGroup.showLess') : tr('addGroup.showMore', {count: games.length - 5})}
-                                </Text>
-                            </Pressable>
-                        )}
-                </View>
+                                </Pressable>
+                            ))}
+                        </View>
+                    </View>
 
-                <Pressable
-                    onPress={handleSave}
-                    accessibilityLabel={tr('addGroup.saveA11y')}
-                    style={[styles.saveButton, {backgroundColor: t.accent}]}
-                >
-                    <Text style={{color: '#fff', fontWeight: '700', fontSize: 16}}>{tr('addGroup.saveLabel')}</Text>
-                </Pressable>
-            </View>
-        </ScrollView>
+                    <View style={styles.gamesHeader}>
+                        <Text style={[styles.label, {color: t.text}]}>{tr('addGroup.addGamesLabel')}</Text>
+                    </View>
+                </View>
+            }
+            renderItem={({item: game}) => {
+                const isSelected = isGameSelected(game.db_id ?? game.game_id);
+
+                return (
+                    <Pressable
+                        onPress={() => {
+                            toggleGame(game.db_id ?? game.game_id);
+                            if (Platform.OS === 'ios') {
+                                Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+                            }
+                        }}
+                        style={[styles.gameRow, {
+                            flexDirection: 'row',
+                            alignItems: 'center',
+                            justifyContent: 'space-between',
+                            paddingVertical: 10,
+                            paddingHorizontal: 12,
+                            borderRadius: 10,
+                            backgroundColor: isSelected
+                                ? (theme === 'dark' ? '#1C3A2F' : '#D1FAE5')
+                                : (theme === 'dark' ? '#2C2C2E' : '#E5E5EA'),
+                        }]}
+                    >
+                        <Text style={{fontSize: 14, fontWeight: '700', color: t.text}}>{game.title} </Text>
+                        {isSelected && (
+                            <SymbolView
+                                name="checkmark"
+                                style={{width: 20, height: 20}}
+                                tintColor={t.accent}
+                            />
+                        )}
+                    </Pressable>
+                );
+            }}
+            ListFooterComponent={
+                <View style={styles.gamesFooter}>
+                    {games.length > 5 && (
+                        <Pressable
+                            onPress={() => setShowAll(prev => !prev)}
+                            style={{paddingVertical: 10, alignItems: 'center'}}
+                        >
+                            <Text style={{color: t.accent, fontSize: 14, fontWeight: '600'}}>
+                                {showAll ? tr('addGroup.showLess') : tr('addGroup.showMore', {count: games.length - 5})}
+                            </Text>
+                        </Pressable>
+                    )}
+                    <Pressable
+                        onPress={handleSave}
+                        accessibilityLabel={tr('addGroup.saveA11y')}
+                        style={[styles.saveButton, {backgroundColor: t.accent}]}
+                    >
+                        <Text style={{color: '#fff', fontWeight: '700', fontSize: 16}}>{tr('addGroup.saveLabel')}</Text>
+                    </Pressable>
+                </View>
+            }
+        />
     );
 }
 
 const styles = StyleSheet.create({
+    gameRow: {marginHorizontal: 16, marginBottom: 12},
+    gamesHeader: {paddingTop: 8, marginBottom: 8},
+    gamesFooter: {marginHorizontal: 16, gap: 8, paddingBottom: 8},
     section: {
         marginHorizontal: 16,
         marginTop: 10,

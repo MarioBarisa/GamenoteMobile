@@ -134,3 +134,36 @@ export function gameToSupabaseRow(game: Partial<Game> & { user_id: string }) {
   };
 }
 
+
+const WEB_GAME_COLUMNS = 'id,title,platform,status,currently_playing,rating,notes,genre,genres_list,publisher,play_time,start_date,end_date,created_at,image_url,background_image,progress_mode,progress_value,progress_total,progress_source,achievement_percent';
+export const USER_GAME_COLUMNS = `${WEB_GAME_COLUMNS},game_api_id,metacritic_score,esrb_rating,release_date,website_url,description,screenshot_urls,series_games` as const;
+
+export async function fetchUserRows(database: typeof import("@/services/supabase").supabase, userId: string, signal: AbortSignal): Promise<Game[]> {
+  const games: Game[] = [];
+  const ids = new Set<string>();
+  let expectedCount: number | null = null;
+  for (;;) {
+    signal.throwIfAborted();
+    const {data, error, count} = await database.from('games')
+      .select(USER_GAME_COLUMNS, {count: 'exact'})
+      .eq('user_id', userId)
+      .order('id')
+      .range(games.length, games.length + 999)
+      .abortSignal(signal);
+    if (error) throw error;
+    if (expectedCount !== null && count !== expectedCount) throw new Error('Library changed while loading');
+    expectedCount = count;
+
+    const page = data ?? [];
+    for (const row of page) {
+      if (ids.has(row.id)) throw new Error('Library changed while loading');
+      ids.add(row.id);
+      games.push(supabaseRowToGame(row));
+    }
+
+    if (expectedCount === null ? page.length < 1000 : games.length === expectedCount) return games;
+    if (!page.length || (expectedCount !== null && games.length > expectedCount)) {
+      throw new Error('Library could not be fully loaded');
+    }
+  }
+}

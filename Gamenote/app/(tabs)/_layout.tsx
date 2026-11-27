@@ -1,15 +1,18 @@
 import {NativeTabs} from "expo-router/native-tabs";
-import {router, useSegments} from "expo-router";
-import {Platform} from "react-native";
+import {router, useNavigationContainerRef, useSegments} from "expo-router";
+import {StackActions} from "expo-router/react-navigation";
+import {Platform, View} from "react-native";
 import * as Haptics from "expo-haptics";
 import {useSettings} from "@/context/settings";
 import {useTheme} from "@/context/theme";
-import {useEffect, useRef} from "react";
+import {useEffect, useLayoutEffect, useRef, useState} from "react";
 import {useAuth} from "@/context/auth";
 import {useTranslation} from "react-i18next";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const ONBOARDING_KEY = '@onboarding_complete';
+const iosVersion = Platform.OS === "ios" ? parseInt(String(Platform.Version), 10) : 0;
+const minimizeBehavior = iosVersion >= 26 ? "onScrollDown" : undefined;
 
 // noinspection JSUnusedGlobalSymbols
 export default function TabsLayout() {
@@ -22,6 +25,21 @@ export default function TabsLayout() {
     const previousTabRef = useRef(tabSegment);
     const {vibrationsEnabled, activeSource} = useSettings();
     const {accent} = useTheme();
+    const [hasLayout, setHasLayout] = useState(false);
+    const navigation = useNavigationContainerRef();
+    const previousSource = useRef(activeSource);
+
+    useLayoutEffect(() => {
+        if (previousSource.current === activeSource) return;
+        previousSource.current = activeSource;
+        const tabs = navigation.getRootState()?.routes.find(route => route.name === "(tabs)")?.state;
+        for (const tab of tabs?.routes ?? []) {
+            const stack = tab.state;
+            if (stack?.key && stack.routes[stack.index ?? 0]?.name !== "index") {
+                navigation.dispatch({...StackActions.popTo("index"), target: stack.key});
+            }
+        }
+    }, [activeSource, navigation]);
 
     useEffect(() => {
         if (loggedIn || activeSource === "local") return;
@@ -44,11 +62,7 @@ export default function TabsLayout() {
         }
     }, [tabSegment, vibrationsEnabled]);
 
-    const minimizeBehavior = Platform.OS === 'ios' && Number(Platform.Version) >= 26 // PROVJERA ZA iOS <26 jer tamo nema ovog API
-        ? "onScrollDown"
-        : undefined;
-
-    return (
+    const tabs = (
         <NativeTabs minimizeBehavior={minimizeBehavior} tintColor={accent}>
             <NativeTabs.Trigger name="home">
                 <NativeTabs.Trigger.Label>{t("tabs.home")}</NativeTabs.Trigger.Label>
@@ -81,5 +95,14 @@ export default function TabsLayout() {
             </NativeTabs.Trigger>
 
         </NativeTabs>
+    );
+
+    if (iosVersion < 27) return tabs;
+    return (
+        <View style={{flex: 1}} onLayout={hasLayout ? undefined : ({nativeEvent: {layout}}) => {
+            if (layout.width > 0 && layout.height > 0) setHasLayout(true);
+        }}>
+            {hasLayout && tabs}
+        </View>
     );
 }

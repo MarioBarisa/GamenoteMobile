@@ -1,7 +1,10 @@
 import {useLocalMode} from "@/context/localMode";
+import {useSettings} from "@/context/settings";
+import {screenContent} from "@/constants/layout";
+import {ScreenScrollView} from "@/components/ScreenViewport";
 import {localImageUrl} from "@/services/localData";
 import {Image} from "expo-image";
-import {Text, ScrollView, StyleSheet, TextInput, View, Alert, Pressable, RefreshControl} from "react-native";
+import {Text, StyleSheet, TextInput, View, Alert, Pressable, RefreshControl} from "react-native";
 import {useCallback, useLayoutEffect, useState} from "react";
 import {useTheme} from "@/context/theme";
 import {useAuth} from "@/context/auth";
@@ -11,6 +14,7 @@ import {useFocusEffect, useNavigation, useRouter} from "expo-router";
 import {useTranslation} from "react-i18next";
 import {ACCOUNT_SECURED_COLOR} from "@/constants/theme";
 import {hasPlatinum} from "@/utils/profileAchievements";
+import LocalModeEntry from "@/components/LocalModeEntry";
 import PasswordInput from "@/components/PasswordInput";
 
 
@@ -50,6 +54,7 @@ export default function FavoritesScreen() {
     const {t: tr} = useTranslation();
     const {loggedIn, user, username, signIn, signOut, totpFactors, refreshSecurity, openRecoveredProfile, openProfileAfterSignIn, acknowledgeProfile} = useAuth();
     const {activeSource, document, storageError, returnToCloudProfile, setReturnToCloudProfile} = useLocalMode();
+    const {claimLocalModeOnboarding} = useSettings();
     const isLocal = activeSource === "local";
     const localName = document?.profile.name || tr("screens.localMode.localProfile");
     const profileName = isLocal ? localName : user?.user_metadata?.name;
@@ -63,6 +68,10 @@ export default function FavoritesScreen() {
     const {themeColors: t} = useTheme();
     const navigation = useNavigation();
     const router = useRouter();
+
+    useFocusEffect(useCallback(() => {
+        if (isLocal && claimLocalModeOnboarding()) router.push("/(modals)/localModeOnboarding");
+    }, [isLocal, claimLocalModeOnboarding, router]));
 
     useFocusEffect(useCallback(() => {
         if (loggedIn && !isLocal) refreshSecurity().catch(() => {});
@@ -163,9 +172,11 @@ export default function FavoritesScreen() {
     const platinum = hasPlatinum(userInfo, accountSecured);
 
     return (
-        <ScrollView
-            style={{backgroundColor: t.background}}
-            contentInsetAdjustmentBehavior="automatic"
+        <ScreenScrollView
+            backgroundColor={t.background}
+            contentContainerStyle={loggedIn || isLocal ? screenContent.detail : screenContent.form}
+            automaticallyAdjustKeyboardInsets
+            keyboardShouldPersistTaps="handled"
             refreshControl={<RefreshControl refreshing={isLoading} onRefresh={() => { refresh(); if (!isLocal) refreshSecurity().catch(() => {}); }} tintColor={t.accent} />}
         >
             {(loggedIn || isLocal) && (
@@ -569,6 +580,8 @@ export default function FavoritesScreen() {
                             clearButtonMode="unless-editing"
                             style={[styles.systemInput, {color: t.text}]}
                             textContentType="username"
+                            autoComplete="username"
+                            keyboardType="email-address"
                             autoCapitalize="none"
                             autoCorrect={false}
                             spellCheck={false}
@@ -581,6 +594,7 @@ export default function FavoritesScreen() {
                             containerStyle={{marginHorizontal: 16}}
                             style={[styles.systemInput, {color: t.text, marginHorizontal: 0}]}
                             textContentType="password"
+                            autoComplete="password"
                             value={password}
                             editable={!signingIn}
                             onChangeText={setPassword}
@@ -656,10 +670,11 @@ export default function FavoritesScreen() {
                                 </Text>
                             </Pressable>
                         </View>
+                        <LocalModeEntry disabled={signingIn}/>
                     </View>
                 </View>
             )}
-        </ScrollView>
+        </ScreenScrollView>
     );
 }
 

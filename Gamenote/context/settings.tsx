@@ -1,6 +1,7 @@
 import {createContext, ReactNode, useCallback, useContext, useEffect, useMemo, useRef, useState} from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import {changeLanguage, getCurrentLanguage} from "@/utils/i18n";
+import {preloadFoilTextures} from "@/services/foilTextures";
 
 const VIBRATIONS_KEY = "vibrationsEnabled";
 const COMPACT_KEY = "compactCards";
@@ -30,6 +31,8 @@ type SettingsContextValue = {
     localSettingsLoaded: boolean;
     activeSource: AccountSource;
     setLocalModeEnabled: (value: boolean) => Promise<boolean>;
+    activateLocalMode: () => Promise<void>;
+    claimLocalModeOnboarding: () => boolean;
     setActiveSource: (source: AccountSource) => Promise<void>;
     language: string;
     setLanguage: (value: string) => void;
@@ -51,6 +54,7 @@ export function SettingsProvider({children}: { children: ReactNode }) {
         let cancelled = false;
         AsyncStorage.getItem(TCG_KEY).then(value => {
             if (!cancelled && !tcgChanged.current && value !== null) {
+                if (value === "true") void preloadFoilTextures();
                 setTCGMode(value === "true");
             }
         }).catch(() => {
@@ -117,6 +121,21 @@ export function SettingsProvider({children}: { children: ReactNode }) {
         return enabled && !previous.onboardingSeen;
     }, [applySourceSettings]);
 
+    const activateLocalMode = useCallback(async () => {
+        const previous = currentSource.current;
+        if (!previous || previous.source === "local") return;
+        await AsyncStorage.multiSet([[LOCAL_MODE_KEY, "true"], [SOURCE_KEY, "local"]]);
+        applySourceSettings({...previous, enabled: true, source: "local"});
+    }, [applySourceSettings]);
+
+    const claimLocalModeOnboarding = useCallback(() => {
+        const previous = currentSource.current;
+        if (!previous || previous.source !== "local" || previous.onboardingSeen) return false;
+        applySourceSettings({...previous, onboardingSeen: true});
+        void AsyncStorage.setItem(LOCAL_ONBOARDING_KEY, "true").catch(() => {});
+        return true;
+    }, [applySourceSettings]);
+
     const setActiveSource = useCallback(async (source: AccountSource) => {
         const previous = currentSource.current;
         if (!previous?.enabled || previous.source === source) return;
@@ -136,6 +155,7 @@ export function SettingsProvider({children}: { children: ReactNode }) {
 
     const setAndPersistTCG = useCallback((value: boolean) => {
         tcgChanged.current = true;
+        if (value) void preloadFoilTextures();
         setTCGMode(value);
         AsyncStorage.setItem(TCG_KEY, String(value));
     }, []);
@@ -159,11 +179,13 @@ export function SettingsProvider({children}: { children: ReactNode }) {
             localSettingsLoaded: sourceSettings !== null,
             activeSource: sourceSettings?.source ?? "cloud",
             setLocalModeEnabled,
+            activateLocalMode,
+            claimLocalModeOnboarding,
             setActiveSource,
             language,
             setLanguage: setAndPersistLanguage,
         }),
-        [vibrationsEnabled, compactCards, tcgMode, tcgSettingsLoaded, setAndPersistTCG, sourceSettings, setLocalModeEnabled, setActiveSource, language, setAndPersistLanguage]
+        [vibrationsEnabled, compactCards, tcgMode, tcgSettingsLoaded, setAndPersistTCG, sourceSettings, setLocalModeEnabled, activateLocalMode, claimLocalModeOnboarding, setActiveSource, language, setAndPersistLanguage]
     );
 
     return <SettingsContext.Provider value={value}>{children}</SettingsContext.Provider>;

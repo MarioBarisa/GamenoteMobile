@@ -40,6 +40,7 @@ export default function TotpCodeInput({value, onChange, disabled, autoFocus, fie
                     accessibilityHint={t("mfa.codeHint")}
                     style={styles.input}
                     textContentType="oneTimeCode"
+                    autoComplete="one-time-code"
                     keyboardType="number-pad"
                     autoCapitalize="none"
                     autoCorrect={false}

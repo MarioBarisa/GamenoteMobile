@@ -1,6 +1,8 @@
+import {screenContent} from "@/constants/layout";
+import {ScreenFlatList} from "@/components/ScreenViewport";
 import {useGamePresentation} from "@/context/localMode";
 import {Image} from "expo-image";
-import {RefreshControl, ScrollView, Text, View, StyleSheet, TouchableOpacity} from "react-native";
+import {RefreshControl, Text, View, StyleSheet, TouchableOpacity} from "react-native";
 import {useTheme} from "@/context/theme";
 import {useGroups} from "@/context/GroupsContext";
 import {Ionicons} from "@expo/vector-icons";
@@ -36,9 +38,9 @@ export default function GroupsIndex() {
     };
 
     return (
-        <ScrollView
-            style={{backgroundColor: t.background}}
-            contentInsetAdjustmentBehavior="automatic"
+        <ScreenFlatList
+            backgroundColor={t.background}
+            contentContainerStyle={screenContent.detail}
             refreshControl={
               <RefreshControl
                 refreshing={isLoadingGroups || isLoadingGames}
@@ -46,81 +48,80 @@ export default function GroupsIndex() {
                 tintColor={t.accent}
               />
             }
-        >
-            {groups.length === 0 ? (
+            data={groups}
+            keyExtractor={group => group.id}
+            ListEmptyComponent={
                 <Text style={{color: t.text, fontSize: 26, fontWeight: "bold", textAlign: "center", padding: 32}}>
                     {tr("groups.empty")}
                 </Text>
-            ) : (
-                groups.map((group) => {
-                    const groupGames = getGroupGameImages(group.id);
-                    const realCount = getGamesInGroup(group.id).length;
+            }
+            renderItem={({item: group}) => {
+                const groupGames = getGroupGameImages(group.id);
+                const realCount = getGamesInGroup(group.id).length;
 
-                    return (
-                        <TouchableOpacity
-                            key={group.id}
-                            accessibilityLabel={tr("groups.openA11y", {name: group.name})}
-                            style={[styles.card, {backgroundColor: t.card}]}
-                            onPress={() => router.push({
-                                pathname: "/(tabs)/groups/group-detail",
-                                params: {id: group.id}
-                            })}
-                            activeOpacity={0.75}
-                        >
-                            <View style={styles.headerRow}>
-                                <View style={styles.titleSection}>
-                                    <Text style={{color: t.text, fontWeight: "700", fontSize: 18}}>{group.name}</Text>
-                                    {group.type && (
-                                        <Text style={{
-                                            color: t.secondaryText,
-                                            fontSize: 12,
-                                            marginTop: 2
-                                        }}>{group.type}</Text>
-                                    )}
-                                </View>
-                                {typeof group.rating === 'number' ? (
-                                    <View style={styles.ratingRow}>
-                                        {[1, 2, 3, 4, 5].map(star => (
-                                            <SymbolView
-                                                key={star}
-                                                name={star <= group.rating! ? 'star.fill' : 'star'}
-                                                style={{width: 22, height: 22}}
-                                                tintColor={star <= group.rating! ? '#FF9F0A' : t.secondaryText}
-                                            />
-                                        ))}
-                                    </View>
-                                ) : null}
+                return (
+                    <TouchableOpacity
+                        accessibilityLabel={tr("groups.openA11y", {name: group.name})}
+                        style={[styles.card, {backgroundColor: t.card}]}
+                        onPress={() => router.push({
+                            pathname: "/(tabs)/groups/group-detail",
+                            params: {id: group.id}
+                        })}
+                        activeOpacity={0.75}
+                    >
+                        <View style={styles.headerRow}>
+                            <View style={styles.titleSection}>
+                                <Text style={{color: t.text, fontWeight: "700", fontSize: 18}}>{group.name}</Text>
+                                {group.type && (
+                                    <Text style={{
+                                        color: t.secondaryText,
+                                        fontSize: 12,
+                                        marginTop: 2
+                                    }}>{group.type}</Text>
+                                )}
                             </View>
-
-                            <View style={styles.gamesPreview}>
-                                <View style={styles.gameImagesRow}>
-                                    {groupGames.map((game, index) => (
-                                        <View key={index} style={styles.gameImageWrapper}>
-                                            {imageUrl(game?.image_url) ? (
-                                                <Image
-                                                    source={{uri: imageUrl(game?.image_url)}}
-                                                    style={styles.gameImage}
-                                                    contentFit="cover"
-                                                    cachePolicy={isLocal ? "memory" : "memory-disk"}
-                                                    transition={{duration: 200, effect: "cross-dissolve"}}
-                                                />
-                                            ) : (
-                                                <View style={[styles.gameImage, styles.gameImagePlaceholder, {backgroundColor: t.background}]}>
-                                                    <Ionicons name="image-outline" size={18} color={t.secondaryText}/>
-                                                </View>
-                                            )}
-                                        </View>
+                            {typeof group.rating === 'number' ? (
+                                <View style={styles.ratingRow}>
+                                    {[1, 2, 3, 4, 5].map(star => (
+                                        <SymbolView
+                                            key={star}
+                                            name={star <= group.rating! ? 'star.fill' : 'star'}
+                                            style={{width: 22, height: 22}}
+                                            tintColor={star <= group.rating! ? '#FF9F0A' : t.secondaryText}
+                                        />
                                     ))}
                                 </View>
-                                <Text style={{color: t.secondaryText, fontSize: 11, marginTop: 4}}>
-                                    {getGameCountLabel(realCount)}
-                                </Text>
+                            ) : null}
+                        </View>
+
+                        <View style={styles.gamesPreview}>
+                            <View style={styles.gameImagesRow}>
+                                {groupGames.map((game, index) => (
+                                    <View key={index} style={styles.gameImageWrapper}>
+                                        {imageUrl(game?.image_url) ? (
+                                            <Image
+                                                source={{uri: imageUrl(game?.image_url)}}
+                                                style={styles.gameImage}
+                                                contentFit="cover"
+                                                cachePolicy={isLocal ? "memory" : "memory-disk"}
+                                                transition={{duration: 200, effect: "cross-dissolve"}}
+                                            />
+                                        ) : (
+                                            <View style={[styles.gameImage, styles.gameImagePlaceholder, {backgroundColor: t.background}]}>
+                                                <Ionicons name="image-outline" size={18} color={t.secondaryText}/>
+                                            </View>
+                                        )}
+                                    </View>
+                                ))}
                             </View>
-                        </TouchableOpacity>
-                    );
-                })
-            )}
-        </ScrollView>
+                            <Text style={{color: t.secondaryText, fontSize: 11, marginTop: 4}}>
+                                {getGameCountLabel(realCount)}
+                            </Text>
+                        </View>
+                    </TouchableOpacity>
+                );
+            }}
+        />
     );
 }
 

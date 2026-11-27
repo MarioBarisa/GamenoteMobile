@@ -1,4 +1,4 @@
-import {View, StyleSheet, useWindowDimensions} from 'react-native'
+import {View, StyleSheet} from 'react-native'
 import {colors} from '@/constants/theme'
 import {useTheme} from '@/context/theme'
 
@@ -21,15 +21,13 @@ export function GameCardSkeleton() {
 }
 
 // Kostur kompaktne kartice
-export function GameCardCompactSkeleton() {
+export function GameCardCompactSkeleton({width}: {width: number}) {
   const {theme} = useTheme()
   const t = colors[theme]
   const ghost = theme === 'dark' ? '#2C2C2E' : '#E5E5EA'
-  const {width} = useWindowDimensions()
-  const cardWidth = (width - 32 - 12) / 2
 
   return (
-    <View style={[styles.card, {width: cardWidth, backgroundColor: t.card, borderColor: ghost}]}>
+    <View style={[styles.card, {width, backgroundColor: t.card, borderColor: ghost}]}>
       <View style={[styles.image, {backgroundColor: ghost}]} />
       <View style={styles.body}>
         <View style={[styles.bar, {backgroundColor: ghost}]} />

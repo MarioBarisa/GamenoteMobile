@@ -1,10 +1,12 @@
 import {useGamePresentation} from "@/context/localMode";
+import {screenContent} from "@/constants/layout";
+import {ScreenFlatList, ScreenViewport} from "@/components/ScreenViewport";
 import {useLocalSearchParams, Stack, Link, useRouter} from "expo-router";
 import {useTheme} from "@/context/theme";
 import {colors} from "@/constants/theme"
 import {useGroups} from "@/context/GroupsContext";
 import {Image} from "expo-image";
-import {ScrollView, Text, View, StyleSheet, Pressable,} from "react-native";
+import {Text, View, StyleSheet, Pressable,} from "react-native";
 import {useUserGames} from "@/hooks/useUserGames";
 import {useMemo} from "react";
 import {SymbolView} from "expo-symbols";
@@ -34,9 +36,9 @@ export default function GroupDetail(){
     const group = groups.find((g)=>g.id === id); // AKO grupa NIJE PRONAĐENA
     if(!group){
         return (
-            <View style={{flex: 1, justifyContent: "center", alignItems: "center", backgroundColor: t.background}}>
+            <ScreenViewport backgroundColor={t.background} style={{justifyContent: "center", alignItems: "center"}}>
                 <Text style={{color: t.text}}>{tr("groups.notFound")}</Text>
-            </View>
+            </ScreenViewport>
         );
     }
 
@@ -84,131 +86,138 @@ export default function GroupDetail(){
                     ),
                 }}
             />
-            <ScrollView style={{backgroundColor: t.background}} contentContainerStyle={{paddingBottom: 16}} contentInsetAdjustmentBehavior="automatic" >
-                <View style={styles.ratingRow}>
-                    {group.type && (
-                        <Text style={{
-                            color: t.text,
-                            fontSize: 18,
-                            marginTop: 14,
-                            fontWeight: "700"
-                        }}><Text style={{color: t.secondaryText}}>{tr("groups.typeLabel")}</Text>{group.type}</Text>
-                    )}
-                    {group.created_at && (
-                        <Text style={{
-                            color: t.text,
-                            fontSize: 14,
-                            marginTop: 14,
-                            fontWeight: "700"
-                        }}><Text style={{color: t.secondaryText}}>{tr("groups.createdLabel")}</Text>{new Date(group.created_at).toLocaleDateString('en-GB').replace(/\//g, '.')}</Text>
-                    )}
-                    {group.user_notes && ( // NIJE TRENUTNO IMPLEMNTIRANO U BAZI PODATAKA
-                        <Text style={{color: t.text, fontSize: 16, marginTop: 14, fontStyle: "italic"}}>{group.user_notes}</Text>
-                    )}
-                </View>
-                {(typeof group.rating === "number" || avgRating !== null) && (
-                    <View style={styles.groupRatingRow}>
-                        {typeof group.rating === "number" && (
-                            <View style={styles.ratingRowStars}>
-                                {[1, 2, 3, 4, 5].map(star => (
-                                    <SymbolView
-                                        key={star}
-                                        name={star <= group.rating! ? 'star.fill' : 'star'}
-                                        style={{width: 34, height: 34}}
-                                        tintColor={star <= group.rating! ? '#FF9F0A' : t.secondaryText}
-                                    />
-                                ))}
-                            </View>
-                        )}
-                        {avgRating !== null && (
-                            <View style={styles.avgBadge}>
-                                <SymbolView
-                                    name="star.fill"
-                                    style={{width: 20, height: 20}}
-                                    tintColor="#FF9F0A"
-                                />
-                                <Text style={[styles.avgText, {color: t.secondaryText}]}>
-                                    {`Ø ${avgRating.toFixed(1)}`}
-                                </Text>
-                            </View>
-                        )}
-                        {games.length > 0 && (
-                            <View style={styles.avgBadge}>
-                                <SymbolView
-                                    name="clock.fill"
-                                    style={{width: 20, height: 20}}
-                                    tintColor={t.secondaryText}
-                                />
-                                <Text style={[styles.avgText, {color: t.secondaryText}]}>
-                                    {`${totalPlaytime}h`}
-                                </Text>
-                            </View>
-                        )}
-                    </View>
-                )}
-                <Text style={{color: t.secondaryText, fontSize: 13, margin: 16, marginBottom: 8}}>
-                    {games.length > 0 ? `${games.length} ${games.length === 1 ? tr("groups.gameCountSingle") : tr("groups.gameCountLabel", {count: games.length})}` : ""}
-                </Text>
-
-                {games.map((game, index) => {
-                    const platform = platformStyle(game.platform);
-                    const cover = imageUrl(game.image_url);
-                    return (
-                    <Pressable key={index} onPress={() => router.push({ //KADA KORISNIK KLIKNE NA NEKU IGRU OTVORI DETALJE IGRE
-                        pathname: "/(tabs)/groups/details",
-                        params: { game: JSON.stringify(game) },
-                    })}>
-                        <View style={[styles.gameCard, {backgroundColor: t.card}]}>
-                            {cover ? (
-                                <Image source={{uri: cover}} style={styles.gameImage} contentFit="cover" cachePolicy={isLocal ? "memory" : "memory-disk"} transition={{duration: 200, effect: "cross-dissolve"}}/>
-                            ) : (
-                                <View style={[styles.gameImage, {
-                                    backgroundColor: t.background,
-                                    justifyContent: "center",
-                                    alignItems: "center"
-                                }]}>
-                                    <Ionicons name="image-outline" size={24} color={t.secondaryText}/>
-                                </View>
+            <ScreenFlatList
+                backgroundColor={t.background}
+                contentContainerStyle={[screenContent.detail, {paddingBottom: 16}]}
+                data={games}
+                keyExtractor={game => game.db_id ?? game.game_id}
+                ListHeaderComponent={
+                    <>
+                        <View style={styles.ratingRow}>
+                            {group.type && (
+                                <Text style={{
+                                    color: t.text,
+                                    fontSize: 18,
+                                    marginTop: 14,
+                                    fontWeight: "700"
+                                }}><Text style={{color: t.secondaryText}}>{tr("groups.typeLabel")}</Text>{group.type}</Text>
                             )}
-                            <View style={styles.gameInfo}>
-                                <Text style={{color: t.text, fontWeight: "600", fontSize: 15}}>{game?.title}</Text>
-                                {game?.genre && (
-                                    <Text style={{color: t.secondaryText, fontSize: 12, marginTop: 2}}>{game.genre}</Text>
-                                )}
-                            </View>
-                            <View style={styles.gameSecondaryInfo}>
-                                {typeof game?.rating === 'number' && (
-                                    <View style={styles.starsRow}>
+                            {group.created_at && (
+                                <Text style={{
+                                    color: t.text,
+                                    fontSize: 14,
+                                    marginTop: 14,
+                                    fontWeight: "700"
+                                }}><Text style={{color: t.secondaryText}}>{tr("groups.createdLabel")}</Text>{new Date(group.created_at).toLocaleDateString('en-GB').replace(/\//g, '.')}</Text>
+                            )}
+                            {group.user_notes && ( // NIJE TRENUTNO IMPLEMNTIRANO U BAZI PODATAKA
+                                <Text style={{color: t.text, fontSize: 16, marginTop: 14, fontStyle: "italic"}}>{group.user_notes}</Text>
+                            )}
+                        </View>
+                        {(typeof group.rating === "number" || avgRating !== null) && (
+                            <View style={styles.groupRatingRow}>
+                                {typeof group.rating === "number" && (
+                                    <View style={styles.ratingRowStars}>
                                         {[1, 2, 3, 4, 5].map(star => (
-                                            <Ionicons
+                                            <SymbolView
                                                 key={star}
-                                                name={star <= game.rating! ? 'star' : 'star-outline'}
-                                                size={14}
-                                                color={star <= game.rating! ? '#FF9F0A' : t.secondaryText}
-                                                style={{marginLeft: 2}} />
+                                                name={star <= group.rating! ? 'star.fill' : 'star'}
+                                                style={{width: 34, height: 34}}
+                                                tintColor={star <= group.rating! ? '#FF9F0A' : t.secondaryText}
+                                            />
                                         ))}
                                     </View>
                                 )}
-                                {typeof game?.metacriticScore === 'number' && game.metacriticScore > 0 && (
-                                    <View style={[styles.metaBadge, {backgroundColor: metacriticColor(game.metacriticScore)}]}>
-                                        <Text style={styles.metaText}>{game.metacriticScore}</Text>
+                                {avgRating !== null && (
+                                    <View style={styles.avgBadge}>
+                                        <SymbolView
+                                            name="star.fill"
+                                            style={{width: 20, height: 20}}
+                                            tintColor="#FF9F0A"
+                                        />
+                                        <Text style={[styles.avgText, {color: t.secondaryText}]}>
+                                            {`Ø ${avgRating.toFixed(1)}`}
+                                        </Text>
                                     </View>
                                 )}
-                                {platform && (
-                                    <View style={[styles.platformBadge, {backgroundColor: theme === 'dark' ? '#2C2C2E' : '#F2F2F7'}]}>
-                                        <Text style={[styles.platformText, {color: platform.text}]} numberOfLines={1} adjustsFontSizeToFit minimumFontScale={0.8}>
-                                            {typeof game.play_time === 'number'
-                                                ? `${game.play_time}h via ${platform.label}`
-                                                : `via ${platform.label}`}
+                                {games.length > 0 && (
+                                    <View style={styles.avgBadge}>
+                                        <SymbolView
+                                            name="clock.fill"
+                                            style={{width: 20, height: 20}}
+                                            tintColor={t.secondaryText}
+                                        />
+                                        <Text style={[styles.avgText, {color: t.secondaryText}]}>
+                                            {`${totalPlaytime}h`}
                                         </Text>
                                     </View>
                                 )}
                             </View>
-                        </View>
-                    </Pressable>
+                        )}
+                        <Text style={{color: t.secondaryText, fontSize: 13, margin: 16, marginBottom: 8}}>
+                            {games.length > 0 ? `${games.length} ${games.length === 1 ? tr("groups.gameCountSingle") : tr("groups.gameCountLabel", {count: games.length})}` : ""}
+                        </Text>
+                    </>
+                }
+                renderItem={({item: game}) => {
+                    const platform = platformStyle(game.platform);
+                    const cover = imageUrl(game.image_url);
+                    return (
+                        <Pressable onPress={() => router.push({ //KADA KORISNIK KLIKNE NA NEKU IGRU OTVORI DETALJE IGRE
+                            pathname: "/(tabs)/groups/details",
+                            params: { game: JSON.stringify(game) },
+                        })}>
+                            <View style={[styles.gameCard, {backgroundColor: t.card}]}>
+                                {cover ? (
+                                    <Image source={{uri: cover}} style={styles.gameImage} contentFit="cover" cachePolicy={isLocal ? "memory" : "memory-disk"} transition={{duration: 200, effect: "cross-dissolve"}}/>
+                                ) : (
+                                    <View style={[styles.gameImage, {
+                                        backgroundColor: t.background,
+                                        justifyContent: "center",
+                                        alignItems: "center"
+                                    }]}>
+                                        <Ionicons name="image-outline" size={24} color={t.secondaryText}/>
+                                    </View>
+                                )}
+                                <View style={styles.gameInfo}>
+                                    <Text style={{color: t.text, fontWeight: "600", fontSize: 15}}>{game?.title}</Text>
+                                    {game?.genre && (
+                                        <Text style={{color: t.secondaryText, fontSize: 12, marginTop: 2}}>{game.genre}</Text>
+                                    )}
+                                </View>
+                                <View style={styles.gameSecondaryInfo}>
+                                    {typeof game?.rating === 'number' && (
+                                        <View style={styles.starsRow}>
+                                            {[1, 2, 3, 4, 5].map(star => (
+                                                <Ionicons
+                                                    key={star}
+                                                    name={star <= game.rating! ? 'star' : 'star-outline'}
+                                                    size={14}
+                                                    color={star <= game.rating! ? '#FF9F0A' : t.secondaryText}
+                                                    style={{marginLeft: 2}} />
+                                            ))}
+                                        </View>
+                                    )}
+                                    {typeof game?.metacriticScore === 'number' && game.metacriticScore > 0 && (
+                                        <View style={[styles.metaBadge, {backgroundColor: metacriticColor(game.metacriticScore)}]}>
+                                            <Text style={styles.metaText}>{game.metacriticScore}</Text>
+                                        </View>
+                                    )}
+                                    {platform && (
+                                        <View style={[styles.platformBadge, {backgroundColor: theme === 'dark' ? '#2C2C2E' : '#F2F2F7'}]}>
+                                            <Text style={[styles.platformText, {color: platform.text}]} numberOfLines={1} adjustsFontSizeToFit minimumFontScale={0.8}>
+                                                {typeof game.play_time === 'number'
+                                                    ? `${game.play_time}h via ${platform.label}`
+                                                    : `via ${platform.label}`}
+                                            </Text>
+                                        </View>
+                                    )}
+                                </View>
+                            </View>
+                        </Pressable>
                     );
-                })}
-            </ScrollView>
+                }}
+            />
         </>
     );
 }
@@ -232,6 +241,7 @@ const styles = StyleSheet.create({
     },
     groupRatingRow: {
         flexDirection: "row",
+        flexWrap: "wrap",
         alignItems: "center",
         gap: 8,
     },

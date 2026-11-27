@@ -1,6 +1,6 @@
 import {useGamePresentation} from "@/context/localMode";
 import {Image} from "expo-image";
-import {Alert, View, Text, StyleSheet, Pressable, useWindowDimensions} from 'react-native'
+import {Alert, View, Text, StyleSheet, Pressable} from 'react-native'
 import { colors } from '@/constants/theme'
 import { useTheme } from '@/context/theme'
 import {Ionicons} from "@expo/vector-icons";
@@ -10,7 +10,7 @@ import {STATUS_CONFIG} from "@/common/StatusCommons";
 import {achievementPercent, progressColor} from "@/common/ProgressSources";
 import * as Haptics from 'expo-haptics';
 import {useTranslation} from "react-i18next";
-import {useRef, useState} from "react";
+import {memo, useRef, useState} from "react";
 import type {ViewInstance} from "react-native";
 import GameContextMenu, {MenuAnchor} from "@/components/GameContextMenu";
 import TCGFoilOverlay from "@/components/TCGFoilOverlay";
@@ -18,18 +18,18 @@ import {useTCGFoil} from "@/hooks/useTCGFoil";
 
 interface Props {
   game: Game
+  width: number
   onDelete?: (gameId: string) => void | Promise<void>
 }
 
-export default function GameCard({ game, onDelete }: Props) {
+export default memo(function GameCard({ game, width, onDelete }: Props) {
   const {t: tr} = useTranslation();
   const { theme } = useTheme()
   const t = colors[theme]
     const router = useRouter();
     const segments = useSegments();
     const tab = segments[1] as 'home' | 'favorites' | 'search';
-    const {width: SCREEN_WIDTH} = useWindowDimensions();
-    const isLargeScreen = SCREEN_WIDTH >= 400;
+    const isLargeScreen = width >= 368;
     const cardRef = useRef<ViewInstance>(null);
     const [menuAnchor, setMenuAnchor] = useState<MenuAnchor | null>(null);
     const [menuVisible, setMenuVisible] = useState(false);
@@ -217,7 +217,7 @@ export default function GameCard({ game, onDelete }: Props) {
       />
       </>
   )
-}
+});
 
 const styles = StyleSheet.create({
     card: {

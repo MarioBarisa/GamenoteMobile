@@ -1,4 +1,5 @@
 import {useTheme} from "@/context/theme";
+import {screenContent} from "@/constants/layout";
 import {Stack, useRouter} from "expo-router";
 import {Image} from "expo-image";
 import {Alert, Keyboard, Pressable, ScrollView, StyleSheet, Text, TextInput, View} from "react-native";
@@ -21,6 +22,7 @@ export default function ManageAccountModal() {
 
     const [newUsername, setNewUsername] = useState(username);
     const [newPassword, setNewPassword] = useState('');
+    const [currentPassword, setCurrentPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [avatarInputUrl, setAvatarInputUrl] = useState('');
     const [isSaving, setIsSaving] = useState(false);
@@ -33,28 +35,16 @@ export default function ManageAccountModal() {
         passwordAttempt.current++;
     }, []);
 
-    const requestCurrentPassword = () => new Promise<string | undefined>(resolve => {
-        Keyboard.dismiss();
-        Alert.prompt(
-            tr("profile.confirmPasswordChangeTitle"),
-            tr("mfa.currentPassword"),
-            [
-                {text: tr("common.cancel"), style: "cancel", onPress: () => resolve(undefined)},
-                {text: tr("common.saveChanges"), isPreferred: true, onPress: value => resolve(value ?? "")},
-            ],
-            "plain-text",
-        );
-    });
-
     const savePassword = async (attempt: number) => {
         const cancelled = () => passwordAttempt.current !== attempt;
-        const currentPassword = await requestCurrentPassword();
-        if (cancelled() || currentPassword === undefined) return false;
+        if (cancelled()) return false;
         if (!currentPassword) {
             setPasswordError("mfa.currentPassword");
             return false;
         }
 
+        Keyboard.dismiss();
+        setCurrentPassword("");
         try {
             const result = await updatePassword(newPassword, currentPassword, cancelled);
             if (cancelled()) return false;
@@ -142,7 +132,7 @@ export default function ManageAccountModal() {
 
     return (
         <ScrollView
-            contentContainerStyle={{gap: 10, padding: 8}}
+            contentContainerStyle={[screenContent.form, {gap: 10, padding: 8}]}
             style={{backgroundColor: t.backgroundModal}}
             contentInsetAdjustmentBehavior="automatic"
             automaticallyAdjustContentInsets={true}
@@ -236,6 +226,7 @@ export default function ManageAccountModal() {
                         onChangeText={setNewPassword}
                         editable={!isSaving && !isDeleting}
                         textContentType="newPassword"
+                        autoComplete="new-password"
                         placeholder={tr('profile.manageAccountPasswordPlaceholder')}
                         placeholderTextColor={t.secondaryText}
                     />
@@ -251,9 +242,28 @@ export default function ManageAccountModal() {
                         onChangeText={setConfirmPassword}
                         editable={!isSaving && !isDeleting}
                         textContentType="newPassword"
+                        autoComplete="new-password"
                         placeholder={tr('profile.manageAccountPasswordConfirmLabel')}
                         placeholderTextColor={t.secondaryText}
                     />
+                    {(newPassword || confirmPassword) ? (
+                        <PasswordInput
+                            style={[
+                                styles.input,
+                                {
+                                    color: t.text,
+                                    backgroundColor: theme === 'dark' ? '#2C2C2E' : '#E5E5EA',
+                                },
+                            ]}
+                            value={currentPassword}
+                            onChangeText={setCurrentPassword}
+                            editable={!isSaving && !isDeleting}
+                            textContentType="password"
+                            autoComplete="password"
+                            placeholder={tr("mfa.currentPassword")}
+                            placeholderTextColor={t.secondaryText}
+                        />
+                    ) : null}
                 </View>
             </View>
 

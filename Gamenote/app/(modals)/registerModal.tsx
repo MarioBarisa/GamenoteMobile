@@ -1,4 +1,5 @@
 import {useTheme} from "@/context/theme";
+import {screenContent} from "@/constants/layout";
 import {useRouter} from "expo-router";
 import {Alert, Platform, Pressable, ScrollView, StyleSheet, Text, TextInput, View} from "react-native";
 import {SymbolView} from "expo-symbols";
@@ -7,6 +8,7 @@ import * as WebBrowser from "expo-web-browser";
 import {useState} from "react";
 import {useTranslation} from "react-i18next";
 import {useAuth} from "@/context/auth";
+import LocalModeEntry from "@/components/LocalModeEntry";
 import PasswordInput from "@/components/PasswordInput";
 
 interface RegisterFormData {
@@ -141,7 +143,7 @@ export default function RegisterModal() {
 
     return (
         <ScrollView
-            contentContainerStyle={{gap: 10, padding: 8}}
+            contentContainerStyle={[screenContent.form, {gap: 10, padding: 8}]}
             style={{backgroundColor: t.backgroundModal}}
             contentInsetAdjustmentBehavior="automatic"
             automaticallyAdjustContentInsets={true}
@@ -192,6 +194,8 @@ export default function RegisterModal() {
                         placeholder={tr('register.emailPlaceholder')}
                         placeholderTextColor={t.secondaryText}
                         textContentType="username"
+                        autoComplete="username"
+                        keyboardType="email-address"
                         autoCapitalize="none"
                         autoCorrect={false}
                         spellCheck={false}
@@ -221,6 +225,7 @@ export default function RegisterModal() {
                         placeholder={tr('register.passwordPlaceholder')}
                         placeholderTextColor={t.secondaryText}
                         textContentType="newPassword"
+                        autoComplete="new-password"
                     />
                     {errors.password && (
                         <Text style={[styles.errorText, {color: '#ff3b30'}]}>
@@ -250,6 +255,7 @@ export default function RegisterModal() {
                         placeholder={tr('register.confirmPlaceholder')}
                         placeholderTextColor={t.secondaryText}
                         textContentType="newPassword"
+                        autoComplete="new-password"
                     />
                     {errors.confirmPassword && (
                         <Text style={[styles.errorText, {color: '#ff3b30'}]}>
@@ -281,6 +287,7 @@ export default function RegisterModal() {
                         {isLoading ? '...' : tr('register.registerButton')}
                     </Text>
                 </Pressable>
+                <LocalModeEntry disabled={isLoading}/>
                 <Pressable
                     onPress={() => {
                         setTosAccepted(!tosAccepted);

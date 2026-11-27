@@ -1,0 +1,45 @@
+name: iOS TestFlight
+
+on:
+  workflow_dispatch:
+  push:
+    tags: ['ios-v*']
+
+permissions:
+  contents: read
+
+jobs:
+  checks:
+    if: github.event_name == 'push' || github.ref == 'refs/heads/main'
+    uses: ./.github/workflows/checks.yml
+
+  submit:
+    needs: checks
+    runs-on: ubuntu-latest
+    environment: app-store-connect
+    timeout-minutes: 30
+    defaults:
+      run:
+        working-directory: Gamenote
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Provjeri da je commit na main grani
+        run: git merge-base --is-ancestor HEAD refs/remotes/origin/main
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38
+        with:
+          node-version-file: Gamenote/.nvmrc
+          cache: npm
+          cache-dependency-path: Gamenote/package-lock.json
+      - name: Provjeri App Store Connect profil
+        run: |
+          node -e 'const id = require("./eas.json").submit?.production?.ios?.ascAppId; if (typeof id !== "string" || !/^\d+$/.test(id)) { console.error("U eas.json postavi submit.production.ios.ascAppId."); process.exit(1); }'
+      - run: npm ci
+      - name: Pokreni EAS Build i Submit
+        env:
+          EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
+        run: |
+          test -n "$EXPO_TOKEN" || { echo "Nedostaje EXPO_TOKEN u app-store-connect okruženju."; exit 1; }
+          npx --yes eas-cli@27.11.0 build --platform ios --profile production --non-interactive --no-wait --auto-submit-with-profile=production

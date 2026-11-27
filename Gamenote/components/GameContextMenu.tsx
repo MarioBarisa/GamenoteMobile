@@ -1,3 +1,4 @@
+import {modalOrientations} from "@/constants/layout";
 import {useEffect, useState} from "react";
 import {Animated, Modal, Platform, Pressable, StyleSheet, Text, useWindowDimensions, View} from "react-native";
 import {BlurView} from "expo-blur";
@@ -51,12 +52,16 @@ export default function GameContextMenu({game, anchor, visible, onClose, onDismi
     if (!anchor) return null;
 
     const imageUri = game.image_url || game.background_image || null;
-    const previewHeight = (anchor.width * 4) / 3; // cover je 3:4
-    const menuTop = anchor.y + previewHeight + 10;
-    const fitsBelow = menuTop + MENU_HEIGHT < screenHeight - insets.bottom;
+    const previewWidth = Math.min(anchor.width, Math.max(0, screenHeight - insets.top - insets.bottom - 32) * 0.75);
+    const previewHeight = previewWidth * 4 / 3;
+    const previewTop = Math.max(insets.top + 16, Math.min(anchor.y, screenHeight - insets.bottom - previewHeight - 16));
+    const menuTop = previewTop + previewHeight + 10;
+    const minTop = insets.top + 16;
+    const maxTop = Math.max(minTop, screenHeight - insets.bottom - MENU_HEIGHT - 16);
+    const top = menuTop <= maxTop ? menuTop : Math.min(maxTop, Math.max(minTop, anchor.y - MENU_HEIGHT - 10));
     const menuLeft = Math.min(
-        Math.max(anchor.x + anchor.width / 2 - MENU_WIDTH / 2, 16),
-        screenWidth - MENU_WIDTH - 16
+        Math.max(anchor.x + anchor.width / 2 - MENU_WIDTH / 2, insets.left + 16),
+        Math.max(insets.left + 16, screenWidth - insets.right - MENU_WIDTH - 16)
     );
 
     // Radnja se izvršava nakon zatvaranja
@@ -70,6 +75,7 @@ export default function GameContextMenu({game, anchor, visible, onClose, onDismi
             transparent
             visible={visible}
             animationType="fade"
+            supportedOrientations={modalOrientations}
             onRequestClose={onClose}
             onDismiss={() => {
                 if (pending === "edit") onEdit();
@@ -93,9 +99,9 @@ export default function GameContextMenu({game, anchor, visible, onClose, onDismi
                 style={[
                     styles.previewOuter,
                     {
-                        left: anchor.x,
-                        top: anchor.y,
-                        width: anchor.width,
+                        left: anchor.x + (anchor.width - previewWidth) / 2,
+                        top: previewTop,
+                        width: previewWidth,
                         height: previewHeight,
                         opacity,
                         transform: [{scale}],
@@ -120,8 +126,7 @@ export default function GameContextMenu({game, anchor, visible, onClose, onDismi
                     {
                         left: menuLeft,
                         width: MENU_WIDTH,
-                        top: fitsBelow ? menuTop : undefined,
-                        bottom: fitsBelow ? undefined : screenHeight - anchor.y + 10,
+                        top,
                         opacity,
                         transform: [{scale}],
                     },

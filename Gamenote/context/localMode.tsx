@@ -9,7 +9,7 @@ import {STATUS_PLATFORM} from "@/common/StatusCommons";
 import {useTheme} from "@/context/theme";
 
 function useLocalModeState() {
-    const {localModeEnabled, activeSource, setActiveSource} = useSettings();
+    const {localModeEnabled, activeSource, activateLocalMode, setActiveSource} = useSettings();
     const {session, knownCloudUserId, username, avatarUrl} = useAuth();
     const cloudUserId = activeSource === "cloud" ? session?.user.id : undefined;
     const {document, size, error, resetRevision} = useSyncExternalStore(subscribeLocalData, getLocalState, getLocalState);
@@ -17,7 +17,8 @@ function useLocalModeState() {
     const [igdbConfigured, setIgdbConfigured] = useState<boolean | null>(null);
     const [mirrorBusy, setMirrorBusy] = useState(false);
     const [mirrorError, setMirrorError] = useState(false);
-    const mirrorEnabled = Boolean(knownCloudUserId && document?.mirrors?.[knownCloudUserId]?.enabled);
+    const mirrorUserId = cloudUserId ?? knownCloudUserId;
+    const mirrorEnabled = Boolean(mirrorUserId && document?.mirrors?.[mirrorUserId]?.enabled);
     const current = useRef({cloudUserId, knownCloudUserId, localModeEnabled, mirrorEnabled});
     const timer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
     const syncing = useRef<Promise<void> | null>(null);
@@ -89,6 +90,11 @@ function useLocalModeState() {
         setMirrorError(false);
     }, []);
 
+    const openLocalLibrary = useCallback(async () => {
+        await loadLocalData();
+        await activateLocalMode();
+    }, [activateLocalMode]);
+
     const switchSource = useCallback(async () => {
         if (activeSource === "cloud") {
             await loadLocalData();
@@ -111,7 +117,7 @@ function useLocalModeState() {
     }, [activeSource, runMirror, setActiveSource]);
 
     return {
-        localModeEnabled, activeSource, switchSource, returnToCloudProfile, setReturnToCloudProfile, document, storageSize: size, storageError: error,
+        localModeEnabled, activeSource, openLocalLibrary, switchSource, returnToCloudProfile, setReturnToCloudProfile, document, storageSize: size, storageError: error,
         eraseLocalProfile, resetRevision, mirrorEnabled, mirrorBusy, mirrorError, knownCloudUserId, canChangeMirror: Boolean(cloudUserId),
         setMirrorEnabled, requestMirrorRefresh, igdbConfigured, refreshIgdbStatus,
     };
